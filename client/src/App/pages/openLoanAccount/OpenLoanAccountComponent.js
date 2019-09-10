@@ -50,7 +50,6 @@ class OpenLoanAccountComponent extends Component {
         //this.setState({[event.target.name]:event.target.value});
         const {rq_body} = {...this.state};
         const currentState = rq_body;
-        console.log("currentState = "+ JSON.stringify(currentState));
         const interest = currentState.interest;
         const payment = currentState.payment;
 
@@ -140,37 +139,50 @@ class OpenLoanAccountComponent extends Component {
   };
 
 
-    FormInput = () => {
+  FormInputCol1 = () => {
         let formUI = formModel.model.map(item => {
            if(item.root === null){
             return(
-            <Form onSubmit={this.handleSubmit}>
-          
             <FormGroup>
                <Label>{item.label}</Label>
               <Input type={item.type} name={item.name} placeholder={item.placeholder}
                value={this.state.rq_body[item.value]} onChange={this.handleChange} />
              </FormGroup>
-         
-             </Form>
-
             );
           }else{
             return(
-            <Form onSubmit={this.handleSubmit}>
-            <FormGroup>
-               <Label>{item.label}</Label>
-              <Input type={item.type} name={item.name} placeholder={item.placeholder}
-               value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
-             </FormGroup>
-             </Form>
+              <FormGroup>
+                <Label>{item.label}</Label>
+                <Input type={item.type} name={item.name} placeholder={item.placeholder}
+                value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
+              </FormGroup>
             );
           }
-            
         });
-        //let formUI = formModel.model.map(item => item.label);
-        //console.log(v001.model.map(item => item.label));
         return formUI;
+    }
+
+    FormInputCol2 = () => {
+      let formUI = formModel.model2.map(item => {
+         if(item.root === null){
+          return(
+          <FormGroup>
+             <Label>{item.label}</Label>
+            <Input type={item.type} name={item.name} placeholder={item.placeholder}
+             value={this.state.rq_body[item.value]} onChange={this.handleChange} />
+           </FormGroup>
+          );
+        }else{
+          return(
+            <FormGroup>
+              <Label>{item.label}</Label>
+              <Input type={item.type} name={item.name} placeholder={item.placeholder}
+              value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
+            </FormGroup>
+          );
+        }
+      });
+      return formUI;
     }
 
     render() {
@@ -192,12 +204,22 @@ class OpenLoanAccountComponent extends Component {
                     </DropdownMenu>
             </UncontrolledDropdown>
             <br />
-
+            <Form onSubmit={this.handleSubmit}>
             <Row > 
               <Col md={{ size: 3, offset: 3 }} >
-                {this.FormInput()}
+                {this.FormInputCol1()}
+            </Col>
+
+            <Col md={{ size: 3 }}>
+                {this.FormInputCol2()}
             </Col>
             </Row>
+
+            <div align="center">
+                <Button color="primary" type="submit" >Submit</Button> 
+            </div>
+            <br />
+            </Form>
             </div>
         //     <Form onSubmit={this.handleSubmit}>
         //       {/* <span class="badge badge-light"> */}

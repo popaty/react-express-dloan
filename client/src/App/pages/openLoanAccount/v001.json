@@ -2,7 +2,7 @@
     "rq_body": {
         "customer_number": "111111111103",
         "customer_type": "0703",
-        "account_name": "นายทนงตน Munkong ",
+        "account_name": "นายทนงตน Munkong",
         "credit_limit": 90000,
         "credit_term_number": 9,
         "credit_term_unit": "M",

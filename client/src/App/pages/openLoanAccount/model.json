@@ -1,7 +1,7 @@
 {
     "model" : [
         {
-            "label" : "Customer number : ",
+            "label" : "Customer number",
             "type" : "text",
             "name" : "customer_number",
             "placeholder" : "Enter customer number",
@@ -9,7 +9,7 @@
             "root" : null
         },
         {
-            "label" : "Customer type : ",
+            "label" : "Customer type",
             "type" : "text",
             "name" : "customer_type",
             "placeholder" : "Enter customer type",
@@ -17,7 +17,7 @@
             "root" : null
         },
         {
-            "label" : "Account name : ",
+            "label" : "Account name",
             "type" : "text",
             "name" : "account_name",
             "placeholder" : "Enter account name",
@@ -26,7 +26,7 @@
 
         },
         {
-            "label" : "Credit limit : ",
+            "label" : "Credit limit",
             "type" : "number",
             "name" : "credit_limit",
             "placeholder" : "Enter credit limit",
@@ -35,7 +35,7 @@
 
         },
         {
-            "label" : "Credit term number : ",
+            "label" : "Credit term number",
             "type" : "number",
             "name" : "credit_term_number",
             "placeholder" : "Enter credit term number",
@@ -44,7 +44,7 @@
 
         },
         {
-            "label" : "Credit term unit : ",
+            "label" : "Credit term unit",
             "type" : "text",
             "name" : "credit_term_unit",
             "placeholder" : "Enter credit term unit",
@@ -53,13 +53,109 @@
 
         },
         {
-            "label" : "Product name : ",
+            "label" : "Product name",
             "type" : "text",
             "name" : "product_name",
             "placeholder" : "Enter product name",
             "value" : "product_name",
             "root" : null
 
+        },
+        {
+            "label" : "Disbursement account",
+            "type" : "text",
+            "name" : "disbursement_account",
+            "placeholder" : "Enter disbursement account",
+            "value" : "pdisbursement_account",
+            "root" : null
+
+        },
+        {
+            "label" : "Deduction account",
+            "type" : "text",
+            "name" : "deduction_account",
+            "placeholder" : "Enter deduction account",
+            "value" : "deduction_account",
+            "root" : null
+        }
+    ],
+
+
+
+
+
+    "model2" : [
+        {
+            "label" : "Account branch",
+            "type" : "number",
+            "name" : "account_branch",
+            "placeholder" : "Enter account branch",
+            "value" : "account_branch",
+            "root" : null
+        },
+        {
+            "label" : "Response unit",
+            "type" : "number",
+            "name" : "response_unit",
+            "placeholder" : "Enter response unit",
+            "value" : "response_unit",
+            "root" : null
+        },
+        {
+            "label" : "Application id",
+            "type" : "text",
+            "name" : "application_id",
+            "placeholder" : "Enter application id",
+            "value" : "application_id",
+            "root" : null
+        },
+        {
+            "label" : "Interest index",
+            "type" : "text",
+            "name" : "interest_index",
+            "placeholder" : "Enter interest index",
+            "value" : "interest_index",
+            "root" : "interest"
+        },
+        {
+            "label" : "Interest spread",
+            "type" : "number",
+            "name" : "interest_spread",
+            "placeholder" : "Enter interest_spread",
+            "value" : "interest_spread",
+            "root" : "interest"
+        },
+        {
+            "label" : "Payment frequency",
+            "type" : "number",
+            "name" : "payment_frequency",
+            "placeholder" : "Enter payment frequency",
+            "value" : "payment_frequency",
+            "root" : "payment"
+        },
+        {
+            "label" : "Payment unit",
+            "type" : "text",
+            "name" : "payment_unit",
+            "placeholder" : "Enter payment unit",
+            "value" : "payment_unit",
+            "root" : "payment"
+        },
+        {
+            "label" : "Payment date",
+            "type" : "number",
+            "name" : "payment_date",
+            "placeholder" : "Enter payment date",
+            "value" : "payment_date",
+            "root" : "payment"
+        },
+        {
+            "label" : "Billing offset day",
+            "type" : "number",
+            "name" : "billing_offset_day",
+            "placeholder" : "Enter billing offset day",
+            "value" : "billing_offset_day",
+            "root" : "payment"
         }
     ]
 }
