@@ -27,10 +27,37 @@
         },
         {
             "label" : "Credit limit : ",
-            "type" : "text",
+            "type" : "number",
             "name" : "credit_limit",
             "placeholder" : "Enter credit limit",
             "value" : "credit_limit",
+            "root" : null
+
+        },
+        {
+            "label" : "Credit term number : ",
+            "type" : "number",
+            "name" : "credit_term_number",
+            "placeholder" : "Enter credit term number",
+            "value" : "credit_term_number",
+            "root" : null
+
+        },
+        {
+            "label" : "Credit term unit : ",
+            "type" : "text",
+            "name" : "credit_term_unit",
+            "placeholder" : "Enter credit term unit",
+            "value" : "credit_term_unit",
+            "root" : null
+
+        },
+        {
+            "label" : "Product name : ",
+            "type" : "text",
+            "name" : "product_name",
+            "placeholder" : "Enter product name",
+            "value" : "product_name",
             "root" : null
 
         }

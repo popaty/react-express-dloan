@@ -142,11 +142,8 @@ class OpenLoanAccountComponent extends Component {
 
     FormInput = () => {
         let formUI = formModel.model.map(item => {
-
            if(item.root === null){
             return(
-              <Row > 
-              <Col md={{ size: 3, offset: 3 }} >
             <Form onSubmit={this.handleSubmit}>
           
             <FormGroup>
@@ -156,24 +153,17 @@ class OpenLoanAccountComponent extends Component {
              </FormGroup>
          
              </Form>
-             </Col>
-             </Row>
+
             );
           }else{
             return(
-              <Row > 
-              <Col md={{ size: 3, offset: 3 }} >
             <Form onSubmit={this.handleSubmit}>
-          
             <FormGroup>
                <Label>{item.label}</Label>
               <Input type={item.type} name={item.name} placeholder={item.placeholder}
                value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
              </FormGroup>
-         
              </Form>
-             </Col>
-             </Row>
             );
           }
             
@@ -202,7 +192,12 @@ class OpenLoanAccountComponent extends Component {
                     </DropdownMenu>
             </UncontrolledDropdown>
             <br />
-            {this.FormInput()}
+
+            <Row > 
+              <Col md={{ size: 3, offset: 3 }} >
+                {this.FormInput()}
+            </Col>
+            </Row>
             </div>
         //     <Form onSubmit={this.handleSubmit}>
         //       {/* <span class="badge badge-light"> */}
@@ -210,9 +205,9 @@ class OpenLoanAccountComponent extends Component {
             
         //     <Col md={{ size: 3, offset: 3 }} >
          
-        //     <FormGroup>
-        //       <Label>Customer number</Label>
-        //       <Input type="text" name="customer_number" placeholder="Enter customer number" 
+        // //     <FormGroup>
+        // //       <Label>Customer number</Label>
+        // //       <Input type="text" name="customer_number" placeholder="Enter customer number" 
         //       value={this.state.rq_body.customer_number} onChange={this.handleChange} />
         //     </FormGroup>
             
@@ -264,10 +259,10 @@ class OpenLoanAccountComponent extends Component {
         //       value={this.state.rq_body.deduction_account} onChange={this.handleChange} />
         //     </FormGroup>
             
-        //     </Col>
+            // </Col>
 
 
-        //     <Col md={{ size: 3 }}>
+            //  <Col md={{ size: 3 }}>
         //     <FormGroup>
         //       <Label>Account branch</Label>
         //       <Input type="number" name="account_branch"  
@@ -321,8 +316,8 @@ class OpenLoanAccountComponent extends Component {
         //       <Input type="number" name="billing_offset_day"  
         //       value={this.state.rq_body.payment.billing_offset_day} onChange={this.handleChange} />
         //     </FormGroup>
-        //     </Col>   
-        //   </Row>
+          //   </Col>   
+          // </Row>
 
         //   <div align="center">
         //   {/* <input  value="Submit" type="submit" /> */}
@@ -331,8 +326,8 @@ class OpenLoanAccountComponent extends Component {
         //   </div>
         //   <br />
         //   {/* </span> */}
-        //   </Form> 
-        // </div>
+        //    </Form> 
+        //  </div>
         );
     }
 }
