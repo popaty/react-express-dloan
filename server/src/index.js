@@ -77,7 +77,7 @@ app.post('/api/openLoanAccount', (req,res) => {
 		"accept_encoding": "UTF8",
 		"Content-Type": "application/json",
 	};
-	let url = properties.get('openLoanAccount.url');
+	let url = properties.get('openLoanAccount.url')
 	api_helper_post.API_call_post(url, header, req.body)
 		.then(response => {
 			res.json(response)
@@ -87,6 +87,68 @@ app.post('/api/openLoanAccount', (req,res) => {
 		});
 	console.log('Finished Open Loan Account');
 });
+
+app.post('/api/calculateInstallment', (req,res) => {
+	console.log('Calculate Installment Amount');
+	console.log("body : "+JSON.stringify(req.body));
+	let header = {
+		"x-request-id": uuidv4(),
+		"x-job-id": "",
+		"x-real-ip": "",
+		"x-caller-service": "react-app",
+		"x-caller-domain": "00",
+		"x-device": "",
+		"x-application": "react-app",
+		"x-channel": "",
+		"datetime": dateFormat(now, "yyyymmdd"),
+		"accept": "application/json",
+		"accept_language": "en",
+		"accept_encoding": "UTF8",
+		"original-caller-domain":"B0",
+		"Content-Type": "application/json",
+	};
+	let url = properties.get('calculateInstallment.url')
+	api_helper_post.API_call_post(url, header, req.body)
+		.then(response => {
+			res.json(response)
+		})
+		.catch(error => {
+			res.send(error)
+		});
+	console.log('Finished Calculate Installment Amount');
+});
+
+
+app.post('/api/disbursement', (req,res) => {
+	console.log('Disbursement');
+	console.log("body : "+JSON.stringify(req.body));
+	let header = {
+		"x-request-id": uuidv4(),
+		"x-job-id": "",
+		"x-real-ip": "",
+		"x-caller-service": "react-app",
+		"x-caller-domain": "00",
+		"x-device": "",
+		"x-application": "react-app",
+		"x-channel": "",
+		"datetime": dateFormat(now, "yyyymmdd"),
+		"accept": "application/json",
+		"accept_language": "en",
+		"accept_encoding": "UTF8",
+		"original-caller-domain":"B0",
+		"Content-Type": "application/json",
+	};
+	let url = properties.get('disbursement.url')
+	api_helper_post.API_call_post(url, header, req.body)
+		.then(response => {
+			res.json(response)
+		})
+		.catch(error => {
+			res.send(error)
+		});
+	console.log('Finished Disbursement');
+});
+
 
 // Handles any requests that don't match the ones above
 app.get('*', (req,res) =>{

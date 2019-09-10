@@ -1,0 +1,26 @@
+{
+    "rq_body" :{
+        "customer_number": "",
+        "customer_type": "",
+        "account_name": "",
+        "credit_limit": 0,
+        "credit_term_number": 0,
+        "credit_term_unit": "",
+        "product_name": "",
+        "disbursement_account": "",
+        "deduction_account": "",
+        "account_branch": 0,
+        "response_unit": 0,
+        "application_id": "",
+        "interest" : {
+            "interest_index": "",
+            "interest_spread": 0
+        },
+        "payment" : {
+            "payment_frequency": 0,
+            "payment_unit": "",
+            "payment_date": 0,
+            "billing_offset_day": 0
+        }
+    }
+}

@@ -1,0 +1,38 @@
+{
+    "model" : [
+        {
+            "label" : "Customer number : ",
+            "type" : "text",
+            "name" : "customer_number",
+            "placeholder" : "Enter customer number",
+            "value" : "customer_number",
+            "root" : null
+        },
+        {
+            "label" : "Customer type : ",
+            "type" : "text",
+            "name" : "customer_type",
+            "placeholder" : "Enter customer type",
+            "value" : "customer_type",
+            "root" : null
+        },
+        {
+            "label" : "Account name : ",
+            "type" : "text",
+            "name" : "account_name",
+            "placeholder" : "Enter account name",
+            "value" : "account_name",
+            "root" : null
+
+        },
+        {
+            "label" : "Credit limit : ",
+            "type" : "text",
+            "name" : "credit_limit",
+            "placeholder" : "Enter credit limit",
+            "value" : "credit_limit",
+            "root" : null
+
+        }
+    ]
+}

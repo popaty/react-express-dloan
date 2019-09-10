@@ -1,15 +1,19 @@
-import React, { Component } from 'react';
-import {Button, Table,Col} from 'reactstrap';
+import React, {Component} from 'react';
+import { Button, Col,Table} from 'reactstrap';
 import DynamicHeader from '../Header.js';
 
-class OpenLoanAccountSummary extends Component {
+class inquiryPositionSummery extends Component {
+
     constructor(props){
         super(props);
-        this.state = {};
+        this.state = {
+            account: ""
+        };
+        this.handleChange = this.handleChange.bind(this);
     }
 
     CallInquiryLoanAccount(){
-        // var data = JSON.parse(sessionStorage.getItem("data_openLoanAccount"));
+        // var data = JSON.parse(sessionStorage.getItem("data_inqLoanAccount"));
         // console.log(data.rs_body.account_number);
         // fetch('/api/inqLoanAccount/'+data.rs_body.account_number, {
         // }).then(response => response.json())
@@ -67,6 +71,10 @@ class OpenLoanAccountSummary extends Component {
             // }).catch(error => console.log(error))
     }
 
+    handleChange(event) {
+        this.setState({account : event.target.value});
+    }
+
     dynamicResponse = (data) => {
         let table = [];
         let children = [];
@@ -91,25 +99,31 @@ class OpenLoanAccountSummary extends Component {
         return table;
     }
 
-    render(){
-        var data = JSON.parse(sessionStorage.getItem("data_openLoanAccount"));
-        let account = data.rs_body.account_number;
+    render() {
+        var data = {
+            "rs_body": {
+              "disbursement_date": "2019-09-10",
+              "account_seqence": "555",
+              "position_balance": "test"
+            }
+          }
         return(
-                <div className="App">
-                    <DynamicHeader />
-                    <form>
-                        <br />
-                         <h2 >Form Data Open Account</h2>
-                        <br />
-                        <Col md={{ size: 6, offset: 3 }} >
-                        {this.dynamicResponse(data.rs_body)}
-                        </Col>
-                        <br />
-                        <Button color="success" onClick={this.CallInquiryLoanAccount} >Inquiry Account Details : {account}</Button> 
-                    </form>
-                </div>
-        );
-    }
+            <div className="App">
+                <DynamicHeader />
+            <form>
+                <br />
+                 <h2 >Form Data Inquiry Position Detail</h2>
+                <br />
+                <Col md={{ size: 6, offset: 3 }} >
+                    {this.dynamicResponse(data.rs_body)}
+                </Col>
+                <br />
+                {/* <Button color="success" onClick={this.Clicked}>Inquiry Interest Accrued</Button><br /><br /> */}
+                <Button color="success" onClick={this.CallInquiryLoanAccount} >Inquiry Account Details </Button> 
+            </form>
+        </div>
+           );
+       }
 }
 
-export default OpenLoanAccountSummary;
+export default inquiryPositionSummery;

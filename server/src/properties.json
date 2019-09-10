@@ -1,0 +1,6 @@
+{
+    "openAccount" : {
+        "url" : "http://localhost:32401/dloan-account/v1/accounts",
+        "method" : "POST"
+    }
+}
