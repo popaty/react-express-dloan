@@ -3,7 +3,7 @@ version: '3'
 services:
 
   server:
-    build: ./server
+    build: ./server1
     expose:
       - 5000
     environment:
