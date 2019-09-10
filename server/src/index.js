@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // var property2 = properties.get('inqLoanAccount.url');
 // console.log(property1);
 // console.log(property2);
-
+//555
 
 // An api endpoint that returns a short list of items
 app.get('/api/getList', (req,res) => {
