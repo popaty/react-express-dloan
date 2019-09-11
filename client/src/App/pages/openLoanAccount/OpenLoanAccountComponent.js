@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import DynamicHeader from '../Header.js';
+import SpinnerLoader from '../loading.js';
 
 import {Button, Form, FormGroup, Label, Input, Row, Col} from 'reactstrap';
 import {UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
@@ -8,7 +9,7 @@ import v000 from './v000.json';
 import v001 from './v001.json';
 import v002 from './v002.json';
 import v003 from './v003.json';
-import formModel from './model.json';
+import inputModel from './model.json';
 
 var cloneDeep = require('lodash.clonedeep');
 
@@ -44,7 +45,7 @@ class OpenLoanAccountComponent extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.loadJson = this.loadJson.bind(this);
-    }
+    };
 
     handleChange(event) {
         //this.setState({[event.target.name]:event.target.value});
@@ -63,16 +64,20 @@ class OpenLoanAccountComponent extends Component {
        }
         this.setState({rq_body : currentState});
        
-    }
+    };
 
     handleSubmit(event) {
         event.preventDefault()
+        this.setState({ loading: true });
         //clone state for use in omit function.
         var body = cloneDeep(this.state);
         let request = this.omitfield(body);
         console.log(request);
-        this.postList(request);
-    }
+        setTimeout(() => {
+          this.setState({ loading: false });
+          this.postList(request);
+        }, 1500);
+    };
 
     omitfield =(body) =>{
         for(let key in body.rq_body){
@@ -90,11 +95,10 @@ class OpenLoanAccountComponent extends Component {
              }
         }
         return body;
-    }
+    };
 
 
     loadJson(event){
-
         if(event.target.name === "000"){
             this.setState(v000);
         }
@@ -107,8 +111,7 @@ class OpenLoanAccountComponent extends Component {
         if(event.target.name === "003"){
             this.setState(v003);
         }
-        
-    }
+    };
 
     postList = (request) => {
       // console.log("myRequest : " + JSON.stringify(request));
@@ -140,7 +143,7 @@ class OpenLoanAccountComponent extends Component {
 
 
   FormInputCol1 = () => {
-        let formUI = formModel.model.map(item => {
+        let formUI = inputModel.model.map(item => {
            if(item.root === null){
             return(
             <FormGroup>
@@ -160,10 +163,10 @@ class OpenLoanAccountComponent extends Component {
           }
         });
         return formUI;
-    }
+    };
 
     FormInputCol2 = () => {
-      let formUI = formModel.model2.map(item => {
+      let formUI = inputModel.model2.map(item => {
          if(item.root === null){
           return(
           <FormGroup>
@@ -183,11 +186,10 @@ class OpenLoanAccountComponent extends Component {
         }
       });
       return formUI;
-    }
+    };
 
     render() {
-     // var test = this.FormInput();
-     // console.log(test);
+      const { loading } = this.state;
         return (    
           <div>
             <DynamicHeader />
@@ -214,144 +216,21 @@ class OpenLoanAccountComponent extends Component {
                 {this.FormInputCol2()}
             </Col>
             </Row>
-
+          
             <div align="center">
-                <Button color="primary" type="submit" >Submit</Button> 
+                <Button color="primary" type="submit" disabled={loading} >
+                  {/* Submit */}
+                  {loading && (<SpinnerLoader />)}
+                    {loading && <span>Loading..</span>}
+                    {!loading && <span>Submit</span>}
+                </Button> 
+                   {/* < SpinnerLoader /> */}
             </div>
             <br />
             </Form>
             </div>
-        //     <Form onSubmit={this.handleSubmit}>
-        //       {/* <span class="badge badge-light"> */}
-        //     <Row > 
-            
-        //     <Col md={{ size: 3, offset: 3 }} >
-         
-        // //     <FormGroup>
-        // //       <Label>Customer number</Label>
-        // //       <Input type="text" name="customer_number" placeholder="Enter customer number" 
-        //       value={this.state.rq_body.customer_number} onChange={this.handleChange} />
-        //     </FormGroup>
-            
-        //     <FormGroup>
-        //       <Label>Account name</Label>
-        //       <Input type="text" name="account_name" placeholder="Enter account name" 
-        //       value={this.state.rq_body.account_name} onChange={this.handleChange} />
-        //     </FormGroup>
-
-        //     <FormGroup>
-        //       <Label>Customer type</Label>
-        //       <Input type="text" name="customer_type" placeholder="Enter customer type" 
-        //       value={this.state.rq_body.customer_type} onChange={this.handleChange} />
-        //     </FormGroup>
-
-        //     <FormGroup>
-        //       <Label>Credit limit</Label>
-        //       <Input type="number" name="credit_limit"  
-        //       value={this.state.rq_body.credit_limit} onChange={this.handleChange} />
-        //     </FormGroup>
-
-        //     <FormGroup>
-        //       <Label>Credit term number</Label>
-        //       <Input type="number" name="credit_term_number"  
-        //       value={this.state.rq_body.credit_term_number} onChange={this.handleChange} />
-        //     </FormGroup>
-
-        //     <FormGroup>
-        //       <Label>Credit term unit</Label>
-        //       <Input type="text" name="credit_term_unit" placeholder="Enter credit term unit" 
-        //       value={this.state.rq_body.credit_term_unit} onChange={this.handleChange} />
-        //     </FormGroup>
-            
-        //     <FormGroup>
-        //       <Label>Product name</Label>
-        //       <Input type="text" name="product_name" placeholder="Enter product name" 
-        //       value={this.state.rq_body.product_name} onChange={this.handleChange} />
-        //     </FormGroup>
-
-        //     <FormGroup>
-        //       <Label>Disbursement account</Label>
-        //       <Input type="text" name="disbursement_account" placeholder="Enter disbursement account" 
-        //       value={this.state.rq_body.disbursement_account} onChange={this.handleChange} />
-        //     </FormGroup>
-
-        //     <FormGroup>
-        //       <Label>Deduction account</Label>
-        //       <Input type="text" name="deduction_account" placeholder="Enter deduction account" 
-        //       value={this.state.rq_body.deduction_account} onChange={this.handleChange} />
-        //     </FormGroup>
-            
-            // </Col>
-
-
-            //  <Col md={{ size: 3 }}>
-        //     <FormGroup>
-        //       <Label>Account branch</Label>
-        //       <Input type="number" name="account_branch"  
-        //       value={this.state.rq_body.account_branch} onChange={this.handleChange} />
-        //     </FormGroup>
-
-        //     <FormGroup>
-        //       <Label>Response unit</Label>
-        //       <Input type="number" name="response_unit"  
-        //       value={this.state.rq_body.response_unit} onChange={this.handleChange} />
-        //     </FormGroup>
-
-        //     <FormGroup>
-        //       <Label>Application id</Label>
-        //       <Input type="text" name="application_id" placeholder="Enter application id" 
-        //       value={this.state.rq_body.application_id} onChange={this.handleChange} />
-        //     </FormGroup>
-
-        //     <FormGroup>
-        //       <Label>Interest index</Label>
-        //       <Input type="text" name="interest_index" placeholder="Enter interest index" 
-        //       value={this.state.rq_body.interest.interest_index} onChange={this.handleChange} />
-        //     </FormGroup>
-
-        //     <FormGroup>
-        //       <Label>Interest spread</Label>
-        //       <Input type="number" name="interest_spread"  
-        //       value={this.state.rq_body.interest.interest_spread} onChange={this.handleChange} />
-        //     </FormGroup>
-
-        //     <FormGroup>
-        //       <Label>Payment frequency</Label>
-        //       <Input type="number" name="payment_frequency"  
-        //       value={this.state.rq_body.payment.payment_frequency} onChange={this.handleChange} />
-        //     </FormGroup>
-
-        //     <FormGroup>
-        //       <Label>Payment unit</Label>
-        //       <Input type="text" name="payment_unit" placeholder="Enter payment unit" 
-        //       value={this.state.rq_body.payment.payment_unit} onChange={this.handleChange} />
-        //     </FormGroup>
-
-        //     <FormGroup>
-        //       <Label>Payment date</Label>
-        //       <Input type="number" name="payment_date"  
-        //       value={this.state.rq_body.payment.payment_date} onChange={this.handleChange} />
-        //     </FormGroup>
-
-        //     <FormGroup>
-        //       <Label>Billing offset day</Label>
-        //       <Input type="number" name="billing_offset_day"  
-        //       value={this.state.rq_body.payment.billing_offset_day} onChange={this.handleChange} />
-        //     </FormGroup>
-          //   </Col>   
-          // </Row>
-
-        //   <div align="center">
-        //   {/* <input  value="Submit" type="submit" /> */}
-        //   {/* <button type="submit" class="btn btn-primary">Submit</button> */}
-        //   <Button color="primary" type="submit" >Submit</Button> 
-        //   </div>
-        //   <br />
-        //   {/* </span> */}
-        //    </Form> 
-        //  </div>
         );
-    }
+    };
 }
 
 export default OpenLoanAccountComponent;

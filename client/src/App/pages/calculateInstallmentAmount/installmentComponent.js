@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Button, Form, FormGroup, Label, Input, Row, Col} from 'reactstrap';
 import DynamicHeader from '../Header.js';
+import inputModel from './model.json';
 
 var cloneDeep = require('lodash.clonedeep');
 
@@ -18,7 +19,7 @@ class installmentComponent extends Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-    }
+    };
 
     componentDidMount(){
         if(JSON.parse(sessionStorage.getItem("interest_rate")) && JSON.parse(sessionStorage.getItem("payment_frequency")) 
@@ -34,7 +35,7 @@ class installmentComponent extends Component {
                 this.setState({rq_body : body});
                 console.log(this.state);
         }
-    }
+    };
 
     handleChange(event) {
         //this.setState({[event.target.name]:event.target.value});
@@ -42,7 +43,7 @@ class installmentComponent extends Component {
          const currentState = rq_body;
          currentState[event.target.name] = event.target.type === "number" ? Number(event.target.value) : event.target.value;
          this.setState({rq_body : currentState}); 
-    }
+    };
 
     handleSubmit(event) {
         event.preventDefault()
@@ -51,7 +52,7 @@ class installmentComponent extends Component {
         let request = this.omitfield(body);
         console.log(request);
         this.postList(request);
-    }
+    };
 
     omitfield =(body) =>{
         for(let key in body.rq_body){
@@ -69,7 +70,7 @@ class installmentComponent extends Component {
              }
         }
         return body;
-    }
+    };
 
     postList = (request) => {
         console.log("myRequest : " + JSON.stringify(request));
@@ -84,10 +85,10 @@ class installmentComponent extends Component {
         //     .then(data => {
                 
             var data = {
-                    "rs_body": {
-                      "installment_amount": 700000000024
-                    }
-                  }
+                "rs_body": {
+                  "installment_amount": 15037.5
+                }
+              }
                 
                 if (data.rs_body) {
                     sessionStorage.setItem("data_installment", JSON.stringify(data));
@@ -100,54 +101,49 @@ class installmentComponent extends Component {
           //  }).catch(error => console.log(error))
     };
 
+    FormInputData = () => {
+        let formUI = inputModel.model.map(item => {
+           if(item.root === null){
+            return(
+            <FormGroup>
+               <Label>{item.label}</Label>
+              <Input type={item.type} name={item.name} placeholder={item.placeholder}
+               value={this.state.rq_body[item.value]} onChange={this.handleChange} />
+             </FormGroup>
+            );
+          }else{
+            return(
+              <FormGroup>
+                <Label>{item.label}</Label>
+                <Input type={item.type} name={item.name} placeholder={item.placeholder}
+                value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
+              </FormGroup>
+            );
+          }
+        });
+        return formUI;
+    };
 
     render() {
         return (
+            
          <div>
              <DynamicHeader />
             <br />
                 <h2 align="center">Form Input Calculate Installment Amount</h2>
             <br />
-            <Form onSubmit={this.handleSubmit}>
             <Row>
                 <Col  md={{ size: 4, offset: 4 }}>
-                <FormGroup>
-                        <Label>Disbursement amount</Label>
-                        <Input type="number" name="disbursement_amount" 
-                        value={this.state.rq_body.disbursement_amount} onChange={this.handleChange}  />
-                        </FormGroup>
-                        
-                        <FormGroup>
-                        <Label>Number of payment</Label>
-                        <Input type="number" name="number_of_payment"  
-                        value={this.state.rq_body.number_of_payment} onChange={this.handleChange} />
-                        </FormGroup>
-
-                        <FormGroup>
-                        <Label>Interest rate</Label>
-                        <Input type="number" name="interest_rate"  
-                        value={this.state.rq_body.interest_rate} onChange={this.handleChange} />
-                        </FormGroup>
-
-                        <FormGroup>
-                        <Label>Payment frequency</Label>
-                        <Input type="number" name="payment_frequency"  
-                        value={this.state.rq_body.payment_frequency} onChange={this.handleChange} />
-                        </FormGroup>
-
-                        <FormGroup>
-                        <Label>payment unit</Label>
-                        <Input type="text" name="payment_unit" placeholder="Enter payment unit"
-                        value={this.state.rq_body.payment_unit} onChange={this.handleChange} />
-                        </FormGroup>
-                        <br />
-                        <div align="center">
-                            <Button color="primary" type="submit" >Submit</Button> 
-                        </div>
-                        <br />
-                </Col>
-            </Row>       
+                <Form onSubmit={this.handleSubmit}>  
+                {this.FormInputData()}     
+                    <br />
+                    <div align="center">
+                        <Button color="primary" type="submit" >Submit</Button> 
+                    </div>
+                    <br />  
             </Form>
+            </Col>
+            </Row>    
         </div>
         );
         }

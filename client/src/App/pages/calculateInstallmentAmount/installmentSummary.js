@@ -7,18 +7,18 @@ class installmentSummary extends Component {
         super(props);
         this.state = {};
         this.opentDisbursement = this.opentDisbursement.bind(this);
-    }
+    };
 
     getSessionStorage(){
         var data = JSON.parse(sessionStorage.getItem("data_installment"));
         return data;
-    }
+    };
 
     opentDisbursement(){
         var data = this.getSessionStorage();
         sessionStorage.setItem("installment_amount", JSON.stringify(data.rs_body.installment_amount));
         window.open('/dbmComponent', '_self');
-    }
+    };
 
     dynamicResponse = (data) => {
         let table = [];
@@ -42,7 +42,7 @@ class installmentSummary extends Component {
             }
             table.push(<Table bordered >{children}</Table>)
         return table;
-    }
+    };
 
     render(){
         var data = this.getSessionStorage();
@@ -62,7 +62,7 @@ class installmentSummary extends Component {
                     </form>
                 </div>
         );
-    }
+    };
 
 }
 export default installmentSummary;

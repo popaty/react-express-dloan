@@ -9,10 +9,11 @@ class disbursementSummery extends Component {
         this.state = {
 
         };
-    }
+    };
+
     openInqPositionDetail(){
         window.open('/ipdComponent', '_self');
-    }
+    };
 
     render() {
         return(
@@ -29,7 +30,7 @@ class disbursementSummery extends Component {
                  <Button color="success" onClick={this.openInqPositionDetail}>Inquiry Position Detail</Button>
             </div>
            );
-       }
+       };
 }
 
 export default disbursementSummery;

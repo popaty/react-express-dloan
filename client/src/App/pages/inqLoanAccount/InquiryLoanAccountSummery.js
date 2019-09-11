@@ -8,16 +8,12 @@ class InquiryLoanAccountSummery extends Component {
         this.state = {
         }
         this.opentInstallment = this.opentInstallment.bind(this);
-    }
+    };
 
     getSessionStorage(){
         var data = JSON.parse(sessionStorage.getItem("data_inqLoanAccount"));
         return data;
-    }
-
-    // Clicked(){
-    //     this.props.history.push('/');
-    // }
+    };
 
     opentInstallment(){
         var data = this.getSessionStorage();
@@ -25,7 +21,7 @@ class InquiryLoanAccountSummery extends Component {
         sessionStorage.setItem("payment_frequency", JSON.stringify(data.payment.payment_frequency));
         sessionStorage.setItem("payment_unit", JSON.stringify(data.payment.payment_unit));
         window.open('/ciaComponent', '_self');
-    }
+    };
     
 
     dynamicResponse = (data) => {
@@ -54,7 +50,7 @@ class InquiryLoanAccountSummery extends Component {
             }
             table.push(<Table bordered>{children}</Table>)
         return table;
-    }
+    };
 
     render(){
         var data = this.getSessionStorage();
@@ -70,14 +66,13 @@ class InquiryLoanAccountSummery extends Component {
               {this.dynamicResponse(data)}
             </Col>
             <br />
-               {/* <Button color="secondary" onClick={this.Clicked}>Home</Button>&emsp;&emsp;  */}
                <Button color="success" onClick={this.opentInstallment}>Calculate Installment Amount</Button>
                 <br />
                 <br /> 
                 <br /> 
             </div>
         )
-    }
+    };
 }
 
 export default InquiryLoanAccountSummery;

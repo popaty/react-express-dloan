@@ -6,7 +6,7 @@ class OpenLoanAccountSummary extends Component {
     constructor(props){
         super(props);
         this.state = {};
-    }
+    };
 
     CallInquiryLoanAccount(){
         // var data = JSON.parse(sessionStorage.getItem("data_openLoanAccount"));
@@ -55,7 +55,7 @@ class OpenLoanAccountSummary extends Component {
                 "is_catch_up": true
               }
             }
-          }
+          };
                 if (data.rs_body) {
                     sessionStorage.setItem("data_inqLoanAccount", JSON.stringify(data.rs_body));
                     window.open('/ilaSummary', '_self');
@@ -64,8 +64,8 @@ class OpenLoanAccountSummary extends Component {
                         +"error desc : "+ data.errors.map(error => error.error_desc));
                 }
 
-            // }).catch(error => console.log(error))
-    }
+            //  }).catch(error => console.log(error))
+    };
 
     dynamicResponse = (data) => {
         let table = [];
@@ -89,7 +89,7 @@ class OpenLoanAccountSummary extends Component {
             }
             table.push(<Table bordered >{children}</Table>)
         return table;
-    }
+    };
 
     render(){
         var data = JSON.parse(sessionStorage.getItem("data_openLoanAccount"));
@@ -109,7 +109,7 @@ class OpenLoanAccountSummary extends Component {
                     </form>
                 </div>
         );
-    }
+    };
 }
 
 export default OpenLoanAccountSummary;

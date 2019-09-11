@@ -16,11 +16,11 @@ class InquiryLoanAccountComponent extends Component {
         event.preventDefault()
         //this.getInqAccount();
         console.log(this.state);
-    }
+    };
 
     handleChange(event) {
         this.setState({account : event.target.value});
-    }
+    };
 
     getInqAccount = () =>{
        fetch('/api/inqLoanAccount/'+this.state.account, {
@@ -66,7 +66,7 @@ class InquiryLoanAccountComponent extends Component {
                         "is_catch_up": true
                       }
                     }
-                  }
+                  };
 
                 if (data.rs_body) {
                      sessionStorage.setItem("data_inqLoanAccount", JSON.stringify(data.rs_body));
@@ -98,7 +98,7 @@ class InquiryLoanAccountComponent extends Component {
             </div>
             
         )
-    }
+    };
 
 }
 export default InquiryLoanAccountComponent;
