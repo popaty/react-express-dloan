@@ -18,11 +18,11 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//get URL from property file
 // var property1 = properties.get('openLoanAccount.url');
 // var property2 = properties.get('inqLoanAccount.url');
 // console.log(property1);
 // console.log(property2);
-//555
 
 // An api endpoint that returns a short list of items
 app.get('/api/getList', (req,res) => {

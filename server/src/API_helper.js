@@ -8,10 +8,12 @@ module.exports = {
             headers: JSON.stringify(header)
         };
         return new Promise((resolve, reject) => {
+            console.log("header : "+JSON.stringify(header));
             request.get(options, function(err, resp, body) {
                 if (err) {
                     reject(err);
                 } else {
+                    console.log("myBody : "+body);
                     resolve(JSON.parse(body));
                 }
             })
