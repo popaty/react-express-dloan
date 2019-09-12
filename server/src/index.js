@@ -149,6 +149,34 @@ app.post('/api/disbursement', (req,res) => {
 	console.log('Finished Disbursement');
 });
 
+app.get('/api/inqPositionDetail/:accountNo', (req, res) => {
+	console.log('Inquiry Position Detail')
+	console.log(req.params.accountNo);
+	let header = {
+		"x-request-id": uuidv4(),
+		"x-job-id": "",
+		"x-real-ip": "",
+		"x-caller-service": "react-app",
+		"x-caller-domain": "00",
+		"x-device": "",
+		"x-application": "react-app",
+		"x-channel": "",
+		"datetime": dateFormat(now, "yyyymmdd"),
+		"accept": "application/json",
+		"accept_language": "en",
+		"accept_encoding": "UTF8",
+		"Content-Type": "application/json",
+	};
+	let url = properties.get('inqPositionDetail.url') + req.params.accountNo;
+	api_helper.API_call_get(url, header)
+		.then(response => {
+			res.json(response)
+		})
+		.catch(error => {
+			res.send(error)
+		})
+});
+
 
 // Handles any requests that don't match the ones above
 app.get('*', (req,res) =>{
