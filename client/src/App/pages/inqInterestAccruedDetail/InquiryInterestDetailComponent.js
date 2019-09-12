@@ -21,7 +21,7 @@ class inquiryInterestDetailComponent extends Component {
 
     Clicked(event) {
         event.preventDefault()
-        window.open('/iiaSummary', '_self');
+        window.open('/iiadSummary', '_self');
     }
 
     handleChange(event) {
