@@ -7,11 +7,11 @@ const header = (props) => {
         <div >
         <Navbar color="light" light expand="md">
         {/* <img src={logo} alt="TN" width="100" height="100" /> */}
-         <NavbarBrand href="/" >TN</NavbarBrand> 
+         <NavbarBrand href="/" >TN</NavbarBrand>
            <Nav className="ml-auto" navbar>
             <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
-                  Loan Account 
+                  Loan Account
                 </DropdownToggle>
                     <DropdownMenu right>
                         <DropdownItem href="/olaComponent">
@@ -37,6 +37,20 @@ const header = (props) => {
                     </DropdownMenu>
               </UncontrolledDropdown>
               &emsp;
+               <UncontrolledDropdown nav inNavbar>
+                   <DropdownToggle nav caret>
+                       Interest
+                   </DropdownToggle>
+                   <DropdownMenu right>
+                       <DropdownItem href="/iiaComponent">
+                           Inquiry Interest Accrued (List)
+                       </DropdownItem>
+                       <DropdownItem href="/iiadComponent">
+                           Inquiry Interest Accrued Details
+                       </DropdownItem>
+                   </DropdownMenu>
+               </UncontrolledDropdown>
+               &emsp;
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
                   P-rest
@@ -56,7 +70,7 @@ const header = (props) => {
        </div>
     );
   };
-   
+
 export default header;
 
 
