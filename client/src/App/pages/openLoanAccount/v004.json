@@ -1,0 +1,27 @@
+{
+  "rq_body": {
+    "customer_number": "111111111004",
+    "customer_type": "0703",
+    "account_name": "นายซัน มีเงิน",
+    "credit_limit": 200000,
+    "credit_term_number": 5,
+    "credit_term_unit": "M",
+    "product_name": "7200120090001",
+    "disbursement_account": "20000002014",
+    "deduction_account": "20000025914",
+    "account_branch": 21,
+    "response_unit": 21,
+    "application_id": "APP0004",
+    "interest": {
+      "interest_index": "Fixed",
+      "interest_spread": 20
+    },
+    "payment": {
+      "payment_frequency": 1,
+      "payment_unit": "M",
+      "payment_date": 28,
+      "billing_offset_day": 1
+    }
+  }
+}
+

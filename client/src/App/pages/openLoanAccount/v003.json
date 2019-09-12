@@ -1,27 +1,27 @@
 {
-    "rq_body": {
-        "customer_number": "111111111110",
-        "customer_type": "0702",
-        "account_name": "นางจินตนา การดี",
-        "credit_limit": 100000,
-        "credit_term_number": 10,
-        "credit_term_unit": "M",
-        "product_name": "7200120090001",
-        "disbursement_account": "20000002011",
-        "deduction_account": "20000025911",
-        "account_branch": 25,
-        "response_unit":1,
-        "application_id": "APP0001",
-        "interest": {
-            "interest_index": "Fixed",
-            "interest_spread": 18
-        },
-        "payment": {
-            "payment_frequency": 0,
-            "payment_unit": "",
-            "payment_date": 0,
-            "billing_offset_day": 0
-             }
+  "rq_body": {
+    "customer_number": "111111111110",
+    "customer_type": "0702",
+    "account_name": "นางจินตนา การดี",
+    "credit_limit": 100000,
+    "credit_term_number": 10,
+    "credit_term_unit": "M",
+    "product_name": "7200120090001",
+    "disbursement_account": "20000002011",
+    "deduction_account": "20000025911",
+    "account_branch": 25,
+    "response_unit": 1,
+    "application_id": "APP0001",
+    "interest": {
+      "interest_index": "Fixed",
+      "interest_spread": 18
+    },
+    "payment": {
+      "payment_frequency": 0,
+      "payment_unit": "",
+      "payment_date": 0,
+      "billing_offset_day": 0
     }
+  }
 }
- 
+
