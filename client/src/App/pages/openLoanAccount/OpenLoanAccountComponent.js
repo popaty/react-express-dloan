@@ -207,7 +207,7 @@ class OpenLoanAccountComponent extends Component {
                         <DropdownItem name="001" onClick={this.loadJson}>Input body Open Account Validation 001</DropdownItem>
                         <DropdownItem name="002" onClick={this.loadJson}>Input body Open Account Validation 002</DropdownItem>
                         <DropdownItem name="003" onClick={this.loadJson}>Input body Open Account Validation 003</DropdownItem>
-                        <DropdownItem name="004" onClick={this.loadJson}>Input body Open Account Validation 004</DropdownItem>
+                        <DropdownItem name="004" onClick={this.loadJson}>[DEMO]Input body Open Account Validation 004</DropdownItem>
                     </DropdownMenu>
             </UncontrolledDropdown>
             <br />

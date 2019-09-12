@@ -81,7 +81,7 @@
         },
         {
             "label" : "Interest spread",
-            "type" : "number",
+            "type" : "text",
             "name" : "interest_spread",
             "placeholder" : "Enter interest spread",
             "value" : "interest_spread",

@@ -7,7 +7,7 @@ class inquiryPositionSummery extends Component {
     constructor(props){
         super(props);
         this.state = {
-       
+
         };
     }
 
@@ -17,17 +17,25 @@ class inquiryPositionSummery extends Component {
 
         for(let key in data){
             if(typeof data[key] === "object"){
+                console.log("if"+key)
                 let obj = [];
                 for(let subdata in data[key]){
                     if(typeof data[key][subdata] === "boolean"){
                         var catchup = String(data[key][subdata] );
                         obj.push(<tr><td>{subdata}</td><td>{catchup}</td></tr>)
                     }else{
-                        obj.push(<tr><td>{subdata}</td><td>{data[key][subdata]}</td></tr>);
+                        if (subdata != "daily_accrued_amount" && subdata != "unpaid_accrued_amount") {
+                            obj.push(<tr>
+                                <td>{subdata}</td>
+                                <td>{data[key][subdata]}</td>
+                            </tr>);
+                        }
                     }
                 }
-                children.push(<tr><td>{key+" : "}</td><td><Table>{obj}</Table></td></tr>);
+
+                    children.push(<tr><td>{key+" : "}</td><td><Table>{obj}</Table></td></tr>);
             }else{
+                console.log("else"+key)
                 children.push(<tr><td>{key}</td><td>{data[key]}</td></tr>);
             }
         }
