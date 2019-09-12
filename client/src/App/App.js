@@ -11,8 +11,8 @@ import openLoanAccountSummary from './pages/openLoanAccount/OpenLoanAccountSumma
 import inquiryLoanAccountComponent from './pages/inqLoanAccount/InquiryLoanAccountComponent';
 import inquiryLoanAccountSummary from './pages/inqLoanAccount/InquiryLoanAccountSummery';
 
-import installmentComponent from './pages/calculateInstallmentAmount/installmentComponent';
-import installmentSummary from './pages/calculateInstallmentAmount/installmentSummary';
+import calculateInstallmentComponent from './pages/calculateInstallment/calculateInstallmentComponent';
+import calculateInstallmentSummary from './pages/calculateInstallment/calculateInstallmentSummary';
 
 import disbursementComponent from './pages/disbursement/disbursementComponent';
 import disbursementSummery from './pages/disbursement/disbursementSummery';
@@ -22,6 +22,9 @@ import inquiryPositionSummery from './pages/inqPositionDetail/InquiryPositionSum
 
 import inquiryInterestComponent from './pages/inqInterestAccrued/InquiryInterestComponent';
 import inquiryInterestSummery from './pages/inqInterestAccrued/InquiryInterestSummery';
+
+import inquiryInterestDetailComponent from './pages/inqInterestAccruedDetail/InquiryInterestDetailComponent';
+import inquiryInterestDetailSummery from './pages/inqInterestAccruedDetail/InquiryInterestDetailSummery';
 
 class App extends Component {
   render() {
@@ -37,8 +40,8 @@ class App extends Component {
           <Route path='/ilaComponent' component={inquiryLoanAccountComponent}/>
           <Route path='/ilaSummary' component={inquiryLoanAccountSummary}/>
 
-          <Route path='/ciaComponent' component={installmentComponent}/>
-          <Route path='/ciaSummary' component={installmentSummary}/>
+          <Route path='/ciaComponent' component={calculateInstallmentComponent}/>
+          <Route path='/ciaSummary' component={calculateInstallmentSummary}/>
 
           <Route path='/dbmComponent' component={disbursementComponent}/>
           <Route path='/dbmSummary' component={disbursementSummery}/>
@@ -48,7 +51,10 @@ class App extends Component {
 
           <Route path='/iiaComponent' component={inquiryInterestComponent}/>
           <Route path='/iiaSummary' component={inquiryInterestSummery}/>
-          
+
+          <Route path='/iiadComponent' component={inquiryInterestDetailComponent}/>
+          <Route path='/iiadSummary' component={inquiryInterestDetailSummery}/>
+
         </Switch>
       </div>
     );
@@ -56,7 +62,7 @@ class App extends Component {
       <Switch>
         <App/>
       </Switch>
-    
+
     );
   }
 }
