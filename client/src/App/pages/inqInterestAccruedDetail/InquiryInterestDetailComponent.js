@@ -13,8 +13,7 @@ class inquiryInterestDetailComponent extends Component {
             rq_body : {
                 account_number: "",
                 account_sequence: "",
-                first_date: "",
-                second_number: ""
+                date: ""
             }
         };
         this.handleChange = this.handleChange.bind(this);
@@ -111,7 +110,7 @@ class inquiryInterestDetailComponent extends Component {
                 <br/>
                 <Row>
                     <Col md={{size: 4, offset: 4}}>
-                        <Form onSubmit={this.handleSubmit}>
+                        <Form onSubmit={this.Clicked}>
                             {this.FormInputData()}
                             <br/>
                             <div align="center">

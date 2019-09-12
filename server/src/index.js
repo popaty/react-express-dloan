@@ -178,6 +178,65 @@ app.get('/api/inqPositionDetail/:accountNo', (req, res) => {
 		})
 });
 
+app.get('/api/inqInterestAccrued/:accountNo', (req, res) => {
+	console.log('Inquiry Interest Accrued List')
+	console.log(req.params.accountNo);
+	let header = {
+		"x-request-id": uuidv4(),
+		"x-job-id": "",
+		"x-real-ip": "",
+		"x-caller-service": "react-app",
+		"x-caller-domain": "00",
+		"x-device": "",
+		"x-application": "react-app",
+		"x-channel": "",
+		"datetime": dateFormat(now, "yyyymmdd"),
+		"accept": "application/json",
+		"accept_language": "en",
+		"accept_encoding": "UTF8",
+		"Content-Type": "application/json",
+	};
+	let url = properties.get('inqInterestAccruedList.url') + req.params.accountNo;
+	api_helper.API_call_get(url, header)
+		.then(response => {
+			res.json(response)
+		})
+		.catch(error => {
+			res.send(error)
+		})
+});
+
+app.post('/api/inqInterestAccruedDetail', (req,res) => {
+	console.log('inqInterestAccruedDetail');
+	console.log("body : "+JSON.stringify(req.body));
+	let header = {
+		"x-request-id": uuidv4(),
+		"x-job-id": "",
+		"x-real-ip": "",
+		"x-caller-service": "react-app",
+		"x-caller-domain": "00",
+		"x-device": "",
+		"x-application": "react-app",
+		"x-channel": "",
+		"datetime": dateFormat(now, "yyyymmdd"),
+		"accept": "application/json",
+		"accept_language": "en",
+		"accept_encoding": "UTF8",
+		"original-caller-domain":"B0",
+		"Content-Type": "application/json",
+	};
+	let url = properties.get('inqInterestAccruedDetail.url')
+	console.log(url)
+	api_helper_post.API_call_post(url, header, req.body)
+		.then(response => {
+			res.json(response)
+		})
+		.catch(error => {
+			res.send(error)
+		});
+	console.log('Finished inqInterestAccruedDetail');
+});
+
 
 // Handles any requests that don't match the ones above
 app.get('*', (req,res) =>{

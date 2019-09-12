@@ -13,7 +13,7 @@
     "response_unit": 21,
     "application_id": "APP0004",
     "interest": {
-      "interest_index": "Fixed",
+      "interest_index": "FIXED",
       "interest_spread": 20
     },
     "payment": {
