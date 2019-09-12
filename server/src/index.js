@@ -77,7 +77,8 @@ app.post('/api/openLoanAccount', (req,res) => {
 		"accept_encoding": "UTF8",
 		"Content-Type": "application/json",
 	};
-	let url = properties.get('openLoanAccount.url')
+	let url = properties.get('openLoanAccount.url');
+	console.log(url);
 	api_helper_post.API_call_post(url, header, req.body)
 		.then(response => {
 			res.json(response)

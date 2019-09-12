@@ -63,7 +63,7 @@ class OpenLoanAccountComponent extends Component {
            currentState[event.target.name] = event.target.type === "number" ? Number(event.target.value) : event.target.value;
        }
         this.setState({rq_body : currentState});
-       
+
     };
 
     handleSubmit(event) {
@@ -81,7 +81,7 @@ class OpenLoanAccountComponent extends Component {
 
     omitfield =(body) =>{
         for(let key in body.rq_body){
-             if(typeof body.rq_body[key] === "object" ){   
+             if(typeof body.rq_body[key] === "object" ){
               for(let subkey in body.rq_body[key]){
                     if(body.rq_body[key][subkey] === "" || body.rq_body[key][subkey] === 0){
                         delete body.rq_body[key][subkey];
@@ -89,7 +89,7 @@ class OpenLoanAccountComponent extends Component {
               }
               if(Object.keys(body.rq_body[key]).length === 0){
                     delete body.rq_body[key];
-                } 
+                }
              }else if(body.rq_body[key] === "" || body.rq_body[key] === 0){
                     delete body.rq_body[key];
              }
@@ -114,23 +114,23 @@ class OpenLoanAccountComponent extends Component {
     };
 
     postList = (request) => {
-      // console.log("myRequest : " + JSON.stringify(request));
-      // fetch('/api/openLoanAccount', {
-      //     method: 'POST',
-      //     headers: {
-      //         "Content-Type": "application/json"
-      //     },
-      //     body: JSON.stringify(request)
-      // })
-      //     .then(response => response.json())
-      //     .then(data => {
+      console.log("myRequest : " + JSON.stringify(request));
+      fetch('/api/openLoanAccount', {
+          method: 'POST',
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify(request)
+      })
+          .then(response => response.json())
+          .then(data => {
 
-          let data = {
-            "rs_body": {
-              "account_number": "111111111004",
-              "open_date": "13-09-2019"
-            }
-          }
+          // let data = {
+          //   "rs_body": {
+          //     "account_number": "111111111004",
+          //     "open_date": "13-09-2019"
+          //   }
+          // };
               if (data.rs_body) {
                   sessionStorage.setItem("data_openLoanAccount", JSON.stringify(data));
                   window.open('/olaSummary', '_self');
@@ -138,7 +138,7 @@ class OpenLoanAccountComponent extends Component {
                   alert("error code : "+data.errors.map(error => error.error_code)+"\n"
                       +"error desc : "+ data.errors.map(error => error.error_desc));
               }
-          // }).catch(error => console.log(error))
+          }).catch(error => console.log(error))
   };
 
 
@@ -190,7 +190,7 @@ class OpenLoanAccountComponent extends Component {
 
     render() {
       const { loading } = this.state;
-        return (    
+        return (
           <div>
             <DynamicHeader />
            <br />
@@ -207,7 +207,7 @@ class OpenLoanAccountComponent extends Component {
             </UncontrolledDropdown>
             <br />
             <Form onSubmit={this.handleSubmit}>
-            <Row > 
+            <Row >
               <Col md={{ size: 3, offset: 3 }} >
                 {this.FormInputCol1()}
             </Col>
@@ -216,14 +216,14 @@ class OpenLoanAccountComponent extends Component {
                 {this.FormInputCol2()}
             </Col>
             </Row>
-          
+
             <div align="center">
                 <Button color="primary" type="submit" disabled={loading} >
                   {/* Submit */}
                   {loading && (<SpinnerLoader />)}
                     {loading && <span>Loading..</span>}
                     {!loading && <span>Submit</span>}
-                </Button> 
+                </Button>
                    {/* < SpinnerLoader /> */}
             </div>
             <br />
