@@ -8,19 +8,8 @@ class inquiryPositionSummery extends Component {
     constructor(props){
         super(props);
         this.state = {
-            account: ""
+     
         };
-        this.handleChange = this.handleChange.bind(this);
-        // this.Clicked = this.Clicked.bind(this);
-    }
-
-    Clicked(event) {
-        event.preventDefault()
-        // this.props.history.push('/');
-    }
-
-    handleChange(event) {
-        this.setState({account : event.target.value});
     }
 
     dynamicResponse = (data) => {
@@ -48,8 +37,8 @@ class inquiryPositionSummery extends Component {
     };
 
     render() {
-        var data1 = JSON.parse(sessionStorage.getItem("data_inqPositionDetail"));
-        var data2 = JSON.parse(sessionStorage.getItem("data_inqPositionDetail"));
+        var data = JSON.parse(sessionStorage.getItem("data_inqInterestAccruedDetail"));
+        //var data2 = JSON.parse(sessionStorage.getItem("data_inqPositionDetail"));
         return(
             <div className="App">
                 <DynamicHeader />
@@ -59,11 +48,11 @@ class inquiryPositionSummery extends Component {
                 <br />
                 <Row>
                 <Col md={{ size: 5, offset : 1 }} >
-                    {this.dynamicResponse(data1)}
+                    {this.dynamicResponse(data.rs_body)}
                 </Col>
-                <Col md={{ size: 5 }} >
+                {/* <Col md={{ size: 5 }} >
                     {this.dynamicResponse(data2)}
-                </Col>
+                </Col> */}
                 </Row>
                 <br />
                 {/* <Button color="secondary" onClick={this.Clicked}>Home</Button><br /><br /> */}

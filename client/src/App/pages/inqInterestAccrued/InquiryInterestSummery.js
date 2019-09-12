@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Button, Col,Table} from 'reactstrap';
+import { Col,Table} from 'reactstrap';
 import DynamicHeader from '../Header.js';
 
 class inquiryPositionSummery extends Component {
