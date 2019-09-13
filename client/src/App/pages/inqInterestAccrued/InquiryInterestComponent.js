@@ -75,20 +75,24 @@ class inquiryInterestComponent extends Component {
         }
         if (data.rs_body) {
             var tmp = data.rs_body.position_detail.map(item => item);
-            var js = JSON.stringify(tmp);
-            var str = js.toString();
-            //console.log(tmp);
+            for(let i in tmp){
+                var str = tmp[i];
+            }
             console.log(str);
+            // var js = JSON.stringify(tmp);
+            // var str = js.toString();
+            // console.log(tmp);
+            // console.log(str);
 
 
             //   sessionStorage.setItem("data_inqInterastaAccrued", JSON.stringify(data.rs_body));
-            //  window.open('/iiaSummary', '_self');
+            //   window.open('/iiaSummary', '_self');
         } else {
             alert("error code : " + data.errors.map(error => error.error_code) + "\n"
                 + "error desc : " + data.errors.map(error => error.error_desc) + "\n"
                 + "error type : " + data.errors.map(error => error.error_type));
         }
-    }
+    };
 
     handleChange(event) {
         this.setState({ account: event.target.value });
@@ -112,7 +116,7 @@ class inquiryInterestComponent extends Component {
                 </Col>
             </div>
         );
-    }
+    };
 }
 
 export default inquiryInterestComponent;

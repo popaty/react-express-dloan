@@ -13,8 +13,7 @@ class inquiryInterestDetailComponent extends Component {
             rq_body : {
                 account_number: "",
                 account_sequence: "",
-                first_date: "",
-                //second_number: ""
+                date: ""
             }
         };
         this.handleChange = this.handleChange.bind(this);

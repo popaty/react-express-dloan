@@ -17,7 +17,7 @@
             "root" : null
         },
         {
-            "label" : "1st Date",
+            "label" : "Date",
             "type" : "text",
             "name" : "date",
             "placeholder" : "Enter first date",
