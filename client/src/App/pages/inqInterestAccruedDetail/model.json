@@ -19,18 +19,9 @@
         {
             "label" : "1st Date",
             "type" : "text",
-            "name" : "first_date",
+            "name" : "date",
             "placeholder" : "Enter first date",
-            "value" : "first_date",
-            "root" : null
-
-        },
-        {
-            "label" : "2nd Date",
-            "type" : "text",
-            "name" : "second_date",
-            "placeholder" : "Enter second date",
-            "value" : "second_date",
+            "value" : "date",
             "root" : null
 
         }
