@@ -1,20 +1,34 @@
-const request = require('request')
+const request = require('request');
 
 module.exports = {
-    API_call_post : function(url, header, body){
-        var options = {
+    API_call_post: function (url, header, body) {
+        console.log(url);
+        const options = {
             url: url,
             headers: JSON.stringify(header),
             body: JSON.stringify(body)
         };
         return new Promise((resolve, reject) => {
-            console.log("header : "+JSON.stringify(header));
-            console.log("body : "+JSON.stringify(body));
-            request.post(options, function(err, resp, body) {
+            console.log("request_header : " + JSON.stringify(header));
+            console.log("request_body : " + JSON.stringify(body));
+            request.post(options, function (err, resp, body) {
                 if (err) {
-                    reject(err);
+                    //check for system error then modify data structure
+                    let errMsg = {
+                        errors: [
+                            {
+                                error_code: err.errno,
+                                error_type: err.code,
+                                error_desc: err.syscall
+                            }
+                        ]
+                    };
+                    console.log(err);
+                    console.log(errMsg);
+                    reject(errMsg);
                 } else {
-                    console.log("myBody : "+body);
+                    //send out data response
+                    console.log("response_body : " + body);
                     resolve(JSON.parse(body));
                 }
             })
