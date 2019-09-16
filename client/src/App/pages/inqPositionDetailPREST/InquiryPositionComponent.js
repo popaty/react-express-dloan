@@ -30,7 +30,7 @@ class inquiryPositionComponent extends Component {
                         principal_balance: getdata.bal
                     };
                     sessionStorage.setItem("data_inqPositionDetail", JSON.stringify(body));
-                    window.open('/ipdSummary', '_self');
+                    window.open('/ipdprestSummary', '_self');
                 } else {
                     alert("Data not found.");
                 }

@@ -17,14 +17,20 @@ import calculateInstallmentSummary from './pages/calculateInstallment/calculateI
 import disbursementComponent from './pages/disbursement/disbursementComponent';
 import disbursementSummery from './pages/disbursement/disbursementSummery';
 
-import inquiryPositionComponent from './pages/inqPositionDetail/InquiryPositionComponent';
-import inquiryPositionSummery from './pages/inqPositionDetail/InquiryPositionSummery';
+import inquiryPositionComponent from './pages/inqPositionDetailPREST/InquiryPositionComponent';
+import inquiryPositionSummery from './pages/inqPositionDetailPREST/InquiryPositionSummery';
 
 import inquiryInterestComponent from './pages/inqInterestAccrued/InquiryInterestComponent';
 import inquiryInterestSummery from './pages/inqInterestAccrued/InquiryInterestSummery';
 
 import inquiryInterestDetailComponent from './pages/inqInterestAccruedDetail/InquiryInterestDetailComponent';
 import inquiryInterestDetailSummery from './pages/inqInterestAccruedDetail/InquiryInterestDetailSummery';
+
+import inqPositionComponent from './pages/inqPositionDetail/inqPositionComponent';
+import inqPositionSummery from './pages/inqPositionDetail/inqPositionSummery';
+
+import RepaymentComponent from './pages/repayment/RepaymentComponent';
+import RepaymentSummery from './pages/repayment/RepaymentSummery';
 
 class App extends Component {
   render() {
@@ -46,14 +52,20 @@ class App extends Component {
           <Route path='/dbmComponent' component={disbursementComponent}/>
           <Route path='/dbmSummary' component={disbursementSummery}/>
 
-          <Route path='/ipdComponent' component={inquiryPositionComponent}/>
-          <Route path='/ipdSummary' component={inquiryPositionSummery}/>
+          <Route path='/ipdprestComponent' component={inquiryPositionComponent}/>
+          <Route path='/ipdprestSummary' component={inquiryPositionSummery}/>
 
           <Route path='/iiaComponent' component={inquiryInterestComponent}/>
           <Route path='/iiaSummary' component={inquiryInterestSummery}/>
 
           <Route path='/iiadComponent' component={inquiryInterestDetailComponent}/>
           <Route path='/iiadSummary' component={inquiryInterestDetailSummery}/>
+
+          <Route path='/ipdComponent' component={inqPositionComponent}/>
+          <Route path='/ipdSummary' component={inqPositionSummery}/>
+
+          <Route path='/rpmComponent' component={RepaymentComponent}/>
+          <Route path='/rpmSummary' component={RepaymentSummery}/>
 
         </Switch>
       </div>

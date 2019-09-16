@@ -7,7 +7,6 @@ class inquiryPositionSummery extends Component {
     constructor(props) {
         super(props);
         this.state = {};
-        this.handleChange = this.handleChange.bind(this);
     }
 
     CallInquiryLoanAccount() {
@@ -16,47 +15,6 @@ class inquiryPositionSummery extends Component {
         fetch('/api/inqLoanAccount/' + data.account_number, {}).then(response => response.json())
             .then(data => {
                 console.log(data);
-                // var data = {
-                //     "rs_body": {
-                //         "account_number": "111111111004",
-                //         "product_name": "7200120090001",
-                //         "customer_number": "12111111111",
-                //         "customer_type": "0702",
-                //         "account_name": "นางสาวกานดา มาดีไกล",
-                //         "currency": "THB",
-                //         "account_branch": 1,
-                //         "response_unit": 2,
-                //         "credit_term_number": 12,
-                //         "credit_term_unit": "M",
-                //         "disbursement_account": "20000002010",
-                //         "open_date": "2019-08-23",
-                //         "application_id": "APP0001",
-                //         "closed_date": "",
-                //         "limit": {
-                //             "credit_limit": 100000,
-                //             "balance": 100000,
-                //             "available_balance": 100000,
-                //             "maturity_date": "2020-08-19"
-                //         },
-                //         "payment": {
-                //             "payment_frequency": 1,
-                //             "payment_unit": "M",
-                //             "payment_date": 31,
-                //             "payment_calculation_method": "installment",
-                //             "billing_offset_day": 1,
-                //             "deduction_account": "20000002010"
-                //         },
-                //         "interest": {
-                //             "interest_index": "MRR",
-                //             "interest_spread": 12,
-                //             "interest_rate": 19.12,
-                //             "penalty_index": "pen",
-                //             "penalty_rate": 28,
-                //             "grace_day": 5,
-                //             "is_catch_up": true
-                //         }
-                //     }
-                // }
                 if (data.rs_body) {
                     sessionStorage.setItem("data_inqLoanAccount", JSON.stringify(data.rs_body));
                     window.open('/ilaSummary', '_self');
@@ -68,9 +26,6 @@ class inquiryPositionSummery extends Component {
             }).catch(error => console.log(error))
     }
 
-    handleChange(event) {
-        this.setState({account: event.target.value});
-    }
 
     dynamicResponse = (data) => {
         let table = [];
