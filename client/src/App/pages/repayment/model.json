@@ -1,0 +1,20 @@
+{
+    "model" : [
+        {
+            "label" : "test1",
+            "type" : "text",
+            "name" : "test1",
+            "placeholder" : "Enter test1",
+            "value" : "test1",
+            "root" : null
+        },
+        {
+            "label" : "tes2",
+            "type" : "text",
+            "name" : "test2",
+            "placeholder" : "Enter test2",
+            "value" : "test2",
+            "root" : null
+        }
+    ]
+}

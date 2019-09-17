@@ -51,7 +51,6 @@ class installmentComponent extends Component {
         //clone state for use in omit function.
         var body = cloneDeep(this.state);
         let request = this.omitfield(body);
-        // console.log(request);
         this.postList(request);
     };
 
@@ -75,23 +74,35 @@ class installmentComponent extends Component {
 
     postList = (request) => {
         console.log("myRequest : " + JSON.stringify(request));
-        var inputData = {number_of_payment : request.rq_body.number_of_payment, disbursement_amount : request.rq_body.disbursement_amount};
-        //console.log(JSON.stringify(inputData));
-        fetch('/api/calculateInstallment', {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(request),
-        })
-            .then(response => response.json())
-            .then(data => {
+        // var inputData = {number_of_payment : request.rq_body.number_of_payment, disbursement_amount : request.rq_body.disbursement_amount};
+        // fetch('/api/calculateInstallment', {
+        //     method: 'POST',
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     },
+        //     body: JSON.stringify(request),
+        // })
+        //     .then(response => response.json())
+        //     .then(data => {
 
-        // var data = {
-        //     "rs_body": {
-        //         "installment_amount": 15037.5
-        //     }
+        // if (data.rs_body) {
+        //     sessionStorage.setItem("data_installment", JSON.stringify(data));
+        //     sessionStorage.setItem("input_installment", JSON.stringify(inputData));
+        //     window.open('/ciaSummary', '_self');
+        // }else{
+        //     alert("error code : "+data.errors.map(error => error.error_code)+"\n"
+        //         +"error desc : "+ data.errors.map(error => error.error_desc)+"\n"
+        //         +"error type : "+ data.errors.map(error => error.error_type));
         // }
+        //  }).catch(error => console.log(error))
+
+        //mock data
+        var data = {
+            "rs_body": {
+              "installment_amount": 15037.5
+            }
+        };
+        var inputData = {number_of_payment : request.rq_body.number_of_payment, disbursement_amount : request.rq_body.disbursement_amount};
         if (data.rs_body) {
             sessionStorage.setItem("data_installment", JSON.stringify(data));
             sessionStorage.setItem("input_installment", JSON.stringify(inputData));
@@ -101,7 +112,6 @@ class installmentComponent extends Component {
                 +"error desc : "+ data.errors.map(error => error.error_desc)+"\n"
                 +"error type : "+ data.errors.map(error => error.error_type));
         }
-         }).catch(error => console.log(error))
     };
 
     FormInputData = () => {
@@ -110,7 +120,7 @@ class installmentComponent extends Component {
                 return(
                     <FormGroup>
                         <Label>{item.label}</Label>
-                        <Input type={item.type} name={item.name} placeholder={item.placeholder}
+                        <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
                                value={this.state.rq_body[item.value]} onChange={this.handleChange} />
                     </FormGroup>
                 );
@@ -118,7 +128,7 @@ class installmentComponent extends Component {
                 return(
                     <FormGroup>
                         <Label>{item.label}</Label>
-                        <Input type={item.type} name={item.name} placeholder={item.placeholder}
+                        <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
                                value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
                     </FormGroup>
                 );

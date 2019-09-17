@@ -84,7 +84,7 @@ class inquiryInterestDetailComponent extends Component {
                 return (
                     <FormGroup>
                         <Label>{item.label}</Label>
-                        <Input type={item.type} name={item.name} placeholder={item.placeholder}
+                        <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
                                value={this.state.rq_body[item.value]} onChange={this.handleChange}/>
                     </FormGroup>
                 );
@@ -92,7 +92,7 @@ class inquiryInterestDetailComponent extends Component {
                 return (
                     <FormGroup>
                         <Label>{item.label}</Label>
-                        <Input type={item.type} name={item.name} placeholder={item.placeholder}
+                        <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
                                value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange}/>
                     </FormGroup>
                 );

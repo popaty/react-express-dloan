@@ -15,7 +15,7 @@ class InquiryLoanAccountComponent extends Component {
     Clicked(event) {
         event.preventDefault()
         this.getInqAccount();
-        console.log(this.state);
+        //console.log(this.state);
     };
 
     handleChange(event) {
