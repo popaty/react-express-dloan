@@ -41,7 +41,8 @@ class OpenLoanAccountComponent extends Component {
           payment_date: 0,
           billing_offset_day: 0
         }
-      }
+      },
+      loading : false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -73,29 +74,35 @@ class OpenLoanAccountComponent extends Component {
     //clone state for use in omit function.
     var body = cloneDeep(this.state);
     let request = this.omitfield(body);
+    // console.log(request);
     setTimeout(() => {
       this.setState({ loading: false });
       this.postList(request);
     }, 1500);
   };
 
-  omitfield = (body) => {
-    for (let key in body.rq_body) {
-      if (typeof body.rq_body[key] === "object") {
-        for (let subkey in body.rq_body[key]) {
-          if (body.rq_body[key][subkey] === "" || body.rq_body[key][subkey] === 0) {
-            delete body.rq_body[key][subkey];
-          }
-        }
-        if (Object.keys(body.rq_body[key]).length === 0) {
-          delete body.rq_body[key];
-        }
-      } else if (body.rq_body[key] === "" || body.rq_body[key] === 0) {
-        delete body.rq_body[key];
-      }
+  omitfield =(body) =>{
+    for(let key in body.rq_body){
+        if(body.rq_body.hasOwnProperty(key)){
+            if(typeof body.rq_body[key] === "object" ){
+                for(let subkey in body.rq_body[key]){
+                    if(body.rq_body[key].hasOwnProperty(subkey)){
+                        if(body.rq_body[key][subkey] === "" || body.rq_body[key][subkey] === 0){
+                            delete body.rq_body[key][subkey];
+                        }
+                    }
+                }
+                if(Object.keys(body.rq_body[key]).length === 0){
+                    delete body.rq_body[key];
+                }
+            }else if(body.rq_body[key] === "" || body.rq_body[key] === 0){
+                delete body.rq_body[key];
+            }
+        } 
     }
+    delete body.loading;
     return body;
-  };
+};
 
 
   loadJson(event) {

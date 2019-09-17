@@ -18,7 +18,7 @@
         },
         {
             "label" : "Date",
-            "type" : "text",
+            "type" : "date",
             "name" : "date",
             "placeholder" : "Enter first date",
             "value" : "date",
