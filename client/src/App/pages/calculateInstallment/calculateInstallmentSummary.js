@@ -39,7 +39,7 @@ class calculateInstallmentSummary extends Component {
 
     render(){
         var data = JSON.parse(sessionStorage.getItem("data_installment"));
-        console.log(data);
+        //console.log(data);
         return(
             <div className="App">
                 <DynamicHeader />

@@ -10,10 +10,10 @@ class inqPositionSummery extends Component {
 
     CallInquiryLoanAccount() {
         var data = JSON.parse(sessionStorage.getItem("data_inqLoanAccount"));
-        console.log(data.account_number);
+        //console.log(data.account_number);
         fetch('/api/inqLoanAccount/' + data.account_number, {}).then(response => response.json())
             .then(data => {
-                console.log(data);
+               // console.log(data);
                 if (data.rs_body) {
                     sessionStorage.setItem("data_inqLoanAccount", JSON.stringify(data.rs_body));
                     window.open('/ilaSummary', '_self');
@@ -64,7 +64,7 @@ class inqPositionSummery extends Component {
 
     render() {
         var data = JSON.parse(sessionStorage.getItem("data_inqPositionDetail"));
-        console.log(data);
+        //console.log(data);
         return (
             <div className="App">
                 <DynamicHeader/>

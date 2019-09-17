@@ -23,8 +23,8 @@ class installmentComponent extends Component {
     };
 
     componentDidMount(){
-        if(JSON.parse(sessionStorage.getItem("input3field_installment"))){
-            let data = JSON.parse(sessionStorage.getItem("input3field_installment"));
+        if(JSON.parse(sessionStorage.getItem("inputData_installment"))){
+            let data = JSON.parse(sessionStorage.getItem("inputData_installment"));
             let body = {
                 disbursement_amount: 0,
                 number_of_payment: 0,
@@ -34,7 +34,7 @@ class installmentComponent extends Component {
 
             };
             this.setState({rq_body : body});
-            console.log(this.state);
+            //console.log(this.state);
         }
     };
 
@@ -76,7 +76,7 @@ class installmentComponent extends Component {
     postList = (request) => {
         console.log("myRequest : " + JSON.stringify(request));
         var inputData = {number_of_payment : request.rq_body.number_of_payment, disbursement_amount : request.rq_body.disbursement_amount};
-        console.log(JSON.stringify(inputData));
+        //console.log(JSON.stringify(inputData));
         fetch('/api/calculateInstallment', {
             method: 'POST',
             headers: {

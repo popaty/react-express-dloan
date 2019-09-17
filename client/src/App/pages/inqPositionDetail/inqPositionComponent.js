@@ -18,7 +18,17 @@ class inqPositionComponent extends Component {
 
     Clicked(event) {
         event.preventDefault()
-        window.open('/ipdSummary', '_self');
+        fetch('/api/inquiryPositionDetail/' + this.state.account)
+        .then(response => response.json())
+        .then(data => {
+                if (data) {
+                    //wait
+                    sessionStorage.setItem("data_inqPositionDetail", JSON.stringify(data));
+                    window.open('/ipdSummary', '_self');
+                } else {
+                    alert("Data not found.");
+                }
+            }).catch(error => console.log(error))
     }
 
     render() {

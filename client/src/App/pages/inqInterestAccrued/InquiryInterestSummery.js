@@ -46,7 +46,7 @@ class inquiryPositionSummery extends Component {
 
     render() {
         var data = JSON.parse(sessionStorage.getItem("data_inqInterastaAccrued"));
-        console.log(data);
+       // console.log(data);
         return (
             <div className="App" >
                 <DynamicHeader />

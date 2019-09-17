@@ -19,7 +19,7 @@ class InquiryLoanAccountSummery extends Component {
         var data = this.getSessionStorage();
         var body = {interest_rate : data.interest.interest_rate, payment_frequency : data.payment.payment_frequency,
             payment_unit : data.payment.payment_unit}
-        sessionStorage.setItem("input3field_installment", JSON.stringify(body));
+        sessionStorage.setItem("inputData_installment", JSON.stringify(body));
         window.open('/ciaComponent', '_self');
     };
 
@@ -53,7 +53,7 @@ class InquiryLoanAccountSummery extends Component {
 
     render(){
         var data = this.getSessionStorage();
-        console.log(data);
+        //console.log(data);
         return(
 
             <div className="App">

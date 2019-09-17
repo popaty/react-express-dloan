@@ -10,11 +10,10 @@ class OpenLoanAccountSummary extends Component {
 
     CallInquiryLoanAccount(){
         var data = JSON.parse(sessionStorage.getItem("data_openLoanAccount"));
-        console.log(data.rs_body.account_number);
         fetch('/api/inqLoanAccount/'+data.rs_body.account_number, {
         }).then(response => response.json())
             .then(data => {
-                console.log(data);
+                //console.log(data);
         // var data = {
         //     "rs_body": {
         //       "account_number": "111111111004",
@@ -63,7 +62,6 @@ class OpenLoanAccountSummary extends Component {
                     alert("error code : "+data.errors.map(error => error.error_code)+"\n"
                         +"error desc : "+ data.errors.map(error => error.error_desc));
                 }
-
              }).catch(error => console.log(error))
     };
 

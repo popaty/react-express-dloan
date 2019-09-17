@@ -15,14 +15,15 @@ class inquiryPositionComponent extends Component {
 
     Clicked(event) {
         event.preventDefault()
-        var data = JSON.parse(sessionStorage.getItem("data_inqLoanAccount"));
-        console.log(data.account_number);
-        fetch('/api/inqPositionDetail/' + data.account_number, {}).then(response => response.json())
-            .then(data => {
-                console.log(data);
+        // var data = JSON.parse(sessionStorage.getItem("data_inqLoanAccount"));
+        //console.log(this.state.account);
+        fetch('/api/inqPositionDetail/' + this.state.account)
+        .then(response => response.json())
+        .then(data => {
+                //console.log(data);
                 if (data) {
                     const maximum = Math.max(...data.map(item => item.posnNbr));
-                    console.log(maximum);
+                    //console.log(maximum);
                     const getdata = data.find(element => element.posnNbr === maximum);
                     let body = {
                         account_sequence: getdata.posnNbr,

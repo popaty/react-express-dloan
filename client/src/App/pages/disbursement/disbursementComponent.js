@@ -52,7 +52,7 @@ class disbursementComponent extends Component {
                 }
             };
             this.setState({rq_body : body});
-            console.log(this.state);
+            //console.log(this.state);
         }
     };
 
@@ -75,7 +75,7 @@ class disbursementComponent extends Component {
         //clone state for use in omit function.
         var body = cloneDeep(this.state);
         let request = this.omitfield(body);
-        console.log(request);
+        //console.log(request);
         this.postList(request);
     };
 

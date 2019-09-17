@@ -73,7 +73,6 @@ class OpenLoanAccountComponent extends Component {
         //clone state for use in omit function.
         var body = cloneDeep(this.state);
         let request = this.omitfield(body);
-        console.log(request);
         setTimeout(() => {
           this.setState({ loading: false });
           this.postList(request);
@@ -128,13 +127,6 @@ class OpenLoanAccountComponent extends Component {
       })
           .then(response => response.json())
           .then(data => {
-
-          // let data = {
-          //   "rs_body": {
-          //     "account_number": "111111111004",
-          //     "open_date": "13-09-2019"
-          //   }
-          // };
               if (data.rs_body) {
                   sessionStorage.setItem("data_openLoanAccount", JSON.stringify(data));
                   window.open('/olaSummary', '_self');

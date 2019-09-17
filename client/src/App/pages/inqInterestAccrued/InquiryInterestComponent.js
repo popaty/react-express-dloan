@@ -20,7 +20,7 @@ class inquiryInterestComponent extends Component {
          .then(data => {
             if (data.rs_body) {
                 var value = {...data.rs_body.position_detail.map(item => item)};
-                console.log(value);
+                //console.log(value);
                 sessionStorage.setItem("data_inqInterastaAccrued", JSON.stringify(value));
                 window.open('/iiaSummary', '_self');
             } else {
