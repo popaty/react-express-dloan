@@ -35,7 +35,7 @@ class RepaymentSummery extends Component {
     };
 
     render() {
-        var data = JSON.parse(sessionStorage.getItem("data_installment"));
+        var data = JSON.parse(sessionStorage.getItem("data_repayment"));
         //console.log(data);
         return(
             <div className="App">
