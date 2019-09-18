@@ -25,7 +25,7 @@ class inquiryPositionComponent extends Component {
                     const maximum = Math.max(...data.map(item => item.posnNbr));
                     //console.log(maximum);
                     const getdata = data.find(element => element.posnNbr === maximum);
-                    let body = {
+                    const body = {
                         account_sequence: getdata.posnNbr,
                         open_date: getdata.openDate,
                         principal_balance: getdata.bal

@@ -10,43 +10,62 @@ class inquiryPositionSummery extends Component {
 
         };
     };
+
     getHeaderTable = (data) => {
         let header = [];
-        for (let key in data) {
+        if (data.length > 1) {
             header.push(<th>#&nbsp;</th>);
-            for (let keyinObj in data[key]) {
-                // if(keyinObj !== "daily_accrued_amount" && keyinObj !== "unpaid_accrued_amount"){
-                header.push(<th>{keyinObj}&nbsp;</th>);
-                // } 
+            for (let key in data[0]) {
+                if (data[0].hasOwnProperty(key)) {
+                    header.push(<th>{key}&nbsp;</th>);
+                }
             }
-            break;
+
+        } else {
+            for (let key in data) {
+                if (data.hasOwnProperty(key)) {
+                    header.push(<th>#&nbsp;</th>);
+                    for (let keyinObj in data[key]) {
+                        if (data[key].hasOwnProperty(keyinObj)) {
+                            // if(keyinObj !== "daily_accrued_amount" && keyinObj !== "unpaid_accrued_amount"){
+                            header.push(<th>{keyinObj}&nbsp;</th>);
+                            // } 
+                        }
+                    }
+                }
+            }
         }
         return header;
     };
+
     getBodyTable = (data) => {
         let body = [];
         for (let key in data) {
-            var num = Number(key);
-            let obj = [];
-            obj.push(<td>{num + 1}</td>);
-            for (let keyinObj in data[key]) {
-                if (typeof data[key][keyinObj] === "boolean") {
-                    var catchup = String(data[key][keyinObj]);
-                    obj.push(<td>{catchup}</td>)
-                } else {
-                    // if(keyinObj !== "daily_accrued_amount" && keyinObj !== "unpaid_accrued_amount"){
-                    obj.push(<td>{data[key][keyinObj]}</td>);
-                    // }
+            if (data.hasOwnProperty(key)) {
+                var num = Number(key);
+                let obj = [];
+                obj.push(<td>{num + 1}</td>);
+                for (let keyinObj in data[key]) {
+                    if (data[key].hasOwnProperty(keyinObj)) {
+                        if (typeof data[key][keyinObj] === "boolean") {
+                            var catchup = String(data[key][keyinObj]);
+                            obj.push(<td>{catchup}</td>)
+                        } else {
+                            // if(keyinObj !== "daily_accrued_amount" && keyinObj !== "unpaid_accrued_amount"){
+                            obj.push(<td>{data[key][keyinObj]}</td>);
+                            // }
+                        }
+                    }
                 }
+                body.push(<tr>{obj}</tr>);
             }
-            body.push(<tr>{obj}</tr>);
         }
         return body;
     };
 
     render() {
-        var data = JSON.parse(sessionStorage.getItem("data_inqInterastaAccrued"));
-       // console.log(data);
+        const data = JSON.parse(sessionStorage.getItem("data_inqInterastaAccrued"));
+        // console.log(data);
         return (
             <div className="App" >
                 <DynamicHeader />

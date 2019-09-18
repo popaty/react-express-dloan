@@ -3,10 +3,9 @@ import {Button, Form, FormGroup, Label, Input, Row, Col} from 'reactstrap';
 import DynamicHeader from '../Header.js';
 import inputModel from './model.json';
 
-var cloneDeep = require('lodash.clonedeep');
+const cloneDeep = require('lodash.clonedeep');
 
 class disbursementComponent extends Component {
-
     constructor(props){
         super(props);
         this.state = {
@@ -33,10 +32,10 @@ class disbursementComponent extends Component {
     componentDidMount(){
         if(JSON.parse(sessionStorage.getItem("data_installment")) && JSON.parse(sessionStorage.getItem("data_openLoanAccount"))
             && JSON.parse(sessionStorage.getItem("input_installment"))){
-            let dataOpenLoanAccount = JSON.parse(sessionStorage.getItem("data_openLoanAccount"));
-            let inputInstallment = JSON.parse(sessionStorage.getItem("input_installment"));
-            let dataInstallment = JSON.parse(sessionStorage.getItem("data_installment"));
-            let body = {
+            const dataOpenLoanAccount = JSON.parse(sessionStorage.getItem("data_openLoanAccount"));
+            const inputInstallment = JSON.parse(sessionStorage.getItem("input_installment"));
+            const dataInstallment = JSON.parse(sessionStorage.getItem("data_installment"));
+            const body = {
                 account_number: dataOpenLoanAccount.rs_body.account_number,
                 disbursement_amount: inputInstallment.disbursement_amount,
                 effective_date: "",
@@ -73,8 +72,8 @@ class disbursementComponent extends Component {
     handleSubmit(event) {
         event.preventDefault()
         //clone state for use in omit function.
-        var body = cloneDeep(this.state);
-        let request = this.omitfield(body);
+        let body = cloneDeep(this.state);
+        const request = this.omitfield(body);
         //console.log(request);
         this.postList(request);
     };
@@ -103,30 +102,30 @@ class disbursementComponent extends Component {
 
     postList = (request) => {
         console.log("myRequest : " + JSON.stringify(request));
-        // fetch('/api/disbursement', {
-        //     method: 'POST',
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     },
-        //     body: JSON.stringify(request),
-        // }).then(response => response.json())
-        // .then(data => {
+        fetch('/api/disbursement', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(request),
+        }).then(response => response.json())
+        .then(data => {
 
-        // if (data.rs_body) {
-        //     window.open('/dbmSummary', '_self');
-        // }else{
-        //     alert("error code : "+data.errors.map(error => error.error_code)+"\n"
-        //         +"error desc : "+ data.errors.map(error => error.error_desc)+"\n"
-        //         +"error type : "+ data.errors.map(error => error.error_type));
-        // }
-        // }).catch(error => console.log(error))
+        if (data.rs_body) {
+            window.open('/dbmSummary', '_self');
+        }else{
+            alert("error code : "+data.errors.map(error => error.error_code)+"\n"
+                +"error desc : "+ data.errors.map(error => error.error_desc)+"\n"
+                +"error type : "+ data.errors.map(error => error.error_type));
+        }
+        }).catch(error => console.log(error))
 
 
         //mock data
-        var data = {
-            "rs_body": {}
-        };
-        //     var data =  {  "errors": [
+        // let data = {
+        //     "rs_body": {}
+        // };
+        //     let data =  {  "errors": [
         //         {
         //             "error_code": "502",
         //             "error_type": "",
@@ -142,15 +141,14 @@ class disbursementComponent extends Component {
         //         }
         //     ]
         // };
-        if (data.rs_body) {
-                window.open('/dbmSummary', '_self');
-            }else{
-                alert("error code : "+data.errors.map(error => error.error_code)+"\n"
-                    +"error desc : "+ data.errors.map(error => error.error_desc)+"\n"
-                    +"error type : "+ data.errors.map(error => error.error_type));
-            }
+        // if (data.rs_body) {
+        //         window.open('/dbmSummary', '_self');
+        //     }else{
+        //         alert("error code : "+data.errors.map(error => error.error_code)+"\n"
+        //             +"error desc : "+ data.errors.map(error => error.error_desc)+"\n"
+        //             +"error type : "+ data.errors.map(error => error.error_type));
+        //     }
     };
-
 
     FormInputData = () => {
         let formUI = inputModel.model.map(item => {

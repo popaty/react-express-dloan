@@ -15,7 +15,6 @@ class inquiryPositionSummery extends Component {
     dynamicResponse = (data) => {
         let table = [];
         let children = [];
-
         for(let key in data){
             if(typeof data[key] === "object"){
                 let obj = [];
@@ -37,7 +36,7 @@ class inquiryPositionSummery extends Component {
     };
 
     render() {
-        var data = JSON.parse(sessionStorage.getItem("data_inqInterestAccruedDetail"));
+        const data = JSON.parse(sessionStorage.getItem("data_inqInterestAccruedDetail"));
         //var data2 = JSON.parse(sessionStorage.getItem("data_inqPositionDetail"));
         return(
             <div className="App">

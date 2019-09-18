@@ -1,24 +1,26 @@
 import React, { Component } from 'react';
-import {Button, Table,Col} from 'reactstrap';
+import { Button, Table, Col } from 'reactstrap';
 import DynamicHeader from '../Header.js';
 
 class InquiryLoanAccountSummery extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
         };
         this.opentInstallment = this.opentInstallment.bind(this);
     };
 
-    getSessionStorage(){
-        var data = JSON.parse(sessionStorage.getItem("data_inqLoanAccount"));
-        return data;
+    getSessionStorage() {
+        return JSON.parse(sessionStorage.getItem("data_inqLoanAccount"));
     };
 
-    opentInstallment(){
-        var data = this.getSessionStorage();
-        var body = {interest_rate : data.interest.interest_rate, payment_frequency : data.payment.payment_frequency,
-            payment_unit : data.payment.payment_unit}
+    opentInstallment() {
+        const data = this.getSessionStorage();
+        const body = {
+            interest_rate: data.interest.interest_rate,
+            payment_frequency: data.payment.payment_frequency,
+            payment_unit: data.payment.payment_unit
+        }
         sessionStorage.setItem("inputData_installment", JSON.stringify(body));
         window.open('/ciaComponent', '_self');
     };
@@ -26,35 +28,38 @@ class InquiryLoanAccountSummery extends Component {
     dynamicResponse = (data) => {
         let table = [];
         let children = [];
-
-        for(let key in data){
-            if(typeof data[key] === "object"){
-                let obj = [];
-                for(let subdata in data[key]){
-                    if(typeof data[key][subdata] === "boolean"){
-                        var catchup = String(data[key][subdata] );
-                        obj.push(<tr><td>{subdata}</td><td>{catchup}</td></tr>)
-                    }else{
-                        if (subdata === "balance" || subdata === "available_balance") {
-                            obj.push(<tr class="text-primary"><td>{subdata}</td><td>{data[key][subdata]}</td></tr>);
-                        } else {
-                            obj.push(<tr ><td>{subdata}</td><td>{data[key][subdata]}</td></tr>);
+        for (let key in data) {
+            if (data.hasOwnProperty(key)) {
+                if (typeof data[key] === "object") {
+                    let obj = [];
+                    for (let subdata in data[key]) {
+                        if (data[key].hasOwnProperty(subdata)) {
+                            if (typeof data[key][subdata] === "boolean") {
+                                var catchup = String(data[key][subdata]);
+                                obj.push(<tr><td>{subdata}</td><td>{catchup}</td></tr>)
+                            } else {
+                                if (subdata === "balance" || subdata === "available_balance") {
+                                    obj.push(<tr class="text-primary"><td>{subdata}</td><td>{data[key][subdata]}</td></tr>);
+                                } else {
+                                    obj.push(<tr ><td>{subdata}</td><td>{data[key][subdata]}</td></tr>);
+                                }
+                            }
                         }
                     }
+                    children.push(<tr><td>{key + " : "}</td><td><Table borderless>{obj}</Table></td></tr>);
+                } else {
+                    children.push(<tr><td>{key}</td><td>{data[key]}</td></tr>);
                 }
-                children.push(<tr><td>{key+" : "}</td><td><Table borderless>{obj}</Table></td></tr>);
-            }else{
-                children.push(<tr><td>{key}</td><td>{data[key]}</td></tr>);
             }
         }
         table.push(<Table bordered>{children}</Table>)
         return table;
     };
 
-    render(){
-        var data = this.getSessionStorage();
+    render() {
+        const data = this.getSessionStorage();
         //console.log(data);
-        return(
+        return (
 
             <div className="App">
                 <DynamicHeader />

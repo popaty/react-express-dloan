@@ -3,7 +3,7 @@ import {Button, Form, FormGroup, Label, Input, Col, Row} from 'reactstrap';
 import DynamicHeader from '../Header.js';
 import inputModel from "../inqInterestAccruedDetail/model";
 
-var cloneDeep = require('lodash.clonedeep');
+const cloneDeep = require('lodash.clonedeep');
 
 class inquiryInterestDetailComponent extends Component {
 
@@ -22,10 +22,9 @@ class inquiryInterestDetailComponent extends Component {
 
     Clicked(event) {
         event.preventDefault()
-        event.preventDefault()
         //clone state for use in omit function.
-        var body = cloneDeep(this.state);
-        let request = this.omitfield(body);
+        let body = cloneDeep(this.state);
+        const request = this.omitfield(body);
          //console.log(request);
         this.postList(request);
     }

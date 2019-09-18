@@ -4,7 +4,7 @@ import DynamicHeader from '../Header.js';
 import inputModel from './model.json';
 //import SpinnerLoader from '../loading.js';
 
-var cloneDeep = require('lodash.clonedeep');
+const cloneDeep = require('lodash.clonedeep');
 
 class installmentComponent extends Component {
     constructor(props) {
@@ -24,8 +24,8 @@ class installmentComponent extends Component {
 
     componentDidMount(){
         if(JSON.parse(sessionStorage.getItem("inputData_installment"))){
-            let data = JSON.parse(sessionStorage.getItem("inputData_installment"));
-            let body = {
+            const data = JSON.parse(sessionStorage.getItem("inputData_installment"));
+            const body = {
                 disbursement_amount: 0,
                 number_of_payment: 0,
                 interest_rate: data.interest_rate,
@@ -49,8 +49,8 @@ class installmentComponent extends Component {
     handleSubmit(event) {
         event.preventDefault()
         //clone state for use in omit function.
-        var body = cloneDeep(this.state);
-        let request = this.omitfield(body);
+        let body = cloneDeep(this.state);
+        const request = this.omitfield(body);
         //console.log(request)
         this.postList(request);
     };
@@ -79,35 +79,17 @@ class installmentComponent extends Component {
 
     postList = (request) => {
         console.log("myRequest : " + JSON.stringify(request));
-        // var inputData = {number_of_payment : request.rq_body.number_of_payment, disbursement_amount : request.rq_body.disbursement_amount};
-        // fetch('/api/calculateInstallment', {
-        //     method: 'POST',
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     },
-        //     body: JSON.stringify(request),
-        // })
-        //     .then(response => response.json())
-        //     .then(data => {
-
-        // if (data.rs_body) {
-        //     sessionStorage.setItem("data_installment", JSON.stringify(data));
-        //     sessionStorage.setItem("input_installment", JSON.stringify(inputData));
-        //     window.open('/ciaSummary', '_self');
-        // }else{
-        //     alert("error code : "+data.errors.map(error => error.error_code)+"\n"
-        //         +"error desc : "+ data.errors.map(error => error.error_desc)+"\n"
-        //         +"error type : "+ data.errors.map(error => error.error_type));
-        // }
-        //  }).catch(error => console.log(error))
-
-        //mock data
-        var data = {
-            "rs_body": {
-              "installment_amount": 15037.5
-            }
-        };
         var inputData = {number_of_payment : request.rq_body.number_of_payment, disbursement_amount : request.rq_body.disbursement_amount};
+        fetch('/api/calculateInstallment', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(request),
+        })
+            .then(response => response.json())
+            .then(data => {
+
         if (data.rs_body) {
             sessionStorage.setItem("data_installment", JSON.stringify(data));
             sessionStorage.setItem("input_installment", JSON.stringify(inputData));
@@ -117,6 +99,24 @@ class installmentComponent extends Component {
                 +"error desc : "+ data.errors.map(error => error.error_desc)+"\n"
                 +"error type : "+ data.errors.map(error => error.error_type));
         }
+         }).catch(error => console.log(error))
+
+        //mock data
+        // let data = {
+        //     "rs_body": {
+        //       "installment_amount": 15037.5
+        //     }
+        // };
+        // const inputData = {number_of_payment : request.rq_body.number_of_payment, disbursement_amount : request.rq_body.disbursement_amount};
+        // if (data.rs_body) {
+        //     sessionStorage.setItem("data_installment", JSON.stringify(data));
+        //     sessionStorage.setItem("input_installment", JSON.stringify(inputData));
+        //     window.open('/ciaSummary', '_self');
+        // }else{
+        //     alert("error code : "+data.errors.map(error => error.error_code)+"\n"
+        //         +"error desc : "+ data.errors.map(error => error.error_desc)+"\n"
+        //         +"error type : "+ data.errors.map(error => error.error_type));
+        // }
     };
 
     FormInputData = () => {
@@ -144,7 +144,6 @@ class installmentComponent extends Component {
 
     render() {
         return (
-
             <div>
                 <DynamicHeader />
                 <br />

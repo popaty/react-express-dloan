@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import {Button, Form, FormGroup, Label, Input, Row, Col} from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Row, Col } from 'reactstrap';
 import DynamicHeader from '../Header.js';
 import inputModel from './model.json';
-var cloneDeep = require('lodash.clonedeep');
 
-var cloneDeep = require('lodash.clonedeep');
+const cloneDeep = require('lodash.clonedeep');
 
 class RepaymentComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            rq_body :{
+            rq_body: {
                 test1: "",
                 test2: "",
             }
@@ -21,33 +20,37 @@ class RepaymentComponent extends Component {
 
     handleChange(event) {
         //this.setState({[event.target.name]:event.target.value});
-        const {rq_body} = {...this.state};
+        const { rq_body } = { ...this.state };
         const currentState = rq_body;
         currentState[event.target.name] = event.target.type === "number" ? Number(event.target.value) : event.target.value;
-        this.setState({rq_body : currentState});
+        this.setState({ rq_body: currentState });
     };
 
     handleSubmit(event) {
         event.preventDefault()
         //clone state for use in omit function.
-        var body = cloneDeep(this.state);
-        let request = this.omitfield(body);
+        let body = cloneDeep(this.state);
+        const request = this.omitfield(body);
         this.postList(request);
     };
 
-    omitfield =(body) =>{
-        for(let key in body.rq_body){
-            if(typeof body.rq_body[key] === "object" ){
-                for(let subkey in body.rq_body[key]){
-                    if(body.rq_body[key][subkey] === "" || body.rq_body[key][subkey] === 0){
-                        delete body.rq_body[key][subkey];
+    omitfield = (body) => {
+        for (let key in body.rq_body) {
+            if (body.rq_body.hasOwnProperty(key)) {
+                if (typeof body.rq_body[key] === "object") {
+                    for (let subkey in body.rq_body[key]) {
+                        if (body.rq_body[key].hasOwnProperty(subkey)) {
+                            if (body.rq_body[key][subkey] === "" || body.rq_body[key][subkey] === 0) {
+                                delete body.rq_body[key][subkey];
+                            }
+                        }
                     }
-                }
-                if(Object.keys(body.rq_body[key]).length === 0){
+                    if (Object.keys(body.rq_body[key]).length === 0) {
+                        delete body.rq_body[key];
+                    }
+                } else if (body.rq_body[key] === "" || body.rq_body[key] === 0) {
                     delete body.rq_body[key];
                 }
-            }else if(body.rq_body[key] === "" || body.rq_body[key] === 0){
-                delete body.rq_body[key];
             }
         }
         return body;
@@ -65,33 +68,33 @@ class RepaymentComponent extends Component {
             .then(response => response.json())
             .then(data => {
 
-        if (data.rs_body) {
-            sessionStorage.setItem("data_repayment", JSON.stringify(data));
-            window.open('/rpmSummary', '_self');
-        }else{
-            alert("error code : "+data.errors.map(error => error.error_code)+"\n"
-                +"error desc : "+ data.errors.map(error => error.error_desc)+"\n"
-                +"error type : "+ data.errors.map(error => error.error_type));
-        }
-         }).catch(error => console.log(error))
+                if (data.rs_body) {
+                    sessionStorage.setItem("data_repayment", JSON.stringify(data));
+                    window.open('/rpmSummary', '_self');
+                } else {
+                    alert("error code : " + data.errors.map(error => error.error_code) + "\n"
+                        + "error desc : " + data.errors.map(error => error.error_desc) + "\n"
+                        + "error type : " + data.errors.map(error => error.error_type));
+                }
+            }).catch(error => console.log(error))
     };
 
     FormInputData = () => {
         let formUI = inputModel.model.map(item => {
-            if(item.root === null){
-                return(
+            if (item.root === null) {
+                return (
                     <FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                               value={this.state.rq_body[item.value]} onChange={this.handleChange} />
+                            value={this.state.rq_body[item.value]} onChange={this.handleChange} />
                     </FormGroup>
                 );
-            }else{
-                return(
+            } else {
+                return (
                     <FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                               value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
+                            value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
                     </FormGroup>
                 );
             }

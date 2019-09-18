@@ -19,9 +19,9 @@ class inquiryInterestComponent extends Component {
         }).then(response => response.json())
          .then(data => {
             if (data.rs_body) {
-                var value = {...data.rs_body.position_detail.map(item => item)};
+                // value = {...data.rs_body.position_detail.map(item => item)};
                 //console.log(value);
-                sessionStorage.setItem("data_inqInterastaAccrued", JSON.stringify(value));
+                sessionStorage.setItem("data_inqInterastaAccrued", JSON.stringify(data.rs_body.position_detail));
                 window.open('/iiaSummary', '_self');
             } else {
                 alert("error code : " + data.errors.map(error => error.error_code) + "\n"
@@ -29,6 +29,46 @@ class inquiryInterestComponent extends Component {
                     + "error type : " + data.errors.map(error => error.error_type));
             }
         }).catch(error => console.log(error))
+
+        //mock data
+        // let data = {
+        //     "rs_body": {
+        //         "position_detail": [
+        //             {
+        //                 "account_number": 600000000032,
+        //                 "account_sequence": 1,
+        //                 "interest_index": "MRR",
+        //                 "interest_spread": -3.00000,
+        //                 "penalty_index": "PEN",
+        //                 "open_date": "2019-09-12",
+        //                 "open_datetime_stamp": "2019-09-12T11:19:10Z",
+        //                 "grace_day": 5,
+        //                 "is_catch_up": true,
+        //                 "customer_type": "0703",
+        //                 "account_branch": 20,
+        //                 "daily_accrued_amount": 0.10959,
+        //                 "unpaid_accrued_amount": 0.00000
+        //             },
+        //             {
+        //                 "account_number": 600000000033,
+        //                 "account_sequence": 2,
+        //                 "interest_index": "MRR",
+        //                 "interest_spread": -4.00000,
+        //                 "penalty_index": "PEN",
+        //                 "open_date": "2019-09-13",
+        //                 "open_datetime_stamp": "2019-09-12T11:19:10Z",
+        //                 "grace_day": 6,
+        //                 "is_catch_up": false,
+        //                 "customer_type": "0704",
+        //                 "account_branch": 21,
+        //                 "daily_accrued_amount": 0.10959,
+        //                 "unpaid_accrued_amount": 0.00000
+        //             }
+        //         ]
+        //     }
+        // }
+        // sessionStorage.setItem("data_inqInterastaAccrued", JSON.stringify(data.rs_body.position_detail));
+        // window.open('/iiaSummary', '_self');
     };
 
     handleChange(event) {
