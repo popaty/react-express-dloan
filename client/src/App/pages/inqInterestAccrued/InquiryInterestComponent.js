@@ -14,7 +14,7 @@ class inquiryInterestComponent extends Component {
     }
 
     Clicked(event) {
-        event.preventDefault()
+        event.preventDefault();
         fetch('/api/inqInterestAccrued/'+this.state.account, {
         }).then(response => response.json())
          .then(data => {

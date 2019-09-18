@@ -1,9 +1,20 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import DynamicHeader from '../Header.js';
 import SpinnerLoader from '../loading.js';
 
-import { Button, Form, FormGroup, Label, Input, Row, Col } from 'reactstrap';
-import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import {
+    Button,
+    Col,
+    DropdownItem,
+    DropdownMenu,
+    DropdownToggle,
+    Form,
+    FormGroup,
+    Input,
+    Label,
+    Row,
+    UncontrolledDropdown
+} from 'reactstrap';
 
 import v000 from './v000.json';
 import v001 from './v001.json';
@@ -69,7 +80,7 @@ class OpenLoanAccountComponent extends Component {
   };
 
   handleSubmit(event) {
-    event.preventDefault()
+    event.preventDefault();
     this.setState({ loading: true });
     //clone state for use in omit function.
     let body = cloneDeep(this.state);
@@ -98,7 +109,7 @@ class OpenLoanAccountComponent extends Component {
             }else if(body.rq_body[key] === "" || body.rq_body[key] === 0){
                 delete body.rq_body[key];
             }
-        } 
+        }
     }
     delete body.loading;
     return body;
@@ -161,49 +172,47 @@ class OpenLoanAccountComponent extends Component {
 
 
   FormInputCol1 = () => {
-    let formUI = inputModel.model.map(item => {
-      if (item.root === null) {
-        return (
-          <FormGroup>
-            <Label>{item.label}</Label>
-            <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-              value={this.state.rq_body[item.value]} onChange={this.handleChange} />
-          </FormGroup>
-        );
-      } else {
-        return (
-          <FormGroup>
-            <Label>{item.label}</Label>
-            <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-              value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
-          </FormGroup>
-        );
-      }
+      return inputModel.model.map(item => {
+        if (item.root === null) {
+            return (
+                <FormGroup>
+                    <Label>{item.label}</Label>
+                    <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+                           value={this.state.rq_body[item.value]} onChange={this.handleChange}/>
+                </FormGroup>
+            );
+        } else {
+            return (
+                <FormGroup>
+                    <Label>{item.label}</Label>
+                    <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+                           value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange}/>
+                </FormGroup>
+            );
+        }
     });
-    return formUI;
   };
 
   FormInputCol2 = () => {
-    let formUI = inputModel.model2.map(item => {
-      if (item.root === null) {
-        return (
-          <FormGroup>
-            <Label>{item.label}</Label>
-            <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-              value={this.state.rq_body[item.value]} onChange={this.handleChange} />
-          </FormGroup>
-        );
-      } else {
-        return (
-          <FormGroup>
-            <Label>{item.label}</Label>
-            <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-              value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
-          </FormGroup>
-        );
-      }
+      return inputModel.model2.map(item => {
+        if (item.root === null) {
+            return (
+                <FormGroup>
+                    <Label>{item.label}</Label>
+                    <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+                           value={this.state.rq_body[item.value]} onChange={this.handleChange}/>
+                </FormGroup>
+            );
+        } else {
+            return (
+                <FormGroup>
+                    <Label>{item.label}</Label>
+                    <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+                           value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange}/>
+                </FormGroup>
+            );
+        }
     });
-    return formUI;
   };
 
   render() {

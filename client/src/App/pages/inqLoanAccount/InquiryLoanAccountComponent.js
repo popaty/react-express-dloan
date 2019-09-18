@@ -13,7 +13,7 @@ class InquiryLoanAccountComponent extends Component {
     }
 
     Clicked(event) {
-        event.preventDefault()
+        event.preventDefault();
         this.getInqAccount();
         //console.log(this.state);
     };

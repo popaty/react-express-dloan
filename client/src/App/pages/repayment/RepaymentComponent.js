@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input, Row, Col } from 'reactstrap';
+import React, {Component} from 'react';
+import {Button, Col, Form, FormGroup, Input, Label, Row} from 'reactstrap';
 import DynamicHeader from '../Header.js';
 import inputModel from './model.json';
 
@@ -13,7 +13,7 @@ class RepaymentComponent extends Component {
                 test1: "",
                 test2: "",
             }
-        }
+        };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     };
@@ -27,7 +27,7 @@ class RepaymentComponent extends Component {
     };
 
     handleSubmit(event) {
-        event.preventDefault()
+        event.preventDefault();
         //clone state for use in omit function.
         let body = cloneDeep(this.state);
         const request = this.omitfield(body);
@@ -80,13 +80,13 @@ class RepaymentComponent extends Component {
     };
 
     FormInputData = () => {
-        let formUI = inputModel.model.map(item => {
+        return inputModel.model.map(item => {
             if (item.root === null) {
                 return (
                     <FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                            value={this.state.rq_body[item.value]} onChange={this.handleChange} />
+                               value={this.state.rq_body[item.value]} onChange={this.handleChange}/>
                     </FormGroup>
                 );
             } else {
@@ -94,12 +94,11 @@ class RepaymentComponent extends Component {
                     <FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                            value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
+                               value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange}/>
                     </FormGroup>
                 );
             }
         });
-        return formUI;
     };
 
     render() {

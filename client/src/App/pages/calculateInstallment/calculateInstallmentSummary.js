@@ -6,10 +6,10 @@ class calculateInstallmentSummary extends Component {
     constructor(props) {
         super(props);
         this.state = {};
-        this.opentDisbursement = this.opentDisbursement.bind(this);
+        calculateInstallmentSummary.openDisbursement = calculateInstallmentSummary.openDisbursement.bind(this);
     };
 
-    opentDisbursement() {
+    static openDisbursement() {
         window.open('/dbmComponent', '_self');
     };
 
@@ -36,7 +36,7 @@ class calculateInstallmentSummary extends Component {
                 }
             }
         }
-        table.push(<Table bordered >{children}</Table>)
+        table.push(<Table bordered >{children}</Table>);
         return table;
     };
 
@@ -54,7 +54,7 @@ class calculateInstallmentSummary extends Component {
                         {this.dynamicResponse(data.rs_body)}
                     </Col>
                     <br />
-                    <Button color="success" onClick={this.opentDisbursement}>Disbursement</Button><br />
+                    <Button color="success" onClick={calculateInstallmentSummary.openDisbursement}>Disbursement</Button><br />
                 </form>
             </div>
         );

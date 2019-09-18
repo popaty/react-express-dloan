@@ -37,7 +37,7 @@ class inquiryPositionSummery extends Component {
                     for (let subdata in data[key]) {
                         if (data[key].hasOwnProperty(subdata)) {
                             if (typeof data[key][subdata] === "boolean") {
-                                var catchup = String(data[key][subdata]);
+                                let catchup = String(data[key][subdata]);
                                 obj.push(<tr>
                                     <td>{subdata}</td>
                                     <td>{catchup}</td>
@@ -62,7 +62,7 @@ class inquiryPositionSummery extends Component {
                 }
             }
         }
-        table.push(<Table bordered>{children}</Table>)
+        table.push(<Table bordered>{children}</Table>);
         return table;
     };
 

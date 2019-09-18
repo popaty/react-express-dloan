@@ -20,7 +20,7 @@ class RepaymentSummery extends Component {
                     for (let subdata in data[key]) {
                         if (data[key].hasOwnProperty(subdata)) {
                             if (typeof data[key][subdata] === "boolean") {
-                                var catchup = String(data[key][subdata]);
+                                let catchup = String(data[key][subdata]);
                                 obj.push(<tr><td>{subdata}</td><td>{catchup}</td></tr>)
                             } else {
                                 obj.push(<tr><td>{subdata}</td><td>{data[key][subdata]}</td></tr>);
@@ -33,7 +33,7 @@ class RepaymentSummery extends Component {
                 }
             }
         }
-        table.push(<Table bordered >{children}</Table>)
+        table.push(<Table bordered >{children}</Table>);
         return table;
     };
 
@@ -51,7 +51,7 @@ class RepaymentSummery extends Component {
                         {this.dynamicResponse(data.rs_body)}
                     </Col>
                     <br />
-                    <Button color="success" onClick={this.opentDisbursement}>Disbursement</Button><br />
+                    <Button color="success" onClick={calculateInstallmentSummary.openDisbursement}>Disbursement</Button><br />
                 </form>
             </div>
         );

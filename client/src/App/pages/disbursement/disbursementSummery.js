@@ -36,7 +36,7 @@ class disbursementSummery extends Component {
     //}
 
     openInqPositionDetail() {
-        var account = JSON.parse(sessionStorage.getItem("data_inqLoanAccount"));
+        let account = JSON.parse(sessionStorage.getItem("data_inqLoanAccount"));
         console.log(account.account_number);
         fetch('/api/inquiryPositionDetail/' + account.account_number).then(response => response.json())
             .then(data => {

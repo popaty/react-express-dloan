@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Form, FormGroup, Label, Input, Row, Col} from 'reactstrap';
+import {Button, Col, Form, FormGroup, Input, Label, Row} from 'reactstrap';
 import DynamicHeader from '../Header.js';
 import inputModel from './model.json';
 //import SpinnerLoader from '../loading.js';
@@ -47,7 +47,7 @@ class installmentComponent extends Component {
     };
 
     handleSubmit(event) {
-        event.preventDefault()
+        event.preventDefault();
         //clone state for use in omit function.
         let body = cloneDeep(this.state);
         const request = this.omitfield(body);
@@ -72,14 +72,17 @@ class installmentComponent extends Component {
                 }else if(body.rq_body[key] === "" || body.rq_body[key] === 0){
                     delete body.rq_body[key];
                 }
-            } 
+            }
         }
         return body;
     };
 
     postList = (request) => {
         console.log("myRequest : " + JSON.stringify(request));
-        var inputData = {number_of_payment : request.rq_body.number_of_payment, disbursement_amount : request.rq_body.disbursement_amount};
+        let inputData = {
+            number_of_payment: request.rq_body.number_of_payment,
+            disbursement_amount: request.rq_body.disbursement_amount
+        };
         fetch('/api/calculateInstallment', {
             method: 'POST',
             headers: {
@@ -120,26 +123,25 @@ class installmentComponent extends Component {
     };
 
     FormInputData = () => {
-        let formUI = inputModel.model.map(item => {
-            if(item.root === null){
-                return(
+        return inputModel.model.map(item => {
+            if (item.root === null) {
+                return (
                     <FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                               value={this.state.rq_body[item.value]} onChange={this.handleChange} />
+                               value={this.state.rq_body[item.value]} onChange={this.handleChange}/>
                     </FormGroup>
                 );
-            }else{
-                return(
+            } else {
+                return (
                     <FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                               value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
+                               value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange}/>
                     </FormGroup>
                 );
             }
         });
-        return formUI;
     };
 
     render() {

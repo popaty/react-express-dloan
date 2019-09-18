@@ -29,7 +29,7 @@ class inquiryPositionSummery extends Component {
                         if (data[key].hasOwnProperty(keyinObj)) {
                             // if(keyinObj !== "daily_accrued_amount" && keyinObj !== "unpaid_accrued_amount"){
                             header.push(<th>{keyinObj}&nbsp;</th>);
-                            // } 
+                            // }
                         }
                     }
                 }
@@ -42,13 +42,13 @@ class inquiryPositionSummery extends Component {
         let body = [];
         for (let key in data) {
             if (data.hasOwnProperty(key)) {
-                var num = Number(key);
+                let num = Number(key);
                 let obj = [];
                 obj.push(<td>{num + 1}</td>);
                 for (let keyinObj in data[key]) {
                     if (data[key].hasOwnProperty(keyinObj)) {
                         if (typeof data[key][keyinObj] === "boolean") {
-                            var catchup = String(data[key][keyinObj]);
+                            let catchup = String(data[key][keyinObj]);
                             obj.push(<td>{catchup}</td>)
                         } else {
                             // if(keyinObj !== "daily_accrued_amount" && keyinObj !== "unpaid_accrued_amount"){

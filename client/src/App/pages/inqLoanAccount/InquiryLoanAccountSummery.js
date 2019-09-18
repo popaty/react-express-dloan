@@ -7,20 +7,20 @@ class InquiryLoanAccountSummery extends Component {
         super(props);
         this.state = {
         };
-        this.opentInstallment = this.opentInstallment.bind(this);
+        InquiryLoanAccountSummery.opentInstallment = InquiryLoanAccountSummery.opentInstallment.bind(this);
     };
 
-    getSessionStorage() {
+    static getSessionStorage() {
         return JSON.parse(sessionStorage.getItem("data_inqLoanAccount"));
     };
 
-    opentInstallment() {
-        const data = this.getSessionStorage();
+    static opentInstallment() {
+        const data = InquiryLoanAccountSummery.getSessionStorage();
         const body = {
             interest_rate: data.interest.interest_rate,
             payment_frequency: data.payment.payment_frequency,
             payment_unit: data.payment.payment_unit
-        }
+        };
         sessionStorage.setItem("inputData_installment", JSON.stringify(body));
         window.open('/ciaComponent', '_self');
     };
@@ -35,7 +35,7 @@ class InquiryLoanAccountSummery extends Component {
                     for (let subdata in data[key]) {
                         if (data[key].hasOwnProperty(subdata)) {
                             if (typeof data[key][subdata] === "boolean") {
-                                var catchup = String(data[key][subdata]);
+                                let catchup = String(data[key][subdata]);
                                 obj.push(<tr><td>{subdata}</td><td>{catchup}</td></tr>)
                             } else {
                                 if (subdata === "balance" || subdata === "available_balance") {
@@ -52,12 +52,12 @@ class InquiryLoanAccountSummery extends Component {
                 }
             }
         }
-        table.push(<Table bordered>{children}</Table>)
+        table.push(<Table bordered>{children}</Table>);
         return table;
     };
 
     render() {
-        const data = this.getSessionStorage();
+        const data = InquiryLoanAccountSummery.getSessionStorage();
         //console.log(data);
         return (
 
@@ -70,7 +70,7 @@ class InquiryLoanAccountSummery extends Component {
                     {this.dynamicResponse(data)}
                 </Col>
                 <br />
-                <Button color="success" onClick={this.opentInstallment}>Calculate Installment Amount</Button>
+                <Button color="success" onClick={InquiryLoanAccountSummery.opentInstallment}>Calculate Installment Amount</Button>
                 <br />
                 <br />
                 <br />

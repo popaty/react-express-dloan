@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Form, FormGroup, Label, Input, Col, Row} from 'reactstrap';
+import {Button, Col, Form, FormGroup, Input, Label, Row} from 'reactstrap';
 import DynamicHeader from '../Header.js';
 import inputModel from "../inqInterestAccruedDetail/model";
 
@@ -21,7 +21,7 @@ class inquiryInterestDetailComponent extends Component {
     }
 
     Clicked(event) {
-        event.preventDefault()
+        event.preventDefault();
         //clone state for use in omit function.
         let body = cloneDeep(this.state);
         const request = this.omitfield(body);
@@ -53,7 +53,7 @@ class inquiryInterestDetailComponent extends Component {
                 }else if(body.rq_body[key] === "" || body.rq_body[key] === 0){
                     delete body.rq_body[key];
                 }
-            } 
+            }
         }
         return body;
     };
@@ -81,7 +81,7 @@ class inquiryInterestDetailComponent extends Component {
     };
 
     FormInputData = () => {
-        let formUI = inputModel.model.map(item => {
+        return inputModel.model.map(item => {
             if (item.root === null) {
                 return (
                     <FormGroup>
@@ -100,7 +100,6 @@ class inquiryInterestDetailComponent extends Component {
                 );
             }
         });
-        return formUI;
     };
 
     render() {

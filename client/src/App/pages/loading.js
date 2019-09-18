@@ -7,6 +7,6 @@ const SpinnerPage = (props) => {
         <Spinner  size="md" color="light" />{' '}
       </div>
     );
-  }
+  };
 
 export default SpinnerPage;

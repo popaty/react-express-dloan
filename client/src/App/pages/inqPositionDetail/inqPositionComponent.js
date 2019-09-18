@@ -17,7 +17,7 @@ class inqPositionComponent extends Component {
     }
 
     Clicked(event) {
-        event.preventDefault()
+        event.preventDefault();
         fetch('/api/inquiryPositionDetail/' + this.state.account)
         .then(response => response.json())
         .then(data => {

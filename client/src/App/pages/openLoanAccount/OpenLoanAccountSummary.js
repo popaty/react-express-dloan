@@ -81,7 +81,7 @@ class OpenLoanAccountSummary extends Component {
                 let obj = [];
                 for (let subdata in data[key]) {
                     if (typeof data[key][subdata] === "boolean") {
-                        var catchup = String(data[key][subdata]);
+                        let catchup = String(data[key][subdata]);
                         obj.push(<tr><td>{subdata}</td><td>{catchup}</td></tr>)
                     } else {
                         obj.push(<tr><td>{subdata}</td><td>{data[key][subdata]}</td></tr>);
@@ -92,7 +92,7 @@ class OpenLoanAccountSummary extends Component {
                 children.push(<tr><td>{key}</td><td>{data[key]}</td></tr>);
             }
         }
-        table.push(<Table bordered >{children}</Table>)
+        table.push(<Table bordered >{children}</Table>);
         return table;
     };
 

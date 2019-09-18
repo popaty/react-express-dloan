@@ -9,7 +9,7 @@ class inqPositionSummery extends Component {
     }
 
     CallInquiryLoanAccount() {
-        var data = JSON.parse(sessionStorage.getItem("data_inqLoanAccount"));
+        let data = JSON.parse(sessionStorage.getItem("data_inqLoanAccount"));
         //console.log(data.account_number);
         fetch('/api/inqLoanAccount/' + data.account_number, {}).then(response => response.json())
             .then(data => {
@@ -103,13 +103,13 @@ class inqPositionSummery extends Component {
         let body = [];
         for (let key in data) {
             if (data.hasOwnProperty(key)) {
-                var num = Number(key);
+                let num = Number(key);
                 let obj = [];
                 obj.push(<td>{num + 1}</td>);
                 for (let keyinObj in data[key]) {
                     if (data[key].hasOwnProperty(keyinObj)) {
                         if (typeof data[key][keyinObj] === "boolean") {
-                            var catchup = String(data[key][keyinObj]);
+                            let catchup = String(data[key][keyinObj]);
                             obj.push(<td>{catchup}</td>)
                         } else {
                             obj.push(<td>{data[key][keyinObj]}</td>);

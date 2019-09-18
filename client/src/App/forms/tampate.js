@@ -29,20 +29,20 @@ class tampate extends Component {
            currentState[event.target.name] = event.target.type === "number" ? Number(event.target.value) : event.target.value;
        }
         this.setState({rq_body : currentState});
-       
+
     }
 
     handleSubmit(event) {
-        event.preventDefault()
-        let body = {...this.state}
+        event.preventDefault();
+        let body = {...this.state};
         let request = this.omitfield(body);
        console.log(request);
         // this.postList(request);
     }
 
-    omitfield =(body) =>{
+    omitfield = (body) =>{
         for(let key in body.rq_body){
-             if(typeof body.rq_body[key] === "object" ){   
+             if(typeof body.rq_body[key] === "object" ){
               for(let subkey in body.rq_body[key]){
                     if(body.rq_body[key][subkey] === "" || body.rq_body[key][subkey] === 0){
                         delete body.rq_body[key][subkey];
@@ -50,13 +50,13 @@ class tampate extends Component {
               }
               if(Object.keys(body.rq_body[key]).length === 0){
                     delete body.rq_body[key];
-                } 
+                }
              }else if(body.rq_body[key] === "" || body.rq_body[key] === 0){
                     delete body.rq_body[key];
              }
         }
         return body;
-    }
+    };
 
 
     render() {
