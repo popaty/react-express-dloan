@@ -34,6 +34,9 @@ const header = (props) => {
                         <DropdownItem href="/dbmComponent">
                             Disbursement
                         </DropdownItem>
+                        <DropdownItem href="/rpmComponent">
+                            Repayment
+                        </DropdownItem>
                     </DropdownMenu>
               </UncontrolledDropdown>
               &emsp;
@@ -53,10 +56,21 @@ const header = (props) => {
                &emsp;
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
-                  P-rest
+                  Position
                 </DropdownToggle>
                     <DropdownMenu right>
                         <DropdownItem href="/ipdComponent">
+                            Inquiry Position Detail
+                        </DropdownItem>
+                    </DropdownMenu>
+              </UncontrolledDropdown>
+               &emsp;
+              <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav caret>
+                  P-rest
+                </DropdownToggle>
+                    <DropdownMenu right>
+                        <DropdownItem href="/ipdprestComponent">
                             Inquiry Position Detail
                         </DropdownItem>
                     </DropdownMenu>

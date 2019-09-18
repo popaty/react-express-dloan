@@ -52,7 +52,7 @@ class disbursementComponent extends Component {
                 }
             };
             this.setState({rq_body : body});
-            console.log(this.state);
+            //console.log(this.state);
         }
     };
 
@@ -75,43 +75,57 @@ class disbursementComponent extends Component {
         //clone state for use in omit function.
         var body = cloneDeep(this.state);
         let request = this.omitfield(body);
-        console.log(request);
+        //console.log(request);
         this.postList(request);
     };
 
     omitfield =(body) =>{
         for(let key in body.rq_body){
-            if(typeof body.rq_body[key] === "object" ){
-                for(let subkey in body.rq_body[key]){
-                    if(body.rq_body[key][subkey] === "" || body.rq_body[key][subkey] === 0){
-                        delete body.rq_body[key][subkey];
+            if(body.rq_body.hasOwnProperty(key)){
+                if(typeof body.rq_body[key] === "object" ){
+                    for(let subkey in body.rq_body[key]){
+                        if(body.rq_body[key].hasOwnProperty(subkey)){
+                            if(body.rq_body[key][subkey] === "" || body.rq_body[key][subkey] === 0){
+                                delete body.rq_body[key][subkey];
+                            }
+                        }
                     }
-                }
-                if(Object.keys(body.rq_body[key]).length === 0){
+                    if(Object.keys(body.rq_body[key]).length === 0){
+                        delete body.rq_body[key];
+                    }
+                }else if(body.rq_body[key] === "" || body.rq_body[key] === 0){
                     delete body.rq_body[key];
                 }
-            }else if(body.rq_body[key] === "" || body.rq_body[key] === 0){
-                delete body.rq_body[key];
-            }
+            } 
         }
         return body;
     };
 
     postList = (request) => {
         console.log("myRequest : " + JSON.stringify(request));
-        fetch('/api/disbursement', {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(request),
-        })
-            .then(response => response.json())
-            .then(data => {
+        // fetch('/api/disbursement', {
+        //     method: 'POST',
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     },
+        //     body: JSON.stringify(request),
+        // }).then(response => response.json())
+        // .then(data => {
 
-        // var data = {
-        //     "rs_body": {}
-        // };
+        // if (data.rs_body) {
+        //     window.open('/dbmSummary', '_self');
+        // }else{
+        //     alert("error code : "+data.errors.map(error => error.error_code)+"\n"
+        //         +"error desc : "+ data.errors.map(error => error.error_desc)+"\n"
+        //         +"error type : "+ data.errors.map(error => error.error_type));
+        // }
+        // }).catch(error => console.log(error))
+
+
+        //mock data
+        var data = {
+            "rs_body": {}
+        };
         //     var data =  {  "errors": [
         //         {
         //             "error_code": "502",
@@ -129,13 +143,12 @@ class disbursementComponent extends Component {
         //     ]
         // };
         if (data.rs_body) {
-            window.open('/dbmSummary', '_self');
-        }else{
-            alert("error code : "+data.errors.map(error => error.error_code)+"\n"
-                +"error desc : "+ data.errors.map(error => error.error_desc)+"\n"
-                +"error type : "+ data.errors.map(error => error.error_type));
-        }
-        }).catch(error => console.log(error))
+                window.open('/dbmSummary', '_self');
+            }else{
+                alert("error code : "+data.errors.map(error => error.error_code)+"\n"
+                    +"error desc : "+ data.errors.map(error => error.error_desc)+"\n"
+                    +"error type : "+ data.errors.map(error => error.error_type));
+            }
     };
 
 
@@ -145,7 +158,7 @@ class disbursementComponent extends Component {
                 return(
                     <FormGroup>
                         <Label>{item.label}</Label>
-                        <Input type={item.type} name={item.name} placeholder={item.placeholder}
+                        <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
                                value={this.state.rq_body[item.value]} onChange={this.handleChange} />
                     </FormGroup>
                 );
@@ -153,7 +166,7 @@ class disbursementComponent extends Component {
                 return(
                     <FormGroup>
                         <Label>{item.label}</Label>
-                        <Input type={item.type} name={item.name} placeholder={item.placeholder}
+                        <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
                                value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
                     </FormGroup>
                 );

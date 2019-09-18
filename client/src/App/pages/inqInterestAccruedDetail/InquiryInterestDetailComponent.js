@@ -26,7 +26,7 @@ class inquiryInterestDetailComponent extends Component {
         //clone state for use in omit function.
         var body = cloneDeep(this.state);
         let request = this.omitfield(body);
-        // console.log(request);
+         //console.log(request);
         this.postList(request);
     }
 
@@ -39,22 +39,25 @@ class inquiryInterestDetailComponent extends Component {
 
     omitfield =(body) =>{
         for(let key in body.rq_body){
-            if(typeof body.rq_body[key] === "object" ){
-                for(let subkey in body.rq_body[key]){
-                    if(body.rq_body[key][subkey] === "" || body.rq_body[key][subkey] === 0){
-                        delete body.rq_body[key][subkey];
+            if(body.rq_body.hasOwnProperty(key)){
+                if(typeof body.rq_body[key] === "object" ){
+                    for(let subkey in body.rq_body[key]){
+                        if(body.rq_body[key].hasOwnProperty(subkey)){
+                            if(body.rq_body[key][subkey] === "" || body.rq_body[key][subkey] === 0){
+                                delete body.rq_body[key][subkey];
+                            }
+                        }
                     }
-                }
-                if(Object.keys(body.rq_body[key]).length === 0){
+                    if(Object.keys(body.rq_body[key]).length === 0){
+                        delete body.rq_body[key];
+                    }
+                }else if(body.rq_body[key] === "" || body.rq_body[key] === 0){
                     delete body.rq_body[key];
                 }
-            }else if(body.rq_body[key] === "" || body.rq_body[key] === 0){
-                delete body.rq_body[key];
-            }
+            } 
         }
         return body;
     };
-
 
     postList = (request) => {
         console.log("myRequest : " + JSON.stringify(request));
@@ -84,7 +87,7 @@ class inquiryInterestDetailComponent extends Component {
                 return (
                     <FormGroup>
                         <Label>{item.label}</Label>
-                        <Input type={item.type} name={item.name} placeholder={item.placeholder}
+                        <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
                                value={this.state.rq_body[item.value]} onChange={this.handleChange}/>
                     </FormGroup>
                 );
@@ -92,7 +95,7 @@ class inquiryInterestDetailComponent extends Component {
                 return (
                     <FormGroup>
                         <Label>{item.label}</Label>
-                        <Input type={item.type} name={item.name} placeholder={item.placeholder}
+                        <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
                                value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange}/>
                     </FormGroup>
                 );
