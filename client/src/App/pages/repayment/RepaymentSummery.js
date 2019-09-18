@@ -4,7 +4,6 @@ import DynamicHeader from '../Header.js';
 
 
 class RepaymentSummery extends Component {
-
     constructor(props) {
         super(props);
         this.state = {};
@@ -51,7 +50,7 @@ class RepaymentSummery extends Component {
                         {this.dynamicResponse(data.rs_body)}
                     </Col>
                     <br />
-                    <Button color="success" onClick={calculateInstallmentSummary.openDisbursement}>Disbursement</Button><br />
+                    {/* <Button color="success" onClick={calculateInstallmentSummary.openDisbursement}>Disbursement</Button><br /> */}
                 </form>
             </div>
         );
