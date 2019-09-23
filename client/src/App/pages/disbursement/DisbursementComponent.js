@@ -103,30 +103,30 @@ class disbursementComponent extends Component {
     };
 
     postList = (request) => {
-        // console.log("myRequest : " + JSON.stringify(request));
-        // fetch('/api/disbursement', {
-        //     method: 'POST',
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     },
-        //     body: JSON.stringify(request),
-        // }).then(response => response.json())
-        //     .then(data => {
+        console.log("myRequest : " + JSON.stringify(request));
+        fetch('/api/disbursement', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(request),
+        }).then(response => response.json())
+            .then(data => {
 
-        //         if (data.rs_body) {
-        //             window.open('/dbmSummary', '_self');
-        //         } else {
-        //             alert("error code : " + data.errors.map(error => error.error_code) + "\n"
-        //                 + "error desc : " + data.errors.map(error => error.error_desc) + "\n"
-        //                 + "error type : " + data.errors.map(error => error.error_type));
-        //         }
-        //     }).catch(error => console.log(error))
+                if (data.rs_body) {
+                    window.open('/dbmSummary', '_self');
+                } else {
+                    alert("error code : " + data.errors.map(error => error.error_code) + "\n"
+                        + "error desc : " + data.errors.map(error => error.error_desc) + "\n"
+                        + "error type : " + data.errors.map(error => error.error_type));
+                }
+            }).catch(error => console.log(error))
 
 
         //mock data
-        let data = {
-            "rs_body": {}
-        };
+        // let data = {
+        //     "rs_body": {}
+        // };
         //     let data =  {  "errors": [
         //         {
         //             "error_code": "502",
@@ -143,13 +143,13 @@ class disbursementComponent extends Component {
         //         }
         //     ]
         // };
-        if (data.rs_body) {
-                window.open('/dbmSummary', '_self');
-            }else{
-                alert("error code : "+data.errors.map(error => error.error_code)+"\n"
-                    +"error desc : "+ data.errors.map(error => error.error_desc)+"\n"
-                    +"error type : "+ data.errors.map(error => error.error_type));
-            }
+        // if (data.rs_body) {
+        //         window.open('/dbmSummary', '_self');
+        //     }else{
+        //         alert("error code : "+data.errors.map(error => error.error_code)+"\n"
+        //             +"error desc : "+ data.errors.map(error => error.error_desc)+"\n"
+        //             +"error type : "+ data.errors.map(error => error.error_type));
+        //     }
     };
 
     FormInputData = () => {
