@@ -103,53 +103,53 @@ class disbursementComponent extends Component {
     };
 
     postList = (request) => {
-        // console.log("myRequest : " + JSON.stringify(request));
-        // fetch('/api/disbursement', {
-        //     method: 'POST',
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     },
-        //     body: JSON.stringify(request),
-        // }).then(response => response.json())
-        //     .then(data => {
+        console.log("myRequest : " + JSON.stringify(request));
+        fetch('/api/disbursement', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(request),
+        }).then(response => response.json())
+            .then(data => {
 
-        //         if (data.rs_body) {
-        //             window.open('/dbmSummary', '_self');
-        //         } else {
-        //             alert("error code : " + data.errors.map(error => error.error_code) + "\n"
-        //                 + "error desc : " + data.errors.map(error => error.error_desc) + "\n"
-        //                 + "error type : " + data.errors.map(error => error.error_type));
-        //         }
-        //     }).catch(error => console.log(error))
+                if (data.rs_body) {
+                    window.open('/dbmSummary', '_self');
+                } else {
+                    alert("error code : " + data.errors.map(error => error.error_code) + "\n"
+                        + "error desc : " + data.errors.map(error => error.error_desc) + "\n"
+                        + "error type : " + data.errors.map(error => error.error_type));
+                }
+            }).catch(error => console.log(error))
 
 
         //mock data
-        let data = {
-            "rs_body": {}
-        };
-        //     let data =  {  "errors": [
-        //         {
-        //             "error_code": "502",
-        //             "error_type": "",
-        //             "error_desc": "Error unmarshaling the json request payload, Caused by: Value(Unknown) - timestamp needs to conform to IETF RFC3339, time zones optional Format(Unknown) - ",
-        //             "error_detail": "",
-        //             "exception": {}
-        //         },
-        //         {
-        //             "error_code": "E88020004",
-        //             "error_type": "OTHER",
-        //             "error_desc": "Cannot parse JSON Body",
-        //             "error_detail": "Cannot parse JSON Body, Caused by: Error unmarshaling the json request payload, Caused by: Value(Unknown) - timestamp needs to conform to IETF RFC3339, time zones optional Format(Unknown) - "
-        //         }
-        //     ]
-        // };
-        if (data.rs_body) {
-                window.open('/dbmSummary', '_self');
-            }else{
-                alert("error code : "+data.errors.map(error => error.error_code)+"\n"
-                    +"error desc : "+ data.errors.map(error => error.error_desc)+"\n"
-                    +"error type : "+ data.errors.map(error => error.error_type));
-            }
+    //     let data = {
+    //         "rs_body": {}
+    //     };
+    //     //     let data =  {  "errors": [
+    //     //         {
+    //     //             "error_code": "502",
+    //     //             "error_type": "",
+    //     //             "error_desc": "Error unmarshaling the json request payload, Caused by: Value(Unknown) - timestamp needs to conform to IETF RFC3339, time zones optional Format(Unknown) - ",
+    //     //             "error_detail": "",
+    //     //             "exception": {}
+    //     //         },
+    //     //         {
+    //     //             "error_code": "E88020004",
+    //     //             "error_type": "OTHER",
+    //     //             "error_desc": "Cannot parse JSON Body",
+    //     //             "error_detail": "Cannot parse JSON Body, Caused by: Error unmarshaling the json request payload, Caused by: Value(Unknown) - timestamp needs to conform to IETF RFC3339, time zones optional Format(Unknown) - "
+    //     //         }
+    //     //     ]
+    //     // };
+    //     if (data.rs_body) {
+    //             window.open('/dbmSummary', '_self');
+    //         }else{
+    //             alert("error code : "+data.errors.map(error => error.error_code)+"\n"
+    //                 +"error desc : "+ data.errors.map(error => error.error_desc)+"\n"
+    //                 +"error type : "+ data.errors.map(error => error.error_type));
+    //         }
     };
 
     FormInputData = () => {

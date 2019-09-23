@@ -76,7 +76,7 @@ class inquiryPositionSummery extends Component {
                 <DynamicHeader />
                 <form>
                     <br />
-                    <h2>Form Data Inquiry Position Detail</h2>
+                    <h2>Form Data Inquiry Interest Accrued</h2>
                     <br />
                     <Col md={{ size: 8, offset: 2 }} >
                         <div class="table-responsive">
