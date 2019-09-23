@@ -15,6 +15,7 @@ class inquiryPositionSummery extends Component {
         let header = [];
         if (data.length > 1) {
             header.push(<th>#&nbsp;</th>);
+            // eslint-disable-next-line
             for (let key in data[0]) {
                 if (data[0].hasOwnProperty(key)) {
                     header.push(<th>{key}&nbsp;</th>);
@@ -22,9 +23,11 @@ class inquiryPositionSummery extends Component {
             }
 
         } else {
+            // eslint-disable-next-line
             for (let key in data) {
                 if (data.hasOwnProperty(key)) {
                     header.push(<th>#&nbsp;</th>);
+                    // eslint-disable-next-line
                     for (let keyinObj in data[key]) {
                         if (data[key].hasOwnProperty(keyinObj)) {
                             // if(keyinObj !== "daily_accrued_amount" && keyinObj !== "unpaid_accrued_amount"){
@@ -40,11 +43,13 @@ class inquiryPositionSummery extends Component {
 
     getBodyTable = (data) => {
         let body = [];
+        // eslint-disable-next-line
         for (let key in data) {
             if (data.hasOwnProperty(key)) {
                 let num = Number(key);
                 let obj = [];
                 obj.push(<td>{num + 1}</td>);
+                // eslint-disable-next-line
                 for (let keyinObj in data[key]) {
                     if (data[key].hasOwnProperty(keyinObj)) {
                         if (typeof data[key][keyinObj] === "boolean") {
