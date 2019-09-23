@@ -38,7 +38,6 @@ class RepaymentSummery extends Component {
 
     render() {
         const data = JSON.parse(sessionStorage.getItem("data_repayment"));
-        //console.log(data);
         return (
             <div className="App">
                 <DynamicHeader />
@@ -47,7 +46,7 @@ class RepaymentSummery extends Component {
                     <h2 >Form Data Repayment</h2>
                     <br />
                     <Col md={{ size: 6, offset: 3 }} >
-                        {this.dynamicResponse(data.rs_body)}
+                        {this.dynamicResponse(data)}
                     </Col>
                     <br />
                     {/* <Button color="success" onClick={calculateInstallmentSummary.openDisbursement}>Disbursement</Button><br /> */}

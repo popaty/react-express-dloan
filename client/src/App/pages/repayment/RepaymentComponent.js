@@ -1,7 +1,8 @@
-import React, {Component} from 'react';
-import {Button, Col, Form, FormGroup, Input, Label, Row} from 'reactstrap';
+import React, { Component } from 'react';
+import { Button, Col, Form, FormGroup, Input, Label, Row } from 'reactstrap';
 import DynamicHeader from '../Header.js';
 import inputModel from './model.json';
+import repayment from './RepaymentSummery'
 
 const cloneDeep = require('lodash.clonedeep');
 
@@ -71,6 +72,7 @@ class RepaymentComponent extends Component {
                 if (data.rs_body) {
                     sessionStorage.setItem("data_repayment", JSON.stringify(data));
                     window.open('/rpmSummary', '_self');
+                    
                 } else {
                     alert("error code : " + data.errors.map(error => error.error_code) + "\n"
                         + "error desc : " + data.errors.map(error => error.error_desc) + "\n"
@@ -86,7 +88,7 @@ class RepaymentComponent extends Component {
                     <FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                               value={this.state.rq_body[item.value]} onChange={this.handleChange}/>
+                            value={this.state.rq_body[item.value]} onChange={this.handleChange} />
                     </FormGroup>
                 );
             } else {
@@ -94,7 +96,7 @@ class RepaymentComponent extends Component {
                     <FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                               value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange}/>
+                            value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
                     </FormGroup>
                 );
             }
@@ -112,13 +114,14 @@ class RepaymentComponent extends Component {
                     <Col md={{ size: 4, offset: 4 }}>
                         <Form onSubmit={this.handleSubmit}>
                             {this.FormInputData()}
-                            <br />
+                             <br />
                             <div align="center">
                                 <Button color="primary" type="submit" >Submit</Button>
                             </div>
                             <br />
-                        </Form>
-                    </Col>
+                        </Form> 
+                        
+                   </Col>
                 </Row>
             </div>
         );
