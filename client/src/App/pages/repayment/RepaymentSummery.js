@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Col } from 'reactstrap';
+import { Table, Col, Form } from 'reactstrap';
 import DynamicHeader from '../Header.js';
 
 
@@ -43,16 +43,16 @@ class RepaymentSummery extends Component {
         return (
             <div className="App">
                 <DynamicHeader />
-                <form>
+                <Form>
                     <br />
-                    <h2 >Form Data Repayment</h2>
+                    <h2>Form Data Repayment</h2>
                     <br />
                     <Col md={{ size: 6, offset: 3 }} >
                         {this.dynamicResponse(data)}
                     </Col>
                     <br />
                     {/* <Button color="success" onClick={calculateInstallmentSummary.openDisbursement}>Disbursement</Button><br /> */}
-                </form>
+                </Form>
             </div>
         );
     }

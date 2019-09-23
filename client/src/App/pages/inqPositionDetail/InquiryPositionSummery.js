@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Col, Table, Row } from 'reactstrap';
+import { Button, Col, Table, Form } from 'reactstrap';
 import DynamicHeader from '../Header.js';
 
 class inquiryPositionSummery extends Component {
@@ -13,7 +13,7 @@ class inquiryPositionSummery extends Component {
         //console.log(data.account_number);
         fetch('/api/inqLoanAccount/' + data.account_number, {}).then(response => response.json())
             .then(data => {
-               // console.log(data);
+                // console.log(data);
                 if (data.rs_body) {
                     sessionStorage.setItem("data_inqLoanAccount", JSON.stringify(data.rs_body));
                     window.open('/ilaSummary', '_self');
@@ -133,30 +133,27 @@ class inquiryPositionSummery extends Component {
         return (
             <div className="App">
                 <DynamicHeader />
-                <form>
+                <Form>
                     <br />
                     <h2>Form Data Inquiry Position Detail</h2>
                     <br />
-                    <Row>
-                        <Col md={{ size: 8, offset: 2 }} >
-                            <div class="table-responsive">
-                                <Table striped bordered>
-                                    <thead>
-                                        <tr>
-                                            {this.getHeaderTable(data)}
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {this.getBodyTable(data)}
-                                    </tbody>
-                                </Table>
-                            </div>
-                        </Col>
-                    </Row>
+                    <Col md={{ size: 8, offset: 2 }} >
+                        <div class="table-responsive">
+                            <Table striped bordered>
+                                <thead>
+                                    <tr>
+                                        {this.getHeaderTable(data)}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {this.getBodyTable(data)}
+                                </tbody>
+                            </Table>
+                        </div>
+                    </Col>
                     <br />
-                    {/* <Button color="success" onClick={this.Clicked}>Inquiry Interest Accrued</Button><br /><br /> */}
                     <Button color="success" onClick={this.CallInquiryLoanAccount}>Inquiry Account Details </Button>
-                </form>
+                </Form>
             </div>
         );
     }

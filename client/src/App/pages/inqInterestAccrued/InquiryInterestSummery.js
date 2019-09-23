@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Table } from 'reactstrap';
+import { Col, Table } from 'reactstrap';
 import DynamicHeader from '../Header.js';
 
 class inquiryPositionSummery extends Component {
@@ -76,27 +76,23 @@ class inquiryPositionSummery extends Component {
                 <DynamicHeader />
                 <form>
                     <br />
-                    <h2 >Form Data Inquiry Position Detail</h2>
+                    <h2>Form Data Inquiry Position Detail</h2>
                     <br />
-                    <Row>
-                        <Col md={{ size: 8, offset: 2 }} >
-                            <div class="table-responsive">
-                                <Table striped bordered>
-                                    <thead>
-                                        <tr>
-                                            {this.getHeaderTable(data)}
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {this.getBodyTable(data)}
-                                    </tbody>
-                                </Table>
-                            </div>
-                        </Col>
-                    </Row>
+                    <Col md={{ size: 8, offset: 2 }} >
+                        <div class="table-responsive">
+                            <Table striped bordered>
+                                <thead>
+                                    <tr>
+                                        {this.getHeaderTable(data)}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {this.getBodyTable(data)}
+                                </tbody>
+                            </Table>
+                        </div>
+                    </Col>
                     <br />
-                    {/* <Button color="success" onClick={this.Clicked}>Inquiry Interest Accrued</Button><br /><br /> */}
-                    {/* <Button color="success" onClick={this.CallInquiryLoanAccount} >Inquiry Account Details </Button> */}
                 </form>
             </div>
         );

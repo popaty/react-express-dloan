@@ -62,7 +62,6 @@ class InquiryLoanAccountSummery extends Component {
         const data = InquiryLoanAccountSummery.getSessionStorage();
         //console.log(data);
         return (
-
             <div className="App">
                 <DynamicHeader />
                 <br />

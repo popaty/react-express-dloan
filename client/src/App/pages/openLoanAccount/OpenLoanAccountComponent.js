@@ -1,6 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import DynamicHeader from '../Header.js';
 import SpinnerLoader from '../loading.js';
+import '../form.css';
 
 import {
     Button,
@@ -13,6 +14,7 @@ import {
     Input,
     Label,
     Row,
+    Container,
     UncontrolledDropdown
 } from 'reactstrap';
 
@@ -62,7 +64,7 @@ class OpenLoanAccountComponent extends Component {
 
     handleChange(event) {
         //this.setState({[event.target.name]:event.target.value});
-        const {rq_body} = {...this.state};
+        const { rq_body } = { ...this.state };
         const currentState = rq_body;
         const interest = currentState.interest;
         const payment = currentState.payment;
@@ -75,21 +77,21 @@ class OpenLoanAccountComponent extends Component {
         } else {
             currentState[event.target.name] = event.target.type === "number" ? Number(event.target.value) : event.target.value;
         }
-        this.setState({rq_body: currentState});
+        this.setState({ rq_body: currentState });
 
     };
 
     handleSubmit(event) {
         event.preventDefault();
-        this.setState({loading: true});
+        this.setState({ loading: true });
         //clone state for use in omit function.
         let body = cloneDeep(this.state);
         const request = this.omit(body);
         // console.log(request);
         setTimeout(() => {
-            this.setState({loading: false});
+            this.setState({ loading: false });
             this.postList(request);
-        }, 1500);
+        }, 1200);
     };
 
     omit = (body) => {
@@ -180,7 +182,7 @@ class OpenLoanAccountComponent extends Component {
                     <FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                               value={this.state.rq_body[item.value]} onChange={this.handleChange}/>
+                            value={this.state.rq_body[item.value]} onChange={this.handleChange} />
                     </FormGroup>
                 );
             } else {
@@ -188,7 +190,7 @@ class OpenLoanAccountComponent extends Component {
                     <FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                               value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange}/>
+                            value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
                     </FormGroup>
                 );
             }
@@ -202,7 +204,7 @@ class OpenLoanAccountComponent extends Component {
                     <FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                               value={this.state.rq_body[item.value]} onChange={this.handleChange}/>
+                            value={this.state.rq_body[item.value]} onChange={this.handleChange} />
                     </FormGroup>
                 );
             } else {
@@ -210,7 +212,7 @@ class OpenLoanAccountComponent extends Component {
                     <FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                               value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange}/>
+                            value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
                     </FormGroup>
                 );
             }
@@ -218,50 +220,51 @@ class OpenLoanAccountComponent extends Component {
     };
 
     render() {
-        const {loading} = this.state;
+        const { loading } = this.state;
         return (
             <div>
-                <DynamicHeader/>
-                <br/>
-                <h2 align="center">Form Input Open Account</h2>
-                <br/>
-                <UncontrolledDropdown align="center">
-                    <DropdownToggle caret color="secondary">Select validation here &nbsp;</DropdownToggle>
-                    <DropdownMenu>
-                        <DropdownItem name="000" onClick={this.loadJson}>Select validation here</DropdownItem>
-                        <DropdownItem name="001" onClick={this.loadJson}>Input body Open Account Validation
-                            001</DropdownItem>
-                        <DropdownItem name="002" onClick={this.loadJson}>Input body Open Account Validation
-                            002</DropdownItem>
-                        <DropdownItem name="003" onClick={this.loadJson}>Input body Open Account Validation
-                            003</DropdownItem>
-                        <DropdownItem name="004" onClick={this.loadJson}>[DEMO]Input body Open Account Validation
-                            004</DropdownItem>
-                    </DropdownMenu>
-                </UncontrolledDropdown>
-                <br/>
-                <Form onSubmit={this.handleSubmit}>
-                    <Row>
-                        <Col md={{size: 3, offset: 3}}>
-                            {this.FormInputCol1()}
-                        </Col>
+                <DynamicHeader />
+                <Container>
+                    <br />
+                    <h2>Form Input Open Account</h2>
+                    <br />
+                    <UncontrolledDropdown align="center">
+                        <DropdownToggle caret color="secondary">Select validation here &nbsp;</DropdownToggle>
+                        <DropdownMenu>
+                            <DropdownItem name="000" onClick={this.loadJson}>Select validation here</DropdownItem>
+                            <DropdownItem name="001" onClick={this.loadJson}>Input body Open Account Validation
+                             001</DropdownItem>
+                            <DropdownItem name="002" onClick={this.loadJson}>Input body Open Account Validation
+                             002</DropdownItem>
+                            <DropdownItem name="003" onClick={this.loadJson}>Input body Open Account Validation
+                             003</DropdownItem>
+                            <DropdownItem name="004" onClick={this.loadJson}>[DEMO]Input body Open Account Validation
+                             004</DropdownItem>
+                        </DropdownMenu>
+                    </UncontrolledDropdown>
+                    <br />
+                    <Form onSubmit={this.handleSubmit}>
+                        <Row>
+                            <Col md={{ size: 3, offset: 3 }}>
+                                {this.FormInputCol1()}
+                            </Col>
 
-                        <Col md={{size: 3}}>
-                            {this.FormInputCol2()}
-                        </Col>
-                    </Row>
-
-                    <div align="center">
-                        <Button color="primary" type="submit" disabled={loading}>
-                            {/* Submit */}
-                            {loading && (<SpinnerLoader/>)}
-                            {loading && <span>Loading..</span>}
-                            {!loading && <span>Submit</span>}
-                        </Button>
-                        {/* < SpinnerLoader /> */}
-                    </div>
-                    <br/>
-                </Form>
+                            <Col md={{ size: 3 }}>
+                                {this.FormInputCol2()}
+                            </Col>
+                        </Row>
+                        <div align="center">
+                            <Button color="primary" type="submit" disabled={loading}>
+                                {/* Submit */}
+                                {loading && (<SpinnerLoader />)}
+                                {loading && <span>Loading..</span>}
+                                {!loading && <span>Submit</span>}
+                            </Button>
+                            {/* < SpinnerLoader /> */}
+                        </div>
+                        <br />
+                    </Form>
+                </Container>
             </div>
         );
     };

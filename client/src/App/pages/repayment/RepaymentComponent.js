@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Button, Col, Form, FormGroup, Input, Label, Row } from 'reactstrap';
+import { Button, Col, Form, FormGroup, Input, Label, Row, Container } from 'reactstrap';
 import DynamicHeader from '../Header.js';
 import inputModel from './model.json';
-import repayment from './RepaymentSummery'
+//import repayment from './RepaymentSummery'
 
 const cloneDeep = require('lodash.clonedeep');
 
@@ -110,8 +110,9 @@ class RepaymentComponent extends Component {
             <div>
                 <DynamicHeader />
                 <br />
-                <h2 align="center">Form Input Repayment</h2>
+                <h2>Form Input Repayment</h2>
                 <br />
+                <Container>
                 <Row>
                     <Col md={{ size: 4, offset: 4 }}>
                         <Form onSubmit={this.handleSubmit}>
@@ -122,9 +123,9 @@ class RepaymentComponent extends Component {
                             </div>
                             <br />
                         </Form> 
-                        
                    </Col>
                 </Row>
+                </Container>
             </div>
         );
     }

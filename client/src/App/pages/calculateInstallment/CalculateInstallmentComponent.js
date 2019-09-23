@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Col, Form, FormGroup, Input, Label, Row } from 'reactstrap';
+import { Button, Col, Form, FormGroup, Input, Label, Row, Container } from 'reactstrap';
 import DynamicHeader from '../Header.js';
 import inputModel from './model.json';
 //import SpinnerLoader from '../loading.js';
@@ -151,20 +151,21 @@ class installmentComponent extends Component {
             <div>
                 <DynamicHeader />
                 <br />
-                <h2 align="center">Form Input Calculate Installment Amount</h2>
-                <br />
-                <Row>
-                    <Col md={{ size: 4, offset: 4 }}>
-                        <Form onSubmit={this.handleSubmit}>
-                            {this.FormInputData()}
-                            <br />
-                            <div align="center">
-                                <Button color="primary" type="submit" >Submit</Button>
-                            </div>
-                            <br />
-                        </Form>
-                    </Col>
-                </Row>
+                <Container>
+                    <h2>Form Input Calculate Installment Amount</h2>
+                    <br />
+                    <Row>
+                        <Col md={{ size: 4, offset: 4 }}>
+                            <Form onSubmit={this.handleSubmit}>
+                                {this.FormInputData()}
+                                <div align="center">
+                                    <Button color="primary" type="submit" >Submit</Button>
+                                </div>
+                                <br />
+                            </Form>
+                        </Col>
+                    </Row>
+                </Container>
             </div>
         );
     }

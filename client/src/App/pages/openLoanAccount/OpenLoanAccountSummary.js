@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Table, Col } from 'reactstrap';
+import { Button, Table, Col, Form } from 'reactstrap';
 import DynamicHeader from '../Header.js';
 
 class OpenLoanAccountSummary extends Component {
@@ -108,16 +108,16 @@ class OpenLoanAccountSummary extends Component {
         return (
             <div className="App">
                 <DynamicHeader />
-                <form>
+                <Form>
                     <br />
-                    <h2 >Form Data Open Account</h2>
+                    <h2>Form Data Open Account</h2>
                     <br />
                     <Col md={{ size: 6, offset: 3 }} >
                         {this.dynamicResponse(data.rs_body)}
                     </Col>
                     <br />
                     <Button color="success" onClick={this.CallInquiryLoanAccount} >Inquiry Account Details : {account}</Button>
-                </form>
+                </Form>
             </div>
         );
     };
