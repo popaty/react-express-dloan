@@ -26,7 +26,6 @@ class inquiryPositionPRESTSummery extends Component {
             }).catch(error => console.log(error))
     };
 
-
     dynamicResponse = (data) => {
         let table = [];
         let children = [];

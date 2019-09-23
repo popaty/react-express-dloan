@@ -10,36 +10,34 @@ class disbursementSummery extends Component {
     };
 
     //p-rest
-    //openInqPositionDetail() {
-    //no use
-    //var account = JSON.parse(sessionStorage.getItem("data_inqLoanAccount"));
-    //console.log(account.account_number);
-
-    //fetch('/api/inqPositionDetail/' + account.account_number).then(response => response.json())
-    //     .then(data => {
-    //         //console.log(data);
-    //         if (data) {
-    //             const maximum = Math.max(...data.map(item => item.posnNbr));
-    //             //console.log(maximum);
-    //             const getdata = data.find(element => element.posnNbr === maximum);
-    //             let body = {
-    //                 account_sequence: getdata.posnNbr,
-    //                 open_date: getdata.openDate,
-    //                 principal_balance: getdata.bal
-    //             };
-    //             sessionStorage.setItem("data_inqPositionDetail", JSON.stringify(body));
-    //             window.open('/ipdSummary', '_self');
-    //         } else {
-    //             alert("Data not found.");
-    //         }
-    //     }).catch(error => console.log(error))
-    //}
-
     openInqPositionDetail() {
-        let account = JSON.parse(sessionStorage.getItem("data_inqLoanAccount"));
-        console.log(account.account_number);
-        fetch('/api/inquiryPositionDetail/' + account.account_number).then(response => response.json())
-            .then(data => {
+    var account = JSON.parse(sessionStorage.getItem("data_inqLoanAccount"));
+    //console.log(account.account_number);
+    fetch('/api/inqPositionDetail/' + account.account_number).then(response => response.json())
+        .then(data => {
+            //console.log(data);
+            if (data) {
+                const maximum = Math.max(...data.map(item => item.posnNbr));
+                //console.log(maximum);
+                const getdata = data.find(element => element.posnNbr === maximum);
+                let body = {
+                    account_sequence: getdata.posnNbr,
+                    open_date: getdata.openDate,
+                    principal_balance: getdata.bal
+                };
+                sessionStorage.setItem("data_inqPositionDetail", JSON.stringify(body));
+                window.open('/ipdprestSummary', '_self');
+            } else {
+                alert("Data not found.");
+            }
+        }).catch(error => console.log(error))
+    }
+
+    // openInqPositionDetail() {
+    //     let account = JSON.parse(sessionStorage.getItem("data_inqLoanAccount"));
+    //     console.log(account.account_number);
+    //     fetch('/api/inquiryPositionDetail/' + account.account_number).then(response => response.json())
+    //         .then(data => {
                 //console.log(data);
                 // if (data) {
                 //     const maximum = Math.max(...data.map(item => item.posnNbr));
@@ -55,7 +53,7 @@ class disbursementSummery extends Component {
                 // } else {
                 //     alert("Data not found.");
                 // }
-            }).catch(error => console.log(error))
+            // }).catch(error => console.log(error))
 
 
         //mockdata
@@ -86,7 +84,7 @@ class disbursementSummery extends Component {
         // } else {
         //     alert("Data not found.");
         // }
-    };
+    //};
 
     render() {
         const data = JSON.parse(sessionStorage.getItem("data_inqLoanAccount"));
