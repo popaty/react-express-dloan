@@ -15,20 +15,26 @@ class inquiryPositionSummery extends Component {
     dynamicResponse = (data) => {
         let table = [];
         let children = [];
+        // eslint-disable-next-line
         for(let key in data){
-            if(typeof data[key] === "object"){
-                let obj = [];
-                for(let subdata in data[key]){
-                    if(typeof data[key][subdata] === "boolean"){
-                        let catchup = String(data[key][subdata]);
-                        obj.push(<tr><td>{subdata}</td><td>{catchup}</td></tr>)
-                    }else{
-                        obj.push(<tr><td>{subdata}</td><td>{data[key][subdata]}</td></tr>);
+            if(data.hasOwnProperty(key)){
+                if(typeof data[key] === "object"){
+                    let obj = [];
+                    // eslint-disable-next-line
+                    for(let subdata in data[key]){
+                        if(data[key].hasOwnProperty(subdata)){
+                            if(typeof data[key][subdata] === "boolean"){
+                                let catchup = String(data[key][subdata]);
+                                obj.push(<tr><td>{subdata}</td><td>{catchup}</td></tr>)
+                            }else{
+                                obj.push(<tr><td>{subdata}</td><td>{data[key][subdata]}</td></tr>);
+                            }
+                        }
                     }
+                    children.push(<tr><td>{key+" : "}</td><td><Table>{obj}</Table></td></tr>);
+                }else{
+                    children.push(<tr><td>{key}</td><td>{data[key]}</td></tr>);
                 }
-                children.push(<tr><td>{key+" : "}</td><td><Table>{obj}</Table></td></tr>);
-            }else{
-                children.push(<tr><td>{key}</td><td>{data[key]}</td></tr>);
             }
         }
         table.push(<Table bordered >{children}</Table>);

@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {Button, Form, FormGroup, Label, Input, Col} from 'reactstrap';
 import DynamicHeader from '../Header.js';
 
-class inqPositionComponent extends Component {
+class inquiryPositionPRESTComponent extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -12,23 +13,33 @@ class inqPositionComponent extends Component {
         this.Clicked = this.Clicked.bind(this);
     }
 
-    handleChange(event) {
-        this.setState({account: event.target.value});
-    }
-
     Clicked(event) {
         event.preventDefault();
-        fetch('/api/inquiryPositionDetail/' + this.state.account)
+        // var data = JSON.parse(sessionStorage.getItem("data_inqLoanAccount"));
+        //console.log(this.state.account);
+        fetch('/api/inqPositionDetail/' + this.state.account)
         .then(response => response.json())
         .then(data => {
+                //console.log(data);
                 if (data) {
-                    //wait
-                    sessionStorage.setItem("data_inqPositionDetail", JSON.stringify(data));
-                    window.open('/ipdSummary', '_self');
+                    const maximum = Math.max(...data.map(item => item.posnNbr));
+                    //console.log(maximum);
+                    const getdata = data.find(element => element.posnNbr === maximum);
+                    const body = {
+                        account_sequence: getdata.posnNbr,
+                        open_date: getdata.openDate,
+                        principal_balance: getdata.bal
+                    };
+                    sessionStorage.setItem("data_inqPositionDetail", JSON.stringify(body));
+                    window.open('/ipdprestSummary', '_self');
                 } else {
                     alert("Data not found.");
                 }
             }).catch(error => console.log(error))
+    }
+
+    handleChange(event) {
+        this.setState({account: event.target.value});
     }
 
     render() {
@@ -51,4 +62,5 @@ class inqPositionComponent extends Component {
         );
     }
 }
-export default inqPositionComponent;
+
+export default inquiryPositionPRESTComponent;

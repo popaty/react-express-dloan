@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Col, Table } from 'reactstrap';
 import DynamicHeader from '../Header.js';
 
-class inquiryPositionSummery extends Component {
+class inquiryPositionPRESTSummery extends Component {
 
     constructor(props) {
         super(props);
@@ -30,10 +30,12 @@ class inquiryPositionSummery extends Component {
     dynamicResponse = (data) => {
         let table = [];
         let children = [];
+        // eslint-disable-next-line
         for (let key in data) {
             if (data.hasOwnProperty(key)) {
                 if (typeof data[key] === "object") {
                     let obj = [];
+                    // eslint-disable-next-line
                     for (let subdata in data[key]) {
                         if (data[key].hasOwnProperty(subdata)) {
                             if (typeof data[key][subdata] === "boolean") {
@@ -88,4 +90,4 @@ class inquiryPositionSummery extends Component {
     }
 }
 
-export default inquiryPositionSummery;
+export default inquiryPositionPRESTSummery;

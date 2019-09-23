@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Col, Table, Row } from 'reactstrap';
 import DynamicHeader from '../Header.js';
 
-class inqPositionSummery extends Component {
+class inquiryPositionSummery extends Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -79,15 +79,18 @@ class inqPositionSummery extends Component {
         let header = [];
         if (data.length > 1) {
             header.push(<th>#&nbsp;</th>);
+            // eslint-disable-next-line
             for (let key in data[0]) {
                 if (data[0].hasOwnProperty(key)) {
                     header.push(<th>{key}&nbsp;</th>);
                 }
             }
         } else {
+            // eslint-disable-next-line
             for (let key in data) {
                 if (data.hasOwnProperty(key)) {
                     header.push(<th>#&nbsp;</th>);
+                    // eslint-disable-next-line
                     for (let keyinObj in data[key]) {
                         if (data[key].hasOwnProperty(keyinObj)) {
                             header.push(<th>{keyinObj}&nbsp;</th>);
@@ -101,11 +104,13 @@ class inqPositionSummery extends Component {
 
     getBodyTable = (data) => {
         let body = [];
+        // eslint-disable-next-line
         for (let key in data) {
             if (data.hasOwnProperty(key)) {
                 let num = Number(key);
                 let obj = [];
                 obj.push(<td>{num + 1}</td>);
+                // eslint-disable-next-line
                 for (let keyinObj in data[key]) {
                     if (data[key].hasOwnProperty(keyinObj)) {
                         if (typeof data[key][keyinObj] === "boolean") {
@@ -156,4 +161,4 @@ class inqPositionSummery extends Component {
         );
     }
 }
-export default inqPositionSummery;
+export default inquiryPositionSummery;

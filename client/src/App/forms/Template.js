@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
-
-//import v001 from './v001.json';
-
-class tampate extends Component {
+class Template extends Component {
 
     constructor(props){
         super(props);
@@ -35,25 +32,29 @@ class tampate extends Component {
     handleSubmit(event) {
         event.preventDefault();
         let body = {...this.state};
-        let request = this.omitfield(body);
+        let request = this.omit(body);
        console.log(request);
         // this.postList(request);
     }
 
-    omitfield = (body) =>{
+    omit = (body) =>{
         for(let key in body.rq_body){
-             if(typeof body.rq_body[key] === "object" ){
-              for(let subkey in body.rq_body[key]){
-                    if(body.rq_body[key][subkey] === "" || body.rq_body[key][subkey] === 0){
-                        delete body.rq_body[key][subkey];
+            if(body.rq_body.hasOwnProperty(key)){
+                if(typeof body.rq_body[key] === "object" ){
+                    for(let subkey in body.rq_body[key]){
+                        if(body.rq_body[key].hasOwnProperty(subkey)){
+                            if(body.rq_body[key][subkey] === "" || body.rq_body[key][subkey] === 0){
+                                delete body.rq_body[key][subkey];
+                            }
+                        }
                     }
-              }
-              if(Object.keys(body.rq_body[key]).length === 0){
+                    if(Object.keys(body.rq_body[key]).length === 0){
+                        delete body.rq_body[key];
+                    }
+                }else if(body.rq_body[key] === "" || body.rq_body[key] === 0){
                     delete body.rq_body[key];
                 }
-             }else if(body.rq_body[key] === "" || body.rq_body[key] === 0){
-                    delete body.rq_body[key];
-             }
+            }
         }
         return body;
     };
@@ -66,4 +67,4 @@ class tampate extends Component {
        }
 }
 
-export default tampate;
+export default Template;

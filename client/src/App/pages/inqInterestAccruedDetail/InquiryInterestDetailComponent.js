@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Button, Col, Form, FormGroup, Input, Label, Row} from 'reactstrap';
 import DynamicHeader from '../Header.js';
 import inputModel from "../inqInterestAccruedDetail/model";
-
 const cloneDeep = require('lodash.clonedeep');
 
 class inquiryInterestDetailComponent extends Component {
@@ -24,7 +23,7 @@ class inquiryInterestDetailComponent extends Component {
         event.preventDefault();
         //clone state for use in omit function.
         let body = cloneDeep(this.state);
-        const request = this.omitfield(body);
+        const request = this.omit(body);
          //console.log(request);
         this.postList(request);
     }
@@ -36,10 +35,12 @@ class inquiryInterestDetailComponent extends Component {
         this.setState({rq_body : currentState});
     }
 
-    omitfield =(body) =>{
+    omit =(body) =>{
+        // eslint-disable-next-line
         for(let key in body.rq_body){
             if(body.rq_body.hasOwnProperty(key)){
                 if(typeof body.rq_body[key] === "object" ){
+                    // eslint-disable-next-line
                     for(let subkey in body.rq_body[key]){
                         if(body.rq_body[key].hasOwnProperty(subkey)){
                             if(body.rq_body[key][subkey] === "" || body.rq_body[key][subkey] === 0){

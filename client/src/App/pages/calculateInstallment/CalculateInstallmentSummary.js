@@ -16,10 +16,12 @@ class calculateInstallmentSummary extends Component {
     dynamicResponse = (data) => {
         let table = [];
         let children = [];
+        // eslint-disable-next-line
         for (let key in data) {
             if (data.hasOwnProperty(key)) {
                 if (typeof data[key] === "object") {
                     let obj = [];
+                    // eslint-disable-next-line
                     for (let subdata in data[key]) {
                         if (data[key].hasOwnProperty(subdata)) {
                             if (typeof data[key][subdata] === "boolean") {
