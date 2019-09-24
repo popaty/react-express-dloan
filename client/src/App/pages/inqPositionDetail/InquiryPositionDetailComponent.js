@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input, Col, Row,Container } from 'reactstrap';
+import React, {Component} from 'react';
+import {Button, Col, Container, Form, FormGroup, Input, Label, Row} from 'reactstrap';
 import DynamicHeader from '../Header.js';
 import inputModel from './model.json';
 
@@ -9,9 +9,9 @@ class InquiryPositionDetailComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            rq_body : {
-                account_number : "",
-                account_sequence : 0
+            rq_body: {
+                account_number: "",
+                account_sequence: 0
             }
         };
         this.handleChange = this.handleChange.bind(this);
@@ -21,19 +21,19 @@ class InquiryPositionDetailComponent extends Component {
     componentDidMount() {
         if (JSON.parse(sessionStorage.getItem("account_number"))) {
             let body = {
-                account_number : JSON.parse(sessionStorage.getItem("account_number")),
-                account_sequence : 0
-            }
-            this.setState({ rq_body : body });
+                account_number: JSON.parse(sessionStorage.getItem("account_number")),
+                account_sequence: 0
+            };
+            this.setState({rq_body: body});
         }
     }
 
     handleChange(event) {
         //this.setState({[event.target.name]:event.target.value});
-        const { rq_body } = { ...this.state };
+        const {rq_body} = {...this.state};
         const currentState = rq_body;
         currentState[event.target.name] = event.target.type === "number" ? Number(event.target.value) : event.target.value;
-        this.setState({ rq_body: currentState });
+        this.setState({rq_body: currentState});
     };
 
     handleSubmit(event) {
@@ -84,7 +84,7 @@ class InquiryPositionDetailComponent extends Component {
                 if (data.rs_body) {
                     sessionStorage.setItem("response_inqPositionDetail", JSON.stringify(data));
                     window.open('/ipdSummary', '_self');
-                    
+
                 } else {
                     alert("error code : " + data.errors.map(error => error.error_code) + "\n"
                         + "error desc : " + data.errors.map(error => error.error_desc) + "\n"
@@ -100,7 +100,7 @@ class InquiryPositionDetailComponent extends Component {
                     <FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                            value={this.state.rq_body[item.value]} onChange={this.handleChange} />
+                               value={this.state.rq_body[item.value]} onChange={this.handleChange}/>
                     </FormGroup>
                 );
             } else {
@@ -108,7 +108,7 @@ class InquiryPositionDetailComponent extends Component {
                     <FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                            value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
+                               value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange}/>
                     </FormGroup>
                 );
             }
@@ -118,25 +118,26 @@ class InquiryPositionDetailComponent extends Component {
     render() {
         return (
             <div>
-                <DynamicHeader />
+                <DynamicHeader/>
                 <h2>Form Input Inquiry Position Detail</h2>
-                <br />
+                <br/>
                 <Container>
-                <Row>
-                    <Col md={{ size: 4, offset: 4 }}>
-                        <Form onSubmit={this.handleSubmit}>
-                            {this.FormInputData()}
-                             <br />
-                            <div align="center">
-                                <Button color="primary" type="submit" >Submit</Button>
-                            </div>
-                            <br />
-                        </Form> 
-                   </Col>
-                </Row>
+                    <Row>
+                        <Col md={{size: 4, offset: 4}}>
+                            <Form onSubmit={this.handleSubmit}>
+                                {this.FormInputData()}
+                                <br/>
+                                <div align="center">
+                                    <Button color="primary" type="submit">Submit</Button>
+                                </div>
+                                <br/>
+                            </Form>
+                        </Col>
+                    </Row>
                 </Container>
             </div>
         );
     }
 }
+
 export default InquiryPositionDetailComponent;

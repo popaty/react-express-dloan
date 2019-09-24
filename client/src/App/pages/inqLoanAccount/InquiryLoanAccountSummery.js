@@ -7,14 +7,14 @@ class InquiryLoanAccountSummery extends Component {
         super(props);
         this.state = {
         };
-        InquiryLoanAccountSummery.opentInstallment = InquiryLoanAccountSummery.opentInstallment.bind(this);
+        InquiryLoanAccountSummery.openInstallment = InquiryLoanAccountSummery.openInstallment.bind(this);
     };
 
     static getSessionStorage() {
         return JSON.parse(sessionStorage.getItem("response_inqLoanAccount"));
     };
 
-    static opentInstallment() {
+    static openInstallment() {
         const data = InquiryLoanAccountSummery.getSessionStorage();
         const body = {
             interest_rate: data.interest.interest_rate,
@@ -70,7 +70,7 @@ class InquiryLoanAccountSummery extends Component {
                     {this.dynamicResponse(data)}
                 </Col>
                 <br />
-                <Button color="success" onClick={InquiryLoanAccountSummery.opentInstallment}>Calculate Installment Amount</Button>
+                <Button color="success" onClick={InquiryLoanAccountSummery.openInstallment}>Calculate Installment Amount</Button>
                 <br />
                 <br />
                 <br />

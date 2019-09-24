@@ -71,7 +71,7 @@ app.post("/api/calculateInstallment", (req, res) => {
         });
 });
 
-//[POST] Transaction Disbusement
+//[POST] Transaction Disbursement
 app.post("/api/disbursement", (req, res) => {
     console.log("Disbursement");
     let header = headers.get_headers();
