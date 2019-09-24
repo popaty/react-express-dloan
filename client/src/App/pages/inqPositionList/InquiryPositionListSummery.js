@@ -61,13 +61,13 @@ class inquiryPositionSummery extends Component {
     };
 
     render() {
-        const data = JSON.parse(sessionStorage.getItem("response_inqPositionDetail"));
+        const data = JSON.parse(sessionStorage.getItem("response_inqPositionList"));
         //console.log(data);
         return (
             <div className="App">
                 <DynamicHeader />
                 <Form>
-                    <h2>Form Data Inquiry Position Detail</h2>
+                    <h2>Form Data Inquiry Position List</h2>
                     <br />
                     <Col md={{ size: 10, offset: 1 }} >
                         <div class="table-responsive">

@@ -1,0 +1,20 @@
+{
+    "model" : [
+        {
+            "label" : "Account Number",
+            "type" : "text",
+            "name" : "account_number",
+            "placeholder" : "Enter account number",
+            "value" : "account_number",
+            "root" : null
+        },
+        {
+            "label" : "Account Sequence",
+            "type" : "number",
+            "name" : "account_sequence",
+            "placeholder" : "Enter account sequence",
+            "value" : "account_sequence",
+            "root" : null
+        }
+    ]
+}

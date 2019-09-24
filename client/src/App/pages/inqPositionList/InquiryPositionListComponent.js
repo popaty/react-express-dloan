@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input, Col, Row } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Col, Row ,Container} from 'reactstrap';
 import DynamicHeader from '../Header.js';
 
 class inquiryPositionComponent extends Component {
@@ -24,15 +24,16 @@ class inquiryPositionComponent extends Component {
 
     Clicked(event) {
         event.preventDefault();
-        fetch('/api/inquiryPositionDetail/' + this.state.account)
+        fetch('/api/inquiryPositionList/' + this.state.account)
             .then(response => response.json())
             .then(data => {
                 if (data) {
-                    //wait
-                    sessionStorage.setItem("response_inqPositionDetail", JSON.stringify(data.rs_body));
-                    window.open('/ipdSummary', '_self');
+                    sessionStorage.setItem("response_inqPositionList", JSON.stringify(data.rs_body));
+                    window.open('/iplSummary', '_self');
                 } else {
-                    alert("Data not found.");
+                    alert("error code : " + data.errors.map(error => error.error_code) + "\n"
+                        + "error desc : " + data.errors.map(error => error.error_desc) + "\n"
+                        + "error type : " + data.errors.map(error => error.error_type));
                 }
             }).catch(error => console.log(error))
     };
@@ -41,8 +42,9 @@ class inquiryPositionComponent extends Component {
         return (
             <div className="App">
                 <DynamicHeader />
-                <h2>Form Input Inquiry Position Detail</h2>
+                <h2>Form Input Inquiry Position List</h2>
                 <br />
+                <Container>
                 <Row>
                     <Col md={{ size: 5, offset: 4 }}>
                         <Form inline onSubmit={this.Clicked}>
@@ -54,6 +56,7 @@ class inquiryPositionComponent extends Component {
                         </Form>
                     </Col>
                 </Row>
+                </Container>
             </div>
         );
     }

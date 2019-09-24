@@ -59,6 +59,9 @@ const header = (props) => {
                   Position
                 </DropdownToggle>
                     <DropdownMenu right>
+                        <DropdownItem href="/iplComponent">
+                            Inquiry Position List
+                        </DropdownItem>
                         <DropdownItem href="/ipdComponent">
                             Inquiry Position Detail
                         </DropdownItem>

@@ -131,15 +131,15 @@ app.post("/api/inqInterestAccruedDetail", (req, res) => {
         });
 });
 
-//[GET] Inquiry Position Detail
-app.get("/api/inquiryPositionDetail/:accountNo", (req, res) => {
-    console.log("Inquiry Position Detail");
+//[GET] Inquiry Position List
+app.get("/api/inquiryPositionList/:accountNo", (req, res) => {
+    console.log("Inquiry Position List");
     let header = headers.get_headers();
-    let url = properties.get("inquiryPositionDetail.url") + req.params.accountNo;
+    let url = properties.get("inquiryPositionList.url") + req.params.accountNo;
     api_helper.API_call_get(url, header)
         .then(response => {
             res.json(response);
-            console.log("Finished Inquiry Position Detail");
+            console.log("Finished Inquiry Position List");
         })
         .catch(error => {
             res.send(error)
@@ -155,6 +155,21 @@ app.post("/api/repayment", (req, res) => {
         .then(response => {
             res.json(response);
             console.log("Finished Repayment");
+        })
+        .catch(error => {
+            res.send(error)
+        });
+});
+
+//[POST] Inquiry Position Detail
+app.post("/api/inquiryPositionDetail/", (req, res) => {
+    console.log("Inquiry Position Detail");
+    let header = headers.get_headers();
+    let url = properties.get("inquiryPositionDetail.url");
+    api_helper_post.API_call_post(url, header, req.body)
+        .then(response => {
+            res.json(response);
+            console.log("Finished Inquiry Position Detail");
         })
         .catch(error => {
             res.send(error)
