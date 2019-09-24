@@ -72,7 +72,7 @@ class RepaymentComponent extends Component {
             .then(data => {
 
                 if (data.rs_body) {
-                    sessionStorage.setItem("data_repayment", JSON.stringify(data));
+                    sessionStorage.setItem("response_repayment", JSON.stringify(data));
                     window.open('/rpmSummary', '_self');
                     
                 } else {

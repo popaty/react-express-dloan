@@ -69,7 +69,7 @@ class inquiryPositionSummery extends Component {
     };
 
     render() {
-        const data = JSON.parse(sessionStorage.getItem("data_inqInterastaAccrued"));
+        const data = JSON.parse(sessionStorage.getItem("response_inqInterastaAccrued"));
         // console.log(data);
         return (
             <div className="App" >
@@ -77,7 +77,7 @@ class inquiryPositionSummery extends Component {
                 <Form>
                     <h2>Form Data Inquiry Interest Accrued</h2>
                     <br />
-                    <Col md={{ size: 8, offset: 2 }} >
+                    <Col md={{ size: 10, offset: 1 }} >
                         <div class="table-responsive">
                             <Table striped bordered>
                                 <thead>

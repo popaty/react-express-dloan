@@ -71,7 +71,7 @@ class inquiryInterestDetailComponent extends Component {
             .then(response => response.json())
             .then(data => {
                 if (data.rs_body) {
-                    sessionStorage.setItem("data_inqInterestAccruedDetail", JSON.stringify(data));
+                    sessionStorage.setItem("response_inqInterestAccruedDetail", JSON.stringify(data));
                     window.open('/iiadSummary', '_self');
                 } else {
                     alert("error code : " + data.errors.map(error => error.error_code) + "\n"

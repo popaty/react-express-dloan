@@ -21,7 +21,7 @@ class inquiryInterestComponent extends Component {
                 if (data.rs_body) {
                     // value = {...data.rs_body.position_detail.map(item => item)};
                     //console.log(value);
-                    sessionStorage.setItem("data_inqInterastaAccrued", JSON.stringify(data.rs_body.position_detail));
+                    sessionStorage.setItem("response_inqInterastaAccrued", JSON.stringify(data.rs_body.position_detail));
                     window.open('/iiaSummary', '_self');
                 } else {
                     alert("error code : " + data.errors.map(error => error.error_code) + "\n"
@@ -67,7 +67,7 @@ class inquiryInterestComponent extends Component {
         //         ]
         //     }
         // }
-        // sessionStorage.setItem("data_inqInterastaAccrued", JSON.stringify(data.rs_body.position_detail));
+        // sessionStorage.setItem("response_inqInterastaAccrued", JSON.stringify(data.rs_body.position_detail));
         // window.open('/iiaSummary', '_self');
     };
 

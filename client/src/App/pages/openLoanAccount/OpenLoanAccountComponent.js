@@ -150,7 +150,7 @@ class OpenLoanAccountComponent extends Component {
             .then(response => response.json())
             .then(data => {
                 if (data.rs_body) {
-                    sessionStorage.setItem("data_openLoanAccount", JSON.stringify(data));
+                    sessionStorage.setItem("response_openLoanAccount", JSON.stringify(data));
                     window.open('/olaSummary', '_self');
                 } else {
                     alert("error code : " + data.errors.map(error => error.error_code) + "\n"
@@ -166,8 +166,8 @@ class OpenLoanAccountComponent extends Component {
         //   }
         // }
         // if (data.rs_body) {
-        //   sessionStorage.setItem("data_openLoanAccount", JSON.stringify(data));
-        //   window.open('/olaSummary', '_self');
+        //     sessionStorage.setItem("response_openLoanAccount", JSON.stringify(data));
+        //     window.open('/olaSummary', '_self');
         // } else {
         //   alert("error code : " + data.errors.map(error => error.error_code) + "\n"
         //     + "error desc : " + data.errors.map(error => error.error_desc));

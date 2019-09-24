@@ -11,7 +11,7 @@ class InquiryLoanAccountSummery extends Component {
     };
 
     static getSessionStorage() {
-        return JSON.parse(sessionStorage.getItem("data_inqLoanAccount"));
+        return JSON.parse(sessionStorage.getItem("response_inqLoanAccount"));
     };
 
     static opentInstallment() {
@@ -21,7 +21,7 @@ class InquiryLoanAccountSummery extends Component {
             payment_frequency: data.payment.payment_frequency,
             payment_unit: data.payment.payment_unit
         };
-        sessionStorage.setItem("inputData_installment", JSON.stringify(body));
+        sessionStorage.setItem("request_installment", JSON.stringify(body));
         window.open('/ciaComponent', '_self');
     };
 

@@ -6,16 +6,15 @@ class inquiryPositionComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            account : ""
+            account: ""
         };
         this.handleChange = this.handleChange.bind(this);
         this.Clicked = this.Clicked.bind(this);
     }
 
     componentDidMount() {
-        if(JSON.parse(sessionStorage.getItem("data_inqLoanAccount"))){
-            const datainqLoanAccount = JSON.parse(sessionStorage.getItem("data_inqLoanAccount"));
-            this.setState({account : datainqLoanAccount.account_number});
+        if (JSON.parse(sessionStorage.getItem("account_number"))) {
+            this.setState({ account: JSON.parse(sessionStorage.getItem("account_number")) });
         }
     }
 
@@ -30,13 +29,13 @@ class inquiryPositionComponent extends Component {
             .then(data => {
                 if (data) {
                     //wait
-                    sessionStorage.setItem("data_inqPositionDetail", JSON.stringify(data));
+                    sessionStorage.setItem("response_inqPositionDetail", JSON.stringify(data.rs_body));
                     window.open('/ipdSummary', '_self');
                 } else {
                     alert("Data not found.");
                 }
             }).catch(error => console.log(error))
-    }
+    };
 
     render() {
         return (
@@ -49,7 +48,7 @@ class inquiryPositionComponent extends Component {
                         <Form inline onSubmit={this.Clicked}>
                             <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                                 <Label>Account Number : &nbsp;</Label>
-                                <Input type="text" value={this.state.account}  placeholder="Enter account number" onChange={this.handleChange} />
+                                <Input type="text" value={this.state.account} placeholder="Enter account number" onChange={this.handleChange} />
                             </FormGroup>
                             <Button color="primary" type="submit">Submit</Button>
                         </Form>

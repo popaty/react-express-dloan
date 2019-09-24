@@ -39,7 +39,7 @@ class RepaymentSummery extends Component {
     };
 
     render() {
-        const data = JSON.parse(sessionStorage.getItem("data_repayment"));
+        const data = JSON.parse(sessionStorage.getItem("response_repayment"));
         return (
             <div className="App">
                 <DynamicHeader />

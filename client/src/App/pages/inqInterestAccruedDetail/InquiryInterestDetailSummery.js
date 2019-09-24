@@ -41,7 +41,7 @@ class inquiryPositionSummery extends Component {
     };
 
     render() {
-        const data = JSON.parse(sessionStorage.getItem("data_inqInterestAccruedDetail"));
+        const data = JSON.parse(sessionStorage.getItem("response_inqInterestAccruedDetail"));
         //var data2 = JSON.parse(sessionStorage.getItem("data_inqPositionDetail"));
         return (
             <div className="App">

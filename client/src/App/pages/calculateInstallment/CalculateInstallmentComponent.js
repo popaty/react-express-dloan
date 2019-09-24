@@ -23,8 +23,8 @@ class installmentComponent extends Component {
     };
 
     componentDidMount() {
-        if (JSON.parse(sessionStorage.getItem("inputData_installment"))) {
-            const data = JSON.parse(sessionStorage.getItem("inputData_installment"));
+        if (JSON.parse(sessionStorage.getItem("request_installment"))) {
+            const data = JSON.parse(sessionStorage.getItem("request_installment"));
             const body = {
                 disbursement_amount: 0,
                 number_of_payment: 0,
@@ -34,7 +34,6 @@ class installmentComponent extends Component {
 
             };
             this.setState({ rq_body: body });
-            //console.log(this.state);
         }
     };
 
@@ -96,8 +95,8 @@ class installmentComponent extends Component {
             .then(data => {
 
                 if (data.rs_body) {
-                    sessionStorage.setItem("data_installment", JSON.stringify(data));
-                    sessionStorage.setItem("input_installment", JSON.stringify(inputData));
+                    sessionStorage.setItem("response_installment", JSON.stringify(data));
+                    sessionStorage.setItem("request_disbursement", JSON.stringify(inputData));
                     window.open('/ciaSummary', '_self');
                 } else {
                     alert("error code : " + data.errors.map(error => error.error_code) + "\n"
@@ -114,8 +113,8 @@ class installmentComponent extends Component {
         // };
         // const inputData = {number_of_payment : request.rq_body.number_of_payment, disbursement_amount : request.rq_body.disbursement_amount};
         // if (data.rs_body) {
-        //     sessionStorage.setItem("data_installment", JSON.stringify(data));
-        //     sessionStorage.setItem("input_installment", JSON.stringify(inputData));
+        //     sessionStorage.setItem("response_installment", JSON.stringify(data));
+        //     sessionStorage.setItem("request_disbursement", JSON.stringify(inputData));
         //     window.open('/ciaSummary', '_self');
         // }else{
         //     alert("error code : "+data.errors.map(error => error.error_code)+"\n"

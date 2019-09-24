@@ -30,19 +30,19 @@ class disbursementComponent extends Component {
     };
 
     componentDidMount() {
-        if (JSON.parse(sessionStorage.getItem("data_installment")) && JSON.parse(sessionStorage.getItem("data_inqLoanAccount"))
-            && JSON.parse(sessionStorage.getItem("input_installment"))) {
-            const dataInqLoanAccount = JSON.parse(sessionStorage.getItem("data_inqLoanAccount"));
-            const inputInstallment = JSON.parse(sessionStorage.getItem("input_installment"));
-            const dataInstallment = JSON.parse(sessionStorage.getItem("data_installment"));
+        if (JSON.parse(sessionStorage.getItem("response_installment")) && JSON.parse(sessionStorage.getItem("account_number"))
+            && JSON.parse(sessionStorage.getItem("request_disbursement"))) {
+            const account = JSON.parse(sessionStorage.getItem("account_number"));
+            const inputDisbursement  = JSON.parse(sessionStorage.getItem("request_disbursement"));
+            const dataInstallment = JSON.parse(sessionStorage.getItem("response_installment"));
             const body = {
-                account_number: dataInqLoanAccount.account_number,
-                disbursement_amount: inputInstallment.disbursement_amount,
+                account_number: account,
+                disbursement_amount: inputDisbursement.disbursement_amount,
                 effective_date: "",
                 channel_post_date: "",
                 currency_code: "THB",
                 service_branch: 0,
-                number_of_payment: inputInstallment.number_of_payment,
+                number_of_payment: inputDisbursement.number_of_payment,
                 installment_amount: dataInstallment.rs_body.installment_amount,
                 other_properties: {
                     interest_index: "",
@@ -114,6 +114,7 @@ class disbursementComponent extends Component {
             .then(data => {
 
                 if (data.rs_body) {
+                    sessionStorage.setItem("response_disbursement",JSON.stringify(data));
                     window.open('/dbmSummary', '_self');
                 } else {
                     alert("error code : " + data.errors.map(error => error.error_code) + "\n"

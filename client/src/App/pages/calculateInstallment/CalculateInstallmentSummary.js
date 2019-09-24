@@ -43,7 +43,7 @@ class calculateInstallmentSummary extends Component {
     };
 
     render() {
-        const data = JSON.parse(sessionStorage.getItem("data_installment"));
+        const data = JSON.parse(sessionStorage.getItem("response_installment"));
         //console.log(data);
         return (
             <div className="App">

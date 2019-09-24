@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Col, Table, Form } from 'reactstrap';
+import { Col, Table, Form } from 'reactstrap';
 import DynamicHeader from '../Header.js';
 
 class inquiryPositionSummery extends Component {
@@ -7,73 +7,6 @@ class inquiryPositionSummery extends Component {
         super(props);
         this.state = {};
     }
-
-    CallInquiryLoanAccount() {
-        let data = JSON.parse(sessionStorage.getItem("data_inqLoanAccount"));
-        //console.log(data.account_number);
-        fetch('/api/inqLoanAccount/' + data.account_number, {}).then(response => response.json())
-            .then(data => {
-                // console.log(data);
-                if (data.rs_body) {
-                    sessionStorage.setItem("data_inqLoanAccount", JSON.stringify(data.rs_body));
-                    window.open('/ilaSummary', '_self');
-                } else {
-                    alert("error code : " + data.errors.map(error => error.error_code) + "\n"
-                        + "error desc : " + data.errors.map(error => error.error_desc));
-                }
-
-            }).catch(error => console.log(error))
-
-        //mockdata
-        // let data = {
-        //     "rs_body": {
-        //         "account_number": "111111111103",
-        //         "product_name": "7200120090001",
-        //         "customer_number": "12111111111",
-        //         "customer_type": "0702",
-        //         "account_name": "นางสาวกานดา มาดีไกล",
-        //         "currency": "THB",
-        //         "account_branch": 1,
-        //         "response_unit": 2,
-        //         "credit_term_number": 12,
-        //         "credit_term_unit": "M",
-        //         "disbursement_account": "20000002010",
-        //         "open_date": "2019-08-23",
-        //         "application_id": "APP0001",
-        //         "closed_date": "",
-        //         "limit": {
-        //             "credit_limit": 100000,
-        //             "balance": 100000,
-        //             "available_balance": 100000,
-        //             "maturity_date": "2020-08-19"
-        //         },
-        //         "payment": {
-        //             "payment_frequency": 1,
-        //             "payment_unit": "M",
-        //             "payment_date": 31,
-        //             "payment_calculation_method": "installment",
-        //             "billing_offset_day": 1,
-        //             "deduction_account": "20000002010"
-        //         },
-        //         "interest": {
-        //             "interest_index": "MRR",
-        //             "interest_spread": 12,
-        //             "interest_rate": 19.12,
-        //             "penalty_index": "pen",
-        //             "penalty_rate": 28,
-        //             "grace_day": 5,
-        //             "is_catch_up": true
-        //         }
-        //     }
-        // };
-        // if (data.rs_body) {
-        //     sessionStorage.setItem("data_inqLoanAccount", JSON.stringify(data.rs_body));
-        //     window.open('/ilaSummary', '_self');
-        // } else {
-        //     alert("error code : " + data.errors.map(error => error.error_code) + "\n"
-        //         + "error desc : " + data.errors.map(error => error.error_desc));
-        // }
-    };
 
     getHeaderTable = (data) => {
         let header = [];
@@ -128,7 +61,7 @@ class inquiryPositionSummery extends Component {
     };
 
     render() {
-        const data = JSON.parse(sessionStorage.getItem("data_inqPositionDetail"));
+        const data = JSON.parse(sessionStorage.getItem("response_inqPositionDetail"));
         //console.log(data);
         return (
             <div className="App">
@@ -136,7 +69,7 @@ class inquiryPositionSummery extends Component {
                 <Form>
                     <h2>Form Data Inquiry Position Detail</h2>
                     <br />
-                    <Col md={{ size: 8, offset: 2 }} >
+                    <Col md={{ size: 10, offset: 1 }} >
                         <div class="table-responsive">
                             <Table striped bordered>
                                 <thead>
@@ -151,7 +84,6 @@ class inquiryPositionSummery extends Component {
                         </div>
                     </Col>
                     <br />
-                    <Button color="success" onClick={this.CallInquiryLoanAccount}>Inquiry Account Details </Button>
                 </Form>
             </div>
         );
