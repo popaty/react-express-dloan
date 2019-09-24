@@ -46,7 +46,6 @@ class inquiryPositionPRESTComponent extends Component {
         return (
             <div className="App">
                 <DynamicHeader />
-                <br />
                 <h2>Form Input Inquiry Position Detail pREST</h2>
                 <br />
                 <Col md={{ size: 6, offset: 4 }}>

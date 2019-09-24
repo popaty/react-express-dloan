@@ -150,7 +150,6 @@ class installmentComponent extends Component {
         return (
             <div>
                 <DynamicHeader />
-                <br />
                 <Container>
                     <h2>Form Input Calculate Installment Amount</h2>
                     <br />

@@ -225,7 +225,7 @@ class OpenLoanAccountComponent extends Component {
             <div>
                 <DynamicHeader />
                 <Container>
-                    <br />
+                   
                     <h2>Form Input Open Account</h2>
                     <br />
                     <UncontrolledDropdown align="center">

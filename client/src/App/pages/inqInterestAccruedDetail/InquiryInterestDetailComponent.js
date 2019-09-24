@@ -107,7 +107,6 @@ class inquiryInterestDetailComponent extends Component {
         return (
             <div>
                 <DynamicHeader />
-                <br />
                 <h2>Form Input Inquiry Interest Accrued Details</h2>
                 <br />
                 <Col md={{ size: 4, offset: 4 }}>

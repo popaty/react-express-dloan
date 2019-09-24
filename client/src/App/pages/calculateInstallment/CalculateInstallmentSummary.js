@@ -49,7 +49,6 @@ class calculateInstallmentSummary extends Component {
             <div className="App">
                 <DynamicHeader />
                 <Form>
-                    <br />
                     <h2>Form Data Calculate Installment Amount</h2>
                     <br />
                     <Col md={{ size: 6, offset: 3 }} >

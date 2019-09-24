@@ -5,7 +5,7 @@ import {Navbar,NavbarBrand,Nav,UncontrolledDropdown,
 const header = (props) => {
     return (
 
-        <Navbar color="light" light expand="md">
+        <Navbar color="dark" dark expand="md">
         {/* <img src={logo} alt="TN" width="100" height="100" /> */}
          <NavbarBrand href="/" >TN</NavbarBrand>
            <Nav className="ml-auto" navbar>

@@ -64,7 +64,6 @@ class InquiryLoanAccountSummery extends Component {
         return (
             <div className="App">
                 <DynamicHeader />
-                <br />
                 <h2>Form Data Inquiry Account</h2>
                 <br />
                 <Col md={{ size: 6, offset: 3 }} >

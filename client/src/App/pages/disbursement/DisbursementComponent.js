@@ -160,7 +160,6 @@ class disbursementComponent extends Component {
         return (
             <div>
                 <DynamicHeader />
-                <br />
                 <h2>Form Input Disbursement</h2>
                 <br />
                 <Container>

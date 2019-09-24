@@ -109,7 +109,6 @@ class OpenLoanAccountSummary extends Component {
             <div className="App">
                 <DynamicHeader />
                 <Form>
-                    <br />
                     <h2>Form Data Open Account</h2>
                     <br />
                     <Col md={{ size: 6, offset: 3 }} >

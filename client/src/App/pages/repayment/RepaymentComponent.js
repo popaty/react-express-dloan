@@ -109,7 +109,6 @@ class RepaymentComponent extends Component {
         return (
             <div>
                 <DynamicHeader />
-                <br />
                 <h2>Form Input Repayment</h2>
                 <br />
                 <Container>

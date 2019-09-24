@@ -121,8 +121,7 @@ class disbursementSummery extends Component {
         return (
             <div className="App">
                 <DynamicHeader />
-                <br />
-                    <h2>Form Data Disbursement</h2>
+                <h2>Form Data Disbursement</h2>
                 <br />
                 <Col md={{ size: 4, offset: 4 }}>
                     {/* <Alert color="success"><h3>Success!!</h3></Alert> */}

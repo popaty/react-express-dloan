@@ -42,7 +42,6 @@ class inquiryPositionComponent extends Component {
         return (
             <div className="App">
                 <DynamicHeader />
-                <br />
                 <h2>Form Input Inquiry Position Detail</h2>
                 <br />
                 <Row>

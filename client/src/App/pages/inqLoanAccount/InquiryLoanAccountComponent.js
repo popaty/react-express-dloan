@@ -41,7 +41,6 @@ class InquiryLoanAccountComponent extends Component {
          return(
             <div className = "App">
               <DynamicHeader />
-              <br />
                 <h2>Form Input Inquiry Account</h2>
                   <br />
                     <Col md={{ size: 6, offset: 4 }}>

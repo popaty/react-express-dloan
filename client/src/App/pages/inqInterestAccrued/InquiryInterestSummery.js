@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Table } from 'reactstrap';
+import { Col, Table,Form } from 'reactstrap';
 import DynamicHeader from '../Header.js';
 
 class inquiryPositionSummery extends Component {
@@ -74,8 +74,7 @@ class inquiryPositionSummery extends Component {
         return (
             <div className="App" >
                 <DynamicHeader />
-                <form>
-                    <br />
+                <Form>
                     <h2>Form Data Inquiry Interest Accrued</h2>
                     <br />
                     <Col md={{ size: 8, offset: 2 }} >
@@ -93,7 +92,7 @@ class inquiryPositionSummery extends Component {
                         </div>
                     </Col>
                     <br />
-                </form>
+                </Form>
             </div>
         );
     }
