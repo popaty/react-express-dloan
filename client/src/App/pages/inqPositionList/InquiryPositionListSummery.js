@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Col, Table, Form } from 'reactstrap';
+import React, {Component} from 'react';
+import {Col, Form, Table} from 'reactstrap';
 import DynamicHeader from '../Header.js';
 
 class inquiryPositionSummery extends Component {
@@ -65,28 +65,29 @@ class inquiryPositionSummery extends Component {
         //console.log(data);
         return (
             <div className="App">
-                <DynamicHeader />
+                <DynamicHeader/>
                 <Form>
                     <h2>Form Data Inquiry Position List</h2>
-                    <br />
-                    <Col md={{ size: 10, offset: 1 }} >
+                    <br/>
+                    <Col md={{size: 10, offset: 1}}>
                         <div class="table-responsive">
                             <Table striped bordered>
                                 <thead>
-                                    <tr>
-                                        {this.getHeaderTable(data)}
-                                    </tr>
+                                <tr>
+                                    {this.getHeaderTable(data)}
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    {this.getBodyTable(data)}
+                                {this.getBodyTable(data)}
                                 </tbody>
                             </Table>
                         </div>
                     </Col>
-                    <br />
+                    <br/>
                 </Form>
             </div>
         );
     }
 }
+
 export default inquiryPositionSummery;

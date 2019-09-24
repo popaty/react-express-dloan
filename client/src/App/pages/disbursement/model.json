@@ -1,101 +1,92 @@
 {
-    "model" : [
-        {
-            "label" : "Account number",
-            "type" : "text",
-            "name" : "account_number",
-            "placeholder" : "Enter account number",
-            "value" : "account_number",
-            "root" : null
-        },
-        {
-            "label" : "Disbursement amount",
-            "type" : "number",
-            "name" : "disbursement_amount",
-            "placeholder" : "Enter disbursement amount",
-            "value" : "disbursement_amount",
-            "root" : null
-        },
-        {
-            "label" : "Effective date",
-            "type" : "date",
-            "name" : "effective_date",
-            "placeholder" : "Enter effective date",
-            "value" : "effective_date",
-            "root" : null
-
-        },
-        {
-            "label" : "Channel post date",
-            "type" : "date",
-            "name" : "channel_post_date",
-            "placeholder" : "Enter channel post date",
-            "value" : "channel_post_date",
-            "root" : null
-
-        },
-        {
-            "label" : "Currency code",
-            "type" : "text",
-            "name" : "currency_code",
-            "placeholder" : "Enter currency code",
-            "value" : "currency_code",
-            "root" : null
-
-        },
-        {
-            "label" : "Service branch",
-            "type" : "number",
-            "name" : "service_branch",
-            "placeholder" : "Enter service branch",
-            "value" : "service_branch",
-            "root" : null
-
-        },
-        {
-            "label" : "Number of payment",
-            "type" : "number",
-            "name" : "number_of_payment",
-            "placeholder" : "Enter number of payment",
-            "value" : "number_of_payment",
-            "root" : null
-
-        },
-        {
-            "label" : "Installment amount",
-            "type" : "number",
-            "name" : "installment_amount",
-            "placeholder" : "Enter installment amount",
-            "value" : "installment_amount",
-            "root" : null
-
-        },
-        {
-            "label" : "Interest index",
-            "type" : "text",
-            "name" : "interest_index",
-            "placeholder" : "Enter interest index",
-            "value" : "interest_index",
-            "root" : "other_properties"
-
-        },
-        {
-            "label" : "Interest spread",
-            "type" : "text",
-            "name" : "interest_spread",
-            "placeholder" : "Enter interest spread",
-            "value" : "interest_spread",
-            "root" : "other_properties"
-
-        },
-        {
-            "label" : "First payment date",
-            "type" : "text",
-            "name" : "first_payment_date",
-            "placeholder" : "Enter first payment date",
-            "value" : "first_payment_date",
-            "root" : "other_properties"
-
-        }
-    ]
+  "model": [
+    {
+      "label": "Account number",
+      "type": "text",
+      "name": "account_number",
+      "placeholder": "Enter account number",
+      "value": "account_number",
+      "root": null
+    },
+    {
+      "label": "Disbursement amount",
+      "type": "number",
+      "name": "disbursement_amount",
+      "placeholder": "Enter disbursement amount",
+      "value": "disbursement_amount",
+      "root": null
+    },
+    {
+      "label": "Effective date",
+      "type": "date",
+      "name": "effective_date",
+      "placeholder": "Enter effective date",
+      "value": "effective_date",
+      "root": null
+    },
+    {
+      "label": "Channel post date",
+      "type": "date",
+      "name": "channel_post_date",
+      "placeholder": "Enter channel post date",
+      "value": "channel_post_date",
+      "root": null
+    },
+    {
+      "label": "Currency code",
+      "type": "text",
+      "name": "currency_code",
+      "placeholder": "Enter currency code",
+      "value": "currency_code",
+      "root": null
+    },
+    {
+      "label": "Service branch",
+      "type": "number",
+      "name": "service_branch",
+      "placeholder": "Enter service branch",
+      "value": "service_branch",
+      "root": null
+    },
+    {
+      "label": "Number of payment",
+      "type": "number",
+      "name": "number_of_payment",
+      "placeholder": "Enter number of payment",
+      "value": "number_of_payment",
+      "root": null
+    },
+    {
+      "label": "Installment amount",
+      "type": "number",
+      "name": "installment_amount",
+      "placeholder": "Enter installment amount",
+      "value": "installment_amount",
+      "root": null
+    },
+    {
+      "label": "Interest index",
+      "type": "text",
+      "name": "interest_index",
+      "placeholder": "Enter interest index",
+      "value": "interest_index",
+      "root": "other_properties"
+    },
+    {
+      "label": "Interest spread",
+      "type": "text",
+      "name": "interest_spread",
+      "placeholder": "Enter interest spread",
+      "value": "interest_spread",
+      "root": "other_properties"
+    },
+    {
+      "label": "First payment date",
+      "type": "text",
+      "name": "first_payment_date",
+      "placeholder": "Enter first payment date",
+      "value": "first_payment_date",
+      "root": "other_properties"
+    }
+  ]
 }

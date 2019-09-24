@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Button, Col, Form, FormGroup, Input, Label, Row, Container } from 'reactstrap';
+import React, {Component} from 'react';
+import {Button, Col, Container, Form, FormGroup, Input, Label, Row} from 'reactstrap';
 import DynamicHeader from '../Header.js';
 import inputModel from './model.json';
 //import SpinnerLoader from '../loading.js';
@@ -33,16 +33,16 @@ class installmentComponent extends Component {
                 payment_unit: data.payment_unit
 
             };
-            this.setState({ rq_body: body });
+            this.setState({rq_body: body});
         }
     };
 
     handleChange(event) {
         //this.setState({[event.target.name]:event.target.value});
-        const { rq_body } = { ...this.state };
+        const {rq_body} = {...this.state};
         const currentState = rq_body;
         currentState[event.target.name] = event.target.type === "number" ? Number(event.target.value) : event.target.value;
-        this.setState({ rq_body: currentState });
+        this.setState({rq_body: currentState});
     };
 
     handleSubmit(event) {
@@ -130,7 +130,7 @@ class installmentComponent extends Component {
                     <FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                            value={this.state.rq_body[item.value]} onChange={this.handleChange} />
+                               value={this.state.rq_body[item.value]} onChange={this.handleChange}/>
                     </FormGroup>
                 );
             } else {
@@ -138,7 +138,7 @@ class installmentComponent extends Component {
                     <FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                            value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
+                               value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange}/>
                     </FormGroup>
                 );
             }
@@ -148,18 +148,18 @@ class installmentComponent extends Component {
     render() {
         return (
             <div>
-                <DynamicHeader />
+                <DynamicHeader/>
                 <Container>
                     <h2>Form Input Calculate Installment Amount</h2>
-                    <br />
+                    <br/>
                     <Row>
-                        <Col md={{ size: 4, offset: 4 }}>
+                        <Col md={{size: 4, offset: 4}}>
                             <Form onSubmit={this.handleSubmit}>
                                 {this.FormInputData()}
-                                <div align="center">
-                                    <Button color="primary" type="submit" >Submit</Button>
+                                <div class="text-center">
+                                    <Button color="primary" type="submit">Submit</Button>
                                 </div>
-                                <br />
+                                <br/>
                             </Form>
                         </Col>
                     </Row>
@@ -168,4 +168,5 @@ class installmentComponent extends Component {
         );
     }
 }
+
 export default installmentComponent;

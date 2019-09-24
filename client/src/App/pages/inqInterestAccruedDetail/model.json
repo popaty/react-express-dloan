@@ -1,29 +1,28 @@
 {
-    "model" : [
-        {
-            "label" : "Account number",
-            "type" : "text",
-            "name" : "account_number",
-            "placeholder" : "Enter account number",
-            "value" : "account_number",
-            "root" : null
-        },
-        {
-            "label" : "Account Sequence",
-            "type" : "number",
-            "name" : "account_sequence",
-            "placeholder" : "Enter account sequence",
-            "value" : "account_sequence",
-            "root" : null
-        },
-        {
-            "label" : "Date",
-            "type" : "date",
-            "name" : "date",
-            "placeholder" : "Enter first date",
-            "value" : "date",
-            "root" : null
-
-        }
-    ]
+  "model": [
+    {
+      "label": "Account number",
+      "type": "text",
+      "name": "account_number",
+      "placeholder": "Enter account number",
+      "value": "account_number",
+      "root": null
+    },
+    {
+      "label": "Account Sequence",
+      "type": "number",
+      "name": "account_sequence",
+      "placeholder": "Enter account sequence",
+      "value": "account_sequence",
+      "root": null
+    },
+    {
+      "label": "Date",
+      "type": "date",
+      "name": "date",
+      "placeholder": "Enter first date",
+      "value": "date",
+      "root": null
+    }
+  ]
 }

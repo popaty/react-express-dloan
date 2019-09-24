@@ -1,14 +1,12 @@
-import React, { Component } from 'react';
-import { Col, Table,Form } from 'reactstrap';
+import React, {Component} from 'react';
+import {Col, Form, Table} from 'reactstrap';
 import DynamicHeader from '../Header.js';
 
 class inquiryPositionSummery extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-
-        };
+        this.state = {};
     };
 
     getHeaderTable = (data) => {
@@ -72,26 +70,26 @@ class inquiryPositionSummery extends Component {
         const data = JSON.parse(sessionStorage.getItem("response_inqInterastaAccrued"));
         // console.log(data);
         return (
-            <div className="App" >
-                <DynamicHeader />
+            <div className="App">
+                <DynamicHeader/>
                 <Form>
                     <h2>Form Data Inquiry Interest Accrued</h2>
-                    <br />
-                    <Col md={{ size: 10, offset: 1 }} >
+                    <br/>
+                    <Col md={{size: 10, offset: 1}}>
                         <div class="table-responsive">
                             <Table striped bordered>
                                 <thead>
-                                    <tr>
-                                        {this.getHeaderTable(data)}
-                                    </tr>
+                                <tr>
+                                    {this.getHeaderTable(data)}
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    {this.getBodyTable(data)}
+                                {this.getBodyTable(data)}
                                 </tbody>
                             </Table>
                         </div>
                     </Col>
-                    <br />
+                    <br/>
                 </Form>
             </div>
         );

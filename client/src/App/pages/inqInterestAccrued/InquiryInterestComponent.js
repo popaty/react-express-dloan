@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input, Col } from 'reactstrap';
+import React, {Component} from 'react';
+import {Button, Col, Form, FormGroup, Input, Label} from 'reactstrap';
 import DynamicHeader from '../Header.js';
 
 class inquiryInterestComponent extends Component {
@@ -15,8 +15,7 @@ class inquiryInterestComponent extends Component {
 
     Clicked(event) {
         event.preventDefault();
-        fetch('/api/inqInterestAccrued/' + this.state.account, {
-        }).then(response => response.json())
+        fetch('/api/inqInterestAccrued/' + this.state.account, {}).then(response => response.json())
             .then(data => {
                 if (data.rs_body) {
                     // value = {...data.rs_body.position_detail.map(item => item)};
@@ -72,22 +71,22 @@ class inquiryInterestComponent extends Component {
     };
 
     handleChange(event) {
-        this.setState({ account: event.target.value });
+        this.setState({account: event.target.value});
     }
 
     render() {
         return (
             <div className="App">
-                <DynamicHeader />
+                <DynamicHeader/>
                 <h2>Form Input Inquiry Interest Accrued</h2>
-                <br />
-                <Col md={{ size: 6, offset: 4 }}>
-                    <Form inline onSubmit={this.Clicked} >
+                <br/>
+                <Col md={{size: 6, offset: 4}}>
+                    <Form inline onSubmit={this.Clicked}>
                         <FormGroup className="mb-3 mr-sm-3 mb-sm-0">
                             <Label>Account Number : &nbsp;</Label>
-                            <Input type="text" placeholder="Enter account number" onChange={this.handleChange} />
+                            <Input type="text" placeholder="Enter account number" onChange={this.handleChange}/>
                         </FormGroup>
-                        <Button color="primary" type="submit" >Submit</Button>
+                        <Button color="primary" type="submit">Submit</Button>
                     </Form>
                 </Col>
             </div>

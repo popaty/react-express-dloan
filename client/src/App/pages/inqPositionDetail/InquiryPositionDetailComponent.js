@@ -127,7 +127,7 @@ class InquiryPositionDetailComponent extends Component {
                             <Form onSubmit={this.handleSubmit}>
                                 {this.FormInputData()}
                                 <br/>
-                                <div align="center">
+                                <div class="text-center">
                                     <Button color="primary" type="submit">Submit</Button>
                                 </div>
                                 <br/>

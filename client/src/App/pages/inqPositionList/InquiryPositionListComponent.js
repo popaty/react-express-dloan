@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input, Col, Row ,Container} from 'reactstrap';
+import React, {Component} from 'react';
+import {Button, Col, Container, Form, FormGroup, Input, Label, Row} from 'reactstrap';
 import DynamicHeader from '../Header.js';
 
 class inquiryPositionComponent extends Component {
@@ -14,12 +14,12 @@ class inquiryPositionComponent extends Component {
 
     componentDidMount() {
         if (JSON.parse(sessionStorage.getItem("account_number"))) {
-            this.setState({ account: JSON.parse(sessionStorage.getItem("account_number")) });
+            this.setState({account: JSON.parse(sessionStorage.getItem("account_number"))});
         }
     }
 
     handleChange(event) {
-        this.setState({ account: event.target.value });
+        this.setState({account: event.target.value});
     }
 
     Clicked(event) {
@@ -41,24 +41,26 @@ class inquiryPositionComponent extends Component {
     render() {
         return (
             <div className="App">
-                <DynamicHeader />
+                <DynamicHeader/>
                 <h2>Form Input Inquiry Position List</h2>
-                <br />
+                <br/>
                 <Container>
-                <Row>
-                    <Col md={{ size: 5, offset: 4 }}>
-                        <Form inline onSubmit={this.Clicked}>
-                            <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                                <Label>Account Number : &nbsp;</Label>
-                                <Input type="text" value={this.state.account} placeholder="Enter account number" onChange={this.handleChange} />
-                            </FormGroup>
-                            <Button color="primary" type="submit">Submit</Button>
-                        </Form>
-                    </Col>
-                </Row>
+                    <Row>
+                        <Col md={{size: 6, offset: 3}}>
+                            <Form inline onSubmit={this.Clicked}>
+                                <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                                    <Label>Account Number : &nbsp;</Label>
+                                    <Input type="text" value={this.state.account} placeholder="Enter account number"
+                                           onChange={this.handleChange}/>
+                                </FormGroup>
+                                <Button color="primary" type="submit">Submit</Button>
+                            </Form>
+                        </Col>
+                    </Row>
                 </Container>
             </div>
         );
     }
 }
+
 export default inquiryPositionComponent;

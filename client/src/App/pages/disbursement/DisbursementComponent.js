@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Button, Col, Form, FormGroup, Input, Label, Row, Container } from 'reactstrap';
+import React, {Component} from 'react';
+import {Button, Col, Container, Form, FormGroup, Input, Label, Row} from 'reactstrap';
 import DynamicHeader from '../Header.js';
 import inputModel from './model.json';
 
@@ -33,7 +33,7 @@ class disbursementComponent extends Component {
         if (JSON.parse(sessionStorage.getItem("response_installment")) && JSON.parse(sessionStorage.getItem("account_number"))
             && JSON.parse(sessionStorage.getItem("request_disbursement"))) {
             const account = JSON.parse(sessionStorage.getItem("account_number"));
-            const inputDisbursement  = JSON.parse(sessionStorage.getItem("request_disbursement"));
+            const inputDisbursement = JSON.parse(sessionStorage.getItem("request_disbursement"));
             const dataInstallment = JSON.parse(sessionStorage.getItem("response_installment"));
             const body = {
                 account_number: account,
@@ -50,14 +50,14 @@ class disbursementComponent extends Component {
                     first_payment_date: ""
                 }
             };
-            this.setState({ rq_body: body });
+            this.setState({rq_body: body});
             //console.log(this.state);
         }
     };
 
     handleChange(event) {
         //this.setState({[event.target.name]:event.target.value});
-        const { rq_body } = { ...this.state };
+        const {rq_body} = {...this.state};
         const currentState = rq_body;
         const properties = currentState.other_properties;
         if (event.target.name === "interest_index" || event.target.name === "interest_spread"
@@ -66,7 +66,7 @@ class disbursementComponent extends Component {
         } else {
             currentState[event.target.name] = event.target.type === "number" ? Number(event.target.value) : event.target.value;
         }
-        this.setState({ rq_body: currentState });
+        this.setState({rq_body: currentState});
     };
 
     handleSubmit(event) {
@@ -114,7 +114,7 @@ class disbursementComponent extends Component {
             .then(data => {
 
                 if (data.rs_body) {
-                    sessionStorage.setItem("response_disbursement",JSON.stringify(data));
+                    sessionStorage.setItem("response_disbursement", JSON.stringify(data));
                     window.open('/dbmSummary', '_self');
                 } else {
                     alert("error code : " + data.errors.map(error => error.error_code) + "\n"
@@ -142,7 +142,7 @@ class disbursementComponent extends Component {
                     <FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                            value={this.state.rq_body[item.value]} onChange={this.handleChange} />
+                               value={this.state.rq_body[item.value]} onChange={this.handleChange}/>
                     </FormGroup>
                 );
             } else {
@@ -150,7 +150,7 @@ class disbursementComponent extends Component {
                     <FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                            value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
+                               value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange}/>
                     </FormGroup>
                 );
             }
@@ -160,19 +160,19 @@ class disbursementComponent extends Component {
     render() {
         return (
             <div>
-                <DynamicHeader />
+                <DynamicHeader/>
                 <h2>Form Input Disbursement</h2>
-                <br />
+                <br/>
                 <Container>
                     <Row>
-                        <Col md={{ size: 4, offset: 4 }}>
+                        <Col md={{size: 4, offset: 4}}>
                             <Form onSubmit={this.handleSubmit}>
                                 {this.FormInputData()}
-                                <br />
-                                <div align="center">
-                                    <Button color="primary" type="submit" >Submit</Button>
+                                <br/>
+                                <div class="text-center">
+                                    <Button color="primary" type="submit">Submit</Button>
                                 </div>
-                                <br />
+                                <br/>
                             </Form>
                         </Col>
                     </Row>

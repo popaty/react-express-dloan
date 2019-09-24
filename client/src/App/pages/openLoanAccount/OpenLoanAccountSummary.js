@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Button, Table, Col, Form } from 'reactstrap';
+import React, {Component} from 'react';
+import {Button, Col, Form, Table} from 'reactstrap';
 import DynamicHeader from '../Header.js';
 
 class OpenLoanAccountSummary extends Component {
@@ -10,8 +10,7 @@ class OpenLoanAccountSummary extends Component {
 
     CallInquiryLoanAccount() {
         const data = JSON.parse(sessionStorage.getItem("response_openLoanAccount"));
-        fetch('/api/inqLoanAccount/' + data.rs_body.account_number, {
-        }).then(response => response.json())
+        fetch('/api/inqLoanAccount/' + data.rs_body.account_number, {}).then(response => response.json())
             .then(data => {
                 if (data.rs_body) {
                     sessionStorage.setItem("response_inqLoanAccount", JSON.stringify(data.rs_body));
@@ -86,19 +85,31 @@ class OpenLoanAccountSummary extends Component {
                         if (data[key].hasOwnProperty(subdata)) {
                             if (typeof data[key][subdata] === "boolean") {
                                 let catchup = String(data[key][subdata]);
-                                obj.push(<tr><td>{subdata}</td><td>{catchup}</td></tr>)
+                                obj.push(<tr>
+                                    <td>{subdata}</td>
+                                    <td>{catchup}</td>
+                                </tr>)
                             } else {
-                                obj.push(<tr><td>{subdata}</td><td>{data[key][subdata]}</td></tr>);
+                                obj.push(<tr>
+                                    <td>{subdata}</td>
+                                    <td>{data[key][subdata]}</td>
+                                </tr>);
                             }
                         }
                     }
-                    children.push(<tr><td>{key + " : "}</td><td><Table>{obj}</Table></td></tr>);
+                    children.push(<tr>
+                        <td>{key + " : "}</td>
+                        <td><Table>{obj}</Table></td>
+                    </tr>);
                 } else {
-                    children.push(<tr><td>{key}</td><td>{data[key]}</td></tr>);
+                    children.push(<tr>
+                        <td>{key}</td>
+                        <td>{data[key]}</td>
+                    </tr>);
                 }
             }
         }
-        table.push(<Table bordered >{children}</Table>);
+        table.push(<Table bordered>{children}</Table>);
         return table;
     };
 
@@ -108,15 +119,16 @@ class OpenLoanAccountSummary extends Component {
         sessionStorage.setItem("account_number", JSON.stringify(account));
         return (
             <div className="App">
-                <DynamicHeader />
+                <DynamicHeader/>
                 <Form>
                     <h2>Form Data Open Account</h2>
-                    <br />
-                    <Col md={{ size: 6, offset: 3 }} >
+                    <br/>
+                    <Col md={{size: 6, offset: 3}}>
                         {this.dynamicResponse(data.rs_body)}
                     </Col>
-                    <br />
-                    <Button color="success" onClick={this.CallInquiryLoanAccount} >Inquiry Account Details : {account}</Button>
+                    <br/>
+                    <Button color="success" onClick={this.CallInquiryLoanAccount}>Inquiry Account Details
+                        : {account}</Button>
                 </Form>
             </div>
         );

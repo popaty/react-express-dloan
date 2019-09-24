@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import { Button, Col, Form, FormGroup, Input, Label } from 'reactstrap';
+import React, {Component} from 'react';
+import {Button, Col, Form, FormGroup, Input, Label} from 'reactstrap';
 import DynamicHeader from '../Header.js';
 import inputModel from "../inqInterestAccruedDetail/model";
+
 const cloneDeep = require('lodash.clonedeep');
 
 class inquiryInterestDetailComponent extends Component {
@@ -29,10 +30,10 @@ class inquiryInterestDetailComponent extends Component {
     }
 
     handleChange(event) {
-        const { rq_body } = { ...this.state };
+        const {rq_body} = {...this.state};
         const currentState = rq_body;
         currentState[event.target.name] = event.target.type === "number" ? Number(event.target.value) : event.target.value;
-        this.setState({ rq_body: currentState });
+        this.setState({rq_body: currentState});
     }
 
     omit = (body) => {
@@ -88,7 +89,7 @@ class inquiryInterestDetailComponent extends Component {
                     <FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                            value={this.state.rq_body[item.value]} onChange={this.handleChange} />
+                               value={this.state.rq_body[item.value]} onChange={this.handleChange}/>
                     </FormGroup>
                 );
             } else {
@@ -96,7 +97,7 @@ class inquiryInterestDetailComponent extends Component {
                     <FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                            value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
+                               value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange}/>
                     </FormGroup>
                 );
             }
@@ -106,17 +107,17 @@ class inquiryInterestDetailComponent extends Component {
     render() {
         return (
             <div>
-                <DynamicHeader />
+                <DynamicHeader/>
                 <h2>Form Input Inquiry Interest Accrued Details</h2>
-                <br />
-                <Col md={{ size: 4, offset: 4 }}>
+                <br/>
+                <Col md={{size: 4, offset: 4}}>
                     <Form onSubmit={this.Clicked}>
                         {this.FormInputData()}
-                        <br />
-                        <div align="center">
+                        <br/>
+                        <div class="text-center">
                             <Button color="primary" type="submit">Submit</Button>
                         </div>
-                        <br />
+                        <br/>
                     </Form>
                 </Col>
             </div>
