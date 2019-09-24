@@ -15,8 +15,8 @@ class inquiryPositionPRESTComponent extends Component {
 
     Clicked(event) {
         event.preventDefault();
-        var data = JSON.parse(sessionStorage.getItem("data_inqLoanAccount"));
-        console.log(this.state.account);
+        //var data = JSON.parse(sessionStorage.getItem("data_inqLoanAccount"));
+        //console.log(this.state.account);
         fetch('/api/inqPositionDetail/' + this.state.account)
             .then(response => response.json())
             .then(data => {

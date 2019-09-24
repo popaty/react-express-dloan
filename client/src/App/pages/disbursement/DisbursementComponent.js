@@ -30,13 +30,13 @@ class disbursementComponent extends Component {
     };
 
     componentDidMount() {
-        if (JSON.parse(sessionStorage.getItem("data_installment")) && JSON.parse(sessionStorage.getItem("data_openLoanAccount"))
+        if (JSON.parse(sessionStorage.getItem("data_installment")) && JSON.parse(sessionStorage.getItem("data_inqLoanAccount"))
             && JSON.parse(sessionStorage.getItem("input_installment"))) {
-            const dataOpenLoanAccount = JSON.parse(sessionStorage.getItem("data_openLoanAccount"));
+            const dataInqLoanAccount = JSON.parse(sessionStorage.getItem("data_inqLoanAccount"));
             const inputInstallment = JSON.parse(sessionStorage.getItem("input_installment"));
             const dataInstallment = JSON.parse(sessionStorage.getItem("data_installment"));
             const body = {
-                account_number: dataOpenLoanAccount.rs_body.account_number,
+                account_number: dataInqLoanAccount.account_number,
                 disbursement_amount: inputInstallment.disbursement_amount,
                 effective_date: "",
                 channel_post_date: "",
@@ -122,34 +122,16 @@ class disbursementComponent extends Component {
                 }
             }).catch(error => console.log(error))
 
-
         //mock data
-        // let data = {
-        //     "rs_body": {}
-        // };
-        //     let data =  {  "errors": [
-        //         {
-        //             "error_code": "502",
-        //             "error_type": "",
-        //             "error_desc": "Error unmarshaling the json request payload, Caused by: Value(Unknown) - timestamp needs to conform to IETF RFC3339, time zones optional Format(Unknown) - ",
-        //             "error_detail": "",
-        //             "exception": {}
-        //         },
-        //         {
-        //             "error_code": "E88020004",
-        //             "error_type": "OTHER",
-        //             "error_desc": "Cannot parse JSON Body",
-        //             "error_detail": "Cannot parse JSON Body, Caused by: Error unmarshaling the json request payload, Caused by: Value(Unknown) - timestamp needs to conform to IETF RFC3339, time zones optional Format(Unknown) - "
-        //         }
-        //     ]
-        // };
+        // let data =  {"rs_body":{"account_number":600000000067,"account_sequence":1,"balance":1000.00}}
         // if (data.rs_body) {
+        //         sessionStorage.setItem("response_disbursement",JSON.stringify(data));
         //         window.open('/dbmSummary', '_self');
-        //     }else{
-        //         alert("error code : "+data.errors.map(error => error.error_code)+"\n"
-        //             +"error desc : "+ data.errors.map(error => error.error_desc)+"\n"
-        //             +"error type : "+ data.errors.map(error => error.error_type));
-        //     }
+        // } else {
+        //     alert("error code : " + data.errors.map(error => error.error_code) + "\n"
+        //     + "error desc : " + data.errors.map(error => error.error_desc) + "\n"
+        //     + "error type : " + data.errors.map(error => error.error_type));
+        // }
     };
 
     FormInputData = () => {

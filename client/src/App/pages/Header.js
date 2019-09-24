@@ -4,7 +4,7 @@ import {Navbar,NavbarBrand,Nav,UncontrolledDropdown,
 
 const header = (props) => {
     return (
-        // <div >
+
         <Navbar color="light" light expand="md">
         {/* <img src={logo} alt="TN" width="100" height="100" /> */}
          <NavbarBrand href="/" >TN</NavbarBrand>
@@ -77,8 +77,6 @@ const header = (props) => {
               </UncontrolledDropdown>
            </Nav>
        </Navbar>
-    //    <br />
-    //    </div>
     );
   };
 

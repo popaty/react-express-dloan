@@ -108,7 +108,7 @@ class inquiryInterestDetailComponent extends Component {
             <div>
                 <DynamicHeader />
                 <br />
-                <h2>Form Inquiry Interest Accrued Details</h2>
+                <h2>Form Input Inquiry Interest Accrued Details</h2>
                 <br />
                 <Col md={{ size: 4, offset: 4 }}>
                     <Form onSubmit={this.Clicked}>

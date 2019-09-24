@@ -50,7 +50,7 @@ class inquiryPositionSummery extends Component {
                     <br />
                     <h2>Form Data Inquiry Interest Accrued Details</h2>
                     <br />
-                    <Col md={{ size: 5, offset: 1 }} >
+                    <Col md={{ size: 6, offset: 3 }} >
                         {this.dynamicResponse(data.rs_body)}
                     </Col>
                     {/* <Col md={{ size: 5 }} >
