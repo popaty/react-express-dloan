@@ -61,7 +61,7 @@
       "type": "text",
       "name": "disbursement_account",
       "placeholder": "Enter disbursement account",
-      "value": "pdisbursement_account",
+      "value": "disbursement_account",
       "root": null
     },
     {

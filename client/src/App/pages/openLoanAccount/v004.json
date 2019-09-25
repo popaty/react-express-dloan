@@ -19,7 +19,7 @@
     "payment": {
       "payment_frequency": 1,
       "payment_unit": "M",
-      "payment_date": 28,
+      "payment_date": 15,
       "billing_offset_day": 1
     }
   }
