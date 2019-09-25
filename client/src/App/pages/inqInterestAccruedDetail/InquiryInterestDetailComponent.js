@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Button, Col, Form, FormGroup, Input, Label} from 'reactstrap';
 import DynamicHeader from '../Header.js';
 import inputModel from "../inqInterestAccruedDetail/model";
+import utility from '../Utility.js';
 
 const cloneDeep = require('lodash.clonedeep');
 
@@ -24,7 +25,7 @@ class inquiryInterestDetailComponent extends Component {
         event.preventDefault();
         //clone state for use in omit function.
         let body = cloneDeep(this.state);
-        const request = this.omit(body);
+        const request = utility.omit(body);
         //console.log(request);
         this.postList(request);
     }
@@ -35,30 +36,6 @@ class inquiryInterestDetailComponent extends Component {
         currentState[event.target.name] = event.target.type === "number" ? Number(event.target.value) : event.target.value;
         this.setState({rq_body: currentState});
     }
-
-    omit = (body) => {
-        // eslint-disable-next-line
-        for (let key in body.rq_body) {
-            if (body.rq_body.hasOwnProperty(key)) {
-                if (typeof body.rq_body[key] === "object") {
-                    // eslint-disable-next-line
-                    for (let subkey in body.rq_body[key]) {
-                        if (body.rq_body[key].hasOwnProperty(subkey)) {
-                            if (body.rq_body[key][subkey] === "" || body.rq_body[key][subkey] === 0) {
-                                delete body.rq_body[key][subkey];
-                            }
-                        }
-                    }
-                    if (Object.keys(body.rq_body[key]).length === 0) {
-                        delete body.rq_body[key];
-                    }
-                } else if (body.rq_body[key] === "" || body.rq_body[key] === 0) {
-                    delete body.rq_body[key];
-                }
-            }
-        }
-        return body;
-    };
 
     postList = (request) => {
         console.log("myRequest : " + JSON.stringify(request));

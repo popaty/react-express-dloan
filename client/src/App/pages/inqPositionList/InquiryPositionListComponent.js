@@ -29,7 +29,7 @@ class inquiryPositionComponent extends Component {
             .then(response => response.json())
             .then(data => {
                 if (data) {
-                    sessionStorage.setItem("response_inqPositionList", JSON.stringify(data.rs_body));
+                    sessionStorage.setItem("response_inqPositionList", JSON.stringify(data.rs_body.position_detail));
                     window.open('/iplSummary', '_self');
                 } else {
                     alert("error code : " + data.errors.map(error => error.error_code) + "\n"
