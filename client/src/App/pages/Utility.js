@@ -1,4 +1,3 @@
-
 const utility = {
 
     omit : (body) => {
@@ -25,7 +24,6 @@ const utility = {
         delete body.loading;
         return body;
     }
-
-}
+};
 
 export default utility;
