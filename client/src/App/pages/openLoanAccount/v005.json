@@ -1,0 +1,27 @@
+{
+  "rq_body": {
+    "customer_number": "111111111003",
+    "customer_type": "0702",
+    "account_name": "นางทรี มีศรี",
+    "credit_limit": 90000,
+    "credit_term_number": 8,
+    "credit_term_unit": "M",
+    "product_name": "7200120090001",
+    "disbursement_account": "20000002013",
+    "deduction_account": "20000025913",
+    "account_branch": 21,
+    "response_unit": 21,
+    "application_id": "APP0003",
+    "interest": {
+      "interest_index": "MRR",
+      "interest_spread": -3
+    },
+    "payment": {
+      "payment_frequency": 1,
+      "payment_unit": "M",
+      "payment_date": 15,
+      "billing_offset_day": 1
+    }
+  }
+}
+

@@ -24,6 +24,7 @@ import v001 from './v001.json';
 import v002 from './v002.json';
 import v003 from './v003.json';
 import v004 from './v004.json';
+import v005 from './v005.json';
 import inputModel from './model.json';
 
 const cloneDeep = require('lodash.clonedeep');
@@ -93,7 +94,7 @@ class OpenLoanAccountComponent extends Component {
         setTimeout(() => {
             this.setState({loading: false});
             this.postList(request);
-            
+
         }, 1200);
     };
 
@@ -112,6 +113,9 @@ class OpenLoanAccountComponent extends Component {
         }
         if (event.target.name === "004") {
             this.setState(v004);
+        }
+        if (event.target.name === "005") {
+            this.setState(v005);
         }
     };
 
@@ -215,8 +219,10 @@ class OpenLoanAccountComponent extends Component {
                                 002</DropdownItem>
                             <DropdownItem name="003" onClick={this.loadJson}>Input body Open Account Validation
                                 003</DropdownItem>
-                            <DropdownItem name="004" onClick={this.loadJson}>[DEMO]Input body Open Account Validation
+                            <DropdownItem name="004" onClick={this.loadJson}>[DEMO1]Input body Open Account Validation
                                 004</DropdownItem>
+                            <DropdownItem name="005" onClick={this.loadJson}>[DEMO2]Input body Open Account Validation
+                                005</DropdownItem>
                         </DropdownMenu>
                     </UncontrolledDropdown>
                     <br/>
