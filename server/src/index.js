@@ -146,6 +146,21 @@ app.get("/api/inquiryPositionList/:accountNo", (req, res) => {
         });
 });
 
+//[GET] Inquiry Position Detail
+app.get("/api/inquiryPositionDetail/:accountNo/:accountSequence", (req, res) => {
+    console.log("Inquiry Position Detail");
+    let header = headers.get_headers();
+    let url = properties.get("inquiryPositionDetail.url");
+    api_helper.API_call_get(url, header)
+        .then(response => {
+            res.json(response);
+            console.log("Finished Inquiry Position Detail");
+        })
+        .catch(error => {
+            res.send(error)
+        });
+});
+
 //[POST] Repayment
 app.post("/api/repayment", (req, res) => {
     console.log("Repayment");
@@ -161,20 +176,6 @@ app.post("/api/repayment", (req, res) => {
         });
 });
 
-//[POST] Inquiry Position Detail
-app.post("/api/inquiryPositionDetail/", (req, res) => {
-    console.log("Inquiry Position Detail");
-    let header = headers.get_headers();
-    let url = properties.get("inquiryPositionDetail.url");
-    api_helper_post.API_call_post(url, header, req.body)
-        .then(response => {
-            res.json(response);
-            console.log("Finished Inquiry Position Detail");
-        })
-        .catch(error => {
-            res.send(error)
-        });
-});
 
 // Handles any requests that don"t match the ones above
 app.get("*", (req, res) => {
