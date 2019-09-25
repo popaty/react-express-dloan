@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Button, Col, Container, Form, FormGroup, Input, Label, Row} from 'reactstrap';
 import DynamicHeader from '../Header.js';
 import inputModel from './model.json';
-//import repayment from './RepaymentSummery'
+import utility from '../Utility.js';
 
 const cloneDeep = require('lodash.clonedeep');
 
@@ -31,32 +31,9 @@ class RepaymentComponent extends Component {
         event.preventDefault();
         //clone state for use in omit function.
         let body = cloneDeep(this.state);
-        const request = this.omit(body);
+        const request = utility.omit(body);
+        //console.log(request);
         this.postList(request);
-    };
-
-    omit = (body) => {
-        // eslint-disable-next-line
-        for (let key in body.rq_body) {
-            if (body.rq_body.hasOwnProperty(key)) {
-                if (typeof body.rq_body[key] === "object") {
-                    // eslint-disable-next-line
-                    for (let subkey in body.rq_body[key]) {
-                        if (body.rq_body[key].hasOwnProperty(subkey)) {
-                            if (body.rq_body[key][subkey] === "" || body.rq_body[key][subkey] === 0) {
-                                delete body.rq_body[key][subkey];
-                            }
-                        }
-                    }
-                    if (Object.keys(body.rq_body[key]).length === 0) {
-                        delete body.rq_body[key];
-                    }
-                } else if (body.rq_body[key] === "" || body.rq_body[key] === 0) {
-                    delete body.rq_body[key];
-                }
-            }
-        }
-        return body;
     };
 
     postList = (request) => {

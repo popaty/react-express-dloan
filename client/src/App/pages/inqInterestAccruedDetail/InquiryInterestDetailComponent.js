@@ -18,10 +18,10 @@ class inquiryInterestDetailComponent extends Component {
             }
         };
         this.handleChange = this.handleChange.bind(this);
-        this.Clicked = this.Clicked.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    Clicked(event) {
+    handleSubmit(event) {
         event.preventDefault();
         //clone state for use in omit function.
         let body = cloneDeep(this.state);
@@ -88,7 +88,7 @@ class inquiryInterestDetailComponent extends Component {
                 <h2>Form Input Inquiry Interest Accrued Details</h2>
                 <br/>
                 <Col md={{size: 4, offset: 4}}>
-                    <Form onSubmit={this.Clicked}>
+                    <Form onSubmit={this.handleSubmit}>
                         {this.FormInputData()}
                         <br/>
                         <div class="text-center">
