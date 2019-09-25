@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input, Col, Row ,Container} from 'reactstrap';
+import React, {Component} from 'react';
+import {Button, Col, Form, FormGroup, Input, Label, Container, Row} from 'reactstrap';
 import DynamicHeader from '../Header.js';
+import inputModel from './model.json';
 
 class inquiryPositionComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            account: ""
+            account_number: ""
         };
         this.handleChange = this.handleChange.bind(this);
         this.Clicked = this.Clicked.bind(this);
@@ -14,12 +15,12 @@ class inquiryPositionComponent extends Component {
 
     componentDidMount() {
         if (JSON.parse(sessionStorage.getItem("account_number"))) {
-            this.setState({ account: JSON.parse(sessionStorage.getItem("account_number")) });
+            this.setState({ account_number : JSON.parse(sessionStorage.getItem("account_number")) });
         }
     }
 
     handleChange(event) {
-        this.setState({ account: event.target.value });
+        this.setState({[event.target.name]: event.target.type === "number" ? Number(event.target.value) : event.target.value});
     }
 
     Clicked(event) {
@@ -38,28 +39,39 @@ class inquiryPositionComponent extends Component {
             }).catch(error => console.log(error))
     };
 
+    FormInputData = () => {
+        return inputModel.model.map(item => {
+                return (
+                    <FormGroup>
+                        <Label>{item.label}</Label>
+                        <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+                               value={this.state[item.value]} onChange={this.handleChange}/>
+                    </FormGroup>
+                );
+        });
+    };
+
     render() {
         return (
-            <div className="App">
+            <div>
                 <DynamicHeader />
-                
-                <Container>
                 <h2>Form Input Inquiry Position List</h2>
-  
-                <Row>
-                    <Col md={{ size: 6, offset: 3 }}>
-                        <Form inline onSubmit={this.Clicked}>
-                            <FormGroup className="mb-2 mr-sm-5 mb-sm-0">
-                                <Label>Account Number : &nbsp;</Label>
-                                <Input type="text" value={this.state.account} placeholder="Enter account number" onChange={this.handleChange} />
-                            </FormGroup>
-                            <Button color="primary" type="submit">Submit</Button>
-                        </Form>
-                    </Col>
-                </Row>
+                <br />
+                <Container>
+                    <Row>
+                        <Col md={{size: 4, offset: 4}}>
+                            <Form onSubmit={this.Clicked}>
+                                {this.FormInputData()}
+                                <div class="text-center">
+                                    <Button color="primary" type="submit">Submit</Button>
+                                </div>
+                            </Form>
+                        </Col>
+                    </Row>
                 </Container>
             </div>
         );
     }
 }
+
 export default inquiryPositionComponent;

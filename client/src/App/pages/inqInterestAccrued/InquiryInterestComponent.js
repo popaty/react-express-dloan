@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input, Col } from 'reactstrap';
+import React, {Component} from 'react';
+import {Button, Col, Form, FormGroup, Input, Label, Container, Row} from 'reactstrap';
 import DynamicHeader from '../Header.js';
+import inputModel from './model.json';
 
 class inquiryInterestComponent extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            account: ""
+           account_number: ""
         };
         this.handleChange = this.handleChange.bind(this);
         this.Clicked = this.Clicked.bind(this);
@@ -15,8 +16,8 @@ class inquiryInterestComponent extends Component {
 
     Clicked(event) {
         event.preventDefault();
-        fetch('/api/inqInterestAccrued/' + this.state.account, {
-        }).then(response => response.json())
+        //console.log(this.state);
+        fetch('/api/inqInterestAccrued/' + this.state.account_number, {}).then(response => response.json())
             .then(data => {
                 if (data.rs_body) {
                     // value = {...data.rs_body.position_detail.map(item => item)};
@@ -72,24 +73,39 @@ class inquiryInterestComponent extends Component {
     };
 
     handleChange(event) {
-        this.setState({ account: event.target.value });
+        this.setState({[event.target.name]: event.target.type === "number" ? Number(event.target.value) : event.target.value});
     }
+
+    FormInputData = () => {
+        return inputModel.model.map(item => {
+                return (
+                    <FormGroup>
+                        <Label>{item.label}</Label>
+                        <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+                               value={this.state[item.value]} onChange={this.handleChange}/>
+                    </FormGroup>
+                );
+        });
+    };
 
     render() {
         return (
-            <div className="App">
-                <DynamicHeader />
+            <div>
+                <DynamicHeader/>
                 <h2>Form Input Inquiry Interest Accrued</h2>
-                <br />
-                <Col md={{ size: 6, offset: 4 }}>
-                    <Form inline onSubmit={this.Clicked} >
-                        <FormGroup className="mb-3 mr-sm-3 mb-sm-0">
-                            <Label>Account Number : &nbsp;</Label>
-                            <Input type="text" placeholder="Enter account number" onChange={this.handleChange} />
-                        </FormGroup>
-                        <Button color="primary" type="submit" >Submit</Button>
-                    </Form>
-                </Col>
+                <br/>
+                <Container>
+                    <Row>
+                        <Col md={{size: 4, offset: 4}}>
+                            <Form onSubmit={this.Clicked}>
+                                {this.FormInputData()}
+                                <div class="text-center">
+                                    <Button color="primary" type="submit">Submit</Button>
+                                </div>
+                            </Form>
+                        </Col>
+                    </Row>
+                </Container>
             </div>
         );
     };

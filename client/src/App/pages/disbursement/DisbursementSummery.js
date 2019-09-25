@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Button, Table, Col } from 'reactstrap';
+import React, {Component} from 'react';
+import {Button, Col, Table} from 'reactstrap';
 import DynamicHeader from '../Header.js';
 
 class disbursementSummery extends Component {
@@ -11,7 +11,7 @@ class disbursementSummery extends Component {
 
     //p-rest
     openInqPositionDetail() {
-        var account = JSON.parse(sessionStorage.getItem("account_number"));
+        const account = JSON.parse(sessionStorage.getItem("account_number"));
         //console.log(account.account_number);
         fetch('/api/inqPositionDetail/' + account).then(response => response.json())
             .then(data => {
@@ -69,19 +69,31 @@ class disbursementSummery extends Component {
                         if (data[key].hasOwnProperty(subdata)) {
                             if (typeof data[key][subdata] === "boolean") {
                                 let catchup = String(data[key][subdata]);
-                                obj.push(<tr><td>{subdata}</td><td>{catchup}</td></tr>)
+                                obj.push(<tr>
+                                    <td>{subdata}</td>
+                                    <td>{catchup}</td>
+                                </tr>)
                             } else {
-                                obj.push(<tr><td>{subdata}</td><td>{data[key][subdata]}</td></tr>);
+                                obj.push(<tr>
+                                    <td>{subdata}</td>
+                                    <td>{data[key][subdata]}</td>
+                                </tr>);
                             }
                         }
                     }
-                    children.push(<tr><td>{key + " : "}</td><td><Table>{obj}</Table></td></tr>);
+                    children.push(<tr>
+                        <td>{key + " : "}</td>
+                        <td><Table>{obj}</Table></td>
+                    </tr>);
                 } else {
-                    children.push(<tr><td>{key}</td><td>{data[key]}</td></tr>);
+                    children.push(<tr>
+                        <td>{key}</td>
+                        <td>{data[key]}</td>
+                    </tr>);
                 }
             }
         }
-        table.push(<Table bordered >{children}</Table>);
+        table.push(<Table bordered>{children}</Table>);
         return table;
     };
 
@@ -90,14 +102,14 @@ class disbursementSummery extends Component {
         const data = JSON.parse(sessionStorage.getItem("response_disbursement"));
         return (
             <div className="App">
-                <DynamicHeader />
+                <DynamicHeader/>
                 <h2>Form Data Disbursement</h2>
-                <br />
-                <Col md={{ size: 4, offset: 4 }}>
+                <br/>
+                <Col md={{size: 4, offset: 4}}>
                     {/* <Alert color="success"><h3>Success!!</h3></Alert> */}
                     {this.dynamicResponse(data.rs_body)}
                 </Col>
-                <br />
+                <br/>
                 <Button color="success" onClick={this.openInqPositionDetail}>Inquiry Position Detail pREST
                     : {account.account_number}</Button>
             </div>

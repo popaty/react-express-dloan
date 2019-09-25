@@ -36,53 +36,53 @@ import inquiryPositionDetailComponent from './pages/inqPositionDetail/InquiryPos
 import inquiryPositionDetailSummery from './pages/inqPositionDetail/InquiryPositionDetailSummery';
 
 class App extends Component {
-  render() {
-    const App = () => (
-        <div>
-          <Switch>
-            <Route exact path='/' component={Home}/>
-            <Route path='/list' component={List}/>
+    render() {
+        const App = () => (
+            <div>
+                <Switch>
+                    <Route exact path='/' component={Home}/>
+                    <Route path='/list' component={List}/>
 
-            <Route path='/olaComponent' component={openLoanAccountComponent}/>
-            <Route path='/olaSummary' component={openLoanAccountSummary}/>
+                    <Route path='/olaComponent' component={openLoanAccountComponent}/>
+                    <Route path='/olaSummary' component={openLoanAccountSummary}/>
 
-            <Route path='/ilaComponent' component={inquiryLoanAccountComponent}/>
-            <Route path='/ilaSummary' component={inquiryLoanAccountSummary}/>
+                    <Route path='/ilaComponent' component={inquiryLoanAccountComponent}/>
+                    <Route path='/ilaSummary' component={inquiryLoanAccountSummary}/>
 
-            <Route path='/ciaComponent' component={calculateInstallmentComponent}/>
-            <Route path='/ciaSummary' component={calculateInstallmentSummary}/>
+                    <Route path='/ciaComponent' component={calculateInstallmentComponent}/>
+                    <Route path='/ciaSummary' component={calculateInstallmentSummary}/>
 
-            <Route path='/dbmComponent' component={disbursementComponent}/>
-            <Route path='/dbmSummary' component={disbursementSummery}/>
+                    <Route path='/dbmComponent' component={disbursementComponent}/>
+                    <Route path='/dbmSummary' component={disbursementSummery}/>
 
-            <Route path='/ipdprestComponent' component={inquiryPositionPRESTComponent}/>
-            <Route path='/ipdprestSummary' component={inquiryPositionPRESTSummery}/>
+                    <Route path='/ipdprestComponent' component={inquiryPositionPRESTComponent}/>
+                    <Route path='/ipdprestSummary' component={inquiryPositionPRESTSummery}/>
 
-            <Route path='/iiaComponent' component={inquiryInterestComponent}/>
-            <Route path='/iiaSummary' component={inquiryInterestSummery}/>
+                    <Route path='/iiaComponent' component={inquiryInterestComponent}/>
+                    <Route path='/iiaSummary' component={inquiryInterestSummery}/>
 
-            <Route path='/iiadComponent' component={inquiryInterestDetailComponent}/>
-            <Route path='/iiadSummary' component={inquiryInterestDetailSummery}/>
+                    <Route path='/iiadComponent' component={inquiryInterestDetailComponent}/>
+                    <Route path='/iiadSummary' component={inquiryInterestDetailSummery}/>
 
-            <Route path='/iplComponent' component={inquiryPositionListComponent}/>
-            <Route path='/iplSummary' component={inquiryPositionListSummery}/>
+                    <Route path='/iplComponent' component={inquiryPositionListComponent}/>
+                    <Route path='/iplSummary' component={inquiryPositionListSummery}/>
 
-            <Route path='/rpmComponent' component={RepaymentComponent}/>
-            <Route path='/rpmSummary' component={RepaymentSummery}/>
+                    <Route path='/rpmComponent' component={RepaymentComponent}/>
+                    <Route path='/rpmSummary' component={RepaymentSummery}/>
 
-            <Route path='/ipdComponent' component={inquiryPositionDetailComponent}/>
-            <Route path='/ipdSummary' component={inquiryPositionDetailSummery}/>
+                    <Route path='/ipdComponent' component={inquiryPositionDetailComponent}/>
+                    <Route path='/ipdSummary' component={inquiryPositionDetailSummery}/>
 
-          </Switch>
-        </div>
-    );
-    return (
-        <Switch>
-          <App/>
-        </Switch>
+                </Switch>
+            </div>
+        );
+        return (
+            <Switch>
+                <App/>
+            </Switch>
 
-    );
-  }
+        );
+    }
 }
 
 export default App;

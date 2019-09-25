@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Button, Col, Table, Form } from 'reactstrap';
+import React, {Component} from 'react';
+import {Button, Col, Form, Table} from 'reactstrap';
 import DynamicHeader from '../Header.js';
 
 class inquiryPositionPRESTSummery extends Component {
@@ -122,14 +122,14 @@ class inquiryPositionPRESTSummery extends Component {
         //console.log(data);
         return (
             <div className="App">
-                <DynamicHeader />
+                <DynamicHeader/>
                 <Form>
                     <h2>Form Data Inquiry Position Detail pREST</h2>
-                    <br />
-                    <Col md={{ size: 6, offset: 3 }}>
+                    <br/>
+                    <Col md={{size: 6, offset: 3}}>
                         {this.dynamicResponse(data)}
                     </Col>
-                    <br />
+                    <br/>
                     <Button color="success" onClick={this.CallInquiryLoanAccount}>Inquiry Account Details </Button>
                 </Form>
             </div>

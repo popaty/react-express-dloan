@@ -1,14 +1,12 @@
-import React, { Component } from 'react';
-import { Col, Table, Form } from 'reactstrap';
+import React, {Component} from 'react';
+import {Col, Form, Table} from 'reactstrap';
 import DynamicHeader from '../Header.js';
 
 class inquiryPositionSummery extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-
-        };
+        this.state = {};
     }
 
     dynamicResponse = (data) => {
@@ -24,19 +22,31 @@ class inquiryPositionSummery extends Component {
                         if (data[key].hasOwnProperty(subdata)) {
                             if (typeof data[key][subdata] === "boolean") {
                                 let catchup = String(data[key][subdata]);
-                                obj.push(<tr><td>{subdata}</td><td>{catchup}</td></tr>)
+                                obj.push(<tr>
+                                    <td>{subdata}</td>
+                                    <td>{catchup}</td>
+                                </tr>)
                             } else {
-                                obj.push(<tr><td>{subdata}</td><td>{data[key][subdata]}</td></tr>);
+                                obj.push(<tr>
+                                    <td>{subdata}</td>
+                                    <td>{data[key][subdata]}</td>
+                                </tr>);
                             }
                         }
                     }
-                    children.push(<tr><td>{key + " : "}</td><td><Table>{obj}</Table></td></tr>);
+                    children.push(<tr>
+                        <td>{key + " : "}</td>
+                        <td><Table>{obj}</Table></td>
+                    </tr>);
                 } else {
-                    children.push(<tr><td>{key}</td><td>{data[key]}</td></tr>);
+                    children.push(<tr>
+                        <td>{key}</td>
+                        <td>{data[key]}</td>
+                    </tr>);
                 }
             }
         }
-        table.push(<Table bordered >{children}</Table>);
+        table.push(<Table bordered>{children}</Table>);
         return table;
     };
 
@@ -45,17 +55,17 @@ class inquiryPositionSummery extends Component {
         //var data2 = JSON.parse(sessionStorage.getItem("data_inqPositionDetail"));
         return (
             <div className="App">
-                <DynamicHeader />
+                <DynamicHeader/>
                 <Form>
                     <h2>Form Data Inquiry Interest Accrued Details</h2>
-                    <br />
-                    <Col md={{ size: 6, offset: 3 }} >
+                    <br/>
+                    <Col md={{size: 6, offset: 3}}>
                         {this.dynamicResponse(data.rs_body)}
                     </Col>
                     {/* <Col md={{ size: 5 }} >
                     {this.dynamicResponse(data2)}
                 </Col> */}
-                    <br />
+                    <br/>
                 </Form>
             </div>
         );

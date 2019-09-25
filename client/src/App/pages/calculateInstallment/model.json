@@ -1,47 +1,44 @@
 {
-    "model" : [
-        {
-            "label" : "Disbursement amount",
-            "type" : "number",
-            "name" : "disbursement_amount",
-            "placeholder" : "Enter disbursement amount",
-            "value" : "disbursement_amount",
-            "root" : null
-        },
-        {
-            "label" : "Number of payment",
-            "type" : "number",
-            "name" : "number_of_payment",
-            "placeholder" : "Enter number of payment",
-            "value" : "number_of_payment",
-            "root" : null
-        },
-        {
-            "label" : "Interest rate",
-            "type" : "number",
-            "name" : "interest_rate",
-            "placeholder" : "Enter interest rate",
-            "value" : "interest_rate",
-            "root" : null
-
-        },
-        {
-            "label" : "Payment frequency",
-            "type" : "number",
-            "name" : "payment_frequency",
-            "placeholder" : "Enter payment frequency",
-            "value" : "payment_frequency",
-            "root" : null
-
-        },
-        {
-            "label" : "Payment unit",
-            "type" : "text",
-            "name" : "payment_unit",
-            "placeholder" : "Enter payment unit",
-            "value" : "payment_unit",
-            "root" : null
-
-        }
-    ]
+  "model": [
+    {
+      "label": "Disbursement amount",
+      "type": "number",
+      "name": "disbursement_amount",
+      "placeholder": "Enter disbursement amount",
+      "value": "disbursement_amount",
+      "root": null
+    },
+    {
+      "label": "Number of payment",
+      "type": "number",
+      "name": "number_of_payment",
+      "placeholder": "Enter number of payment",
+      "value": "number_of_payment",
+      "root": null
+    },
+    {
+      "label": "Interest rate",
+      "type": "number",
+      "name": "interest_rate",
+      "placeholder": "Enter interest rate",
+      "value": "interest_rate",
+      "root": null
+    },
+    {
+      "label": "Payment frequency",
+      "type": "number",
+      "name": "payment_frequency",
+      "placeholder": "Enter payment frequency",
+      "value": "payment_frequency",
+      "root": null
+    },
+    {
+      "label": "Payment unit",
+      "type": "text",
+      "name": "payment_unit",
+      "placeholder": "Enter payment unit",
+      "value": "payment_unit",
+      "root": null
+    }
+  ]
 }

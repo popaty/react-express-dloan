@@ -1,20 +1,20 @@
 {
-    "model" : [
-        {
-            "label" : "test1",
-            "type" : "text",
-            "name" : "test1",
-            "placeholder" : "Enter test1",
-            "value" : "test1",
-            "root" : null
-        },
-        {
-            "label" : "tes2",
-            "type" : "text",
-            "name" : "test2",
-            "placeholder" : "Enter test2",
-            "value" : "test2",
-            "root" : null
-        }
-    ]
+  "model": [
+    {
+      "label": "Account Number",
+      "type": "text",
+      "name": "account_number",
+      "placeholder": "Enter account number",
+      "value": "account_number",
+      "root": null
+    },
+    {
+      "label": "Payment Amount",
+      "type": "number",
+      "name": "payment_amount",
+      "placeholder": "Enter payment amount",
+      "value": "payment_amount",
+      "root": null
+    }
+  ]
 }
