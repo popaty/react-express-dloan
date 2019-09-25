@@ -11,8 +11,8 @@ class RepaymentComponent extends Component {
         super(props);
         this.state = {
             rq_body: {
-                test1: "",
-                test2: "",
+                account_number: "",
+                payment_amount: 0,
             }
         };
         this.handleChange = this.handleChange.bind(this);
@@ -104,7 +104,6 @@ class RepaymentComponent extends Component {
             }
         });
     };
-
     render() {
         return (
             <div>

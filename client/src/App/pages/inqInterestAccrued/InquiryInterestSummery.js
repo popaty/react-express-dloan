@@ -84,7 +84,7 @@ class inquiryPositionSummery extends Component {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {this.getBodyTable(data)}
+                                    {this.getBodyTable(data)}
                                 </tbody>
                             </Table>
                         </div>
