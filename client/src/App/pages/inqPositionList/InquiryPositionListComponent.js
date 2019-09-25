@@ -42,13 +42,14 @@ class inquiryPositionComponent extends Component {
         return (
             <div className="App">
                 <DynamicHeader />
-                <h2>Form Input Inquiry Position List</h2>
-                <br />
+                
                 <Container>
+                <h2>Form Input Inquiry Position List</h2>
+  
                 <Row>
-                    <Col md={{ size: 5, offset: 4 }}>
+                    <Col md={{ size: 6, offset: 3 }}>
                         <Form inline onSubmit={this.Clicked}>
-                            <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                            <FormGroup className="mb-2 mr-sm-5 mb-sm-0">
                                 <Label>Account Number : &nbsp;</Label>
                                 <Input type="text" value={this.state.account} placeholder="Enter account number" onChange={this.handleChange} />
                             </FormGroup>
