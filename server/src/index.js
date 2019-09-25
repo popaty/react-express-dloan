@@ -150,7 +150,7 @@ app.get("/api/inquiryPositionList/:accountNo", (req, res) => {
 app.get("/api/inquiryPositionDetail/:accountNo/:accountSequence", (req, res) => {
     console.log("Inquiry Position Detail");
     let header = headers.get_headers();
-    let url = properties.get("inquiryPositionDetail.url");
+    let url = properties.get("inquiryPositionDetail.url") + req.params.accountNo +"/"+ req.params.accountSequence;
     api_helper.API_call_get(url, header)
         .then(response => {
             res.json(response);
