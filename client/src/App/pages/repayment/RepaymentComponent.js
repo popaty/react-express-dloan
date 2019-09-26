@@ -12,12 +12,32 @@ class RepaymentComponent extends Component {
         this.state = {
             rq_body: {
                 account_number: "",
-                payment_amount: 0,
+                transaction_amount: 0,
+                effective_date: "",
+                channel_post_date: "",
+                currency_code: "THB",
+                service_branch: 0
             }
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     };
+
+    componentDidMount() {
+        if (JSON.parse(sessionStorage.getItem("account_number"))) {
+            //JSON.parse(sessionStorage.getItem("response_disbursement"))
+            //const data = JSON.parse(sessionStorage.getItem("response_disbursement"));
+            const body = {
+                account_number: JSON.parse(sessionStorage.getItem("account_number")),
+                transaction_amount: 0,
+                effective_date: "",
+                channel_post_date: "",
+                currency_code: "THB",
+                service_branch: 0
+            }
+            this.setState({rq_body: body});
+        }
+    }
 
     handleChange(event) {
         //this.setState({[event.target.name]:event.target.value});

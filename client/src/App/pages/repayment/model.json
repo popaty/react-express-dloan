@@ -9,11 +9,43 @@
       "root": null
     },
     {
-      "label": "Payment Amount",
+      "label": "Transaction amount",
       "type": "number",
-      "name": "payment_amount",
-      "placeholder": "Enter payment amount",
-      "value": "payment_amount",
+      "name": "transaction_amount",
+      "placeholder": "Enter transaction amount",
+      "value": "transaction_amount",
+      "root": null
+    },
+    {
+      "label": "Effective date",
+      "type": "date",
+      "name": "effective_date",
+      "placeholder": "Enter effective date",
+      "value": "effective_date",
+      "root": null
+    },
+    {
+      "label": "Channel post date",
+      "type": "date",
+      "name": "channel_post_date",
+      "placeholder": "Enter channel post date",
+      "value": "channel_post_date",
+      "root": null
+    },
+    {
+      "label": "Currency code",
+      "type": "text",
+      "name": "currency_code",
+      "placeholder": "Enter currency code",
+      "value": "currency_code",
+      "root": null
+    },
+    {
+      "label": "Service branch",
+      "type": "number",
+      "name": "service_branch",
+      "placeholder": "Enter service branch",
+      "value": "service_branch",
       "root": null
     }
   ]
