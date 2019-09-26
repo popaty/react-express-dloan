@@ -155,7 +155,6 @@ class OpenLoanAccountComponent extends Component {
         // }
     };
 
-
     FormInputCol1 = () => {
         return inputModel.model.map(item => {
             if (item.root === null) {
