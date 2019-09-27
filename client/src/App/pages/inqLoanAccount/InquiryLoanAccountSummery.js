@@ -74,6 +74,7 @@ class InquiryLoanAccountSummery extends Component {
 
     render() {
         const data = InquiryLoanAccountSummery.getSessionStorage();
+        sessionStorage.setItem("account_number", JSON.stringify(data.rs_body.account_number));
         //console.log(data);
         return (
             <div className="App">
