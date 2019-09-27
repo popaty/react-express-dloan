@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Button, Col, Form, Table} from 'reactstrap';
 import DynamicHeader from '../Header.js';
+import utility from '../Utility.js';
 
 class OpenLoanAccountSummary extends Component {
     constructor(props) {
@@ -13,6 +14,7 @@ class OpenLoanAccountSummary extends Component {
         fetch('/api/inqLoanAccount/' + data.rs_body.account_number, {}).then(response => response.json())
             .then(data => {
                 if (data.rs_body) {
+                    utility.clearSessionStroage("response_inqLoanAccount");
                     sessionStorage.setItem("response_inqLoanAccount", JSON.stringify(data.rs_body));
                     window.open('/ilaSummary', '_self');
                 } else {

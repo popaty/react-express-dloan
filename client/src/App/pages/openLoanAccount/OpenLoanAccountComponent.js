@@ -121,38 +121,38 @@ class OpenLoanAccountComponent extends Component {
 
     postList = (request) => {
         console.log("myRequest : " + JSON.stringify(request));
-        fetch('/api/openLoanAccount', {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(request)
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.rs_body) {
-                    sessionStorage.setItem("response_openLoanAccount", JSON.stringify(data));
-                    window.open('/olaSummary', '_self');
-                } else {
-                    alert("error code : " + data.errors.map(error => error.error_code) + "\n"
-                        + "error desc : " + data.errors.map(error => error.error_desc));
-                }
-            }).catch(error => console.log(error))
+        // fetch('/api/openLoanAccount', {
+        //     method: 'POST',
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     },
+        //     body: JSON.stringify(request)
+        // })
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         if (data.rs_body) {
+        //             sessionStorage.setItem("response_openLoanAccount", JSON.stringify(data));
+        //             window.open('/olaSummary', '_self');
+        //         } else {
+        //             alert("error code : " + data.errors.map(error => error.error_code) + "\n"
+        //                 + "error desc : " + data.errors.map(error => error.error_desc));
+        //         }
+        //     }).catch(error => console.log(error))
 
         //mock data
-        // let data = {
-        //   "rs_body": {
-        //     "account_number": "111111111103",
-        //     "open_date": "2019-08-27"
-        //   }
-        // }
-        // if (data.rs_body) {
-        //     sessionStorage.setItem("response_openLoanAccount", JSON.stringify(data));
-        //     window.open('/olaSummary', '_self');
-        // } else {
-        //   alert("error code : " + data.errors.map(error => error.error_code) + "\n"
-        //     + "error desc : " + data.errors.map(error => error.error_desc));
-        // }
+        let data = {
+          "rs_body": {
+            "account_number": "111111111555",
+            "open_date": "2019-08-27"
+          }
+        }
+        if (data.rs_body) {
+            sessionStorage.setItem("response_openLoanAccount", JSON.stringify(data));
+            window.open('/olaSummary', '_self');
+        } else {
+          alert("error code : " + data.errors.map(error => error.error_code) + "\n"
+            + "error desc : " + data.errors.map(error => error.error_desc));
+        }
     };
 
     FormInputCol1 = () => {

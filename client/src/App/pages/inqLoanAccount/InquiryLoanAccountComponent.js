@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Button, Container, Col, Form, FormGroup, Input, Label, Row} from 'reactstrap';
 import DynamicHeader from '../Header.js';
 import inputModel from './model.json';
+import utility from '../Utility.js';
 
 class InquiryLoanAccountComponent extends Component {
     constructor(props) {
@@ -19,6 +20,7 @@ class InquiryLoanAccountComponent extends Component {
         fetch('/api/inqLoanAccount/' + this.state.account_number, {}).then(response => response.json())
         .then(data => {
             if (data.rs_body) {
+                utility.clearSessionStroage("response_inqLoanAccount");
                 sessionStorage.setItem("response_inqLoanAccount", JSON.stringify(data.rs_body));
                 window.open('/ilaSummary', '_self');
             } else {
