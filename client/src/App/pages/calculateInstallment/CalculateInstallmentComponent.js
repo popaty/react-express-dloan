@@ -35,6 +35,8 @@ class installmentComponent extends Component {
 
             };
             this.setState({rq_body: body});
+        }else{
+            console.log("request_installment not found!");
         }
     };
 
