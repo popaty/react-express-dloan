@@ -31,29 +31,55 @@ class disbursementComponent extends Component {
     };
 
     componentDidMount() {
-        if (JSON.parse(sessionStorage.getItem("response_installment")) && JSON.parse(sessionStorage.getItem("account_number"))
-            && JSON.parse(sessionStorage.getItem("request_disbursement"))) {
-            const account = JSON.parse(sessionStorage.getItem("account_number"));
-            const inputDisbursement = JSON.parse(sessionStorage.getItem("request_disbursement"));
-            const dataInstallment = JSON.parse(sessionStorage.getItem("response_installment"));
+        let installmentAmount = 0;
+        let disbursementAmount = 0
+        let numberOfPayment = 0;
+        let accountNumber = "";
+
+            if(JSON.parse(sessionStorage.getItem("response_installment"))){
+                 const dataInstallment = JSON.parse(sessionStorage.getItem("response_installment"));
+                 installmentAmount = dataInstallment.rs_body.installment_amount;
+            }else{
+                console.log("sessionStorage response_installment not found!");
+            }
+
+            if(JSON.parse(sessionStorage.getItem("request_disbursement"))){
+                const inputDisbursement = JSON.parse(sessionStorage.getItem("request_disbursement"));
+                disbursementAmount = inputDisbursement.disbursement_amount;
+                numberOfPayment = inputDisbursement.number_of_payment;
+            }else{
+                console.log("sessionStorage request_disbursement not found!");
+            }
+
+            if(JSON.parse(sessionStorage.getItem("account_number"))){
+                const account = JSON.parse(sessionStorage.getItem("account_number"));
+                accountNumber = account;
+            }else{
+                console.log("sessionStorage account_number not found!");
+            }
+        // if (JSON.parse(sessionStorage.getItem("response_installment")) && JSON.parse(sessionStorage.getItem("account_number"))
+        //     && JSON.parse(sessionStorage.getItem("request_disbursement"))) {
+        //     const account = JSON.parse(sessionStorage.getItem("account_number"));
+        //     const inputDisbursement = JSON.parse(sessionStorage.getItem("request_disbursement"));
+        //     const dataInstallment = JSON.parse(sessionStorage.getItem("response_installment"));
             const body = {
-                account_number: account,
-                disbursement_amount: inputDisbursement.disbursement_amount,
+                account_number: accountNumber,
+                disbursement_amount: disbursementAmount,
                 effective_date: "",
                 channel_post_date: "",
                 currency_code: "THB",
                 service_branch: 0,
-                number_of_payment: inputDisbursement.number_of_payment,
-                installment_amount: dataInstallment.rs_body.installment_amount,
+                number_of_payment: numberOfPayment,
+                installment_amount: installmentAmount,
                 other_properties: {
                     interest_index: "",
                     interest_spread: 0,
                     first_payment_date: ""
                 }
             };
-            this.setState({rq_body: body});
-            //console.log(this.state);
-        }
+              this.setState({rq_body: body});
+              //console.log(this.state);
+        //}
     };
 
     handleChange(event) {

@@ -15,7 +15,7 @@ class InquiryLoanAccountComponent extends Component {
     }
 
     Clicked(event) {
-        event.preventDefault();
+       event.preventDefault();
         //console.log(this.state);
         fetch('/api/inqLoanAccount/' + this.state.account_number, {}).then(response => response.json())
         .then(data => {
