@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Button, Col, Form, FormGroup, Input, Label, Container, Row} from 'reactstrap';
 import DynamicHeader from '../Header.js';
 import inputModel from './model.json';
+import utility from '../Utility.js';
 
 class inquiryPositionComponent extends Component {
     constructor(props) {
@@ -29,6 +30,7 @@ class inquiryPositionComponent extends Component {
             .then(response => response.json())
             .then(data => {
                 if (data) {
+                    utility.clearSessionStorage("response_inqPositionList");
                     sessionStorage.setItem("response_inqPositionList", JSON.stringify(data.rs_body.position_detail));
                     window.open('/iplSummary', '_self');
                 } else {

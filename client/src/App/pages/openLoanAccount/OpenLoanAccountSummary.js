@@ -118,6 +118,7 @@ class OpenLoanAccountSummary extends Component {
     render() {
         const data = JSON.parse(sessionStorage.getItem("response_openLoanAccount"));
         const account = data.rs_body.account_number;
+        utility.clearSessionStorage("account_number");
         sessionStorage.setItem("account_number", JSON.stringify(account));
         return (
             <div className="App">

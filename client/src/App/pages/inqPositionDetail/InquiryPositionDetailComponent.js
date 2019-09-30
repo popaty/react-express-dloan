@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Button, Col, Container, Form, FormGroup, Input, Label, Row} from 'reactstrap';
 import DynamicHeader from '../Header.js';
 import inputModel from './model.json';
+import utility from '../Utility.js';
 
 class InquiryPositionDetailComponent extends Component {
     constructor(props) {
@@ -29,7 +30,8 @@ class InquiryPositionDetailComponent extends Component {
         fetch('/api/inquiryPositionDetail/' + this.state.account_number +"/"+this.state.account_sequence, {})
         .then(response => response.json())
         .then(data => {
-            if (data.rs_body) {      
+            if (data.rs_body) { 
+                utility.clearSessionStorage("response_inqPositionDetail");     
                 sessionStorage.setItem("response_inqPositionDetail", JSON.stringify(data.rs_body));
                 window.open('/ipdSummary', '_self');
             } else {

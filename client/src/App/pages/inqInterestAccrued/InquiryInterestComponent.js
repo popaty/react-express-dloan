@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Button, Col, Form, FormGroup, Input, Label, Container, Row} from 'reactstrap';
 import DynamicHeader from '../Header.js';
 import inputModel from './model.json';
+import utility from '../Utility.js';
 
 class inquiryInterestComponent extends Component {
 
@@ -22,6 +23,7 @@ class inquiryInterestComponent extends Component {
                 if (data.rs_body) {
                     // value = {...data.rs_body.position_detail.map(item => item)};
                     //console.log(value);
+                    utility.clearSessionStorage("response_inqInterastaAccrued");
                     sessionStorage.setItem("response_inqInterastaAccrued", JSON.stringify(data.rs_body.position_detail));
                     window.open('/iiaSummary', '_self');
                 } else {

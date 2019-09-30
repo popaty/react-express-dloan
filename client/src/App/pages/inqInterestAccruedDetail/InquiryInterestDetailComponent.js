@@ -49,6 +49,7 @@ class inquiryInterestDetailComponent extends Component {
             .then(response => response.json())
             .then(data => {
                 if (data.rs_body) {
+                    utility.clearSessionStorage("response_inqInterestAccruedDetail");
                     sessionStorage.setItem("response_inqInterestAccruedDetail", JSON.stringify(data));
                     window.open('/iiadSummary', '_self');
                 } else {

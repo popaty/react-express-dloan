@@ -117,6 +117,7 @@ class disbursementComponent extends Component {
             .then(data => {
 
                 if (data.rs_body) {
+                    utility.clearSessionStorage("response_disbursement");
                     sessionStorage.setItem("response_disbursement", JSON.stringify(data));
                     window.open('/dbmSummary', '_self');
                 } else {

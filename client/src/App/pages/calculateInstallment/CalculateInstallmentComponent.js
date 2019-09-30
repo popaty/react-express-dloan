@@ -72,8 +72,9 @@ class installmentComponent extends Component {
         })
             .then(response => response.json())
             .then(data => {
-
                 if (data.rs_body) {
+                    utility.clearSessionStorage("response_installment");
+                    utility.clearSessionStorage("request_disbursement");
                     sessionStorage.setItem("response_installment", JSON.stringify(data));
                     sessionStorage.setItem("request_disbursement", JSON.stringify(inputData));
                     window.open('/ciaSummary', '_self');

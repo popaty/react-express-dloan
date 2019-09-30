@@ -131,6 +131,7 @@ class OpenLoanAccountComponent extends Component {
             .then(response => response.json())
             .then(data => {
                 if (data.rs_body) {
+                    utility.clearSessionStorage("response_openLoanAccount");
                     sessionStorage.setItem("response_openLoanAccount", JSON.stringify(data));
                     window.open('/olaSummary', '_self');
                 } else {

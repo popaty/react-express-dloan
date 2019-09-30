@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Button, Col, Table} from 'reactstrap';
 import DynamicHeader from '../Header.js';
+import utility from '../Utility.js';
 
 class disbursementSummery extends Component {
 
@@ -25,6 +26,7 @@ class disbursementSummery extends Component {
                         open_date: getdata.openDate,
                         principal_balance: getdata.bal
                     };
+                    utility.clearSessionStorage("response_inqPositionDetail");
                     sessionStorage.setItem("response_inqPositionDetail", JSON.stringify(body));
                     window.open('/ipdprestSummary', '_self');
                 } else {

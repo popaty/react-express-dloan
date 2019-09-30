@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Button, Col, Form, FormGroup, Input, Label, Container, Row} from 'reactstrap';
 import DynamicHeader from '../Header.js';
 import inputModel from './model.json';
+import utility from '../Utility.js';
 
 class inquiryPositionPRESTComponent extends Component {
 
@@ -29,6 +30,7 @@ class inquiryPositionPRESTComponent extends Component {
                         open_date: getdata.openDate,
                         principal_balance: getdata.bal
                     };
+                    utility.clearSessionStorage("response_inqPositionDetail");
                     sessionStorage.setItem("response_inqPositionDetail", JSON.stringify(body));
                     window.open('/ipdprestSummary', '_self');
                 } else {
