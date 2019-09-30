@@ -24,8 +24,8 @@ const utility = {
         delete body.loading;
         return body;
     },
-    clearSessionStroage : (key) => {
-        return sessionStorage.removeItem(String(key));
+    clearSessionStorage : (key) => {
+        return sessionStorage.removeItem(key);
     }
 };
 

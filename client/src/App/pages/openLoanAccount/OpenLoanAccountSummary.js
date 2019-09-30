@@ -14,7 +14,7 @@ class OpenLoanAccountSummary extends Component {
         fetch('/api/inqLoanAccount/' + data.rs_body.account_number, {}).then(response => response.json())
             .then(data => {
                 if (data.rs_body) {
-                    utility.clearSessionStroage("response_inqLoanAccount");
+                    utility.clearSessionStorage("response_inqLoanAccount");
                     sessionStorage.setItem("response_inqLoanAccount", JSON.stringify(data.rs_body));
                     window.open('/ilaSummary', '_self');
                 } else {
