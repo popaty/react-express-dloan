@@ -62,7 +62,6 @@ class calculateInstallmentSummary extends Component {
                 <DynamicHeader/>
                 <Form>
                     <h2>Form Data Calculate Installment Amount</h2>
-                    <br/>
                     <Col md={{size: 6, offset: 3}}>
                         {this.dynamicResponse(data.rs_body)}
                     </Col>

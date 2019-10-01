@@ -106,7 +106,6 @@ class disbursementSummery extends Component {
             <div className="App">
                 <DynamicHeader/>
                 <h2>Form Data Disbursement</h2>
-                <br/>
                 <Col md={{size: 4, offset: 4}}>
                     {/* <Alert color="success"><h3>Success!!</h3></Alert> */}
                     {this.dynamicResponse(data.rs_body)}

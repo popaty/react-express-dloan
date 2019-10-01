@@ -16,7 +16,6 @@ class RepaymentSummery extends Component {
                 <DynamicHeader/>
                 <Form>
                     <h2>Form Data Repayment</h2>
-                    <br/>
                     <Col md={{size: 6, offset: 3}}>
                          <Alert color="success"><h3>Success!!</h3></Alert>
                     </Col>

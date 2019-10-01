@@ -67,7 +67,6 @@ class inquiryPositionComponent extends Component {
             <div>
                 <DynamicHeader />
                 <h2>Form Input Inquiry Position List</h2>
-                <br />
                 <Container>
                     <Row>
                         <Col md={{size: 4, offset: 4}}>

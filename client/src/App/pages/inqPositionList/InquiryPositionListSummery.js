@@ -68,7 +68,6 @@ class inquiryPositionSummery extends Component {
                 <DynamicHeader/>
                 <Form>
                     <h2>Form Data Inquiry Position List</h2>
-                    <br/>
                     <Col md={{size: 10, offset: 1}}>
                         <div class="table-responsive">
                             <Table striped bordered>

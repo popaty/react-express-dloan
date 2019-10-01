@@ -127,7 +127,6 @@ class inquiryPositionPRESTSummery extends Component {
                 <DynamicHeader/>
                 <Form>
                     <h2>Form Data Inquiry Position Detail pREST</h2>
-                    <br/>
                     <Col md={{size: 6, offset: 3}}>
                         {this.dynamicResponse(data)}
                     </Col>

@@ -205,9 +205,7 @@ class OpenLoanAccountComponent extends Component {
             <div>
                 <DynamicHeader/>
                 <Container>
-
                     <h2>Form Input Open Account</h2>
-                    <br/>
                     <UncontrolledDropdown align="center">
                         <DropdownToggle caret color="secondary">Select validation here &nbsp;</DropdownToggle>
                         <DropdownMenu>

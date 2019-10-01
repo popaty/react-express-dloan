@@ -113,7 +113,6 @@ class RepaymentComponent extends Component {
             <div>
                 <DynamicHeader/>
                 <h2>Form Input Repayment</h2>
-                <br/>
                 <Container>
                     <Row>
                         <Col md={{size: 4, offset: 4}}>

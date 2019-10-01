@@ -137,7 +137,6 @@ class installmentComponent extends Component {
                 <DynamicHeader />
                 <Container>
                     <h2>Form Input Calculate Installment Amount</h2>
-                    <br />
                     <Row>
                         <Col md={{ size: 4, offset: 4 }}>
                             <Form onSubmit={this.handleSubmit}>
