@@ -1,15 +1,17 @@
-import React, {Component} from 'react';
-import {Button, Col, Form, FormGroup, Input, Label, Container, Row} from 'reactstrap';
+import React, { Component } from 'react';
+import { Button, Col, Form, FormGroup, Input, Label, Container, Row } from 'reactstrap';
 import DynamicHeader from '../Header.js';
 import inputModel from './model.json';
 import utility from '../Utility.js';
+import SpinnerLoader from '../loading.js';
 
 class inquiryInterestComponent extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-           account_number: ""
+            account_number: "",
+            loading: false
         };
         this.handleChange = this.handleChange.bind(this);
         this.Clicked = this.Clicked.bind(this);
@@ -18,7 +20,10 @@ class inquiryInterestComponent extends Component {
     Clicked(event) {
         event.preventDefault();
         //console.log(this.state);
-        fetch('/api/inqInterestAccrued/' + this.state.account_number, {}).then(response => response.json())
+        this.setState({ loading: true });
+        setTimeout(() => {
+            this.setState({ loading: false });
+            fetch('/api/inqInterestAccrued/' + this.state.account_number, {}).then(response => response.json())
             .then(data => {
                 if (data.rs_body) {
                     // value = {...data.rs_body.position_detail.map(item => item)};
@@ -33,77 +38,83 @@ class inquiryInterestComponent extends Component {
                 }
             }).catch(error => console.log(error))
 
-        //mock data
-        // let data = {
-        //     "rs_body": {
-        //         "position_detail": [
-        //             {
-        //                 "account_number": 600000000032,
-        //                 "account_sequence": 1,
-        //                 "interest_index": "MRR",
-        //                 "interest_spread": -3.00000,
-        //                 "penalty_index": "PEN",
-        //                 "open_date": "2019-09-12",
-        //                 "open_datetime_stamp": "2019-09-12T11:19:10Z",
-        //                 "grace_day": 5,
-        //                 "is_catch_up": true,
-        //                 "customer_type": "0703",
-        //                 "account_branch": 20,
-        //                 "daily_accrued_amount": 0.10959,
-        //                 "unpaid_accrued_amount": 0.00000
-        //             },
-        //             {
-        //                 "account_number": 600000000033,
-        //                 "account_sequence": 2,
-        //                 "interest_index": "MRR",
-        //                 "interest_spread": -4.00000,
-        //                 "penalty_index": "PEN",
-        //                 "open_date": "2019-09-13",
-        //                 "open_datetime_stamp": "2019-09-12T11:19:10Z",
-        //                 "grace_day": 6,
-        //                 "is_catch_up": false,
-        //                 "customer_type": "0704",
-        //                 "account_branch": 21,
-        //                 "daily_accrued_amount": 0.10959,
-        //                 "unpaid_accrued_amount": 0.00000
-        //             }
-        //         ]
-        //     }
-        // }
-        // sessionStorage.setItem("response_inqInterastaAccrued", JSON.stringify(data.rs_body.position_detail));
-        // window.open('/iiaSummary', '_self');
+            //mock data
+            // let data = {
+            //     "rs_body": {
+            //         "position_detail": [
+            //             {
+            //                 "account_number": 600000000032,
+            //                 "account_sequence": 1,
+            //                 "interest_index": "MRR",
+            //                 "interest_spread": -3.00000,
+            //                 "penalty_index": "PEN",
+            //                 "open_date": "2019-09-12",
+            //                 "open_datetime_stamp": "2019-09-12T11:19:10Z",
+            //                 "grace_day": 5,
+            //                 "is_catch_up": true,
+            //                 "customer_type": "0703",
+            //                 "account_branch": 20,
+            //                 "daily_accrued_amount": 0.10959,
+            //                 "unpaid_accrued_amount": 0.00000
+            //             },
+            //             {
+            //                 "account_number": 600000000033,
+            //                 "account_sequence": 2,
+            //                 "interest_index": "MRR",
+            //                 "interest_spread": -4.00000,
+            //                 "penalty_index": "PEN",
+            //                 "open_date": "2019-09-13",
+            //                 "open_datetime_stamp": "2019-09-12T11:19:10Z",
+            //                 "grace_day": 6,
+            //                 "is_catch_up": false,
+            //                 "customer_type": "0704",
+            //                 "account_branch": 21,
+            //                 "daily_accrued_amount": 0.10959,
+            //                 "unpaid_accrued_amount": 0.00000
+            //             }
+            //         ]
+            //     }
+            // }
+            // sessionStorage.setItem("response_inqInterastaAccrued", JSON.stringify(data.rs_body.position_detail));
+            // window.open('/iiaSummary', '_self');
+        }, 1000);
     };
 
     handleChange(event) {
-        this.setState({[event.target.name]: event.target.type === "number" ? Number(event.target.value) : event.target.value});
+        this.setState({ [event.target.name]: event.target.type === "number" ? Number(event.target.value) : event.target.value });
     }
 
     FormInputData = () => {
         return inputModel.model.map(item => {
-                return (
-                    <FormGroup>
-                        <Label>{item.label}</Label>
-                        <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                               value={this.state[item.value]} onChange={this.handleChange}/>
-                    </FormGroup>
-                );
+            return (
+                <FormGroup>
+                    <Label>{item.label}</Label>
+                    <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+                        value={this.state[item.value]} onChange={this.handleChange} />
+                </FormGroup>
+            );
         });
     };
 
     render() {
+        const { loading } = this.state;
         return (
             <div>
-                <DynamicHeader/>
+                <DynamicHeader />
                 <h2>Form Input Inquiry Interest Accrued</h2>
-                <br/>
+                <br />
                 <Container>
                     <Row>
-                        <Col md={{size: 4, offset: 4}}>
+                        <Col md={{ size: 4, offset: 4 }}>
                             <Form onSubmit={this.Clicked}>
                                 {this.FormInputData()}
-                                <div class="text-center">
-                                    <Button color="primary" type="submit">Submit</Button>
-                                </div>
+                                    <div class="text-center">
+                                        <Button color="primary" type="submit" disabled={loading}>
+                                            {loading && (<SpinnerLoader />)}
+                                            {loading && <span>Loading..</span>}
+                                            {!loading && <span>Submit</span>}
+                                        </Button>
+                                    </div>
                             </Form>
                         </Col>
                     </Row>

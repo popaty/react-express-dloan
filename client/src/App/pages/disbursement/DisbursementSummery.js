@@ -113,7 +113,7 @@ class disbursementSummery extends Component {
                 </Col>
                 <br/>
                 <Button color="success" onClick={this.openInqPositionDetail}>Inquiry Position Detail pREST
-                    : {account.account_number}</Button>
+                    : {account}</Button>
             </div>
         );
     };

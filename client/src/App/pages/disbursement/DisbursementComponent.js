@@ -3,6 +3,7 @@ import {Button, Col, Container, Form, FormGroup, Input, Label, Row} from 'reacts
 import DynamicHeader from '../Header.js';
 import inputModel from './model.json';
 import utility from '../Utility.js';
+import SpinnerLoader from '../loading.js';
 
 const cloneDeep = require('lodash.clonedeep');
 
@@ -24,7 +25,8 @@ class disbursementComponent extends Component {
                     interest_spread: 0,
                     first_payment_date: ""
                 }
-            }
+            },
+            loading: false
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -98,11 +100,15 @@ class disbursementComponent extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        this.setState({ loading: true });
         //clone state for use in omit function.
         let body = cloneDeep(this.state);
         const request = utility.omit(body);
         //console.log(request);
-        this.postList(request);
+        setTimeout(() => {
+            this.setState({ loading: false });
+            this.postList(request);
+        }, 1000);
     };
 
     postList = (request) => {
@@ -162,6 +168,7 @@ class disbursementComponent extends Component {
     };
 
     render() {
+        const { loading } = this.state;
         return (
             <div>
                 <DynamicHeader/>
@@ -173,9 +180,13 @@ class disbursementComponent extends Component {
                             <Form onSubmit={this.handleSubmit}>
                                 {this.FormInputData()}
                                 <br/>
-                                <div class="text-center">
-                                    <Button color="primary" type="submit">Submit</Button>
-                                </div>
+                                    <div class="text-center">
+                                        <Button color="primary" type="submit" disabled={loading}>
+                                            {loading && (<SpinnerLoader />)}
+                                            {loading && <span>Loading..</span>}
+                                            {!loading && <span>Submit</span>}
+                                        </Button>
+                                    </div>
                                 <br/>
                             </Form>
                         </Col>

@@ -1,8 +1,9 @@
-import React, {Component} from 'react';
-import {Button, Col, Form, FormGroup, Input, Label} from 'reactstrap';
+import React, { Component } from 'react';
+import { Button, Col, Form, FormGroup, Input, Label } from 'reactstrap';
 import DynamicHeader from '../Header.js';
 import inputModel from "../inqInterestAccruedDetail/model";
 import utility from '../Utility.js';
+import SpinnerLoader from '../loading.js';
 
 const cloneDeep = require('lodash.clonedeep');
 
@@ -15,7 +16,8 @@ class inquiryInterestDetailComponent extends Component {
                 account_number: "",
                 account_sequence: "",
                 date: ""
-            }
+            },
+            loading: false
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,18 +25,22 @@ class inquiryInterestDetailComponent extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        this.setState({ loading: true });
         //clone state for use in omit function.
         let body = cloneDeep(this.state);
         const request = utility.omit(body);
         //console.log(request);
-        this.postList(request);
+        setTimeout(() => {
+            this.setState({ loading: false });
+            this.postList(request);
+        }, 1000);
     }
 
     handleChange(event) {
-        const {rq_body} = {...this.state};
+        const { rq_body } = { ...this.state };
         const currentState = rq_body;
         currentState[event.target.name] = event.target.type === "number" ? Number(event.target.value) : event.target.value;
-        this.setState({rq_body: currentState});
+        this.setState({ rq_body: currentState });
     }
 
     postList = (request) => {
@@ -67,7 +73,7 @@ class inquiryInterestDetailComponent extends Component {
                     <FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                               value={this.state.rq_body[item.value]} onChange={this.handleChange}/>
+                            value={this.state.rq_body[item.value]} onChange={this.handleChange} />
                     </FormGroup>
                 );
             } else {
@@ -75,7 +81,7 @@ class inquiryInterestDetailComponent extends Component {
                     <FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                               value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange}/>
+                            value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
                     </FormGroup>
                 );
             }
@@ -83,19 +89,24 @@ class inquiryInterestDetailComponent extends Component {
     };
 
     render() {
+        const { loading } = this.state;
         return (
             <div>
-                <DynamicHeader/>
+                <DynamicHeader />
                 <h2>Form Input Inquiry Interest Accrued Details</h2>
-                <br/>
-                <Col md={{size: 4, offset: 4}}>
+                <br />
+                <Col md={{ size: 4, offset: 4 }}>
                     <Form onSubmit={this.handleSubmit}>
                         {this.FormInputData()}
-                        <br/>
-                        <div class="text-center">
-                            <Button color="primary" type="submit">Submit</Button>
-                        </div>
-                        <br/>
+                        <br />
+                            <div class="text-center">
+                                <Button color="primary" type="submit" disabled={loading}>
+                                    {loading && (<SpinnerLoader />)}
+                                    {loading && <span>Loading..</span>}
+                                    {!loading && <span>Submit</span>}
+                                </Button>
+                            </div>
+                        <br />
                     </Form>
                 </Col>
             </div>

@@ -94,8 +94,7 @@ class OpenLoanAccountComponent extends Component {
         setTimeout(() => {
             this.setState({loading: false});
             this.postList(request);
-
-        }, 1200);
+        }, 1000);
     };
 
     loadJson(event) {

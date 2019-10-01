@@ -3,13 +3,15 @@ import {Button, Col, Form, FormGroup, Input, Label, Container, Row} from 'reacts
 import DynamicHeader from '../Header.js';
 import inputModel from './model.json';
 import utility from '../Utility.js';
+import SpinnerLoader from '../loading.js';
 
 class inquiryPositionPRESTComponent extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            account_number: ""
+            account_number: "",
+            loading: false
         };
         this.handleChange = this.handleChange.bind(this);
         this.Clicked = this.Clicked.bind(this);
@@ -17,7 +19,11 @@ class inquiryPositionPRESTComponent extends Component {
 
     Clicked(event) {
         event.preventDefault();
-        fetch('/api/inqPositionDetail/' + this.state.account_number)
+        this.setState({ loading: true });
+
+        setTimeout(() => {
+            this.setState({ loading: false });
+            fetch('/api/inqPositionDetail/' + this.state.account_number)
             .then(response => response.json())
             .then(data => {
                 //console.log(data);
@@ -37,6 +43,7 @@ class inquiryPositionPRESTComponent extends Component {
                     alert("Data not found.");
                 }
             }).catch(error => console.log(error))
+        }, 1000);
     };
 
     handleChange(event) {
@@ -56,6 +63,7 @@ class inquiryPositionPRESTComponent extends Component {
     };
 
     render() {
+        const { loading } = this.state;
         return (
             <div >
                 <DynamicHeader/>
@@ -67,7 +75,11 @@ class inquiryPositionPRESTComponent extends Component {
                             <Form onSubmit={this.Clicked}>
                                 {this.FormInputData()}
                                 <div class="text-center">
-                                    <Button color="primary" type="submit">Submit</Button>
+                                    <Button color="primary" type="submit" disabled={loading}>
+                                        {loading && (<SpinnerLoader />)}
+                                        {loading && <span>Loading..</span>}
+                                        {!loading && <span>Submit</span>}
+                                    </Button>
                                 </div>
                             </Form>
                         </Col>
