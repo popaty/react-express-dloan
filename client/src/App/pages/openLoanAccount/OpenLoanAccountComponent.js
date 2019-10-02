@@ -242,7 +242,6 @@ class OpenLoanAccountComponent extends Component {
                             </Button>
                             {/* < SpinnerLoader /> */}
                         </div>
-                        <br/>
                     </Form>
                 </Container>
             </div>

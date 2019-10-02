@@ -96,8 +96,7 @@ class inquiryInterestDetailComponent extends Component {
                 <h2>Form Input Inquiry Interest Accrued Details</h2>
                 <Col md={{ size: 4, offset: 4 }}>
                     <Form onSubmit={this.handleSubmit}>
-                        {this.FormInputData()}
-                        <br />
+                        {this.FormInputData()} 
                             <div class="text-center">
                                 <Button color="primary" type="submit" disabled={loading}>
                                     {loading && (<SpinnerLoader />)}
@@ -105,7 +104,6 @@ class inquiryInterestDetailComponent extends Component {
                                     {!loading && <span>Submit</span>}
                                 </Button>
                             </div>
-                        <br />
                     </Form>
                 </Col>
             </div>

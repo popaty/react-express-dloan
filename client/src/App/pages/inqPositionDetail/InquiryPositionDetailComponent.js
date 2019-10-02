@@ -95,7 +95,6 @@ class InquiryPositionDetailComponent extends Component {
                         <Col md={{ size: 4, offset: 4 }}>
                             <Form onSubmit={this.Clicked}>
                                 {this.FormInputData()}
-                                <br />
                                 <div class="text-center">
                                     <Button color="primary" type="submit" disabled={loading}>
                                         {loading && (<SpinnerLoader />)}
@@ -103,7 +102,6 @@ class InquiryPositionDetailComponent extends Component {
                                         {!loading && <span>Submit</span>}
                                     </Button>
                                 </div>
-                                <br />
                             </Form>
                         </Col>
                     </Row>

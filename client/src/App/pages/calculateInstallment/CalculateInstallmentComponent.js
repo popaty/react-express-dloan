@@ -148,7 +148,6 @@ class installmentComponent extends Component {
                                         {!loading && <span>Submit</span>}
                                     </Button>
                                 </div>
-                                <br />
                             </Form>
                         </Col>
                     </Row>
