@@ -66,9 +66,7 @@ class InquiryPositionDetailSummery extends Component {
                 <Col md={{size: 6, offset: 3}}>
                     {this.dynamicResponse(data)}
                 </Col>
-                <br/>
-                <br/>
-                <br/>
+                <br />
             </div>
         )
     };

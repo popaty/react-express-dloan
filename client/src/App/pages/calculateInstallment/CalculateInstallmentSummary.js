@@ -65,7 +65,6 @@ class calculateInstallmentSummary extends Component {
                     <Col md={{size: 6, offset: 3}}>
                         {this.dynamicResponse(data.rs_body)}
                     </Col>
-                    <br/>
                     <Button color="success" onClick={calculateInstallmentSummary.openDisbursement}>Disbursement</Button><br/>
                 </Form>
             </div>

@@ -82,7 +82,6 @@ class inquiryPositionSummery extends Component {
                             </Table>
                         </div>
                     </Col>
-                    <br/>
                 </Form>
             </div>
         );

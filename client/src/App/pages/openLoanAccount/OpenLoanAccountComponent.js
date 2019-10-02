@@ -222,7 +222,6 @@ class OpenLoanAccountComponent extends Component {
                                 005</DropdownItem>
                         </DropdownMenu>
                     </UncontrolledDropdown>
-                    <br/>
                     <Form onSubmit={this.handleSubmit}>
                         <Row>
                             <Col md={{size: 3, offset: 3}}>

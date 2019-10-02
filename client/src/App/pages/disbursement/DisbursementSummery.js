@@ -110,7 +110,6 @@ class disbursementSummery extends Component {
                     {/* <Alert color="success"><h3>Success!!</h3></Alert> */}
                     {this.dynamicResponse(data.rs_body)}
                 </Col>
-                <br/>
                 <Button color="success" onClick={this.openInqPositionDetail}>Inquiry Position Detail pREST
                     : {account}</Button>
             </div>

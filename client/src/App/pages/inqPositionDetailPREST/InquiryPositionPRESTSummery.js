@@ -130,7 +130,6 @@ class inquiryPositionPRESTSummery extends Component {
                     <Col md={{size: 6, offset: 3}}>
                         {this.dynamicResponse(data)}
                     </Col>
-                    <br/>
                     <Button color="success" onClick={this.CallInquiryLoanAccount}>Inquiry Account Details </Button>
                 </Form>
             </div>

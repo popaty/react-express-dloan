@@ -83,12 +83,8 @@ class InquiryLoanAccountSummery extends Component {
                 <Col md={{size: 6, offset: 3}}>
                     {this.dynamicResponse(data)}
                 </Col>
-                <br/>
                 <Button color="success" onClick={InquiryLoanAccountSummery.openInstallment}>Calculate Installment
                     Amount</Button>
-                <br/>
-                <br/>
-                <br/>
             </div>
         )
     };
