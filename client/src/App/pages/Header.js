@@ -1,9 +1,12 @@
 import React from 'react';
-import {DropdownItem, DropdownMenu, DropdownToggle, Nav, Navbar, NavbarBrand, UncontrolledDropdown} from 'reactstrap';
+import {DropdownItem, DropdownMenu, DropdownToggle, Nav, Navbar, NavLink, NavItem, NavbarBrand, UncontrolledDropdown} from 'reactstrap';
+import {FaUser} from 'react-icons/fa';
 
 const header = (props) => {
+    if (JSON.parse(sessionStorage.getItem("account_number"))) {
+        var account = JSON.parse(sessionStorage.getItem("account_number"));
+    }
     return (
-
         <Navbar color="dark" dark expand="md">
             {/* <img src={logo} alt="TN" width="100" height="100" /> */}
             <NavbarBrand href="/">TN</NavbarBrand>
@@ -77,6 +80,10 @@ const header = (props) => {
                         </DropdownItem>
                     </DropdownMenu>
                 </UncontrolledDropdown>
+                &emsp;
+                <NavItem>
+                    <NavLink><span class="text-warning"><FaUser /> {account}</span></NavLink>
+                </NavItem>
             </Nav>
         </Navbar>
     );

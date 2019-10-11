@@ -27,8 +27,6 @@ class RepaymentComponent extends Component {
 
     componentDidMount() {
         if (JSON.parse(sessionStorage.getItem("account_number"))) {
-            //JSON.parse(sessionStorage.getItem("response_disbursement"))
-            //const data = JSON.parse(sessionStorage.getItem("response_disbursement"));
             const body = {
                 account_number: JSON.parse(sessionStorage.getItem("account_number")),
                 transaction_amount: 0,
