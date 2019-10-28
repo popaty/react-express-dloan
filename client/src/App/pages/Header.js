@@ -8,8 +8,8 @@ const header = (props) => {
     }
     return (
         <Navbar color="dark" dark expand="md">
-            {/* <img src={logo} alt="TN" width="100" height="100" /> */}
-            <NavbarBrand href="/">TN</NavbarBrand>
+            {/* <img src={Logo} alt="TN" width="100" height="50" /> */}
+            <NavbarBrand href="/"><span class="text-info">TN</span></NavbarBrand>
             <Nav className="ml-auto" navbar>
                 <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle nav caret>

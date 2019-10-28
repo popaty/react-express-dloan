@@ -116,7 +116,7 @@ class OpenLoanAccountSummary extends Component {
     };
 
     render() {
-        const data = JSON.parse(sessionStorage.getItem("response_openLoanAccount"));
+       const data = JSON.parse(sessionStorage.getItem("response_openLoanAccount"));
         const account = data.rs_body.account_number;
         utility.clearSessionStorage("account_number");
         sessionStorage.setItem("account_number", JSON.stringify(account));
@@ -130,8 +130,8 @@ class OpenLoanAccountSummary extends Component {
                     </Col>
                     <Button color="success" onClick={this.CallInquiryLoanAccount}>Inquiry Account Details : 
                     {account}</Button>
-                </Form>
-            </div>
+                 </Form>
+             </div>
         );
     };
 }

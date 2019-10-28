@@ -22,6 +22,7 @@ const utility = {
             }
         }
         delete body.loading;
+        delete body.resultData;
         return body;
     },
     clearSessionStorage : (key) => {

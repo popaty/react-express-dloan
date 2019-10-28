@@ -1,20 +1,20 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import DynamicHeader from './Header.js';
 
 class Home extends Component {
-    render() {
+  render() {
 
-        return (
-            <div className="App">
-                <DynamicHeader/>
-                <h1>Project Home</h1>
-                {/* Link to List.js */}
-                <Link to={'./list'}>
-                    <button variant="raised">
-                        My List
+    return (
+      <div className="App">
+        <DynamicHeader />
+        <h1>Project Home</h1>
+        {/* Link to List.js */}   
+        <Link to={'./list'}>
+          <button variant="raised">
+            My List
                     </button>
-                </Link>&emsp;
+        </Link>&emsp;
                 {/* <Link to={'./olaComponent'}>
         <button variant="raised">
           Open Loan Account
@@ -35,9 +35,9 @@ class Home extends Component {
         Disbursement
         </button>
       </Link>&emsp; */}
-            </div>
-        );
-    }
+      </div>
+    );
+  }
 }
 
 export default Home;

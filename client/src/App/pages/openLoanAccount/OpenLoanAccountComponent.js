@@ -137,7 +137,7 @@ class OpenLoanAccountComponent extends Component {
                     alert("error code : " + data.errors.map(error => error.error_code) + "\n"
                         + "error desc : " + data.errors.map(error => error.error_desc));
                 }
-            }).catch(error => console.log(error))
+             }).catch(error => console.log(error))
 
         //mock data
         // let data = {
