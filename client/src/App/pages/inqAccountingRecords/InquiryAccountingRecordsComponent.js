@@ -15,6 +15,7 @@ class InquiryAccountingRecordsComponent extends Component {
             service: null,
             transaction_date: null,
             channel_post_date: null,
+            transaction_id: null,
             job_id: null,
             loading: false
         };
@@ -30,7 +31,7 @@ class InquiryAccountingRecordsComponent extends Component {
 
     handleChange(event) {
         // this.setState({ [event.target.name]: event.target.type === "number" ? Number(event.target.value) : event.target.value });
-        this.setState({ [event.target.name]: event.target.value === "" ? null : event.target.value});
+        this.setState({ [event.target.name]: event.target.value === "" ? null : event.target.value });
     };
 
     Clicked(event) {
@@ -40,10 +41,10 @@ class InquiryAccountingRecordsComponent extends Component {
         setTimeout(() => {
             this.setState({ loading: false });
             fetch('/api/inquiryAccountingRecord/' + this.state.account_number + "/" + this.state.account_sequence + "/"
-            + this.state.transaction_date + "/" + this.state.channel_post_date + "/" + this.state.job_id + "/" +
-            this.state.service,{})
+                + this.state.transaction_date + "/" + this.state.channel_post_date + "/" + this.state.job_id + "/" 
+                + this.state.service + "/" + this.state.transaction_id, {})
                 .then(response => response.json())
-                .then(data => { 
+                .then(data => {
                     if (data.rs_body) {
                         utility.clearSessionStorage("response_inquiryAccountingRecord");
                         sessionStorage.setItem("response_inquiryAccountingRecord", JSON.stringify(data.rs_body));
@@ -55,28 +56,32 @@ class InquiryAccountingRecordsComponent extends Component {
                     }
 
                 }).catch(error => console.log(error));
-         }, 1000);
+        }, 1000);
     };
 
     FormInputData = () => {
         return inputModel.model.map(item => {
             if (item.type === "select") {
                 return (
-                    <FormGroup>
-                        <Label>{item.label}</Label>
-                        <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                            value={this.state[item.value]} onChange={this.handleChange} >
-                            {item.items.map(element => <option>{element}</option>)}
-                        </Input>
-                    </FormGroup>
+                    <Col xs="3">
+                        <FormGroup>
+                            <Label>{item.label}</Label>
+                            <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+                                value={this.state[item.value]} onChange={this.handleChange} >
+                                {item.items.map(element => <option>{element}</option>)}
+                            </Input>
+                        </FormGroup>
+                    </Col >
                 );
             } else {
                 return (
-                    <FormGroup>
-                        <Label>{item.label}</Label>
-                        <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                            value={this.state[item.value]} onChange={this.handleChange} />
-                    </FormGroup>
+                    <Col xs="3">
+                        <FormGroup>
+                            <Label>{item.label}</Label>
+                            <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+                                value={this.state[item.value]} onChange={this.handleChange} />
+                        </FormGroup>
+                    </Col>
                 );
             }
         });
@@ -89,20 +94,20 @@ class InquiryAccountingRecordsComponent extends Component {
                 <DynamicHeader />
                 <h2>Form Input Inquiry Accounting Record</h2>
                 <Container>
-                    <Row>
-                        <Col md={{ size: 4, offset: 4 }}>
-                            <Form onSubmit={this.Clicked}>
-                                {this.FormInputData()}
+                    <Form onSubmit={this.Clicked}>
+                        <Row>
+                            {this.FormInputData()}
+                            <Col xs="3">
                                 <div class="text-center">
-                                    <Button color="primary" type="submit" disabled={loading}>
+                                    <Button color="primary" style={{ marginTop: 30 }} type="submit" disabled={loading}>
                                         {loading && (<SpinnerLoader />)}
                                         {loading && <span>Loading..</span>}
                                         {!loading && <span>Submit</span>}
                                     </Button>
                                 </div>
-                            </Form>
-                        </Col>
-                    </Row>
+                            </Col>
+                        </Row>
+                    </Form>
                 </Container>
             </div>
         );

@@ -178,7 +178,7 @@ app.post("/api/repayment", (req, res) => {
 });
 
 //[GET] Inquiry Accounting Record
-app.get("/api/inquiryAccountingRecord/:accountNo/:accountSequence/:transactionDate/:channelPostDate/:jobID/:service", (req, res) => {
+app.get("/api/inquiryAccountingRecord/:accountNo/:accountSequence/:transactionDate/:channelPostDate/:jobID/:service/:transactionID", (req, res) => {
     console.log("Inquiry Accounting Record");
     let parameter = [];
     
@@ -199,6 +199,9 @@ app.get("/api/inquiryAccountingRecord/:accountNo/:accountSequence/:transactionDa
     }
     if(req.params.service != "null"){
         parameter.push("service="+req.params.service);
+    }
+    if(req.params.transactionID != "null"){
+        parameter.push("transaction_id="+req.params.transactionID);
     }
     let header = headers.get_headers();
     let url = properties.get("inquiryAccountingRecord.url") + parameter.join("&").toString();
