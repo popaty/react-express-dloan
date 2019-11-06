@@ -35,6 +35,11 @@ import RepaymentSummery from './pages/repayment/viewRepaymentSummery';
 import inquiryPositionDetailComponent from './pages/inqPositionDetail/viewInquiryPositionDetailComponent';
 import inquiryPositionDetailSummery from './pages/inqPositionDetail/viewInquiryPositionDetailSummery';
 
+import inquiryAccountingRecordsComponent from './pages/inqAccountingRecords/viewInquiryAccountingRecordsComponent';
+import inquiryAccountingRecordsSummery from './pages/inqAccountingRecords/viewInquiryAccountingRecordsSummery';
+import InquiryAccountingByJobID from './pages/inqAccountingRecords/InquiryAccountingByJobIDSummery';
+
+
 class App extends Component {
     render() {
         const App = () => (
@@ -72,6 +77,10 @@ class App extends Component {
 
                     <Route path='/ipdComponent' component={inquiryPositionDetailComponent}/>
                     <Route path='/ipdSummary' component={inquiryPositionDetailSummery}/>
+
+                    <Route path='/iarComponent' component={inquiryAccountingRecordsComponent}/>
+                    <Route path='/iarSummary' component={inquiryAccountingRecordsSummery}/>
+                    <Route path='/iabjSummary' component={InquiryAccountingByJobID}/>
 
                 </Switch>
             </div>

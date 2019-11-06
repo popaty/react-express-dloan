@@ -150,7 +150,8 @@ app.get("/api/inquiryPositionList/:accountNo", (req, res) => {
 app.get("/api/inquiryPositionDetail/:accountNo/:accountSequence", (req, res) => {
     console.log("Inquiry Position Detail");
     let header = headers.get_headers();
-    let url = properties.get("inquiryPositionDetail.url") + req.params.accountNo +"/"+ req.params.accountSequence;
+    let url = properties.get("inquiryPositionDetail.url") + req.params.accountNo +"/"+ req.params.accountSequence
+    +"/"+ req.params.service;
     api_helper.API_call_get(url, header)
         .then(response => {
             res.json(response);
@@ -176,6 +177,41 @@ app.post("/api/repayment", (req, res) => {
         });
 });
 
+//[GET] Inquiry Accounting Record
+app.get("/api/inquiryAccountingRecord/:accountNo/:accountSequence/:transactionDate/:channelPostDate/:jobID/:service", (req, res) => {
+    console.log("Inquiry Accounting Record");
+    let parameter = [];
+    
+    if(req.params.accountNo != "null"){
+        parameter.push("account_number="+req.params.accountNo);
+    }
+    if(req.params.accountSequence != "null"){
+         parameter.push("account_sequence="+ req.params.accountSequence);
+    }
+    if(req.params.transactionDate != "null"){
+        parameter.push("transaction_date="+req.params.transactionDate);
+    }
+    if(req.params.channelPostDate != "null"){
+        parameter.push("channel_post_date="+req.params.channelPostDate);
+    }
+    if(req.params.jobID != "null"){
+        parameter.push("job_id="+req.params.jobID);
+    }
+    if(req.params.service != "null"){
+        parameter.push("service="+req.params.service);
+    }
+    let header = headers.get_headers();
+    let url = properties.get("inquiryAccountingRecord.url") + parameter.join("&").toString();
+    console.log("url ="+url);
+    api_helper.API_call_get(url, header)
+        .then(response => {
+            res.json(response);
+            console.log("Finished Inquiry Accounting Record");
+        })
+        .catch(error => {
+            res.send(error)
+        });
+});
 
 // Handles any requests that don"t match the ones above
 app.get("*", (req, res) => {

@@ -81,6 +81,17 @@ const header = (props) => {
                     </DropdownMenu>
                 </UncontrolledDropdown>
                 &emsp;
+                <UncontrolledDropdown nav inNavbar>
+                    <DropdownToggle nav caret>
+                        Accounting
+                    </DropdownToggle>
+                    <DropdownMenu right>
+                        <DropdownItem href="/iarComponent">
+                            Inquiry Accounting Record
+                        </DropdownItem>
+                    </DropdownMenu>
+                </UncontrolledDropdown>
+                &emsp;
                 <NavItem>
                     <NavLink><span class="text-warning"><FaUser /> {account}</span></NavLink>
                 </NavItem>
