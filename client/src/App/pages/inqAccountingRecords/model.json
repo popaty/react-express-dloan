@@ -19,7 +19,7 @@
       {
         "label": "Service",
         "type": "select",
-        "items": [" ",1,2,3,4],
+        "items": ["","disbursement","deposit-for-repayment","repayment","loan-accr-int","loan-accr-pen"],
         "name": "service",
         "placeholder": "Enter service",
         "value": "service",
