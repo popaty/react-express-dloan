@@ -20,6 +20,7 @@ class disbursementComponent extends Component {
                 service_branch: 0,
                 number_of_payment: 0,
                 installment_amount: 0,
+                clearing_and_settlement_key: "",
                 other_properties: {
                     interest_index: "",
                     interest_spread: 0,
@@ -73,6 +74,7 @@ class disbursementComponent extends Component {
                 service_branch: 0,
                 number_of_payment: numberOfPayment,
                 installment_amount: installmentAmount,
+                clearing_and_settlement_key: "CBS",
                 other_properties: {
                     interest_index: "",
                     interest_spread: 0,

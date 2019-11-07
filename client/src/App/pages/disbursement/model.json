@@ -49,6 +49,14 @@
       "root": null
     },
     {
+      "label": "Clearing and settlement key",
+      "type": "text",
+      "name": "clearing_and_settlement_key",
+      "placeholder": "Enter clearing and settlement key",
+      "value": "clearing_and_settlement_key",
+      "root": null
+    },
+    {
       "label": "Number of payment",
       "type": "number",
       "name": "number_of_payment",
