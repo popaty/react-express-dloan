@@ -4,7 +4,6 @@ import DynamicHeader from '../Header.js';
 // import utility from '../Utility.js';
 import Modal from '../modal'
 import fieldHeader from './fieldRes.js';
-import { FaSdCard } from 'react-icons/fa';
 
 class inquiryAccountingRecordsSummery extends Component {
     constructor(props) {
@@ -31,50 +30,36 @@ class inquiryAccountingRecordsSummery extends Component {
 
     getBodyTable = (data) => {
         let body = [];
-        for (let index in data) {                         // length index in json response 
+        for (let index in data) { 
+            let num = Number(index)+ 1;
             let obj = [];
-            let num = Number(index) + 1;
-            obj.push(<td>{num}</td>);
-
+            obj.push(<td>{num}</td>); 
+            let tmp = this.checkFieldHeader();
             // if (data.hasOwnProperty(index)) {
             // eslint-disable-next-line
                  for (let ResHeader in data[index]) {
                     if (typeof data[index][ResHeader] === "object") {
                         for(let inObj in data[index][ResHeader]){
                             for(let keyInObj in  data[index][ResHeader][inObj]){
-                                // if(item === keyInObj){
-                                //         obj.push(<td>{data[index][ResHeader][inObj][keyInObj]}</td>);
-                                //         break;
-                                //     }
-                                // this.checkFieldHeader(keyInObj);
-                                // console.log("obj ="+this.checkFieldHeader(keyInObj));
-                                // this.checkFieldHeader(keyInObj);
+                                tmp[keyInObj] = data[index][ResHeader][inObj][keyInObj];
                             }
                         }
                      } else {
-                        //  console.log("not = "+ResHeader);
-                        // if(ResHeader === item){
-                        //     obj.push(<td>{data[index][ResHeader]}</td>);
-                        //     break;
-                        // }
-                         
-                        //    console.log(this.checkFieldHeader(ResHeader));
-                        let tmp = this.checkFieldHeader(ResHeader);
                         tmp[ResHeader] = data[index][ResHeader];
-                        console.log(tmp);
                     }
                  }
-            // body.push(<tr>{obj}</tr>);
+                for(let indexValue in tmp){
+                     obj.push(<td>{tmp[indexValue]}</td>);
+                }  
+                body.push(<tr>{obj}</tr>);
         }
         return body;
     };
 
-    checkFieldHeader = (field) => {
+    checkFieldHeader = () => {
         let key = new Object();
         fieldHeader.gl_entry_list.map(item => {  
-             if(field === item){
                 key[item] = "";
-            }
         })
         return key; 
     };
@@ -152,7 +137,7 @@ class inquiryAccountingRecordsSummery extends Component {
                     <h2>Form Data Inquiry Accounting Record</h2>
                     <Col md={{ size: 10, offset: 1 }}>
                         <div class="table-responsive">
-                            <Table hover>
+                            <Table hover bordered>
                                 <thead>
                                     <tr>
                                         {this.getHeaderTable()}
