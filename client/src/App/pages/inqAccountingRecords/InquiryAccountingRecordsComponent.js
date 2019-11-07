@@ -5,7 +5,7 @@ import utility from '../Utility.js';
 import SpinnerLoader from '../loading.js';
 import { Button, Col, Container, Form, FormGroup, Input, Label, Row, Table } from 'reactstrap';
 import fieldHeader from './fieldRes.js'
-import dataRes from './dataRes.js'
+// import dataRes from './dataRes.js'
 
 class InquiryAccountingRecordsComponent extends Component {
     constructor(props) {
@@ -19,8 +19,8 @@ class InquiryAccountingRecordsComponent extends Component {
             transaction_id: null,
             job_id: null,
             loading: false,
-            isFound: true,
-            glEntryList: dataRes.rs_body.gl_entry_list
+            isFound: false,
+            glEntryList: []
         };
         this.handleChange = this.handleChange.bind(this);
         this.Clicked = this.Clicked.bind(this);
@@ -103,7 +103,8 @@ class InquiryAccountingRecordsComponent extends Component {
         header.push(<th>#&nbsp;</th>);
         fieldHeader.gl_entry_list.map(item => {
             if (item === "trnRef" || item === "before_balance" || item === "first_payment_date"
-                || item === "installment_amount" || item === "number_of_payment") {
+                || item === "installment_amount" || item === "number_of_payment" || 
+                item === "interest_index" || item === "interest_spread") {
                 header.push(<th><u>{item}</u>&nbsp;</th>);
             } else {
                 header.push(<th>{item}&nbsp;</th>);
