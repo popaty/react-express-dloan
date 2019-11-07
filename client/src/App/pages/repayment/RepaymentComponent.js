@@ -17,7 +17,8 @@ class RepaymentComponent extends Component {
                 effective_date: "",
                 channel_post_date: "",
                 currency_code: "THB",
-                service_branch: 0
+                service_branch: 0,
+                clearing_and_settlement_key: "",
             },
             loading: false
         };
@@ -33,7 +34,8 @@ class RepaymentComponent extends Component {
                 effective_date: "",
                 channel_post_date: "",
                 currency_code: "THB",
-                service_branch: 0
+                service_branch: 0,
+                clearing_and_settlement_key: "CBS",
             }
             this.setState({rq_body: body});
         }
