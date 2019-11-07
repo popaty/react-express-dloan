@@ -1,81 +1,64 @@
 import React, { Component } from 'react';
 import { Col, Form, Table } from 'reactstrap';
 import DynamicHeader from '../Header.js';
-
+import fieldHeader from './fieldRes.js'
 
 class inquiryAccountingByJobIDSummery extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-        };
-    }
-        getHeaderTable = (data) => {
+        this.state = {};
+        }
+        
+        getHeaderTable = () => {
             let header = [];
-            if (data.length > 1) {
-                header.push(<th>#&nbsp;</th>);
-                // eslint-disable-next-line
-                for (let key in data[0]) {
-                    if (data[0].hasOwnProperty(key)) {
-                        if (typeof data[0][key] === "object") {
-                            // eslint-disable-next-line
-                            for (let inObj in data[0][key]) {
-                                header.push(<th><u>{inObj}</u>&nbsp;</th>);
-                            }
-                        } else {
-                            header.push(<th>{key}&nbsp;</th>);
-                        }
-                    }
+            header.push(<th>#&nbsp;</th>);
+            fieldHeader.gl_entry_list.map(item => {
+                if (item === "trnRef" || item === "before_balance" || item === "first_payment_date"
+                    || item === "installment_amount" || item === "number_of_payment") {
+                    header.push(<th><u>{item}</u>&nbsp;</th>);
+                } else {
+                    header.push(<th>{item}&nbsp;</th>);
                 }
-            } else {
-                // eslint-disable-next-line
-                for (let key in data) {
-                    if (data.hasOwnProperty(key)) {
-                        header.push(<th>#&nbsp;</th>);
-                        // eslint-disable-next-line
-                        for (let keyinObj in data[key]) {
-                            if (data[key].hasOwnProperty(keyinObj)) {
-                                if (typeof data[key][keyinObj] === "object") {
-                                    // eslint-disable-next-line
-                                    for (let inObj in data[key][keyinObj]) {
-                                        header.push(<th><u>{inObj}</u>&nbsp;</th>);
-                                    }
-                                } else {
-                                    header.push(<th>{keyinObj}&nbsp;</th>);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            })
             return header;
         };
-    
+        
         getBodyTable = (data) => {
             let body = [];
-            // eslint-disable-next-line
-            for (let key in data) {
-                if (data.hasOwnProperty(key)) {
-                    let num = Number(key);
-                    let obj = [];
-                    obj.push(<td>{num + 1}</td>);
-                    // eslint-disable-next-line
-                    for (let keyinObj in data[key]) {
-                        if (data[key].hasOwnProperty(keyinObj)) {
-                            if (typeof data[key][keyinObj] === "object") {
-                                // eslint-disable-next-line
-                                for (let inObj in data[key][keyinObj]) {
-                                    obj.push(<td>{data[key][keyinObj][inObj]}&nbsp;</td>);
+            for (let index in data) { 
+                let num = Number(index)+ 1;
+                let obj = [];
+                obj.push(<td>{num}</td>); 
+                let tmp = this.checkFieldHeader();
+                // if (data.hasOwnProperty(index)) {
+                // eslint-disable-next-line
+                     for (let ResHeader in data[index]) {
+                        if (typeof data[index][ResHeader] === "object") {
+                            for(let inObj in data[index][ResHeader]){
+                                for(let keyInObj in  data[index][ResHeader][inObj]){
+                                    tmp[keyInObj] = data[index][ResHeader][inObj][keyInObj];
                                 }
-                            } else {
-                                obj.push(<td>{data[key][keyinObj]}</td>);
                             }
+                         } else {
+                            tmp[ResHeader] = data[index][ResHeader];
                         }
-                    }
+                     }
+                    for(let indexValue in tmp){
+                         obj.push(<td>{tmp[indexValue]}</td>);
+                    }  
                     body.push(<tr>{obj}</tr>);
-                }
             }
             return body;
         };
+    
+        checkFieldHeader = () => {
+            let key = new Object();
+            fieldHeader.gl_entry_list.map(item => {  
+                    key[item] = "";
+            })
+            return key; 
+        };
+       
 
         render() {
             const data = JSON.parse(sessionStorage.getItem("response_inquiryAccountingByRow"));
@@ -90,7 +73,7 @@ class inquiryAccountingByJobIDSummery extends Component {
                                     <Table striped>
                                         <thead>
                                             <tr>
-                                                {this.getHeaderTable(data)}
+                                                {this.getHeaderTable()}
                                             </tr>
                                         </thead>
                                         <tbody>

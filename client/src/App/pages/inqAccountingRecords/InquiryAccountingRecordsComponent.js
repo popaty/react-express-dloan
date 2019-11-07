@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import DynamicHeader from '../Header.js';
 import inputModel from './model.json';
-// import utility from '../Utility.js';
+import utility from '../Utility.js';
 import SpinnerLoader from '../loading.js';
 import { Button, Col, Container, Form, FormGroup, Input, Label, Row, Table } from 'reactstrap';
 import fieldHeader from './fieldRes.js'
-// import dataRes from './dataRes.js'
+import dataRes from './dataRes.js'
 
 class InquiryAccountingRecordsComponent extends Component {
     constructor(props) {
@@ -19,8 +19,8 @@ class InquiryAccountingRecordsComponent extends Component {
             transaction_id: null,
             job_id: null,
             loading: false,
-            isFound: false,
-            glEntryList: []
+            isFound: true,
+            glEntryList: dataRes.rs_body.gl_entry_list
         };
         this.handleChange = this.handleChange.bind(this);
         this.Clicked = this.Clicked.bind(this);
@@ -137,7 +137,7 @@ class InquiryAccountingRecordsComponent extends Component {
                 for(let indexValue in tmp){
                      obj.push(<td>{tmp[indexValue]}</td>);
                 }  
-                body.push(<tr>{obj}</tr>);
+                body.push(<tr onClick={() => this.searchJobID(tmp)}>{obj}</tr>);
         }
         return body;
     };
@@ -148,6 +148,33 @@ class InquiryAccountingRecordsComponent extends Component {
                 key[item] = "";
         })
         return key; 
+    };
+
+
+    searchJobID = (value) => {
+        console.log(value.job_id);
+            this.setState({ account_number: null });
+            this.setState({ account_sequence: null });
+            this.setState({ transaction_date: null });
+            this.setState({ channel_post_date: null });
+            this.setState({ job_id: value.job_id });
+            this.setState({ service: null });
+            this.setState({ transaction_id: null });
+
+            fetch('/api/inquiryAccountingRecord/' + this.state.account_number + "/" + this.state.account_sequence + "/"
+                + this.state.transaction_date + "/" + this.state.channel_post_date + "/" + this.state.job_id + "/"
+                + this.state.service + "/" + this.state.transaction_id, {})
+                .then(response => response.json())
+                .then(data => {
+                    // if (data.rs_body.gl_entry_list.length) {
+                        if (data.rs_body.gl_entry_list.length > 0) {
+                            utility.clearSessionStorage("response_inquiryAccountingByRow");
+                            sessionStorage.setItem("response_inquiryAccountingByRow", JSON.stringify(data.rs_body.gl_entry_list));
+                            window.open('/iabjSummary');
+                        }else{
+                            alert("Not Found.");
+                        }
+                }).catch(error => console.log(error));
     };
 
     render() {
