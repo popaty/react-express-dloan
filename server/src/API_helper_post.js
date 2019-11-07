@@ -5,7 +5,7 @@ module.exports = {
         console.log(url);
         const options = {
             url: url,
-            headers: JSON.stringify(header),
+            headers: header,
             body: JSON.stringify(body)
         };
         return new Promise((resolve, reject) => {
