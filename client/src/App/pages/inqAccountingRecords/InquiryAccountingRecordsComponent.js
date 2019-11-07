@@ -211,10 +211,18 @@ class InquiryAccountingRecordsComponent extends Component {
         console.log(Object.keys(dict).length)
         for (let i = 0; i < dataRes.length; i++) {
             for (let key in dataRes[i]) {
-                dict[key] = dataRes[i][key]
+                if (key === "other_prop") {
+                    dict["trnRef"] = dataRes[i][key].gl_entries_other_properties.trnRef
+                    dict["before_balance"] = ""
+                    dict["first_payment_date"] = dataRes[i].other_prop.trn_other_properties.first_payment_date
+                    dict["installment_amount"] = dataRes[i].other_prop.trn_other_properties.installment_amount
+                    dict["number_of_payment"] = dataRes[i].other_prop.trn_other_properties.number_of_payment
+                } else {
+                    dict[key] = dataRes[i][key]
+                }
             }
             children.push(<td>{i + 1}</td>)
-            for (let j = 0; j < Object.keys(dict).length - 1; j++) {
+            for (let j = 0; j < Object.keys(dict).length; j++) {
                 children.push(<td>{dict[fieldHeader.gl_entry_list[j]]}</td>)
                 // console.log("Test",dict[fieldHeader.gl_entry_list[j]])
             }
