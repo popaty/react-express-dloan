@@ -4,6 +4,7 @@ import DynamicHeader from '../Header.js';
 // import utility from '../Utility.js';
 import Modal from '../modal'
 import fieldHeader from './fieldRes.js';
+import { FaSdCard } from 'react-icons/fa';
 
 class inquiryAccountingRecordsSummery extends Component {
     constructor(props) {
@@ -47,7 +48,7 @@ class inquiryAccountingRecordsSummery extends Component {
                                 //     }
                                 // this.checkFieldHeader(keyInObj);
                                 // console.log("obj ="+this.checkFieldHeader(keyInObj));
-                                this.checkFieldHeader(keyInObj);
+                                // this.checkFieldHeader(keyInObj);
                             }
                         }
                      } else {
@@ -57,10 +58,10 @@ class inquiryAccountingRecordsSummery extends Component {
                         //     break;
                         // }
                          
-                        //   console.log(this.checkFieldHeader(ResHeader));
-                        this.checkFieldHeader(ResHeader);
-
-
+                        //    console.log(this.checkFieldHeader(ResHeader));
+                        let tmp = this.checkFieldHeader(ResHeader);
+                        tmp[ResHeader] = data[index][ResHeader];
+                        console.log(tmp);
                     }
                  }
             // body.push(<tr>{obj}</tr>);
@@ -69,19 +70,13 @@ class inquiryAccountingRecordsSummery extends Component {
     };
 
     checkFieldHeader = (field) => {
-        // console.log(field);
-        let key = []
+        let key = new Object();
         fieldHeader.gl_entry_list.map(item => {  
-            // if(item.hasOwnProperty(field)){
-            //     console.log("then ="+item);
-            // }else{
-            //     console.log("else="+item);
-            // }
-            // if(field === item){
-            //      key.push(field);
-            // }
+             if(field === item){
+                key[item] = "";
+            }
         })
-         return key;
+        return key; 
     };
 
     showModal = e => {

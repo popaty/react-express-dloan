@@ -1,7 +1,7 @@
 {
     "model": [
       {
-        "label": "Account number",
+        "label": "Account Number",
         "type": "text",
         "name": "account_number",
         "placeholder": "Enter account number",
@@ -9,7 +9,7 @@
         "root": null
       },
       {
-        "label": "Account sequence",
+        "label": "Account Sequence",
         "type": "number",
         "name": "account_sequence",
         "placeholder": "Enter account sequence",
@@ -19,14 +19,14 @@
       {
         "label": "Service",
         "type": "select",
-        "items": [" ",1,2,3,4],
+        "items": ["","disbursement","deposit-for-repayment","repayment","loan-accr-int","loan-accr-pen"],
         "name": "service",
         "placeholder": "Enter service",
         "value": "service",
         "root": null
       },
       {
-        "label": "Transaction date",
+        "label": "Transaction Date",
         "type": "date",
         "name": "transaction_date",
         "placeholder": "Enter transaction date",
@@ -34,7 +34,7 @@
         "root": null
       },
       {
-        "label": "Channel post date",
+        "label": "Channel Post Date",
         "type": "date",
         "name": "channel_post_date",
         "placeholder": "Enter channel post date",
@@ -42,11 +42,19 @@
         "root": null
       },
       {
-        "label": "Job id",
+        "label": "Job ID",
         "type": "text",
         "name": "job_id",
         "placeholder": "Enter job id",
         "value": "job_id",
+        "root": null
+      },
+      {
+        "label": "Transaction ID",
+        "type": "text",
+        "name": "transaction_id",
+        "placeholder": "Enter transaction id",
+        "value": "transaction_id",
         "root": null
       }
     ]
