@@ -30,10 +30,12 @@
             "business_area",
             "profit_center",
             "service",
+            "chrono_sequence",
             "trnRef",
             "before_balance",
             "first_payment_date",
             "installment_amount",
             "number_of_payment",
-            "chrono_sequence"
+            "interest_index",
+            "interest_spread"
     ]
