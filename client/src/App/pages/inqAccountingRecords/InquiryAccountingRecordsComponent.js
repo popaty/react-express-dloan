@@ -40,7 +40,11 @@ class InquiryAccountingRecordsComponent extends Component {
     Clicked(event) {
         event.preventDefault();
         // console.log(this.state);
-        this.setState({ loading: true });
+        this.setState({
+            loading: true,
+            isFound: false,
+            glEntryList: [],
+        });
         setTimeout(() => {
             this.setState({ loading: false });
             fetch('/api/inquiryAccountingRecord/' + this.state.account_number + "/" + this.state.account_sequence + "/"
@@ -49,18 +53,18 @@ class InquiryAccountingRecordsComponent extends Component {
                 .then(response => response.json())
                 .then(data => {
                     // if (data.rs_body.gl_entry_list.length) {
-                        if (data.rs_body.gl_entry_list.length > 0) {
-                            // console.log(data.rs_body.gl_entry_list)
-                            this.setState({
-                                isFound: true,
-                                glEntryList: data.rs_body.gl_entry_list,
-                            })
-                        }else{
-                            alert("Not Found.");
-                        }
-                        // utility.clearSessionStorage("response_inquiryAccountingRecord");
-                        // sessionStorage.setItem("response_inquiryAccountingRecord", JSON.stringify(data.rs_body));
-                        // window.open('/iarSummary', '_self');
+                    if (data.rs_body.gl_entry_list.length > 0) {
+                        // console.log(data.rs_body.gl_entry_list)
+                        this.setState({
+                            isFound: true,
+                            glEntryList: data.rs_body.gl_entry_list,
+                        })
+                    } else {
+                        alert("Not Found.");
+                    }
+                    // utility.clearSessionStorage("response_inquiryAccountingRecord");
+                    // sessionStorage.setItem("response_inquiryAccountingRecord", JSON.stringify(data.rs_body));
+                    // window.open('/iarSummary', '_self');
                     // } else {
                     //     alert("error code : " + data.errors.map(error => error.error_code) + "\n"
                     //         + "error desc : " + data.errors.map(error => error.error_desc) + "\n"
@@ -103,7 +107,7 @@ class InquiryAccountingRecordsComponent extends Component {
         header.push(<th>#&nbsp;</th>);
         fieldHeader.gl_entry_list.map(item => {
             if (item === "trnRef" || item === "before_balance" || item === "first_payment_date"
-                || item === "installment_amount" || item === "number_of_payment" || 
+                || item === "installment_amount" || item === "number_of_payment" ||
                 item === "interest_index" || item === "interest_spread") {
                 header.push(<th><u>{item}</u>&nbsp;</th>);
             } else {
@@ -117,65 +121,65 @@ class InquiryAccountingRecordsComponent extends Component {
     getBodyTable = () => {
         let data = this.state.glEntryList;
         let body = [];
-        for (let index in data) { 
-            let num = Number(index)+ 1;
+        for (let index in data) {
+            let num = Number(index) + 1;
             let obj = [];
-            obj.push(<td>{num}</td>); 
+            obj.push(<td>{num}</td>);
             let tmp = this.checkFieldHeader();
             // if (data.hasOwnProperty(index)) {
             // eslint-disable-next-line
-                 for (let ResHeader in data[index]) {
-                    if (typeof data[index][ResHeader] === "object") {
-                        for(let inObj in data[index][ResHeader]){
-                            for(let keyInObj in  data[index][ResHeader][inObj]){
-                                tmp[keyInObj] = data[index][ResHeader][inObj][keyInObj];
-                            }
+            for (let ResHeader in data[index]) {
+                if (typeof data[index][ResHeader] === "object") {
+                    for (let inObj in data[index][ResHeader]) {
+                        for (let keyInObj in data[index][ResHeader][inObj]) {
+                            tmp[keyInObj] = data[index][ResHeader][inObj][keyInObj];
                         }
-                     } else {
-                        tmp[ResHeader] = data[index][ResHeader];
                     }
-                 }
-                for(let indexValue in tmp){
-                     obj.push(<td>{tmp[indexValue]}</td>);
-                }  
-                body.push(<tr onClick={() => this.searchJobID(tmp)}>{obj}</tr>);
+                } else {
+                    tmp[ResHeader] = data[index][ResHeader];
+                }
+            }
+            for (let indexValue in tmp) {
+                obj.push(<td>{tmp[indexValue]}</td>);
+            }
+            body.push(<tr onClick={() => this.searchJobID(tmp)}>{obj}</tr>);
         }
         return body;
     };
 
     checkFieldHeader = () => {
         let key = new Object();
-        fieldHeader.gl_entry_list.map(item => {  
-                key[item] = "";
+        fieldHeader.gl_entry_list.map(item => {
+            key[item] = "";
         })
-        return key; 
+        return key;
     };
 
 
     searchJobID = (value) => {
         console.log(value.job_id);
-            this.setState({ account_number: null });
-            this.setState({ account_sequence: null });
-            this.setState({ transaction_date: null });
-            this.setState({ channel_post_date: null });
-            this.setState({ job_id: value.job_id });
-            this.setState({ service: null });
-            this.setState({ transaction_id: null });
+        this.setState({ account_number: null });
+        this.setState({ account_sequence: null });
+        this.setState({ transaction_date: null });
+        this.setState({ channel_post_date: null });
+        this.setState({ job_id: value.job_id });
+        this.setState({ service: null });
+        this.setState({ transaction_id: null });
 
-            fetch('/api/inquiryAccountingRecord/' + this.state.account_number + "/" + this.state.account_sequence + "/"
-                + this.state.transaction_date + "/" + this.state.channel_post_date + "/" + this.state.job_id + "/"
-                + this.state.service + "/" + this.state.transaction_id, {})
-                .then(response => response.json())
-                .then(data => {
-                    // if (data.rs_body.gl_entry_list.length) {
-                        if (data.rs_body.gl_entry_list.length > 0) {
-                            utility.clearSessionStorage("response_inquiryAccountingByRow");
-                            sessionStorage.setItem("response_inquiryAccountingByRow", JSON.stringify(data.rs_body.gl_entry_list));
-                            window.open('/iabjSummary');
-                        }else{
-                            alert("Not Found.");
-                        }
-                }).catch(error => console.log(error));
+        fetch('/api/inquiryAccountingRecord/' + this.state.account_number + "/" + this.state.account_sequence + "/"
+            + this.state.transaction_date + "/" + this.state.channel_post_date + "/" + this.state.job_id + "/"
+            + this.state.service + "/" + this.state.transaction_id, {})
+            .then(response => response.json())
+            .then(data => {
+                // if (data.rs_body.gl_entry_list.length) {
+                if (data.rs_body.gl_entry_list.length > 0) {
+                    utility.clearSessionStorage("response_inquiryAccountingByRow");
+                    sessionStorage.setItem("response_inquiryAccountingByRow", JSON.stringify(data.rs_body.gl_entry_list));
+                    window.open('/iabjSummary');
+                } else {
+                    alert("Not Found.");
+                }
+            }).catch(error => console.log(error));
     };
 
     render() {
