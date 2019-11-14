@@ -1,24 +1,26 @@
-import React, { useState } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import React, { Component } from 'react';
+import { Modal, ModalHeader, ModalBody} from 'reactstrap';
 
-const ModalExample = (props) => {
-        const [modal, setModal] = useState(false);
-        const toggle = () => setModal(!modal);
-
+class ModalExample extends Component {
+    onClose = e => {
+        this.props.onClose && this.props.onClose(e);
+    };
+    
+    render() {
+        if (!this.props.show) {
+          return null;
+        }
         return (
             <div>
-                <Modal isOpen={modal} toggle={toggle}>
-                    <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+                <Modal isOpen={this.props.show} >
+                    <ModalHeader toggle={this.onClose}>Modal title</ModalHeader>
                     <ModalBody>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </ModalBody>
-                    <ModalFooter>
-                        <Button color="primary" onClick={toggle}>Do Something</Button>{' '}
-                        <Button color="secondary" onClick={toggle}>Cancel</Button>
-                    </ModalFooter>
+                    </ModalBody>
                 </Modal>
             </div>
         )
+    }
 };
 
 export default ModalExample;

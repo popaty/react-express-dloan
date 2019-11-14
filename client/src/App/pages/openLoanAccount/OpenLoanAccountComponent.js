@@ -53,8 +53,7 @@ class OpenLoanAccountComponent extends Component {
                 payment: {
                     payment_frequency: 0,
                     payment_unit: "",
-                    payment_date: 0,
-                    billing_offset_day: 0
+                    payment_date: 0
                 }
             },
             loading: false

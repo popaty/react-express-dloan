@@ -137,14 +137,6 @@
       "placeholder": "Enter payment date",
       "value": "payment_date",
       "root": "payment"
-    },
-    {
-      "label": "Billing offset day",
-      "type": "number",
-      "name": "billing_offset_day",
-      "placeholder": "Enter billing offset day",
-      "value": "billing_offset_day",
-      "root": "payment"
     }
   ]
 }
