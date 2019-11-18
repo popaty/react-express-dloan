@@ -1,0 +1,12 @@
+{
+    "model": [
+      {
+        "label": "Date Penalty :",
+        "type": "date",
+        "name": "date_penalty",
+        "placeholder": "Enter date",
+        "value": "date_penalty",
+        "root": null
+      }
+    ]
+}

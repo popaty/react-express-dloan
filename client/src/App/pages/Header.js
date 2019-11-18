@@ -67,9 +67,12 @@ const header = (props) => {
                         <DropdownItem href="/ipdComponent">
                             Inquiry Position Detail
                         </DropdownItem>
+                        <DropdownItem href="/ipdprestComponent">
+                            Inquiry Position Detail (P-REST)
+                        </DropdownItem>
                     </DropdownMenu>
                 </UncontrolledDropdown>
-                &emsp;
+                {/* &emsp;
                 <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle nav caret>
                         P-rest
@@ -79,7 +82,7 @@ const header = (props) => {
                             Inquiry Position Detail
                         </DropdownItem>
                     </DropdownMenu>
-                </UncontrolledDropdown>
+                </UncontrolledDropdown> */}
                 &emsp;
                 <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle nav caret>
@@ -88,6 +91,26 @@ const header = (props) => {
                     <DropdownMenu right>
                         <DropdownItem href="/iarComponent">
                             Inquiry Accounting Record
+                        </DropdownItem>
+                    </DropdownMenu>
+                </UncontrolledDropdown>
+                &emsp;
+                <UncontrolledDropdown nav inNavbar>
+                    <DropdownToggle nav caret>
+                        Reconciliation 
+                    </DropdownToggle>
+                    <DropdownMenu right>
+                        <DropdownItem href="/ipprComponent">
+                            Inquiry Principal Reconciliation Result
+                        </DropdownItem>
+                        <DropdownItem href="/iirComponent">
+                            Inquiry Interest Reconciliation Result
+                        </DropdownItem>
+                        <DropdownItem href="/iprComponent">
+                            Inquiry Penalty Reconciliation Result
+                        </DropdownItem>
+                        <DropdownItem href="/iglComponent">
+                            Inquiry GL Reconciliation
                         </DropdownItem>
                     </DropdownMenu>
                 </UncontrolledDropdown>

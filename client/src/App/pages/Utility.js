@@ -27,6 +27,9 @@ const utility = {
     },
     clearSessionStorage : (key) => {
         return sessionStorage.removeItem(key);
+    },
+    StringAD : () => {
+        return "AD_";
     }
 };
 

@@ -1,0 +1,12 @@
+{
+    "model": [
+      {
+        "label": "Date Interest :",
+        "type": "date",
+        "name": "date_interest",
+        "placeholder": "Enter date",
+        "value": "date_interest",
+        "root": null
+      }
+    ]
+}

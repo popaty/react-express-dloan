@@ -215,6 +215,70 @@ app.get("/api/inquiryAccountingRecord/:accountNo/:accountSequence/:transactionDa
         });
 });
 
+//[GET] Inquiry Principal Reconciliation Result
+app.get("/api/inquiryPrincipal/:acDate", (req, res) => {
+    console.log("Inquiry Principal Reconciliation Result");
+    let header = headers.get_headers();
+    let url = properties.get("inquiryPrincipal.url")+ req.params.acDate;
+    console.log("url = "+ url);
+    api_helper.API_call_get(url, header)
+        .then(response => {
+            res.json(response);
+            console.log("Finished Inquiry Principal Reconciliation Result");
+        })
+        .catch(error => {
+            res.send(error)
+        });
+});
+
+//[GET] Inquiry Interest Reconciliation Result
+app.get("/api/inquiryInterest/:acDate", (req, res) => {
+    console.log("Inquiry Interest Reconciliation Result");
+    let header = headers.get_headers();
+    let url = properties.get("inquiryInterest.url") + req.params.acDate;
+    console.log("url = "+ url);
+    api_helper.API_call_get(url, header)
+        .then(response => {
+            res.json(response);
+            console.log("Finished Inquiry Interest Reconciliation Result");
+        })
+        .catch(error => {
+            res.send(error)
+        });
+});
+
+//[GET] Inquiry Penalty Reconciliation Result
+app.get("/api/inquiryPenalty/:acDate", (req, res) => {
+    console.log("Inquiry Penalty Reconciliation Result");
+    let header = headers.get_headers();
+    let url = properties.get("inquiryPenalty.url") + req.params.acDate;
+    console.log("url = "+ url);
+    api_helper.API_call_get(url, header)
+        .then(response => {
+            res.json(response);
+            console.log("Finished Inquiry Penalty Reconciliation Result");
+        })
+        .catch(error => {
+            res.send(error)
+        });
+});
+
+//[GET] Inquiry GL Reconciliation
+app.get("/api/inquiryGL/:acDate", (req, res) => {
+    console.log("Inquiry GL Reconciliation");
+    let header = headers.get_headers();
+    let url = properties.get("inquiryGL.url") + req.params.acDate;
+    console.log("url = "+url);
+    api_helper.API_call_get(url, header)
+        .then(response => {
+            res.json(response);
+            console.log("Finished Inquiry GL Reconciliation");
+        })
+        .catch(error => {
+            res.send(error)
+        });
+});
+
 // Handles any requests that don"t match the ones above
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname + "/index.html"));

@@ -36,9 +36,15 @@ import inquiryPositionDetailComponent from './pages/inqPositionDetail/viewInquir
 import inquiryPositionDetailSummery from './pages/inqPositionDetail/viewInquiryPositionDetailSummery';
 
 import inquiryAccountingRecordsComponent from './pages/inqAccountingRecords/viewInquiryAccountingRecordsComponent';
-import inquiryAccountingRecordsSummery from './pages/inqAccountingRecords/viewInquiryAccountingRecordsSummery';
-import InquiryAccountingByJobID from './pages/inqAccountingRecords/InquiryAccountingByJobIDSummery';
+import inquiryAccountingByJobID from './pages/inqAccountingRecords/InquiryAccountingByJobIDSummery';
 
+import inquiryPrincipalReconciliationComponent from './pages/Reconciliation/InquiryPrincipalReconciliationResult/viewInquiryPrincipalReconciliationComponent';
+
+import inquiryInterestReconciliationComponent from './pages/Reconciliation/InquiryInterestReconciliationResult/viewInquiryInterestReconciliationComponent';
+
+import inquiryPenaltyReconciliationComponent from './pages/Reconciliation/InquiryPenaltyReconciliationResult/viewInquiryPenaltyReconciliationComponent';
+
+import inquiryGLReconciliationComponent from './pages/Reconciliation/InquiryGLReconciliation/viewInquiryGLReconciliationComponent';
 
 class App extends Component {
     render() {
@@ -79,8 +85,15 @@ class App extends Component {
                     <Route path='/ipdSummary' component={inquiryPositionDetailSummery}/>
 
                     <Route path='/iarComponent' component={inquiryAccountingRecordsComponent}/>
-                    <Route path='/iarSummary' component={inquiryAccountingRecordsSummery}/>
-                    <Route path='/iabjSummary' component={InquiryAccountingByJobID}/>
+                    <Route path='/iabjSummary' component={inquiryAccountingByJobID}/>
+
+                    <Route path='/ipprComponent' component={inquiryPrincipalReconciliationComponent}/>
+
+                    <Route path='/iirComponent' component={inquiryInterestReconciliationComponent}/>
+
+                    <Route path='/iprComponent' component={inquiryPenaltyReconciliationComponent}/>
+
+                    <Route path='/iglComponent' component={inquiryGLReconciliationComponent}/>
 
                 </Switch>
             </div>

@@ -1,0 +1,12 @@
+{
+    "model": [
+      {
+        "label": "Date Principal :",
+        "type": "date",
+        "name": "date_principal",
+        "placeholder": "Enter date",
+        "value": "date_principal",
+        "root": null
+      }
+    ]
+}

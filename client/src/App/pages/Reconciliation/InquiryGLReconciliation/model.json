@@ -1,0 +1,12 @@
+{
+    "model": [
+      {
+        "label": "Date GL :",
+        "type": "date",
+        "name": "date_GL",
+        "placeholder": "Enter date",
+        "value": "date_GL",
+        "root": null
+      }
+    ]
+}

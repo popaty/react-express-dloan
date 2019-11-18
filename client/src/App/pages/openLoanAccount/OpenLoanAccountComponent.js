@@ -157,7 +157,7 @@ class OpenLoanAccountComponent extends Component {
     FormInputCol1 = () => {
         return inputModel.model.map(item => {
             if (item.root === null) {
-                return (
+                return (      
                     <FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
