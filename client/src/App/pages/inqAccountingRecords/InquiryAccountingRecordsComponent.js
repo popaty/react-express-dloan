@@ -5,7 +5,7 @@ import inputModel from './model.json';
 import SpinnerLoader from '../loading.js';
 import { Button, Col, Container, Form, FormGroup, Input, Label, Row, Table } from 'reactstrap';
 import fieldHeader from './fieldRes.js'
-// import dataResMock from './dataRes.js'
+import dataResMock from './dataRes.js'
 import Modal from '../modal'
 
 class InquiryAccountingRecordsComponent extends Component {
@@ -19,10 +19,12 @@ class InquiryAccountingRecordsComponent extends Component {
             channel_post_date: null,
             transaction_id: null,
             job_id: null,
+
             loading: false,
             isFound: false,
             statusModal: false,
-            glEntryList: []
+            glEntryList: [],
+            dataResponse: []
         };
         this.handleChange = this.handleChange.bind(this);
         this.Clicked = this.Clicked.bind(this);
@@ -142,10 +144,14 @@ class InquiryAccountingRecordsComponent extends Component {
                 }
                 // eslint-disable-next-line
                 for (let indexValue in value) {
-                    obj.push(<td>{value[indexValue]}</td>);
+                    if (indexValue === "job_id" || indexValue === "transaction_id") {
+                        obj.push(<td onClick={e => { this.showModal(indexValue, value[indexValue]) }}><u>{value[indexValue]}</u></td>);
+                    } else {
+                        obj.push(<td>{value[indexValue]}</td>);
+                    }
                 }
                 // body.push(<tr onClick={() => this.searchJobID(tmp)}>{obj}</tr>);
-                body.push(<tr onClick={e => { this.showModal() }}>{obj}</tr>);
+                body.push(<tr>{obj}</tr>);
             }
         }
         return body;
@@ -159,34 +165,56 @@ class InquiryAccountingRecordsComponent extends Component {
         return key;
     };
 
-    showModal = e => {
+    showModal = (key, value) => {
         this.setState({ statusModal: !this.state.statusModal });
+        if (this.state.statusModal === false) {
+            this.inqByJobIDAndTranID(key, value);
+        }
+
     }
 
-    searchJobID = (value) => {
-        console.log(value.job_id);
-        this.setState({ account_number: null,
-                        account_sequence: null,
-                        transaction_date: null, 
-                        channel_post_date: null, 
-                        job_id: value.job_id,
-                        service: null,
-                        transaction_id: null});
-
-        // fetch('/api/inquiryAccountingRecord/' + this.state.account_number + "/" + this.state.account_sequence + "/"
-        //     + this.state.transaction_date + "/" + this.state.channel_post_date + "/" + this.state.job_id + "/"
-        //     + this.state.service + "/" + this.state.transaction_id, {})
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         // if (data.rs_body.gl_entry_list.length) {
-        //             if (data.rs_body.gl_entry_list.length > 0) {
-        //                 utility.clearSessionStorage("response_inquiryAccountingByRow");
-        //                 sessionStorage.setItem("response_inquiryAccountingByRow", JSON.stringify(data.rs_body.gl_entry_list));
-        //                 window.open('/iabjSummary');
-        //             }else{
-        //                 alert("Not Found.");
-        //             }
-        //     }).catch(error => console.log(error));
+    inqByJobIDAndTranID = (key, value) => {
+        if (key === "job_id") {
+            this.setState({
+                account_number: null,
+                account_sequence: null,
+                transaction_date: null,
+                channel_post_date: null,
+                job_id: value,
+                service: null,
+                transaction_id: null
+            });
+        } else {
+            this.setState({
+                account_number: null,
+                account_sequence: null,
+                transaction_date: null,
+                channel_post_date: null,
+                job_id: null,
+                service: null,
+                transaction_id: value
+            });
+        }
+        fetch('/api/inquiryAccountingRecord/' + this.state.account_number + "/" + this.state.account_sequence + "/"
+            + this.state.transaction_date + "/" + this.state.channel_post_date + "/" + this.state.job_id + "/"
+            + this.state.service + "/" + this.state.transaction_id, {})
+            .then(response => response.json())
+            .then(data => {
+                    if (data.rs_body.gl_entry_list.length > 0) {
+                        this.setState({
+                            dataResponse: data.rs_body.gl_entry_list,
+                            account_number: null,
+                            account_sequence: null,
+                            transaction_date: null,
+                            channel_post_date: null,
+                            job_id: null,
+                            service: null,
+                            transaction_id: null
+                        });
+                    } else {
+                        alert("Not Found.");
+                    }
+                }).catch(error => console.log(error));
     };
 
     render() {
@@ -212,8 +240,8 @@ class InquiryAccountingRecordsComponent extends Component {
                     </Form>
                     <Row>
                         <Col>
-                            <div class="table-responsive">
-                                <Table hover bordered>
+                            <div class="table-responsive" style={{ marginBottom: 50, marginTop: 30 }} >
+                                <Table hover bordered >
                                     <thead>
                                         <tr>
                                             {this.getHeaderTable()}
@@ -229,7 +257,7 @@ class InquiryAccountingRecordsComponent extends Component {
                         </Col>
                     </Row>
                 </Container>
-                <Modal show={this.state.statusModal} onClose={this.showModal} />
+                <Modal show={this.state.statusModal} onClose={this.showModal} data={this.state.dataResponse} />
             </div>
         );
     }

@@ -87,7 +87,6 @@ class OpenLoanAccountComponent extends Component {
         this.setState({loading: true});
         //clone state for use in omit function.
         let body = cloneDeep(this.state);
-        //const request = this.omit(body);
         const request = utility.omit(body);
         //console.log(request);
         setTimeout(() => {

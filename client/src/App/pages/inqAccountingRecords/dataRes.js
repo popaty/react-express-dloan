@@ -2,7 +2,7 @@ module.exports= {
         "rs_body": {
             "gl_entry_list": [
                 {
-                    "transaction_id": "4S8UG08LOtEiLk--0-1F-Go-",
+                    "transaction_id": "4S8UG08LOtEiLk--0-1F-Go-1",
                     "transaction_sequence": 1,
                     "transaction_datetime": "2019-10-30T15:26:05+07:00",
                     "transaction_date": "2019-10-30",
@@ -47,7 +47,7 @@ module.exports= {
                     "chrono_sequence": "1911061451203395102372256"
                 },
                 {
-                    "transaction_id": "4S8UG08LOtEiLk--0-1F-Go-",
+                    "transaction_id": "4S8UG08LOtEiLk--0-1F-Go-2",
                     "transaction_sequence": 2,
                     "transaction_datetime": "2019-10-30T15:26:05+07:00",
                     "transaction_date": "2019-10-30",
@@ -82,7 +82,7 @@ module.exports= {
                     "chrono_sequence": "1911061451203418592812256"
                 },
                 {
-                    "transaction_id": "4S8UG08LOtEiLk--0-1F-Go-",
+                    "transaction_id": "4S8UG08LOtEiLk--0-1F-Go-3",
                     "transaction_sequence": 3,
                     "transaction_datetime": "2019-10-30T15:26:05+07:00",
                     "transaction_date": "2019-10-30",
@@ -106,7 +106,7 @@ module.exports= {
                     "chrono_sequence": "1911061451203395102372256"
                 },
                 {
-                    "transaction_id": "4S8UG08LOtEiLk--0-1F-Go-",
+                    "transaction_id": "4S8UG08LOtEiLk--0-1F-Go-4",
                     "transaction_sequence": 4,
                     "transaction_datetime": "2019-10-30T15:26:05+07:00",
                     "transaction_date": "2019-10-30",
