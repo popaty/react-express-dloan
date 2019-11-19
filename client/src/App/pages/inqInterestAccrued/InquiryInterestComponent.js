@@ -6,7 +6,6 @@ import utility from '../Utility.js';
 import SpinnerLoader from '../loading.js';
 
 class inquiryInterestComponent extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -19,15 +18,13 @@ class inquiryInterestComponent extends Component {
 
     Clicked(event) {
         event.preventDefault();
-        //console.log(this.state);
+        // console.log(this.state);
         this.setState({ loading: true });
         setTimeout(() => {
             this.setState({ loading: false });
             fetch('/api/inqInterestAccrued/' + this.state.account_number, {}).then(response => response.json())
             .then(data => {
                 if (data.rs_body) {
-                    // value = {...data.rs_body.position_detail.map(item => item)};
-                    //console.log(value);
                     utility.clearSessionStorage("response_inqInterastaAccrued");
                     sessionStorage.setItem("response_inqInterastaAccrued", JSON.stringify(data.rs_body.position_detail));
                     window.open('/iiaSummary', '_self');
@@ -38,7 +35,7 @@ class inquiryInterestComponent extends Component {
                 }
             }).catch(error => console.log(error))
 
-            //mock data
+            // mock data
             // let data = {
             //     "rs_body": {
             //         "position_detail": [
