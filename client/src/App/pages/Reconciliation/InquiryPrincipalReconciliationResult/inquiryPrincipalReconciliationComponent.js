@@ -4,13 +4,14 @@ import DynamicHeader from '../../Header';
 import inputModel from './model.json';
 import utility from '../../Utility';
 import SpinnerLoader from '../../loading';
+import fieldHeader from './fieldRes.js'
 
 class inquiryPrincipalReconciliationComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
             date_principal: "",
-            dateRes:[],
+            dataRes:[],
             isFound: false,
             loading: false
         };
@@ -24,7 +25,7 @@ class inquiryPrincipalReconciliationComponent extends Component {
 
     Clicked(event) {
         event.preventDefault();
-        this.setState({ loading: true });
+        this.setState({ loading: true, dataRes:[] });
         setTimeout(() => {
             this.setState({ loading: false });
             fetch('/api/inquiryPrincipal/' + utility.StringAD() + this.state.date_principal)
@@ -34,11 +35,8 @@ class inquiryPrincipalReconciliationComponent extends Component {
                     this.setState({
                         isFound: true,
                         loading: false,
-                        dateRes: data.rs_body.principal_reconciliation_list
+                        dataRes: data.rs_body.principal_reconciliation_list
                     });
-                    //  utility.clearSessionStorage("response_inquiryPrincipal");
-                    // sessionStorage.setItem("response_inquiryPrincipal", JSON.stringify(data.rs_body.position_detail));
-                    // window.open('/iplSummary', '_self');
                 } else {
                     alert("error code : " + data.errors.map(error => error.error_code) + "\n"
                         + "error desc : " + data.errors.map(error => error.error_desc) + "\n"
@@ -49,53 +47,46 @@ class inquiryPrincipalReconciliationComponent extends Component {
     };
 
     getHeaderTable = () => {
-        let data = this.state.dateRes;
         let header = [];
-        if (data.length > 1) {
-            header.push(<th>#&nbsp;</th>);
-            // eslint-disable-next-line
-            for (let key in data[0]) {
-                if (data[0].hasOwnProperty(key)) {
-                    header.push(<th>{key}&nbsp;</th>);
-                }
-            }
-
-        } else {
-            // eslint-disable-next-line
-            for (let key in data) {
-                if (data.hasOwnProperty(key)) {
-                    header.push(<th>#&nbsp;</th>);
-                    // eslint-disable-next-line
-                    for (let keyinObj in data[key]) {
-                        if (data[key].hasOwnProperty(keyinObj)) {
-                            header.push(<th>{keyinObj}&nbsp;</th>);
-                        }
-                    }
-                }
-            }
-        }
+        header.push(<th>#&nbsp;</th>);
+        fieldHeader.principal_reconciliation_list.map(item => {
+            header.push(<th>{item}&nbsp;</th>);
+        })
         return header;
     };
 
     getBodyTable = () => {
-        let data = this.state.dateRes;
+        let data = this.state.dataRes;
         let body = [];
         // eslint-disable-next-line
-        for (let key in data) {
-            if (data.hasOwnProperty(key)) {
-                let num = Number(key);
-                let obj = [];
-                obj.push(<td>{num + 1}</td>);
+        for (let index in data) {
+            let num = Number(index) + 1;
+            let obj = [];
+            obj.push(<td>{num}</td>);
+            let value = this.getFieldHeader();
+            if (data.hasOwnProperty(index)) {
                 // eslint-disable-next-line
-                for (let keyinObj in data[key]) {
-                    if (data[key].hasOwnProperty(keyinObj)) {
-                        if (typeof data[key][keyinObj] === "boolean") {
-                            let catchup = String(data[key][keyinObj]);
-                            obj.push(<td>{catchup}</td>)
-                        } else {                         
-                            obj.push(<td>{data[key][keyinObj]}</td>);
+                for (let ResHeader in data[index]) {
+                    if (typeof data[index][ResHeader] === "object") {
+                        // eslint-disable-next-line
+                        for (let inObj in data[index][ResHeader]) {
+                            // eslint-disable-next-line
+                            for (let keyInObj in data[index][ResHeader][inObj]) {
+                                value[keyInObj] = data[index][ResHeader][inObj][keyInObj];
+                            }
                         }
+                    } else {
+                        if (typeof data[index][ResHeader] === "boolean") {
+                            let catchup = String(data[index][ResHeader]);
+                            value[ResHeader] = catchup;
+                        }else{
+                            value[ResHeader] = data[index][ResHeader];
+                        } 
                     }
+                }
+                // eslint-disable-next-line
+                for (let indexValue in value) {
+                    obj.push(<td>{value[indexValue]}</td>);
                 }
                 body.push(<tr>{obj}</tr>);
             }
@@ -103,6 +94,13 @@ class inquiryPrincipalReconciliationComponent extends Component {
         return body;
     };
 
+    getFieldHeader = () => {
+        let key = {};
+        fieldHeader.principal_reconciliation_list.map(item => {
+            key[item] = "";
+        })
+        return key;
+    };
 
     FormInputData = () => {
         return inputModel.model.map(item => {
@@ -138,9 +136,9 @@ class inquiryPrincipalReconciliationComponent extends Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Col md={{ size: 10, offset: 1 }}>
-                            <div class="table-responsive">
-                                <Table striped bordered>
+                        <Col>
+                            <div class="table-responsive" style={{ marginBottom: 50, marginTop: 30 }} >
+                                <Table striped bordered >
                                     <thead>
                                         <tr>
                                             {this.getHeaderTable()}
@@ -150,6 +148,8 @@ class inquiryPrincipalReconciliationComponent extends Component {
                                         {this.getBodyTable()}
                                     </tbody>}
                                 </Table>
+                                <div>
+                                </div>
                             </div>
                         </Col>
                     </Row>

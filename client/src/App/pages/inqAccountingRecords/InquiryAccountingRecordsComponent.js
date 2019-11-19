@@ -5,7 +5,7 @@ import inputModel from './model.json';
 import SpinnerLoader from '../loading.js';
 import { Button, Col, Container, Form, FormGroup, Input, Label, Row, Table } from 'reactstrap';
 import fieldHeader from './fieldRes.js'
-import dataResMock from './dataRes.js'
+// import dataResMock from './dataRes.js'
 import Modal from '../modal'
 
 class InquiryAccountingRecordsComponent extends Component {
@@ -200,21 +200,21 @@ class InquiryAccountingRecordsComponent extends Component {
             + this.state.service + "/" + this.state.transaction_id, {})
             .then(response => response.json())
             .then(data => {
-                    if (data.rs_body.gl_entry_list.length > 0) {
-                        this.setState({
-                            dataResponse: data.rs_body.gl_entry_list,
-                            account_number: null,
-                            account_sequence: null,
-                            transaction_date: null,
-                            channel_post_date: null,
-                            job_id: null,
-                            service: null,
-                            transaction_id: null
-                        });
-                    } else {
-                        alert("Not Found.");
-                    }
-                }).catch(error => console.log(error));
+                if (data.rs_body.gl_entry_list.length > 0) {
+                    this.setState({
+                        dataResponse: data.rs_body.gl_entry_list,
+                        account_number: null,
+                        account_sequence: null,
+                        transaction_date: null,
+                        channel_post_date: null,
+                        job_id: null,
+                        service: null,
+                        transaction_id: null
+                    });
+                } else {
+                    alert("Not Found.");
+                }
+            }).catch(error => console.log(error));
     };
 
     render() {
@@ -237,25 +237,25 @@ class InquiryAccountingRecordsComponent extends Component {
                                 </div>
                             </Col>
                         </Row>
-                    </Form>
-                    <Row>
-                        <Col>
-                            <div class="table-responsive" style={{ marginBottom: 50, marginTop: 30 }} >
-                                <Table hover bordered >
-                                    <thead>
-                                        <tr>
-                                            {this.getHeaderTable()}
-                                        </tr>
-                                    </thead>
-                                    {this.state.isFound && <tbody>
-                                        {this.getBodyTable()}
-                                    </tbody>}
-                                </Table>
-                                <div>
+                        <Row>
+                            <Col>
+                                <div class="table-responsive" style={{ marginBottom: 50, marginTop: 30 }} >
+                                    <Table hover bordered >
+                                        <thead>
+                                            <tr>
+                                                {this.getHeaderTable()}
+                                            </tr>
+                                        </thead>
+                                        {this.state.isFound && <tbody>
+                                            {this.getBodyTable()}
+                                        </tbody>}
+                                    </Table>
+                                    <div>
+                                    </div>
                                 </div>
-                            </div>
-                        </Col>
-                    </Row>
+                            </Col>
+                        </Row>
+                    </Form>
                 </Container>
                 <Modal show={this.state.statusModal} onClose={this.showModal} data={this.state.dataResponse} />
             </div>

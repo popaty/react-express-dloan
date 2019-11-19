@@ -1,16 +1,17 @@
-import React, {Component} from 'react';
-import {Button, Col, Form, FormGroup, Input, Label, Container, Row, Table} from 'reactstrap';
+import React, { Component } from 'react';
+import { Button, Col, Form, FormGroup, Input, Label, Container, Row, Table } from 'reactstrap';
 import DynamicHeader from '../../Header';
 import inputModel from './model.json';
 import utility from '../../Utility';
 import SpinnerLoader from '../../loading';
+import fieldHeader from './fieldRes.js'
 
 class inquiryGLReconciliationComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
             date_GL: "",
-            dateRes:[],
+            dataRes: [],
             isFound: false,
             loading: false
         };
@@ -23,78 +24,70 @@ class inquiryGLReconciliationComponent extends Component {
     }
 
     Clicked(event) {
-         event.preventDefault();
-         this.setState({ loading: true });
+        event.preventDefault();
+        this.setState({ loading: true,dataRes:[] });
         setTimeout(() => {
             fetch('/api/inquiryGL/' + utility.StringAD() + this.state.date_GL)
-            .then(response => response.json())
-            .then(data => {
-                if (data) {
-                    this.setState({ isFound : true,
-                    loading: false,
-                    dateRes : data.rs_body.gl_reconciliation_list });
-        //             utility.clearSessionStorage("response_inquiryGL");
-        //             sessionStorage.setItem("response_inquiryGL", JSON.stringify(data.rs_body.position_detail));
-        //             window.open('/iplSummary', '_self');
-                } else {
-                    alert("error code : " + data.errors.map(error => error.error_code) + "\n"
-                        + "error desc : " + data.errors.map(error => error.error_desc) + "\n"
-                        + "error type : " + data.errors.map(error => error.error_type));
-                }
-            }).catch(error => console.log(error))
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        this.setState({
+                            isFound: true,
+                            loading: false,
+                            dataRes: data.rs_body.gl_reconciliation_list
+                        });
+                    } else {
+                        alert("error code : " + data.errors.map(error => error.error_code) + "\n"
+                            + "error desc : " + data.errors.map(error => error.error_desc) + "\n"
+                            + "error type : " + data.errors.map(error => error.error_type));
+                    }
+                }).catch(error => console.log(error))
             this.setState({ loading: false });
         }, 1000);
-      
+
     };
 
     getHeaderTable = () => {
-        let data = this.state.dateRes;
         let header = [];
-        if (data.length > 1) {
-            header.push(<th>#&nbsp;</th>);
-            // eslint-disable-next-line
-            for (let key in data[0]) {
-                if (data[0].hasOwnProperty(key)) {
-                    header.push(<th>{key}&nbsp;</th>);
-                }
-            }
-
-        } else {
-            // eslint-disable-next-line
-            for (let key in data) {
-                if (data.hasOwnProperty(key)) {
-                    header.push(<th>#&nbsp;</th>);
-                    // eslint-disable-next-line
-                    for (let keyinObj in data[key]) {
-                        if (data[key].hasOwnProperty(keyinObj)) {
-                            header.push(<th>{keyinObj}&nbsp;</th>);
-                        }
-                    }
-                }
-            }
-        }
+        header.push(<th>#&nbsp;</th>);
+        fieldHeader.gl_reconciliation_list.map(item => {
+                header.push(<th>{item}&nbsp;</th>);
+        })
         return header;
     };
 
     getBodyTable = () => {
-        let data = this.state.dateRes;
+        let data = this.state.dataRes;
         let body = [];
         // eslint-disable-next-line
-        for (let key in data) {
-            if (data.hasOwnProperty(key)) {
-                let num = Number(key);
-                let obj = [];
-                obj.push(<td>{num + 1}</td>);
+        for (let index in data) {
+            let num = Number(index) + 1;
+            let obj = [];
+            obj.push(<td>{num}</td>);
+            let value = this.getFieldHeader();
+            if (data.hasOwnProperty(index)) {
                 // eslint-disable-next-line
-                for (let keyinObj in data[key]) {
-                    if (data[key].hasOwnProperty(keyinObj)) {
-                        if (typeof data[key][keyinObj] === "boolean") {
-                            let catchup = String(data[key][keyinObj]);
-                            obj.push(<td>{catchup}</td>)
-                        } else {
-                            obj.push(<td>{data[key][keyinObj]}</td>);
+                for (let ResHeader in data[index]) {
+                    if (typeof data[index][ResHeader] === "object") {
+                        // eslint-disable-next-line
+                        for (let inObj in data[index][ResHeader]) {
+                            // eslint-disable-next-line
+                            for (let keyInObj in data[index][ResHeader][inObj]) {
+                                value[keyInObj] = data[index][ResHeader][inObj][keyInObj];
+                            }
                         }
+                    } else {
+                        if (typeof data[index][ResHeader] === "boolean") {
+                            let catchup = String(data[index][ResHeader]);
+                            value[ResHeader] = catchup;
+                        }else{
+                            value[ResHeader] = data[index][ResHeader];
+                        } 
                     }
+                }
+                // eslint-disable-next-line
+                for (let indexValue in value) {
+                    obj.push(<td>{value[indexValue]}</td>);
                 }
                 body.push(<tr>{obj}</tr>);
             }
@@ -102,15 +95,23 @@ class inquiryGLReconciliationComponent extends Component {
         return body;
     };
 
+    getFieldHeader = () => {
+        let key = {};
+        fieldHeader.gl_reconciliation_list.map(item => {
+            key[item] = "";
+        })
+        return key;
+    };
+
     FormInputData = () => {
         return inputModel.model.map(item => {
-                return (
-                    <FormGroup>
-                        <Label>{item.label}</Label>
-                        <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                               value={this.state[item.value]} onChange={this.handleChange}/>
-                    </FormGroup>
-                );
+            return (
+                <FormGroup>
+                    <Label>{item.label}</Label>
+                    <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+                        value={this.state[item.value]} onChange={this.handleChange} />
+                </FormGroup>
+            );
         });
     };
 
@@ -122,11 +123,11 @@ class inquiryGLReconciliationComponent extends Component {
                 <h2>Form Input Inquiry GL Reconciliation</h2>
                 <Container>
                     <Row>
-                        <Col md={{size: 4, offset: 4}}>
+                        <Col md={{ size: 4, offset: 4 }}>
                             <Form onSubmit={this.Clicked}>
                                 {this.FormInputData()}
                                 <div class="text-center">
-                                    <Button style={{ marginBottom: 60 }} color="primary" type="submit" disabled={loading}>
+                                    <Button style={{ marginBottom: 10 }} color="primary" type="submit" disabled={loading}>
                                         {loading && (<SpinnerLoader />)}
                                         {loading && <span>Loading..</span>}
                                         {!loading && <span>Submit</span>}
@@ -136,20 +137,22 @@ class inquiryGLReconciliationComponent extends Component {
                         </Col>
                     </Row>
                     <Row>
-                    <Col md={{size: 10, offset: 1}}>
-                        <div class="table-responsive">
-                            <Table striped bordered>
-                                <thead>
-                                <tr>
-                                    {this.getHeaderTable()}
-                                </tr>
-                                </thead>
-                                {this.state.isFound && <tbody>
-                                    {this.getBodyTable()}
-                                </tbody>}
-                            </Table>
-                        </div>
-                    </Col>
+                        <Col>
+                            <div class="table-responsive" style={{ marginBottom: 50, marginTop: 30 }} >
+                                <Table striped bordered >
+                                    <thead>
+                                        <tr>
+                                            {this.getHeaderTable()}
+                                        </tr>
+                                    </thead>
+                                    {this.state.isFound && <tbody>
+                                        {this.getBodyTable()}
+                                    </tbody>}
+                                </Table>
+                                <div>
+                                </div>
+                            </div>
+                        </Col>
                     </Row>
                 </Container>
             </div>
