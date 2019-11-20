@@ -10,6 +10,9 @@ module.exports.position_detail = [
     "is_catch_up",
     "customer_type",
     "account_branch",
-    "daily_accrued_amount",
-    "unpaid_accrued_amount"
+    "daily_accrued_interest_amount",
+    "unpaid_accrued_interest_amount",
+    "is_start_penalty",
+    "daily_accrued_penalty_amount",
+    "unpaid_accrued_penalty_amount"
 ]

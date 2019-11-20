@@ -58,7 +58,7 @@ class InquiryAccountingRecordsComponent extends Component {
                         // console.log(data.rs_body.gl_entry_list)
                         this.setState({
                             isFound: true,
-                            glEntryLcdist: data.rs_body.gl_entry_list,
+                            glEntryList: data.rs_body.gl_entry_list,
                         })
                     } else {
                         alert("Not Found.");

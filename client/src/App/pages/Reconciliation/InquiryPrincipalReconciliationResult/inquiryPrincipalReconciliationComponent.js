@@ -138,7 +138,7 @@ class inquiryPrincipalReconciliationComponent extends Component {
                     <Row>
                         <Col>
                             <div class="table-responsive" style={{ marginBottom: 50, marginTop: 30 }} >
-                                <Table striped bordered >
+                                <Table striped bordered>
                                     <thead>
                                         <tr>
                                             {this.getHeaderTable()}
