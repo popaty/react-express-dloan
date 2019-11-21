@@ -11,13 +11,7 @@ class ModalExample extends Component {
         let header = [];
         header.push(<th>#&nbsp;</th>);
         fieldHeader.gl_entry_list.map(item => {
-            if (item === "trnRef" || item === "before_balance" || item === "first_payment_date"
-                || item === "installment_amount" || item === "number_of_payment" ||
-                item === "interest_index" || item === "interest_spread") {
-                header.push(<th><u>{item}</u>&nbsp;</th>);
-            } else {
-                header.push(<th>{item}&nbsp;</th>);
-            }
+            header.push(<th>{item}&nbsp;</th>);
         })
         return header;
     };
@@ -36,23 +30,21 @@ class ModalExample extends Component {
                 for (let ResHeader in data[index]) {
                     if (typeof data[index][ResHeader] === "object") {
                         // eslint-disable-next-line
+                        let tmp = []
                         for (let inObj in data[index][ResHeader]) {
                             // eslint-disable-next-line
                             for (let keyInObj in data[index][ResHeader][inObj]) {
-                                value[keyInObj] = data[index][ResHeader][inObj][keyInObj];
+                                tmp.push(keyInObj+" : "+data[index][ResHeader][inObj][keyInObj]);
                             }
                         }
+                        value[ResHeader] = tmp.join(" | ");
                     } else {
                         value[ResHeader] = data[index][ResHeader];
                     }
                 }
                 // eslint-disable-next-line
                 for (let indexValue in value) {
-                    if(indexValue === "job_id" || indexValue === "transaction_id" ){
                         obj.push(<td>{value[indexValue]}</td>);
-                    }else{
-                        obj.push(<td>{value[indexValue]}</td>);
-                    }
                 }
                 body.push(<tr>{obj}</tr>);
             }
@@ -74,7 +66,7 @@ class ModalExample extends Component {
         }
         return (
             <div> 
-                <Modal size="lg" isOpen={this.props.show} >
+                <Modal size="xl" isOpen={this.props.show} >
                     <ModalHeader toggle={this.onClose}>Form Data Inquiry Accounting Record</ModalHeader>
                     <ModalBody>
                         <div class="table-responsive" style={{ marginBottom: 15 , marginTop: 10}} >

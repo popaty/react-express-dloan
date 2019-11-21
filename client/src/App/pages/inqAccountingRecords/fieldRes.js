@@ -30,12 +30,13 @@
             "transaction_date",
             "channel_post_date",
             "datetime_stamp",
-            "chrono_sequence",
-            "trnRef",
-            "before_balance",
-            "first_payment_date",
-            "installment_amount",
-            "number_of_payment",
-            "interest_index",
-            "interest_spread"
+            "other_prop",
+            "chrono_sequence"
+        //     "trnRef",
+        //     "before_balance",
+        //     "first_payment_date",
+        //     "installment_amount",
+        //     "number_of_payment",
+        //     "interest_index",
+        //     "interest_spread"
     ]

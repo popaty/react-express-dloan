@@ -36,7 +36,6 @@ import inquiryPositionDetailComponent from './pages/inqPositionDetail/viewInquir
 import inquiryPositionDetailSummery from './pages/inqPositionDetail/viewInquiryPositionDetailSummery';
 
 import inquiryAccountingRecordsComponent from './pages/inqAccountingRecords/viewInquiryAccountingRecordsComponent';
-import inquiryAccountingByJobID from './pages/inqAccountingRecords/InquiryAccountingByJobIDSummery';
 
 import inquiryPrincipalReconciliationComponent from './pages/Reconciliation/InquiryPrincipalReconciliationResult/viewInquiryPrincipalReconciliationComponent';
 
@@ -85,7 +84,6 @@ class App extends Component {
                     <Route path='/ipdSummary' component={inquiryPositionDetailSummery}/>
 
                     <Route path='/iarComponent' component={inquiryAccountingRecordsComponent}/>
-                    <Route path='/iabjSummary' component={inquiryAccountingByJobID}/>
 
                     <Route path='/ipprComponent' component={inquiryPrincipalReconciliationComponent}/>
 

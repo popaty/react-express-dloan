@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import DynamicHeader from '../Header.js';
 import inputModel from './model.json';
-// import utility from '../Utility.js';
 import SpinnerLoader from '../loading.js';
 import { Button, Col, Container, Form, FormGroup, Input, Label, Row, Table } from 'reactstrap';
 import fieldHeader from './fieldRes.js'
@@ -21,7 +20,7 @@ class InquiryAccountingRecordsComponent extends Component {
             job_id: null,
 
             loading: false,
-            isFound: false,
+            isFound: true,
             statusModal: false,
             glEntryList: [],
             dataResponse: []
@@ -45,9 +44,9 @@ class InquiryAccountingRecordsComponent extends Component {
     Clicked(event) {
         event.preventDefault();
         // console.log(this.state);
-        this.setState({ loading: true });
+        this.setState({ loading: true,
+            glEntryList : [] });
         setTimeout(() => {
-            this.setState({ loading: false });
             fetch('/api/inquiryAccountingRecord/' + this.state.account_number + "/" + this.state.account_sequence + "/"
                 + this.state.transaction_date + "/" + this.state.channel_post_date + "/" + this.state.job_id + "/"
                 + this.state.service + "/" + this.state.transaction_id, {})
@@ -55,23 +54,16 @@ class InquiryAccountingRecordsComponent extends Component {
                 .then(data => {
                     // if (data.rs_body.gl_entry_list.length) {
                     if (data.rs_body.gl_entry_list.length > 0) {
-                        // console.log(data.rs_body.gl_entry_list)
                         this.setState({
+                            loading: false,
                             isFound: true,
-                            glEntryList: data.rs_body.gl_entry_list,
+                             glEntryList: data.rs_body.gl_entry_list
                         })
                     } else {
                         alert("Not Found.");
                     }
-                    // utility.clearSessionStorage("response_inquiryAccountingRecord");
-                    // sessionStorage.setItem("response_inquiryAccountingRecord", JSON.stringify(data.rs_body));
-                    // window.open('/iarSummary', '_self');
-                    // } else {
-                    //     alert("error code : " + data.errors.map(error => error.error_code) + "\n"
-                    //         + "error desc : " + data.errors.map(error => error.error_desc) + "\n"
-                    //         + "error type : " + data.errors.map(error => error.error_type));
-                    // }
                 }).catch(error => console.log(error));
+                this.setState({loading: false});
         }, 1000);
     };
 
@@ -107,13 +99,7 @@ class InquiryAccountingRecordsComponent extends Component {
         let header = [];
         header.push(<th>#&nbsp;</th>);
         fieldHeader.gl_entry_list.map(item => {
-            if (item === "trnRef" || item === "before_balance" || item === "first_payment_date"
-                || item === "installment_amount" || item === "number_of_payment" ||
-                item === "interest_index" || item === "interest_spread") {
-                header.push(<th><u>{item}</u>&nbsp;</th>);
-            } else {
-                header.push(<th>{item}&nbsp;</th>);
-            }
+            header.push(<th>{item}&nbsp;</th>);
         })
         return header;
     };
@@ -132,16 +118,19 @@ class InquiryAccountingRecordsComponent extends Component {
                 for (let ResHeader in data[index]) {
                     if (typeof data[index][ResHeader] === "object") {
                         // eslint-disable-next-line
+                        let tmp = []
                         for (let inObj in data[index][ResHeader]) {
                             // eslint-disable-next-line
                             for (let keyInObj in data[index][ResHeader][inObj]) {
-                                value[keyInObj] = data[index][ResHeader][inObj][keyInObj];
+                                tmp.push(keyInObj+" : "+data[index][ResHeader][inObj][keyInObj]);
                             }
                         }
+                        value[ResHeader] = tmp.join(" | ");
                     } else {
                         value[ResHeader] = data[index][ResHeader];
                     }
                 }
+                console.log(value);
                 // eslint-disable-next-line
                 for (let indexValue in value) {
                     if (indexValue === "job_id" || indexValue === "transaction_id") {
@@ -150,7 +139,6 @@ class InquiryAccountingRecordsComponent extends Component {
                         obj.push(<td>{value[indexValue]}</td>);
                     }
                 }
-                // body.push(<tr onClick={() => this.searchJobID(tmp)}>{obj}</tr>);
                 body.push(<tr>{obj}</tr>);
             }
         }
@@ -176,6 +164,7 @@ class InquiryAccountingRecordsComponent extends Component {
     inqByJobIDAndTranID = (key, value) => {
         if (key === "job_id") {
             this.setState({
+                dataResponse: [],
                 account_number: null,
                 account_sequence: null,
                 transaction_date: null,
@@ -186,6 +175,7 @@ class InquiryAccountingRecordsComponent extends Component {
             });
         } else {
             this.setState({
+                dataResponse: [],
                 account_number: null,
                 account_sequence: null,
                 transaction_date: null,
@@ -202,14 +192,7 @@ class InquiryAccountingRecordsComponent extends Component {
             .then(data => {
                 if (data.rs_body.gl_entry_list.length > 0) {
                     this.setState({
-                        dataResponse: data.rs_body.gl_entry_list,
-                        account_number: null,
-                        account_sequence: null,
-                        transaction_date: null,
-                        channel_post_date: null,
-                        job_id: null,
-                        service: null,
-                        transaction_id: null
+                         dataResponse: data.rs_body.gl_entry_list
                     });
                 } else {
                     alert("Not Found.");
@@ -261,7 +244,6 @@ class InquiryAccountingRecordsComponent extends Component {
             </div>
         );
     }
-
 }
 
 export default InquiryAccountingRecordsComponent;
