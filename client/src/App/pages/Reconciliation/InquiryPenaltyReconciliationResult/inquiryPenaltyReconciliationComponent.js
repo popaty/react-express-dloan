@@ -28,7 +28,7 @@ class InquiryPenaltyReconciliationComponent extends Component {
         this.setState({ loading: true ,dataRes:[] });
 
         setTimeout(() => {
-            fetch('/api/inquiryPenalty/' + utility.StringAD() + this.state.date_penalty)
+            fetch('/api/inquiryPenalty/' + this.state.date_penalty)
                 .then(response => response.json())
                 .then(data => {
                     if (data) {

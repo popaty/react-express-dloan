@@ -27,7 +27,7 @@ class inquiryGLReconciliationComponent extends Component {
         event.preventDefault();
         this.setState({ loading: true,dataRes:[] });
         setTimeout(() => {
-            fetch('/api/inquiryGL/' + utility.StringAD() + this.state.date_GL)
+            fetch('/api/inquiryGL/' + this.state.date_GL)
                 .then(response => response.json())
                 .then(data => {
                     if (data) {

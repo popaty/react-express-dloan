@@ -28,7 +28,7 @@ class inquiryPrincipalReconciliationComponent extends Component {
         this.setState({ loading: true, dataRes:[] });
         setTimeout(() => {
             this.setState({ loading: false });
-            fetch('/api/inquiryPrincipal/' + utility.StringAD() + this.state.date_principal)
+            fetch('/api/inquiryPrincipal/' + this.state.date_principal)
             .then(response => response.json())
             .then(data => {
                 if (data) {

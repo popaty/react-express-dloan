@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Button, Col, Form, FormGroup, Input, Label, Container, Row, Table} from 'reactstrap';
 import DynamicHeader from '../../Header';
 import inputModel from './model.json';
-import utility from '../../Utility';
 import SpinnerLoader from '../../loading';
 import fieldHeader from './fieldRes.js'
 
@@ -27,7 +26,7 @@ class InquiryInterestReconciliationComponent extends Component {
         event.preventDefault();
         this.setState({ loading: true,dataRes:[] });
         setTimeout(() => {
-            fetch('/api/inquiryInterest/' + utility.StringAD() + this.state.date_interest)
+            fetch('/api/inquiryInterest/' + this.state.date_interest)
             .then(response => response.json())
             .then(data => {
                 if (data) {
