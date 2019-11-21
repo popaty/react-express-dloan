@@ -139,7 +139,7 @@ class InquiryPenaltyReconciliationComponent extends Component {
                     </Row>
                     <Row>
                         <Col>
-                            <div class="table-responsive" style={{ marginBottom: 50, marginTop: 30 }} >
+                            <div class="table-responsive" style={{ marginBottom: 50, marginTop: 10 }} >
                                 <Table striped bordered >
                                     <thead>
                                         <tr>
