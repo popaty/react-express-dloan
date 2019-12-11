@@ -21,8 +21,11 @@ const utility = {
                 }
             }
         }
+        //in state all
         delete body.loading;
         delete body.resultData;
+        //in state disburse
+        delete body.disabled;
         return body;
     },
     clearSessionStorage : (key) => {

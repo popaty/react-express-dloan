@@ -70,7 +70,7 @@ class InquiryAccountingRecordsComponent extends Component {
         return inputModel.model.map(item => {
             if (item.type === "select") {
                 return (
-                    <Col xs="3">
+                    <Col md="3">
                         <FormGroup>
                             <Label>{item.label}</Label>
                             <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
@@ -82,7 +82,7 @@ class InquiryAccountingRecordsComponent extends Component {
                 );
             } else {
                 return (
-                    <Col xs="3">
+                    <Col md="3">
                         <FormGroup>
                             <Label>{item.label}</Label>
                             <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
@@ -209,7 +209,7 @@ class InquiryAccountingRecordsComponent extends Component {
                     <Form onSubmit={this.Clicked}>
                         <Row>
                             {this.FormInputData()}
-                            <Col xs="3">
+                            <Col md="3">
                                 <div class="text-center">
                                     <Button color="primary" style={{ marginTop: 30 }} type="submit" disabled={loading}>
                                         {loading && (<SpinnerLoader />)}
