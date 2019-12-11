@@ -72,17 +72,6 @@ const header = (props) => {
                         </DropdownItem>
                     </DropdownMenu>
                 </UncontrolledDropdown>
-                {/* &emsp;
-                <UncontrolledDropdown nav inNavbar>
-                    <DropdownToggle nav caret>
-                        P-rest
-                    </DropdownToggle>
-                    <DropdownMenu right>
-                        <DropdownItem href="/ipdprestComponent">
-                            Inquiry Position Detail
-                        </DropdownItem>
-                    </DropdownMenu>
-                </UncontrolledDropdown> */}
                 &emsp;
                 <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle nav caret>
@@ -92,14 +81,6 @@ const header = (props) => {
                         <DropdownItem href="/iarComponent">
                             Inquiry Accounting Record
                         </DropdownItem>
-                    </DropdownMenu>
-                </UncontrolledDropdown>
-                &emsp;
-                <UncontrolledDropdown nav inNavbar>
-                    <DropdownToggle nav caret>
-                        Reconciliation 
-                    </DropdownToggle>
-                    <DropdownMenu right>
                         <DropdownItem href="/ipprComponent">
                             Inquiry Principal Reconciliation Result
                         </DropdownItem>

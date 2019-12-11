@@ -4,7 +4,7 @@ import inputModel from './model.json';
 import SpinnerLoader from '../loading.js';
 import { Button, Col, Container, Form, FormGroup, Input, Label, Row, Table } from 'reactstrap';
 import fieldHeader from './fieldRes.js'
-// import dataResMock from './dataRes.js'
+// import dataResMock from './mockDataRes.js'
 import Modal from '../modal'
 
 class InquiryAccountingRecordsComponent extends Component {
@@ -20,7 +20,7 @@ class InquiryAccountingRecordsComponent extends Component {
             job_id: null,
 
             loading: false,
-            isFound: true,
+            isFound: false,
             statusModal: false,
             glEntryList: [],
             dataResponse: []
@@ -39,7 +39,6 @@ class InquiryAccountingRecordsComponent extends Component {
         // this.setState({ [event.target.name]: event.target.type === "number" ? Number(event.target.value) : event.target.value });
         this.setState({ [event.target.name]: event.target.value === "" ? null : event.target.value });
     };
-
 
     Clicked(event) {
         event.preventDefault();
@@ -223,7 +222,7 @@ class InquiryAccountingRecordsComponent extends Component {
                         <Row>
                             <Col>
                                 <div class="table-responsive" style={{ marginBottom: 50, marginTop: 30 }} >
-                                    <Table hover bordered >
+                                    <Table hover bordered>
                                         <thead>
                                             <tr>
                                                 {this.getHeaderTable()}
