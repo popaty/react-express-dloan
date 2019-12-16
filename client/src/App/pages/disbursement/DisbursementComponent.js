@@ -27,7 +27,7 @@ class disbursementComponent extends Component {
                     first_payment_date: "",
                     number_of_payment: 0,
                     installment_amount: 0,
-                    payment_calculation_method: ""
+                    payment_calculation_method: "installment"
                 }
             },
             loading: false,
@@ -76,7 +76,7 @@ class disbursementComponent extends Component {
                 first_payment_date: "",
                 number_of_payment: String(numberOfPayment),
                 installment_amount:String(installmentAmount),
-                payment_calculation_method: ""
+                payment_calculation_method: "installment"
             }
         };
         this.setState({ rq_body: body });
@@ -117,7 +117,7 @@ class disbursementComponent extends Component {
         //clone state for use in omit function.
         let body = cloneDeep(this.state);
         const request = utility.omit(body);
-        console.log(request);
+        // console.log(request);
         setTimeout(() => {
              this.setState({ loading: false });
              this.postList(request);

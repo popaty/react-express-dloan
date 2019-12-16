@@ -99,7 +99,7 @@
     {
       "label": "Payment Calculation Method",
       "type": "select",
-      "items": ["","installment","minimum"],
+      "items": ["installment","minimum"],
       "name": "payment_calculation_method",
       "placeholder": "Enter Payment Calculation Method",
       "value": "payment_calculation_method",
