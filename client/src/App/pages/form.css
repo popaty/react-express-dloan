@@ -3,6 +3,11 @@ h2 {
     margin-bottom: 40px
 }
 
+h4 {
+    margin-top: 20px;
+    margin-left: 170px;
+}
+
 .navbar {
     margin-bottom: 50px;
 }
@@ -11,3 +16,7 @@ button {
     margin-bottom: 30px;
     margin-top: 10px;
 }
+
+hr {
+    border-top: 1px solid;
+  }

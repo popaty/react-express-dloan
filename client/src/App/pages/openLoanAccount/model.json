@@ -71,9 +71,7 @@
       "placeholder": "Enter deduction account",
       "value": "deduction_account",
       "root": null
-    }
-  ],
-  "model2": [
+    },
     {
       "label": "Account branch",
       "type": "number",
@@ -136,6 +134,15 @@
       "name": "payment_date",
       "placeholder": "Enter payment date",
       "value": "payment_date",
+      "root": "payment"
+    },
+    {
+      "label": "Payment Calculation Method",
+      "type": "select",
+      "items": ["","installment","minimum"],
+      "name": "payment_calculation_method",
+      "placeholder": "Enter Payment Calculation Method",
+      "value": "payment_calculation_method",
       "root": "payment"
     }
   ]

@@ -22,7 +22,7 @@ class ModalExample extends Component {
         // eslint-disable-next-line
         for (let index in data) {
             let num = Number(index) + 1;
-            let obj = [];
+             let obj = [];
             obj.push(<td>{num}</td>);
             let value = this.getFieldHeader();
             if (data.hasOwnProperty(index)) {

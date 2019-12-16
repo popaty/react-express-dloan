@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import DynamicHeader from '../Header.js';
 import SpinnerLoader from '../loading.js';
 import '../form.css';
@@ -53,7 +53,8 @@ class OpenLoanAccountComponent extends Component {
                 payment: {
                     payment_frequency: 0,
                     payment_unit: "",
-                    payment_date: 0
+                    payment_date: 0,
+                    payment_calculation_method: ""
                 }
             },
             loading: false
@@ -65,7 +66,7 @@ class OpenLoanAccountComponent extends Component {
 
     handleChange(event) {
         //this.setState({[event.target.name]:event.target.value});
-        const {rq_body} = {...this.state};
+        const { rq_body } = { ...this.state };
         const currentState = rq_body;
         const interest = currentState.interest;
         const payment = currentState.payment;
@@ -73,24 +74,26 @@ class OpenLoanAccountComponent extends Component {
         if (event.target.name === "interest_index" || event.target.name === "interest_spread") {
             interest[event.target.name] = event.target.type === "number" ? Number(event.target.value) : event.target.value;
         } else if (event.target.name === "payment_frequency" || event.target.name === "payment_unit" ||
-            event.target.name === "payment_date" || event.target.name === "billing_offset_day") {
+            event.target.name === "payment_date" || event.target.name === "billing_offset_day"
+            || event.target.name === "payment_calculation_method") {
+
             payment[event.target.name] = event.target.type === "number" ? Number(event.target.value) : event.target.value;
         } else {
             currentState[event.target.name] = event.target.type === "number" ? Number(event.target.value) : event.target.value;
         }
-        this.setState({rq_body: currentState});
+        this.setState({ rq_body: currentState });
 
     };
 
     handleSubmit(event) {
         event.preventDefault();
-        this.setState({loading: true});
+        this.setState({ loading: true });
         //clone state for use in omit function.
         let body = cloneDeep(this.state);
         const request = utility.omit(body);
-        //console.log(request);
+        console.log(request);
         setTimeout(() => {
-            this.setState({loading: false});
+            this.setState({ loading: false });
             this.postList(request);
         }, 1000);
     };
@@ -135,7 +138,7 @@ class OpenLoanAccountComponent extends Component {
                     alert("error code : " + data.errors.map(error => error.error_code) + "\n"
                         + "error desc : " + data.errors.map(error => error.error_desc));
                 }
-             }).catch(error => console.log(error))
+            }).catch(error => console.log(error))
 
         //mock data
         // let data = {
@@ -153,55 +156,104 @@ class OpenLoanAccountComponent extends Component {
         // }
     };
 
-    FormInputCol1 = () => {
-        return inputModel.model.map(item => {
+    FormInputRow1 = () => {
+        let count = 0;
+        let strCol1 = [];
+        let strCol2 = [];
+        inputModel.model.map(item => {
+            count++;
             if (item.root === null) {
-                return (      
-                    <FormGroup>
+                if (count % 2 != 0) {
+                    strCol1.push(<FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                               value={this.state.rq_body[item.value]} onChange={this.handleChange}/>
+                            value={this.state.rq_body[item.value]} onChange={this.handleChange} />
                     </FormGroup>
-                );
-            } else {
-                return (
-                    <FormGroup>
+                    )
+                } else {
+                    strCol2.push(<FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                               value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange}/>
+                            value={this.state.rq_body[item.value]} onChange={this.handleChange} />
                     </FormGroup>
-                );
+                    )
+                }
             }
         });
+        return (<Row><Col md={{ size: 3, offset: 3 }}>{strCol1}</Col><Col md={{ size: 3 }}>{strCol2}</Col></Row>);
     };
 
-    FormInputCol2 = () => {
-        return inputModel.model2.map(item => {
-            if (item.root === null) {
-                return (
-                    <FormGroup>
+    FormInputRow2 = () => {
+        let count = 0;
+        let Col1 = [];
+        let Col2 = [];
+        inputModel.model.map(item => {
+            count++;
+            if (item.root != null && item.root === "interest") {
+                if (count % 2 != 0) {
+                    Col1.push(<FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                               value={this.state.rq_body[item.value]} onChange={this.handleChange}/>
+                            value={this.state.rq_body[item.value]} onChange={this.handleChange} />
                     </FormGroup>
-                );
-            } else {
-                return (
-                    <FormGroup>
+                    )
+                } else {
+                    Col2.push(<FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                               value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange}/>
+                            value={this.state.rq_body[item.value]} onChange={this.handleChange} />
                     </FormGroup>
-                );
+                    )
+                }
             }
         });
-    };
+        return (<Row><Col md={{ size: 3, offset: 3 }}>{Col1}</Col><Col md={{ size: 3 }}>{Col2}</Col></Row>);
+    }
+
+    FormInputRow3 = () => {
+        let count = 0;
+        let Col1 = [];
+        let Col2 = [];
+        inputModel.model.map(item => {
+            count++;
+            if (item.root != null && item.root === "payment") {
+                if (count % 2 != 0) {
+                    Col1.push(<FormGroup>
+                        <Label>{item.label}</Label>
+                        <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+                            value={this.state.rq_body[item.value]} onChange={this.handleChange} />
+                    </FormGroup>
+                    )
+                } else {
+                    if (item.type === "select") {
+                        Col2.push(
+                            <FormGroup>
+                                <Label>{item.label}</Label>
+                                <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+                                    value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} >
+                                    {item.items.map(element => <option>{element}</option>)}
+                                </Input>
+                            </FormGroup>
+                        );
+                    } else {
+                        Col2.push(<FormGroup>
+                            <Label>{item.label}</Label>
+                            <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+                                value={this.state.rq_body[item.value]} onChange={this.handleChange} />
+                        </FormGroup>
+                        );
+                    }
+                }
+            }
+        });
+        return (<Row><Col md={{ size: 3, offset: 3 }}>{Col1}</Col><Col md={{ size: 3 }}>{Col2}</Col></Row>);
+    }
 
     render() {
-        const {loading} = this.state;
+        const { loading } = this.state;
         return (
             <div>
-                <DynamicHeader/>
+                <DynamicHeader />
                 <Container>
                     <h2>Form Input Open Account</h2>
                     <UncontrolledDropdown align="center">
@@ -221,19 +273,19 @@ class OpenLoanAccountComponent extends Component {
                         </DropdownMenu>
                     </UncontrolledDropdown>
                     <Form onSubmit={this.handleSubmit}>
-                        <Row>
-                            <Col md={{size: 3, offset: 3}}>
-                                {this.FormInputCol1()}
-                            </Col>
 
-                            <Col md={{size: 3}}>
-                                {this.FormInputCol2()}
-                            </Col>
-                        </Row>
+                        {this.FormInputRow1()}
+                        <h4>Interest</h4>
+                        <hr width="70%" />
+                        {this.FormInputRow2()}
+                        <h4>Payment</h4>
+                        <hr width="70%" />
+                        {this.FormInputRow3()}
+
                         <div class="text-center">
                             <Button color="primary" type="submit" disabled={loading}>
                                 {/* Submit */}
-                                {loading && (<SpinnerLoader/>)}
+                                {loading && (<SpinnerLoader />)}
                                 {loading && <span>Loading..</span>}
                                 {!loading && <span>Submit</span>}
                             </Button>
