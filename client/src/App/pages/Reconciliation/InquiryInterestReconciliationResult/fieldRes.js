@@ -5,6 +5,8 @@ module.exports.interest_reconciliation_list = [
     "accounting_status",
     "accounting_type",
     "currency",
+    "gl_account_number",
+    "cost_center",
     "external_accrual_balance",
     "gl_accrual_balance",
     "is_passed",
