@@ -158,6 +158,7 @@ class OpenLoanAccountComponent extends Component {
 
     FormInputRow1 = () => {
         let count = 0;
+        //edit to colLeft and colRight
         let strCol1 = [];
         let strCol2 = [];
         inputModel.model.map(item => {
@@ -185,6 +186,7 @@ class OpenLoanAccountComponent extends Component {
 
     FormInputRow2 = () => {
         let count = 0;
+        //edit to colLeft and colRight
         let Col1 = [];
         let Col2 = [];
         inputModel.model.map(item => {
@@ -212,6 +214,7 @@ class OpenLoanAccountComponent extends Component {
 
     FormInputRow3 = () => {
         let count = 0;
+        //edit to colLeft and colRight
         let Col1 = [];
         let Col2 = [];
         inputModel.model.map(item => {
