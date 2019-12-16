@@ -81,6 +81,15 @@
       "root": "other_properties"
     },
     {
+      "label": "Payment Calculation Method",
+      "type": "select",
+      "items": ["installment","minimum"],
+      "name": "payment_calculation_method",
+      "placeholder": "Enter Payment Calculation Method",
+      "value": "payment_calculation_method",
+      "root": "other_properties"
+    },
+    {
       "label": "Number of Payment",
       "type": "number",
       "name": "number_of_payment",
@@ -94,15 +103,6 @@
       "name": "installment_amount",
       "placeholder": "Enter installment amount",
       "value": "installment_amount",
-      "root": "other_properties"
-    },
-    {
-      "label": "Payment Calculation Method",
-      "type": "select",
-      "items": ["installment","minimum"],
-      "name": "payment_calculation_method",
-      "placeholder": "Enter Payment Calculation Method",
-      "value": "payment_calculation_method",
       "root": "other_properties"
     }
   ]
