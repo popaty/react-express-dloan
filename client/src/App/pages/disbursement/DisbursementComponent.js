@@ -32,7 +32,7 @@ class disbursementComponent extends Component {
             },
             loading: false,
             disabled: ""
-        };
+        }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     };
@@ -78,7 +78,7 @@ class disbursementComponent extends Component {
                 installment_amount:String(installmentAmount),
                 payment_calculation_method: "installment"
             }
-        };
+        }
         this.setState({ rq_body: body });
     };
 
@@ -121,7 +121,7 @@ class disbursementComponent extends Component {
         setTimeout(() => {
              this.setState({ loading: false });
              this.postList(request);
-        }, 1000);
+        }, 1000)
     };
 
     postList = (request) => {
@@ -200,7 +200,7 @@ class disbursementComponent extends Component {
                     }
                 }
             }
-        });
+        })
     };
 
     render() {

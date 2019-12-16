@@ -95,7 +95,7 @@ class OpenLoanAccountComponent extends Component {
         setTimeout(() => {
             this.setState({ loading: false });
             this.postList(request);
-        }, 1000);
+        }, 1000)
     };
 
     loadJson(event) {
@@ -252,7 +252,7 @@ class OpenLoanAccountComponent extends Component {
                     );
                 }
             }
-        });
+        })
         return (<Row><Col md={{ size: 3, offset: 3 }}>{columnLeft}</Col><Col md={{ size: 3 }}>{columnRight}</Col></Row>);
     };
 
@@ -291,12 +291,10 @@ class OpenLoanAccountComponent extends Component {
 
                         <div class="text-center">
                             <Button color="primary" type="submit" disabled={loading}>
-                                {/* Submit */}
                                 {loading && (<SpinnerLoader />)}
                                 {loading && <span>Loading..</span>}
                                 {!loading && <span>Submit</span>}
                             </Button>
-                            {/* < SpinnerLoader /> */}
                         </div>
                     </Form>
                 </Container>
