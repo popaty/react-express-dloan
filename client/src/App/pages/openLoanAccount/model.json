@@ -113,6 +113,15 @@
       "root": "interest"
     },
     {
+      "label": "Payment Calculation Method",
+      "type": "select",
+      "items": ["Please select","installment","minimum"],
+      "name": "payment_calculation_method",
+      "placeholder": "Enter Payment Calculation Method",
+      "value": "payment_calculation_method",
+      "root": "payment"
+    },
+    {
       "label": "Payment frequency",
       "type": "number",
       "name": "payment_frequency",
@@ -134,15 +143,6 @@
       "name": "payment_date",
       "placeholder": "Enter payment date",
       "value": "payment_date",
-      "root": "payment"
-    },
-    {
-      "label": "Payment Calculation Method",
-      "type": "select",
-      "items": ["","installment","minimum"],
-      "name": "payment_calculation_method",
-      "placeholder": "Enter Payment Calculation Method",
-      "value": "payment_calculation_method",
       "root": "payment"
     }
   ]

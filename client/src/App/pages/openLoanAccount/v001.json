@@ -20,7 +20,8 @@
       "payment_frequency": 1,
       "payment_unit": "M",
       "payment_date": 1,
-      "billing_offset_day": 5
+      "billing_offset_day": 5,
+      "payment_calculation_method": ""
     }
   }
 }
