@@ -27,7 +27,7 @@ class disbursementComponent extends Component {
                     first_payment_date: "",
                     number_of_payment: 0,
                     installment_amount: 0,
-                    payment_calculation_method: "installment"
+                    payment_calculation_method: ""
                 }
             },
             loading: false,
@@ -78,7 +78,7 @@ class disbursementComponent extends Component {
                 installment_amount:String(installmentAmount),
                 payment_calculation_method: "installment"
             }
-        };
+        }
         this.setState({ rq_body: body });
     };
 
@@ -121,7 +121,7 @@ class disbursementComponent extends Component {
         setTimeout(() => {
              this.setState({ loading: false });
              this.postList(request);
-        }, 1000);
+        }, 1000)
     };
 
     postList = (request) => {
