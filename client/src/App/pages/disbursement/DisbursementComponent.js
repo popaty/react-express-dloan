@@ -27,7 +27,7 @@ class disbursementComponent extends Component {
                     first_payment_date: "",
                     number_of_payment: 0,
                     installment_amount: 0,
-                    payment_calculation_method: "installment"
+                    payment_calculation_method: ""
                 }
             },
             loading: false,

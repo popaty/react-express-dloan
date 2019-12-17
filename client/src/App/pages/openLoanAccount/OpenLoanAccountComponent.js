@@ -163,7 +163,7 @@ class OpenLoanAccountComponent extends Component {
         inputModel.model.map(item => {
             count++;
             if (item.root === null) {
-                if (count % 2 != 0) {
+                if (count % 2 !== 0) {
                     columnLeft.push(<FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
@@ -189,8 +189,8 @@ class OpenLoanAccountComponent extends Component {
         let columnRight = [];
         inputModel.model.map(item => {
             count++;
-            if (item.root != null && item.root === "interest") {
-                if (count % 2 != 0) {
+            if (item.root !== null && item.root === "interest") {
+                if (count % 2 !== 0) {
                     columnLeft.push(<FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
@@ -211,27 +211,20 @@ class OpenLoanAccountComponent extends Component {
     };
 
     FormInputRow3 = () => {
-        let count = 0,countItems = 0;
+        let count = 0;
         let columnLeft = [];
         let columnRight = [];
         inputModel.model.map(item => {
             count++;
-            if (item.root != null && item.root === "payment") {
-                if (count % 2 != 0) {
+            if (item.root !== null && item.root === "payment") {
+                if (count % 2 !== 0) {
                     if (item.type === "select") {
                         columnLeft.push(
                             <FormGroup>
                                 <Label>{item.label}</Label>
                                 <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
                                     value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} >
-                                    {item.items.map(element => {
-                                        countItems++;
-                                        if(countItems === 1){
-                                            return (<option value= "">{element}</option>);
-                                        }else{
-                                            return (<option>{element}</option>);
-                                        }
-                                    })}
+                                    {item.items.map(element => <option>{element}</option>)}
                                 </Input>
                             </FormGroup>
                         );
@@ -299,7 +292,7 @@ class OpenLoanAccountComponent extends Component {
                     </Form>
                 </Container>
             </div>
-        );
+        )
     };
 }
 
