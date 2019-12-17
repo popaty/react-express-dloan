@@ -32,13 +32,13 @@ class disbursementComponent extends Component {
             },
             loading: false,
             disabled: ""
-        };
+        }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     };
 
     componentDidMount() {
-        let disbursementAmount = 0
+        let disbursementAmount = 0;
         let accountNumber = "";
 
         if (JSON.parse(sessionStorage.getItem("response_installment"))) {
@@ -178,7 +178,7 @@ class disbursementComponent extends Component {
                                     {item.items.map(element => <option>{element}</option>)}
                                 </Input>
                             </FormGroup>
-                    );
+                    )
                 } else {
                     if(item.name === "installment_amount" || item.name ==="number_of_payment"){
                         return (
@@ -188,7 +188,7 @@ class disbursementComponent extends Component {
                                          value={this.state.rq_body[item.root][item.value]}
                                          onChange={this.handleChange} disabled={this.state.disabled} />
                                 </FormGroup>
-                        );
+                        )
                     }else{
                         return (
                                 <FormGroup>
@@ -196,11 +196,11 @@ class disbursementComponent extends Component {
                                     <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
                                         value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
                                 </FormGroup>
-                        );
+                        )
                     }
                 }
             }
-        });
+        })
     };
 
     render() {
@@ -226,7 +226,7 @@ class disbursementComponent extends Component {
                     </Form>
                 </Container>
             </div>
-        );
+        )
     };
 }
 
