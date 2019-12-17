@@ -82,7 +82,6 @@ class OpenLoanAccountComponent extends Component {
             currentState[event.target.name] = event.target.type === "number" ? Number(event.target.value) : event.target.value;
         }
         this.setState({ rq_body: currentState });
-
     };
 
     handleSubmit(event) {
@@ -91,7 +90,7 @@ class OpenLoanAccountComponent extends Component {
         //clone state for use in omit function.
         let body = cloneDeep(this.state);
         const request = utility.omit(body);
-        console.log(request);
+        // console.log(request);
         setTimeout(() => {
             this.setState({ loading: false });
             this.postList(request);
@@ -158,21 +157,20 @@ class OpenLoanAccountComponent extends Component {
 
     FormInputRow1 = () => {
         let count = 0;
-        //edit to colLeft and colRight
-        let strCol1 = [];
-        let strCol2 = [];
+        let columnLeft = [];
+        let columnRight = [];
         inputModel.model.map(item => {
             count++;
             if (item.root === null) {
-                if (count % 2 != 0) {
-                    strCol1.push(<FormGroup>
+                if (count % 2 !== 0) {
+                    columnLeft.push(<FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
                             value={this.state.rq_body[item.value]} onChange={this.handleChange} />
                     </FormGroup>
                     )
                 } else {
-                    strCol2.push(<FormGroup>
+                    columnRight.push(<FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
                             value={this.state.rq_body[item.value]} onChange={this.handleChange} />
@@ -180,56 +178,47 @@ class OpenLoanAccountComponent extends Component {
                     )
                 }
             }
-        });
-        return (<Row><Col md={{ size: 3, offset: 3 }}>{strCol1}</Col><Col md={{ size: 3 }}>{strCol2}</Col></Row>);
+        })
+        return (<Row><Col md={{ size: 3, offset: 3 }}>{columnLeft}</Col><Col md={{ size: 3 }}>{columnRight}</Col></Row>);
     };
 
     FormInputRow2 = () => {
         let count = 0;
-        //edit to colLeft and colRight
-        let Col1 = [];
-        let Col2 = [];
+        let columnLeft = [];
+        let columnRight = [];
         inputModel.model.map(item => {
             count++;
-            if (item.root != null && item.root === "interest") {
-                if (count % 2 != 0) {
-                    Col1.push(<FormGroup>
+            if (item.root !== null && item.root === "interest") {
+                if (count % 2 !== 0) {
+                    columnLeft.push(<FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                            value={this.state.rq_body[item.value]} onChange={this.handleChange} />
+                            value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
                     </FormGroup>
                     )
                 } else {
-                    Col2.push(<FormGroup>
+                    columnRight.push(<FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                            value={this.state.rq_body[item.value]} onChange={this.handleChange} />
+                            value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
                     </FormGroup>
                     )
                 }
             }
-        });
-        return (<Row><Col md={{ size: 3, offset: 3 }}>{Col1}</Col><Col md={{ size: 3 }}>{Col2}</Col></Row>);
-    }
+        })
+        return (<Row><Col md={{ size: 3, offset: 3 }}>{columnLeft}</Col><Col md={{ size: 3 }}>{columnRight}</Col></Row>);
+    };
 
     FormInputRow3 = () => {
         let count = 0;
-        //edit to colLeft and colRight
-        let Col1 = [];
-        let Col2 = [];
+        let columnLeft = [];
+        let columnRight = [];
         inputModel.model.map(item => {
             count++;
-            if (item.root != null && item.root === "payment") {
-                if (count % 2 != 0) {
-                    Col1.push(<FormGroup>
-                        <Label>{item.label}</Label>
-                        <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                            value={this.state.rq_body[item.value]} onChange={this.handleChange} />
-                    </FormGroup>
-                    )
-                } else {
+            if (item.root !== null && item.root === "payment") {
+                if (count % 2 !== 0) {
                     if (item.type === "select") {
-                        Col2.push(
+                        columnLeft.push(
                             <FormGroup>
                                 <Label>{item.label}</Label>
                                 <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
@@ -239,18 +228,25 @@ class OpenLoanAccountComponent extends Component {
                             </FormGroup>
                         );
                     } else {
-                        Col2.push(<FormGroup>
+                        columnLeft.push(<FormGroup>
                             <Label>{item.label}</Label>
                             <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                                value={this.state.rq_body[item.value]} onChange={this.handleChange} />
+                                value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
                         </FormGroup>
-                        );
+                        )
                     }
+                } else {
+                    columnRight.push(<FormGroup>
+                        <Label>{item.label}</Label>
+                        <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+                            value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
+                    </FormGroup>
+                    );
                 }
             }
-        });
-        return (<Row><Col md={{ size: 3, offset: 3 }}>{Col1}</Col><Col md={{ size: 3 }}>{Col2}</Col></Row>);
-    }
+        })
+        return (<Row><Col md={{ size: 3, offset: 3 }}>{columnLeft}</Col><Col md={{ size: 3 }}>{columnRight}</Col></Row>);
+    };
 
     render() {
         const { loading } = this.state;
@@ -279,25 +275,23 @@ class OpenLoanAccountComponent extends Component {
 
                         {this.FormInputRow1()}
                         <h4>Interest</h4>
-                        <hr width="70%" />
+                        <hr />
                         {this.FormInputRow2()}
                         <h4>Payment</h4>
-                        <hr width="70%" />
+                        <hr />
                         {this.FormInputRow3()}
 
                         <div class="text-center">
                             <Button color="primary" type="submit" disabled={loading}>
-                                {/* Submit */}
                                 {loading && (<SpinnerLoader />)}
                                 {loading && <span>Loading..</span>}
                                 {!loading && <span>Submit</span>}
                             </Button>
-                            {/* < SpinnerLoader /> */}
                         </div>
                     </Form>
                 </Container>
             </div>
-        );
+        )
     };
 }
 
