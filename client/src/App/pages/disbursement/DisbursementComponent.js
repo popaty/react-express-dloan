@@ -38,7 +38,7 @@ class disbursementComponent extends Component {
     };
 
     componentDidMount() {
-        let disbursementAmount = 0;
+        let disbursementAmount = 0; 
         let accountNumber = "";
 
         if (JSON.parse(sessionStorage.getItem("response_installment"))) {

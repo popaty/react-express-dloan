@@ -6,6 +6,7 @@ import { Button, Col, Container, Form, FormGroup, Input, Label, Row, Table } fro
 import fieldHeader from './fieldRes.js'
 // import dataResMock from './mockDataRes.js'
 import Modal from '../modal'
+const cloneDeep = require('lodash.clonedeep');
 
 class InquiryAccountingRecordsComponent extends Component {
     constructor(props) {
@@ -18,22 +19,22 @@ class InquiryAccountingRecordsComponent extends Component {
             channel_post_date: null,
             transaction_id: null,
             job_id: null,
-
+            
             loading: false,
             isFound: false,
             statusModal: false,
             glEntryList: [],
             dataResponse: []
-        };
+        }
         this.handleChange = this.handleChange.bind(this);
         this.Clicked = this.Clicked.bind(this);
     };
 
     componentDidMount() {
         if (JSON.parse(sessionStorage.getItem("account_number"))) {
-            this.setState({ account_number: JSON.parse(sessionStorage.getItem("account_number")) });
+            this.setState({ account_number: JSON.parse(sessionStorage.getItem("account_number"))});
         }
-    }
+    };
 
     handleChange(event) {
         // this.setState({ [event.target.name]: event.target.type === "number" ? Number(event.target.value) : event.target.value });
@@ -43,8 +44,7 @@ class InquiryAccountingRecordsComponent extends Component {
     Clicked(event) {
         event.preventDefault();
         // console.log(this.state);
-        this.setState({ loading: true,
-            glEntryList : [] });
+        this.setState({ loading: true,glEntryList : []});
         setTimeout(() => {
             fetch('/api/inquiryAccountingRecord/' + this.state.account_number + "/" + this.state.account_sequence + "/"
                 + this.state.transaction_date + "/" + this.state.channel_post_date + "/" + this.state.job_id + "/"
@@ -56,8 +56,7 @@ class InquiryAccountingRecordsComponent extends Component {
                         this.setState({
                             loading: false,
                             isFound: true,
-                            glEntryList: data.rs_body.gl_entry_list
-                        })
+                            glEntryList: data.rs_body.gl_entry_list})
                     } else {
                         alert("Not Found.");
                     }
@@ -91,7 +90,7 @@ class InquiryAccountingRecordsComponent extends Component {
                     </Col>
                 );
             }
-        });
+        })
     };
 
     getHeaderTable = () => {
@@ -129,7 +128,7 @@ class InquiryAccountingRecordsComponent extends Component {
                         value[ResHeader] = data[index][ResHeader];
                     }
                 }
-                console.log(value);
+                // console.log(value);
                 // eslint-disable-next-line
                 for (let indexValue in value) {
                     if (indexValue === "job_id" || indexValue === "transaction_id") {
@@ -154,39 +153,53 @@ class InquiryAccountingRecordsComponent extends Component {
 
     showModal = (key, value) => {
         this.setState({ statusModal: !this.state.statusModal });
-        if (this.state.statusModal === false) {
+        if (this.state.statusModal===false) {
             this.inqByJobIDAndTranID(key, value);
         }
-
     }
 
     inqByJobIDAndTranID = (key, value) => {
+        let stateNew = cloneDeep(this.state);
         if (key === "job_id") {
-            this.setState({
-                dataResponse: [],
-                account_number: null,
-                account_sequence: null,
-                transaction_date: null,
-                channel_post_date: null,
-                job_id: value,
-                service: null,
-                transaction_id: null
-            });
+            stateNew.account_number = null;
+            stateNew.account_sequence = null;
+            stateNew.transaction_date = null;
+            stateNew.channel_post_date = null;
+            stateNew.job_id = value;
+            stateNew.service = null;
+            stateNew.transaction_id = null;
+            // this.setState({
+            //     dataResponse: [],
+            //     account_number: null,
+            //     account_sequence: null,
+            //     transaction_date: null,
+            //     channel_post_date: null,
+            //     job_id: value,
+            //     service: null,
+            //     transaction_id: null
+            // });
         } else {
-            this.setState({
-                dataResponse: [],
-                account_number: null,
-                account_sequence: null,
-                transaction_date: null,
-                channel_post_date: null,
-                job_id: null,
-                service: null,
-                transaction_id: value
-            });
+            stateNew.account_number = null;
+            stateNew.account_sequence = null;
+            stateNew.transaction_date = null;
+            stateNew.channel_post_date = null;
+            stateNew.job_id = null;
+            stateNew.service = null;
+            stateNew.transaction_id = value;
+            // this.setState({
+            //     dataResponse: [],
+            //     account_number: null,
+            //     account_sequence: null,
+            //     transaction_date: null,
+            //     channel_post_date: null,
+            //     job_id: null,
+            //     service: null,
+            //     transaction_id: value
+            // });
         }
-        fetch('/api/inquiryAccountingRecord/' + this.state.account_number + "/" + this.state.account_sequence + "/"
-            + this.state.transaction_date + "/" + this.state.channel_post_date + "/" + this.state.job_id + "/"
-            + this.state.service + "/" + this.state.transaction_id, {})
+        fetch('/api/inquiryAccountingRecord/' + stateNew.account_number + "/" + stateNew.account_sequence + "/"
+            + stateNew.transaction_date + "/" + stateNew.channel_post_date + "/" + stateNew.job_id + "/"
+            + stateNew.service + "/" + stateNew.transaction_id, {})
             .then(response => response.json())
             .then(data => {
                 if (data.rs_body.gl_entry_list.length > 0) {
@@ -241,8 +254,8 @@ class InquiryAccountingRecordsComponent extends Component {
                 </Container>
                 <Modal show={this.state.statusModal} onClose={this.showModal} data={this.state.dataResponse} />
             </div>
-        );
-    }
+        )
+    };
 }
 
 export default InquiryAccountingRecordsComponent;
