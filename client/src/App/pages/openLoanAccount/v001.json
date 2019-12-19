@@ -1,28 +1,26 @@
 {
-  "rq_body": {
-    "customer_number": "111111111103",
-    "customer_type": "0703",
-    "account_name": "นายทนงตน Munkong",
-    "credit_limit": 90000,
-    "credit_term_number": 9,
-    "credit_term_unit": "M",
-    "product_name": "7200120090001",
-    "disbursement_account": "20000002013",
-    "deduction_account": "20000002013",
-    "account_branch": 20,
-    "response_unit": 20,
-    "application_id": "APP0003",
-    "interest": {
-      "interest_index": "MRR",
-      "interest_spread": -3
-    },
-    "payment": {
-      "payment_frequency": 1,
-      "payment_unit": "M",
-      "payment_date": 1,
-      "billing_offset_day": 5,
-      "payment_calculation_method": ""
+    "rq_body": {
+      "customer_number": "12345",
+      "customer_type": "0702",
+      "account_name": "นางแก้ว ตา",
+      "credit_limit": 200000,
+      "credit_term_number": 12,
+      "credit_term_unit": "M",
+      "product_name": "7200120090002",
+      "disbursement_account": "1111111111",
+      "deduction_account": "9999999999",
+      "account_branch": 1,
+      "response_unit": 1,
+      "application_id": "APP0001",
+      "interest": {
+        "interest_index": "FIXED",
+        "interest_spread": 18
+      },
+      "payment": {
+        "payment_frequency": 1,
+        "payment_unit": "M",
+        "payment_date": 28,
+        "payment_calculation_method": "installment"
+      }
     }
   }
-}
-

@@ -153,7 +153,7 @@ class InquiryAccountingRecordsComponent extends Component {
 
     showModal = (key, value) => {
         this.setState({ statusModal: !this.state.statusModal });
-        if (this.state.statusModal===false) {
+        if (!this.state.statusModal) {
             this.inqByJobIDAndTranID(key, value);
         }
     }

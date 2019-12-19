@@ -1,0 +1,27 @@
+{
+  "rq_body": {
+    "customer_number": "111111111108",
+    "customer_type": "0702",
+    "account_name": "นางสีดา รามายณะ",
+    "credit_limit": 35000,
+    "credit_term_number": 4,
+    "credit_term_unit": "M",
+    "product_name": "7200120090001",
+    "disbursement_account": "20000002021",
+    "deduction_account": "20000025921",
+    "account_branch": 31,
+    "response_unit": 31,
+    "application_id": "APP0011",
+    "interest": {
+      "interest_index": "MRR",
+      "interest_spread": 22
+    },
+    "payment": {
+      "payment_frequency": 1,
+      "payment_unit": "M",
+      "payment_date": 15,
+      "billing_offset_day": 7,
+      "payment_calculation_method": ""
+    }
+  }
+}
