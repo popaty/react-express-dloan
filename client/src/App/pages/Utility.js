@@ -26,6 +26,13 @@ const utility = {
         delete body.resultData;
         //in state disburse
         delete body.disabled;
+
+        delete body.openMyModal;
+        delete body.isFound;
+        delete body.interest_index;
+        delete body.interest_spread;
+        delete body.date;
+
         return body;
     },
     clearSessionStorage : (key) => {
