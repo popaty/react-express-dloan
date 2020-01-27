@@ -8,6 +8,7 @@ import SpinnerLoader from '../loading.js';
 const cloneDeep = require('lodash.clonedeep');
 let installmentAmount = "";
 let numberOfPayment = "";
+let dataArray = [];
 
 class disbursementComponent extends Component {
     constructor(props) {
@@ -43,7 +44,7 @@ class disbursementComponent extends Component {
 
         };
         this.handleChange = this.handleChange.bind(this);
-        this.handleChangeTest = this.handleChangeTest.bind(this);
+        this.handleChangeModal = this.handleChangeModal.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
@@ -93,14 +94,16 @@ class disbursementComponent extends Component {
                 first_payment_date: "",
                 number_of_payment: String(numberOfPayment),
                 installment_amount: String(installmentAmount),
-                payment_calculation_method: "installment"
+                payment_calculation_method: "installment",
+                interest_override_reason: "",
+                campaign_name: "",
+                interest_schedule: []
             }
         };
         this.setState({ rq_body: body });
     };
 
-    handleChangeTest(event) {
-        console.log(event.target.value);
+    handleChangeModal(event) {
         if (event.target.name === "date") {
             this.setState({ date: event.target.value });
         } else if (event.target.name === "interest_index") {
@@ -141,14 +144,13 @@ class disbursementComponent extends Component {
     };
 
     handleSubmit(event) {
-
         console.log(sessionStorage.getItem("disburse_interest"));
 
         //set Array for interest schedule
-        const { rq_body } = { ...this.state };
-        const currentState = rq_body;
-        const properties = currentState.other_properties;
-        properties["interest_schedule"] = JSON.parse(sessionStorage.getItem("disburse_interest"));
+        // const { rq_body } = { ...this.state };
+        // const currentState = rq_body;
+        // const properties = currentState.other_properties;
+        // properties["interest_schedule"] = JSON.parse(sessionStorage.getItem("disburse_interest"));
 
 
         // this.setState({ rq_body[""]["interest_schedule"] : JSON.parse(sessionStorage.getItem("disburse_interest"))});
@@ -210,32 +212,34 @@ class disbursementComponent extends Component {
 
     handleCloseModal() {
         this.setState({ openMyModal: false });
-        this.setState({ isFound: true });
-
-        var dataArray = [];
-        var data = {
+        // this.setState({ isFound: true });
+        let data = {
             date: this.state.date,
             interest_index: this.state.interest_index,
             interest_spread: this.state.interest_spread
         };
-        console.log("DATA:" + JSON.stringify(data));
+        // console.log("DATA:" + JSON.stringify(data));
 
-        if (sessionStorage.getItem("disburse_interest") != null) {
-            dataArray = JSON.parse(sessionStorage.getItem("disburse_interest"));
-            dataArray.push(data);
+        // if (sessionStorage.getItem("disburse_interest") != null) {
+        //     dataArray = JSON.parse(sessionStorage.getItem("disburse_interest"));
+        //     dataArray.push(data);
 
-            // for (var i = 0; i < dataArray.length; i++)
-            //     console.log((i + 1) + ": " + JSON.stringify(dataArray[i]));
+        //     for (var i = 0; i < dataArray.length; i++)
+        //         console.log((i + 1) + ": " + JSON.stringify(dataArray[i]));
 
-            sessionStorage.setItem("disburse_interest", JSON.stringify(dataArray));
-        } else {
-            dataArray.push(data);
-            sessionStorage.setItem("disburse_interest", JSON.stringify(dataArray));
-        }
+        //     sessionStorage.setItem("disburse_interest", JSON.stringify(dataArray));
+        // } else {
+        //     dataArray.push(data);
+        //     sessionStorage.setItem("disburse_interest", JSON.stringify(dataArray));
+        // }
+        dataArray.push(data);
+        // console.log("data = "+ JSON.stringify(dataArray));
         const { rq_body } = { ...this.state };
         const currentState = rq_body;
         const properties = currentState.other_properties;
-        properties["interest_schedule"] = JSON.parse(sessionStorage.getItem("disburse_interest"));
+        properties["interest_schedule"] = JSON.stringify(dataArray);
+        console.log(this.state.rq_body);
+        // properties["interest_schedule"] = JSON.parse(sessionStorage.getItem("disburse_interest"));
     }
 
     renderTable() {
@@ -291,10 +295,8 @@ class disbursementComponent extends Component {
 
     render() {
         const { loading } = this.state;
-        let tempData;
-        tempData = JSON.parse(sessionStorage.getItem("disburse_interest"));
-        // tempData = [{"date":"2020-01-23","interest_index":"1","interest_spread":"1"}]
-        console.log("tempData : " + JSON.stringify(tempData));
+        let tempData = this.state.rq_body.other_properties.interest_schedule;
+        console.log("tempData : " + tempData);
         return (
             <div>
                 <DynamicHeader />
@@ -309,28 +311,25 @@ class disbursementComponent extends Component {
                                     <div>
                                         <Button color="secondary" type="button" onClick={this.handleOpenModal}>Add
                                             Interest Schedule</Button>
-                                        <Modal isOpen={this.state.openMyModal}
-                                            // style={customStyles}
-                                            // contentLabel="Interest Schedule">
-                                            >
+                                        <Modal isOpen={this.state.openMyModal}>
                                             <ModalHeader toggle={this.closeModal} >Interest Schedule</ModalHeader>
                                             <ModalBody>
                                                 <FormGroup>
                                                     <Label>Date</Label>
                                                     <Input type="date" name="date" placeholder="date" step="any"
-                                                        value={this.state.date} onChange={this.handleChangeTest}>
+                                                        value={this.state.date} onChange={this.handleChangeModal}>
                                                     </Input>
                                                     <Label>Interest Index</Label>
                                                     <Input type="String" name="interest_index" placeholder="interest_index"
                                                         step="any"
                                                         value={this.state.interest_index}
-                                                        onChange={this.handleChangeTest}>
+                                                        onChange={this.handleChangeModal}>
                                                     </Input>
                                                     <Label>Interest Spread</Label>
                                                     <Input type="number" name="interest_spread"
                                                         placeholder="interest_spread" step="any"
                                                         value={this.state.interest_spread}
-                                                        onChange={this.handleChangeTest}>
+                                                        onChange={this.handleChangeModal}>
                                                     </Input>
                                                     <div class="text-center">
                                                     <Button color="primary" onClick={this.handleCloseModal}>Add</Button>{' '}
