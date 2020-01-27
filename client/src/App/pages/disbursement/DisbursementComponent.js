@@ -286,6 +286,16 @@ class disbursementComponent extends Component {
         })
     };
 
+    clickDelete(param) {
+        return function (e) {
+            console.log("get index"+param);
+            // var dataArray = JSON.parse(sessionStorage.getItem("disburse_interest"));
+            // dataArray.splice(param,1);
+            // console.log(JSON.stringify(dataArray));
+            // this.setState({ isFound: true });
+        };
+    };
+
     render() {
         const { loading } = this.state;
         // let tempData = this.state.rq_body.other_properties.interest_schedule;
@@ -340,25 +350,31 @@ class disbursementComponent extends Component {
                         </Row>
                         {this.state.isFound &&
                             <div>
-                                {tempData.map(item => {
+                                <Table striped>
+                                    <tbody>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Date</th>
+                                        <th>Interest Index</th>
+                                        <th>Interest Spread</th>
+                                        <th></th>
+                                    </tr>
+                                {tempData.map((item, index) => {
                                     return (
-                                        <Table striped>
-                                            <tbody>
                                                 <tr>
-                                                    <th>Date</th>
-                                                    <th>Interest Index</th>
-                                                    <th>Interest Spread</th>
-                                                </tr>
-                                                <tr>
+                                                    <td>{index}</td>
                                                     <td>{item.date}</td>
                                                     <td>{item.interest_index}</td>
                                                     <td>{item.interest_spread}</td>
+                                                    <td>
+                                                        <Button onClick={this.clickDelete(index)} type="button" color="danger">DEL</Button>
+                                                    </td>
                                                 </tr>
-                                            </tbody>
-                                        </Table>
                                     )
                                 }
                                 )}
+                                    </tbody>
+                                </Table>
                             </div>
                         }
                         <div class="text-center">
