@@ -144,8 +144,7 @@ class disbursementComponent extends Component {
     };
 
     handleSubmit(event) {
-        console.log(sessionStorage.getItem("disburse_interest"));
-
+        // console.log(sessionStorage.getItem("disburse_interest"));
         //set Array for interest schedule
         // const { rq_body } = { ...this.state };
         // const currentState = rq_body;
@@ -240,12 +239,6 @@ class disbursementComponent extends Component {
         properties["interest_schedule"] = dataArray;
         // console.log(this.state.rq_body);
         // properties["interest_schedule"] = JSON.parse(sessionStorage.getItem("disburse_interest"));
-    }
-
-    renderTable() {
-        if (sessionStorage.getItem("disburse_interest") != null) {
-            return
-        }
     }
 
     FormInputData = () => {
