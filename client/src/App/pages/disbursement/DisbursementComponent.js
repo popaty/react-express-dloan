@@ -1,24 +1,13 @@
-import React, {Component} from 'react';
-import {Button, Col, Container, Form, FormGroup, Input, Label, Row, Table} from 'reactstrap';
+import React, { Component } from 'react';
+import { Button, Col, Container, Form, FormGroup, Input, Label, Row, Table, Modal ,ModalBody,ModalHeader} from 'reactstrap';
 import DynamicHeader from '../Header.js';
 import inputModel from './model.json';
 import utility from '../Utility.js';
 import SpinnerLoader from '../loading.js';
-import ReactModal from 'react-modal';
 
 const cloneDeep = require('lodash.clonedeep');
 let installmentAmount = "";
 let numberOfPayment = "";
-const customStyles = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)'
-    }
-};
 
 class disbursementComponent extends Component {
     constructor(props) {
@@ -48,7 +37,7 @@ class disbursementComponent extends Component {
             disabled: "",
             openMyModal: false,
             date: "",
-            interest_index: "",
+            interest_index: "FIXED",
             interest_spread: "",
             isFound: false
 
@@ -107,23 +96,23 @@ class disbursementComponent extends Component {
                 payment_calculation_method: "installment"
             }
         };
-        this.setState({rq_body: body});
+        this.setState({ rq_body: body });
     };
 
     handleChangeTest(event) {
         console.log(event.target.value);
         if (event.target.name === "date") {
-            this.setState({date: event.target.value});
+            this.setState({ date: event.target.value });
         } else if (event.target.name === "interest_index") {
-            this.setState({interest_index: event.target.value})
+            this.setState({ interest_index: event.target.value })
         } else if (event.target.name === "interest_spread") {
-            this.setState({interest_spread: event.target.value});
+            this.setState({ interest_spread: event.target.value });
         }
     }
 
     handleChange(event) {
         //this.setState({[event.target.name]:event.target.value});
-        const {rq_body} = {...this.state};
+        const { rq_body } = { ...this.state };
         const currentState = rq_body;
         const properties = currentState.other_properties;
         if (event.target.name === "interest_index" || event.target.name === "interest_spread"
@@ -139,16 +128,16 @@ class disbursementComponent extends Component {
             if (event.target.value === "minimum") {
                 properties["installment_amount"] = "";
                 properties["number_of_payment"] = "";
-                this.setState({disabled: "disabled"});
+                this.setState({ disabled: "disabled" });
             } else {
                 properties["installment_amount"] = String(installmentAmount);
                 properties["number_of_payment"] = String(numberOfPayment);
-                this.setState({disabled: ""});
+                this.setState({ disabled: "" });
             }
         } else {
             currentState[event.target.name] = event.target.type === "number" ? Number(event.target.value) : event.target.value;
         }
-        this.setState({rq_body: currentState});
+        this.setState({ rq_body: currentState });
     };
 
     handleSubmit(event) {
@@ -156,7 +145,7 @@ class disbursementComponent extends Component {
         console.log(sessionStorage.getItem("disburse_interest"));
 
         //set Array for interest schedule
-        const {rq_body} = {...this.state};
+        const { rq_body } = { ...this.state };
         const currentState = rq_body;
         const properties = currentState.other_properties;
         properties["interest_schedule"] = JSON.parse(sessionStorage.getItem("disburse_interest"));
@@ -165,13 +154,13 @@ class disbursementComponent extends Component {
         // this.setState({ rq_body[""]["interest_schedule"] : JSON.parse(sessionStorage.getItem("disburse_interest"))});
 
         event.preventDefault();
-        this.setState({loading: true});
+        this.setState({ loading: true });
         //clone state for use in omit function.
         let body = cloneDeep(this.state);
         const request = utility.omit(body);
         // console.log(request);
         setTimeout(() => {
-            this.setState({loading: false});
+            this.setState({ loading: false });
             this.postList(request);
         }, 1000)
     };
@@ -211,18 +200,17 @@ class disbursementComponent extends Component {
     };
 
     handleOpenModal() {
-        this.setState({openMyModal: true});
+        this.setState({ openMyModal: true });
     }
 
     closeModal() {
 
-        this.setState({openMyModal: false});
+        this.setState({ openMyModal: false });
     }
 
     handleCloseModal() {
-
-        this.setState({openMyModal: false});
-        this.setState({isFound: true});
+        this.setState({ openMyModal: false });
+        this.setState({ isFound: true });
 
         var dataArray = [];
         var data = {
@@ -232,35 +220,22 @@ class disbursementComponent extends Component {
         };
         console.log("DATA:" + JSON.stringify(data));
 
-        // sessionStorage.clear();
         if (sessionStorage.getItem("disburse_interest") != null) {
             dataArray = JSON.parse(sessionStorage.getItem("disburse_interest"));
-            console.log("getget =" + dataArray);
             dataArray.push(data);
 
-            for (var i = 0; i < dataArray.length; i++)
-                console.log((i + 1) + ": " + JSON.stringify(dataArray[i]));
+            // for (var i = 0; i < dataArray.length; i++)
+            //     console.log((i + 1) + ": " + JSON.stringify(dataArray[i]));
 
             sessionStorage.setItem("disburse_interest", JSON.stringify(dataArray));
         } else {
             dataArray.push(data);
             sessionStorage.setItem("disburse_interest", JSON.stringify(dataArray));
-            console.log(dataArray);
         }
-
-        //[{"date":"2020-01-23","interest_index":"1","interest_spread":"1"}]
-
-        const {rq_body} = {...this.state};
+        const { rq_body } = { ...this.state };
         const currentState = rq_body;
         const properties = currentState.other_properties;
         properties["interest_schedule"] = JSON.parse(sessionStorage.getItem("disburse_interest"));
-
-
-        //
-        // this.setState({date : ""});
-        // this.setState({interest_index : ""});
-        // this.setState({interest_spread : ""});
-        // this.renderTableData()
     }
 
     renderTable() {
@@ -276,7 +251,7 @@ class disbursementComponent extends Component {
                     <FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                               value={this.state.rq_body[item.value]} onChange={this.handleChange}/>
+                            value={this.state.rq_body[item.value]} onChange={this.handleChange} />
                     </FormGroup>
                 );
             } else {
@@ -285,7 +260,7 @@ class disbursementComponent extends Component {
                         <FormGroup>
                             <Label>{item.label}</Label>
                             <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                                   value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange}>
+                                value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange}>
                                 {item.items.map(element => <option>{element}</option>)}
                             </Input>
                         </FormGroup>
@@ -296,8 +271,8 @@ class disbursementComponent extends Component {
                             <FormGroup>
                                 <Label>{item.label}</Label>
                                 <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                                       value={this.state.rq_body[item.root][item.value]}
-                                       onChange={this.handleChange} disabled={this.state.disabled}/>
+                                    value={this.state.rq_body[item.root][item.value]}
+                                    onChange={this.handleChange} disabled={this.state.disabled} />
                             </FormGroup>
                         )
                     } else {
@@ -305,7 +280,7 @@ class disbursementComponent extends Component {
                             <FormGroup>
                                 <Label>{item.label}</Label>
                                 <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                                       value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange}/>
+                                    value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
                             </FormGroup>
                         )
                     }
@@ -315,93 +290,94 @@ class disbursementComponent extends Component {
     };
 
     render() {
-        const {loading} = this.state;
+        const { loading } = this.state;
         let tempData;
         tempData = JSON.parse(sessionStorage.getItem("disburse_interest"));
         // tempData = [{"date":"2020-01-23","interest_index":"1","interest_spread":"1"}]
         console.log("tempData : " + JSON.stringify(tempData));
         return (
             <div>
-                <DynamicHeader/>
+                <DynamicHeader />
                 <h2>Form Input Disbursement</h2>
                 <Container>
                     <Form onSubmit={this.handleSubmit}>
                         <Row>
-                            <Col md={{size: 4, offset: 4}}>
+                            <Col md={{ size: 4, offset: 4 }}>
                                 {this.FormInputData()}
                                 <FormGroup>
                                     <Label>Interest Schedule</Label>
                                     <div>
                                         <Button color="secondary" type="button" onClick={this.handleOpenModal}>Add
                                             Interest Schedule</Button>
-                                        <ReactModal
-                                            isOpen={this.state.openMyModal}
-                                            style={customStyles}
-                                            contentLabel="Interest Schedule">
-                                            <FormGroup>
-                                                <Label>Date</Label>
-                                                <Input type="String" name="date" placeholder="date" step="any"
-                                                       value={this.state.date} onChange={this.handleChangeTest}>
-                                                </Input>
-                                                <Label>Interest Index</Label>
-                                                <Input type="String" name="interest_index" placeholder="interest_index"
-                                                       step="any"
-                                                       value={this.state.interest_index}
-                                                       onChange={this.handleChangeTest}>
-                                                </Input>
-                                                <Label>Interest Spread</Label>
-                                                <Input type="number" name="interest_spread"
-                                                       placeholder="interest_spread" step="any"
-                                                       value={this.state.interest_spread}
-                                                       onChange={this.handleChangeTest}>
-                                                </Input>
-                                                <button type="button" onClick={this.handleCloseModal}>Add</button>
-                                                <button type="button" onClick={this.closeModal}>close</button>
-                                            </FormGroup>
-                                        </ReactModal>
+                                        <Modal isOpen={this.state.openMyModal}
+                                            // style={customStyles}
+                                            // contentLabel="Interest Schedule">
+                                            >
+                                            <ModalHeader toggle={this.closeModal} >Interest Schedule</ModalHeader>
+                                            <ModalBody>
+                                                <FormGroup>
+                                                    <Label>Date</Label>
+                                                    <Input type="date" name="date" placeholder="date" step="any"
+                                                        value={this.state.date} onChange={this.handleChangeTest}>
+                                                    </Input>
+                                                    <Label>Interest Index</Label>
+                                                    <Input type="String" name="interest_index" placeholder="interest_index"
+                                                        step="any"
+                                                        value={this.state.interest_index}
+                                                        onChange={this.handleChangeTest}>
+                                                    </Input>
+                                                    <Label>Interest Spread</Label>
+                                                    <Input type="number" name="interest_spread"
+                                                        placeholder="interest_spread" step="any"
+                                                        value={this.state.interest_spread}
+                                                        onChange={this.handleChangeTest}>
+                                                    </Input>
+                                                    <div class="text-center">
+                                                    <Button color="primary" onClick={this.handleCloseModal}>Add</Button>{' '}
+                                                    <Button color="secondary" onClick={this.closeModal}>close</Button>
+                                                    {/* <button type="button" onClick={this.handleCloseModal}>Add</button>
+                                                    <button type="button" onClick={this.closeModal}>close</button> */}
+                                                    </div>
+                                                </FormGroup>
+                                            </ModalBody>
+                                        </Modal>
                                     </div>
                                 </FormGroup>
                             </Col>
                         </Row>
-                        {/*{this.renderTable()}*/}
-                        {/*{this.state.rq_body.other_properties.interest_schedule.map(item =>*/}
-                        {/*   <h1>{item.date}</h1>*/}
-                        {/*)}*/}
-                        {/*}*/}
-
                         {this.state.isFound &&
-                        <div>
-                            {tempData.map(item => {
+                            <div>
+                                {tempData.map(item => {
                                     return (
                                         <Table striped>
                                             <tbody>
-                                            <tr>
-                                                <th>Date</th>
-                                                <th>Interest Index</th>
-                                                <th>Interest Spread</th>
-                                            </tr>
-                                            <tr>
-                                                <td>{item.date}</td>
-                                                <td>{item.interest_index}</td>
-                                                <td>{item.interest_spread}</td>
-                                            </tr>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Interest Index</th>
+                                                    <th>Interest Spread</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>{item.date}</td>
+                                                    <td>{item.interest_index}</td>
+                                                    <td>{item.interest_spread}</td>
+                                                </tr>
                                             </tbody>
                                         </Table>
                                     )
                                 }
-                            )}
-                        </div>
+                                )}
+                            </div>
                         }
                         <div class="text-center">
                             <Button color="primary" type="submit" disabled={loading}>
-                                {loading && (<SpinnerLoader/>)}
+                                {loading && (<SpinnerLoader />)}
                                 {loading && <span>Loading..</span>}
                                 {!loading && <span>Submit</span>}
                             </Button>
                         </div>
                     </Form>
                     <Row>
-                        <Col md={{size: 4, offset: 4}}>
+                        <Col md={{ size: 4, offset: 4 }}>
 
                         </Col>
                     </Row>
@@ -409,49 +385,6 @@ class disbursementComponent extends Component {
             </div>
         )
     };
-
-    // clickMe() {
-    //     return function (p1) {
-    //         // alert("Hello World")
-    //         <div>
-    //             <h1>hello world</h1>
-    //         </div>
-    //     };
-    // }
-
-    // clickMe = () => {
-    //     return <Table hover>
-    //         <thead>
-    //         <tr>
-    //             <th>#</th>
-    //             <th>Date</th>
-    //             <th>Interest Index</th>
-    //             <th>Interest Spread</th>
-    //         </tr>
-    //         </thead>
-    //         <tbody>
-    //         <tr>
-    //             <th scope="row">1</th>
-    //             <td>Mark</td>
-    //             <td>Otto</td>
-    //             <td>@mdo</td>
-    //         </tr>
-    //         <tr>
-    //             <th scope="row">2</th>
-    //             <td>Jacob</td>
-    //             <td>Thornton</td>
-    //             <td>@fat</td>
-    //         </tr>
-    //         <tr>
-    //             <th scope="row">3</th>
-    //             <td>Larry</td>
-    //             <td>the Bird</td>
-    //             <td>@twitter</td>
-    //         </tr>
-    //         </tbody>
-    //     </Table>
-    // }
-
 }
 
 export default disbursementComponent;

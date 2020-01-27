@@ -43,29 +43,30 @@ class InquiryAccountingRecordsComponent extends Component {
 
     Clicked(event) {
         event.preventDefault();
-        // console.log(this.state);
-        this.setState({ loading: true,glEntryList : []});
-        setTimeout(() => {
-            fetch('/api/inquiryAccountingRecord/' + this.state.account_number + "/" + this.state.account_sequence + "/"
-                + this.state.transaction_date + "/" + this.state.channel_post_date + "/" + this.state.job_id + "/"
-                + this.state.service + "/" + this.state.transaction_id, {})
-                .then(response => response.json())
-                .then(data => {
-                    // if (data.rs_body.gl_entry_list.length) {
-                    if (data.rs_body.gl_entry_list.length > 0) {
-                        this.setState({
-                            loading: false,
-                            isFound: true,
-                            glEntryList: data.rs_body.gl_entry_list})
-                    } else {
-                        alert("Not Found.");
-                    }
-                }).catch(error => console.log(error));
-                this.setState({loading: false});
-        }, 1000);
+         console.log(this.state);
+        // this.setState({ loading: true,glEntryList : []});
+        // setTimeout(() => {
+        //     fetch('/api/inquiryAccountingRecord/' + this.state.account_number + "/" + this.state.account_sequence + "/"
+        //         + this.state.transaction_date + "/" + this.state.channel_post_date + "/" + this.state.job_id + "/"
+        //         + this.state.service + "/" + this.state.transaction_id, {})
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             // if (data.rs_body.gl_entry_list.length) {
+        //             if (data.rs_body.gl_entry_list.length > 0) {
+        //                 this.setState({
+        //                     loading: false,
+        //                     isFound: true,
+        //                     glEntryList: data.rs_body.gl_entry_list})
+        //             } else {
+        //                 alert("Not Found.");
+        //             }
+        //         }).catch(error => console.log(error));
+        //         this.setState({loading: false});
+        // }, 1000);
     };
 
     FormInputData = () => {
+        let countElement = 0;
         return inputModel.model.map(item => {
             if (item.type === "select") {
                 return (
@@ -74,7 +75,14 @@ class InquiryAccountingRecordsComponent extends Component {
                             <Label>{item.label}</Label>
                             <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
                                 value={this.state[item.value]} onChange={this.handleChange} >
-                                {item.items.map(element => <option>{element}</option>)}
+                                {item.items.map(element => {
+                                    countElement++;
+                                    if(countElement === 1){
+                                        return (<option value="">{element}</option>);
+                                    }else{
+                                        return (<option>{element}</option>);
+                                    }
+                                })}
                             </Input>
                         </FormGroup>
                     </Col >

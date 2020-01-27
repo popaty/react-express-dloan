@@ -19,7 +19,7 @@
       {
         "label": "Service",
         "type": "select",
-        "items": ["","disbursement","deposit-for-repayment","repayment","loan-accr-int","loan-accr-pen","loan-adjust-accr-int-incr","loan-adjust-accr-int-decr","loan-adjust-accr-pen-incr","loan-adjust-accr-pen-decr","adjusted-future-date"],
+        "items": ["Select service","disbursement","deposit-for-repayment","repayment","loan-accr-int","loan-accr-pen","loan-adjust-accr-int-incr","loan-adjust-accr-int-decr","loan-adjust-accr-pen-incr","loan-adjust-accr-pen-decr","adjusted-future-date"],
         "name": "service",
         "placeholder": "Enter service",
         "value": "service",
