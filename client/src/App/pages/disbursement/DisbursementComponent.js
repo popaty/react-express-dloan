@@ -212,7 +212,7 @@ class disbursementComponent extends Component {
 
     handleCloseModal() {
         this.setState({ openMyModal: false });
-        // this.setState({ isFound: true });
+        this.setState({ isFound: true });
         let data = {
             date: this.state.date,
             interest_index: this.state.interest_index,
@@ -237,8 +237,8 @@ class disbursementComponent extends Component {
         const { rq_body } = { ...this.state };
         const currentState = rq_body;
         const properties = currentState.other_properties;
-        properties["interest_schedule"] = JSON.stringify(dataArray);
-        console.log(this.state.rq_body);
+        properties["interest_schedule"] = dataArray;
+        // console.log(this.state.rq_body);
         // properties["interest_schedule"] = JSON.parse(sessionStorage.getItem("disburse_interest"));
     }
 
@@ -295,6 +295,7 @@ class disbursementComponent extends Component {
 
     render() {
         const { loading } = this.state;
+        // let tempData = this.state.rq_body.other_properties.interest_schedule;
         let tempData = this.state.rq_body.other_properties.interest_schedule;
         console.log("tempData : " + tempData);
         return (
