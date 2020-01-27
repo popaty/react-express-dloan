@@ -104,6 +104,22 @@
       "placeholder": "Enter installment amount",
       "value": "installment_amount",
       "root": "other_properties"
+    },
+    {
+      "label": "Interest Override Reason",
+      "type": "text",
+      "name": "interest_override_reason",
+      "placeholder": "Enter interest override reason",
+      "value": "interest_override_reason",
+      "root": "other_properties"
+    },
+    {
+      "label": "Campaign Name",
+      "type": "String",
+      "name": "campaign_name",
+      "placeholder": "Enter campaign name",
+      "value": "campaign_name",
+      "root": "other_properties"
     }
   ]
 }
