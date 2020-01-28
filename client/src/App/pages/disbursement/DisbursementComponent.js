@@ -267,17 +267,24 @@ class disbursementComponent extends Component {
         })
     };
 
-    clickDelete = (param) => {
-            // console.log(JSON.stringify(dataArray));
-            // const { rq_body } = { ...this.state };
-            // const currentState = rq_body;
-            // const properties = currentState.other_properties;
-            // this.state.rq_body.other_properties.interest_schedule.splice(param,1);
-            // properties["interest_schedule"] = dataArray;
+    // FormInputData = () => {
 
-            // console.log("currentState = "+ JSON.stringify(this.state.rq_body));
-            // this.setState({ isFound: true });
-    };
+
+    // }
+
+    callDelete(param1, e) {
+        e.preventDefault();
+        console.log('The link was clicked.');
+        console.log(param1);
+
+        const { rq_body } = { ...this.state };
+        const properties = rq_body.other_properties;
+
+        properties["interest_schedule"] = this.state.rq_body.other_properties.interest_schedule.splice(param1, 1);
+
+        this.setState({isFound : false});
+        this.setState({isFound : true});
+    }
 
     render() {
         const { loading } = this.state;
@@ -347,7 +354,7 @@ class disbursementComponent extends Component {
                                                     <td>{item.interest_index}</td>
                                                     <td>{item.interest_spread}</td>
                                                     <td>
-                                                        <Button onClick={this.clickDelete(index)} type="button" color="danger">DEL</Button>
+                                                    <Button onClick={(e) => this.callDelete(index, e)} type="button" color="danger">DEL</Button>
                                                     </td>
                                                 </tr>
                                     )
