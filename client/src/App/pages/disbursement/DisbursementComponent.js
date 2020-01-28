@@ -145,12 +145,14 @@ class disbursementComponent extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        if(this.state.rq_body.other_properties.interest_schedule.length === 0){
         //convert [] to "" in interest_schedule if interest_schedule === []
         const { rq_body } = { ...this.state };
         const currentState = rq_body;
         const properties = currentState.other_properties;
         properties["interest_schedule"] = "";
-
+        }
+    
         this.setState({ loading: true });
         //clone state for use in omit function.
         let body = cloneDeep(this.state);
@@ -275,20 +277,14 @@ class disbursementComponent extends Component {
 
     callDelete(param1, e) {
         e.preventDefault();
-        // console.log(param1);
+        if(this.state.rq_body.other_properties.interest_schedule.length === 0){
+            this.setState({isFound : false});
+        }else{
+            const { rq_body } = { ...this.state };
+            const properties = rq_body.other_properties;
+            properties["interest_schedule"] = this.state.rq_body.other_properties.interest_schedule.splice(param1, 1);
+        }
 
-        // if(this.state.rq_body.other_properties.interest_schedule.length === 0){
-        //     this.setState({isFound : false});
-        // }else{
-        //     const { rq_body } = { ...this.state };
-        //     const properties = rq_body.other_properties;
-        //     properties["interest_schedule"] = this.state.rq_body.other_properties.interest_schedule.splice(param1, 1);
-        //     // dataArray = this.state.rq_body.other_properties.interest_schedule.splice(param1, 1);
-        //     // console.log("dataArray : "+JSON.stringify(dataArray));
-        //     // properties["interest_schedule"] = dataArray;
-        //     console.log(this.state.rq_body.other_properties.interest_schedule.splice(param1, 1));
-        //     // console.log("state : "+ JSON.stringify(this.state.rq_body.other_properties.interest_schedule));
-        // }
         // this.setState({isFound : false});
         // this.setState({isFound : true});
      
