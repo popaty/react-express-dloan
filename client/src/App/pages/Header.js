@@ -95,6 +95,16 @@ const header = (props) => {
                         </DropdownItem>
                     </DropdownMenu>
                 </UncontrolledDropdown>
+                <UncontrolledDropdown nav inNavbar>
+                    <DropdownToggle nav caret>
+                        DLake Access API
+                    </DropdownToggle>
+                    <DropdownMenu right>
+                        <DropdownItem href="/timelineComponent">
+                            Timeline
+                        </DropdownItem>
+                    </DropdownMenu>
+                </UncontrolledDropdown>
                 &emsp;
                 <NavItem>
                     <NavLink><span class="text-warning"><FaUser /> {account}</span></NavLink>

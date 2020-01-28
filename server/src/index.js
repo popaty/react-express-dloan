@@ -279,6 +279,35 @@ app.get("/api/inquiryGL/:acDate", (req, res) => {
         });
 });
 
+//[GET] Inquiry GL Reconciliation
+app.get("/api/dlake/timeline/:cif/:month", (req, res) => {
+    console.log("DLake timeline access");
+    // let header = headers.get_headers();
+    let header = headers.get_short_headers();
+    let url = properties.get("timeline.url") + req.params.cif+"-"+req.params.month;
+    console.log("url = "+url);
+    api_helper.API_call_get(url, header)
+        .then(response => {
+            try {
+                res.json(response);    
+            } catch (error) {
+                console.log("error : "+error);
+            }
+            console.log("Finished Inquiry timeline");
+        })
+        .catch(error => {
+            res.send(error)
+        });
+    // rsBody = {
+    //     "rs_body": [
+    //         {
+    //             "id" : "1"
+    //         }
+    //     ]
+    // }
+    // res.json(rsBody)
+});
+
 // Handles any requests that don"t match the ones above
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname + "/index.html"));

@@ -1,0 +1,23 @@
+{
+    "model": [
+      {
+        "label": "Customer Number",
+        "type": "text",
+        "name": "cif_number",
+        "placeholder": "Enter customer number",
+        "value": "cif_number"
+      },{
+        "label": "year",
+        "type": "text",
+        "name": "year",
+        "placeholder": "yyyy",
+        "value": "year"
+      },{
+        "label": "month",
+        "type": "text",
+        "name": "month",
+        "placeholder": "mm",
+        "value": "month"
+      }
+    ]
+}

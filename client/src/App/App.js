@@ -45,6 +45,9 @@ import inquiryPenaltyReconciliationComponent from './pages/Reconciliation/Inquir
 
 import inquiryGLReconciliationComponent from './pages/Reconciliation/InquiryGLReconciliation/viewInquiryGLReconciliationComponent';
 
+import TimelineComponent from './pages/timeline/viewTimelineComponent';
+import TimelineSummary from './pages/timeline/viewTimelineSummary';
+
 class App extends Component {
     render() {
         const App = () => (
@@ -92,6 +95,9 @@ class App extends Component {
                     <Route path='/iprComponent' component={inquiryPenaltyReconciliationComponent}/>
 
                     <Route path='/iglComponent' component={inquiryGLReconciliationComponent}/>
+
+                    <Route path='/timelineComponent' component={TimelineComponent}/>
+                    <Route path='/timelineSummary' component={TimelineSummary}/>
 
                 </Switch>
             </div>

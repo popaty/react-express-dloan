@@ -20,5 +20,16 @@ module.exports = {
             "original-caller-domain": "B0",
             "Content-Type": "application/json",
         };
+    },
+
+    get_short_headers: function () {
+        return {
+            'x-request-id': uuidv4(),
+            // 'x-job-id': uuidv4(),
+            // 'original-caller-domain': 'B0',
+            // 'requested-service':'demo',
+            // 'requested-service-version':'v1',
+            // 'Content-Type': 'application/json',
+        };
     }
 };
