@@ -31,7 +31,7 @@ class disbursementComponent extends Component {
                     payment_calculation_method: "",
                     interest_override_reason: "",
                     campaign_name: "",
-                    interest_schedule: []
+                    interest_schedule: ""
                 }
             },
             loading: false,
@@ -40,7 +40,9 @@ class disbursementComponent extends Component {
             date: "",
             interest_index: "FIXED",
             interest_spread: "",
-            isFound: false
+            isFound: false,
+            //declare for map in table
+            interest_schedule_obj : []
 
         };
         this.handleChange = this.handleChange.bind(this);
@@ -97,7 +99,7 @@ class disbursementComponent extends Component {
                 payment_calculation_method: "installment",
                 interest_override_reason: "",
                 campaign_name: "",
-                interest_schedule: []
+                interest_schedule: ""
             }
         };
         this.setState({ rq_body: body });
@@ -145,19 +147,13 @@ class disbursementComponent extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        if(this.state.rq_body.other_properties.interest_schedule.length === 0){
-        //convert [] to "" in interest_schedule if interest_schedule === []
-        const { rq_body } = { ...this.state };
-        const currentState = rq_body;
-        const properties = currentState.other_properties;
-        properties["interest_schedule"] = "";
-        }
-    
         this.setState({ loading: true });
         //clone state for use in omit function.
         let body = cloneDeep(this.state);
+        if(this.state.interest_schedule_obj.length !== 0){
+            body.rq_body.other_properties.interest_schedule = JSON.stringify(this.state.interest_schedule_obj);
+        }
         const request = utility.omit(body);
-        // console.log(request);
         setTimeout(() => {
             this.setState({ loading: false });
             this.postList(request);
@@ -217,12 +213,11 @@ class disbursementComponent extends Component {
         };
 
         dataArray.push(data);
-        const { rq_body } = { ...this.state };
-        const currentState = rq_body;
-        const properties = currentState.other_properties;
-        properties["interest_schedule"] = dataArray;
-        // console.log("dataArray : "+ JSON.stringify(dataArray))
-        // console.log(this.state.rq_body);
+        // const { rq_body } = { ...this.state };
+        // const currentState = rq_body;
+        // const properties = currentState.other_properties;
+        // properties["interest_schedule"] = dataArray;
+        this.setState({interest_schedule_obj : dataArray});
     }
 
     FormInputData = () => {
@@ -275,24 +270,9 @@ class disbursementComponent extends Component {
 
     // }
 
-    callDelete(param1, e) {
-        e.preventDefault();
-        if(this.state.rq_body.other_properties.interest_schedule.length === 0){
-            this.setState({isFound : false});
-        }else{
-            const { rq_body } = { ...this.state };
-            const properties = rq_body.other_properties;
-            properties["interest_schedule"] = this.state.rq_body.other_properties.interest_schedule.splice(param1, 1);
-        }
-
-        // this.setState({isFound : false});
-        // this.setState({isFound : true});
-     
-    }
-
     render() {
         const { loading } = this.state;
-        let tempData = this.state.rq_body.other_properties.interest_schedule;
+        let tempData = this.state.interest_schedule_obj;
         return (
             <div>
                 <DynamicHeader />
@@ -352,13 +332,10 @@ class disbursementComponent extends Component {
                                 {tempData.map((item, index) => {
                                     return (
                                                 <tr>
-                                                    <td>{index}</td>
+                                                    <td>{index+1}</td>
                                                     <td>{item.date}</td>
                                                     <td>{item.interest_index}</td>
                                                     <td>{item.interest_spread}</td>
-                                                    <td>
-                                                    <Button onClick={(e) => this.callDelete(index, e)} type="button" color="danger">DEL</Button>
-                                                    </td>
                                                 </tr>
                                     )
                                 }

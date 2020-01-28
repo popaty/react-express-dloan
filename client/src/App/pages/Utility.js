@@ -31,6 +31,7 @@ const utility = {
         delete body.interest_index;
         delete body.interest_spread;
         delete body.date;
+        delete body.interest_schedule_obj;
 
         return body;
     },
