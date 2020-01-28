@@ -46,29 +46,6 @@ class InquiryPositionDetailComponent extends Component {
                     }
 
                 }).catch(error => console.log(error))
-
-            //mock data
-            // let data ={
-            //     "rs_body": {
-            //         "position_detail": {
-            //             "interest_index": "FIXED",
-            //             "interest_spread": 20.00000,
-            //             "interest_rate": 20.00000,
-            //             "penalty_index": "PEN",
-            //             "grace_day": 5,
-            //             "is_catch_up": true,
-            //             "unpaid_accrued_amount": 1.00000
-            //         }
-            //     }
-            // }
-            // if (data.rs_body) {
-            //     sessionStorage.setItem("response_inqPositionDetail", JSON.stringify(data.rs_body));
-            //     window.open('/ipdSummary', '_self');
-            // } else {
-            //     alert("error code : " + data.errors.map(error => error.error_code) + "\n"
-            //     + "error desc : " + data.errors.map(error => error.error_desc) + "\n"
-            //     + "error type : " + data.errors.map(error => error.error_type));
-            // }
         }, 1000);
     };
 

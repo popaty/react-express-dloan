@@ -26,7 +26,8 @@ class InquiryPositionDetailSummery extends Component {
                                     <td>{catchup}</td>
                                 </tr>)
                             } else {
-                                if (subdata === "balance" || subdata === "available_balance") {
+                                if (subdata === "balance" || subdata === "available_balance" ||
+                                subdata === "unpaid_accrued_interest_amount" || subdata === "interest_rate") {
                                     obj.push(<tr class="text-primary">
                                         <td>{subdata}</td>
                                         <td>{data[key][subdata]}</td>
