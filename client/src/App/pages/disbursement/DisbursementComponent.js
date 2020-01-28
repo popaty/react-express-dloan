@@ -204,7 +204,8 @@ class disbursementComponent extends Component {
         this.setState({ openMyModal: false });
     }
 
-    handleCloseModal() {
+    handleCloseModal = (e) => {
+        e.preventDefault();
         this.setState({ openMyModal: false });
         this.setState({ isFound: true });
         let data = {
@@ -274,21 +275,27 @@ class disbursementComponent extends Component {
 
     callDelete(param1, e) {
         e.preventDefault();
-        console.log('The link was clicked.');
-        console.log(param1);
+        // console.log(param1);
 
-        const { rq_body } = { ...this.state };
-        const properties = rq_body.other_properties;
-
-        properties["interest_schedule"] = this.state.rq_body.other_properties.interest_schedule.splice(param1, 1);
-
-        this.setState({isFound : false});
-        this.setState({isFound : true});
+        // if(this.state.rq_body.other_properties.interest_schedule.length === 0){
+        //     this.setState({isFound : false});
+        // }else{
+        //     const { rq_body } = { ...this.state };
+        //     const properties = rq_body.other_properties;
+        //     properties["interest_schedule"] = this.state.rq_body.other_properties.interest_schedule.splice(param1, 1);
+        //     // dataArray = this.state.rq_body.other_properties.interest_schedule.splice(param1, 1);
+        //     // console.log("dataArray : "+JSON.stringify(dataArray));
+        //     // properties["interest_schedule"] = dataArray;
+        //     console.log(this.state.rq_body.other_properties.interest_schedule.splice(param1, 1));
+        //     // console.log("state : "+ JSON.stringify(this.state.rq_body.other_properties.interest_schedule));
+        // }
+        // this.setState({isFound : false});
+        // this.setState({isFound : true});
+     
     }
 
     render() {
         const { loading } = this.state;
-        // let tempData = this.state.rq_body.other_properties.interest_schedule;
         let tempData = this.state.rq_body.other_properties.interest_schedule;
         return (
             <div>
@@ -325,7 +332,7 @@ class disbursementComponent extends Component {
                                                         onChange={this.handleChangeModal}>
                                                     </Input>
                                                     <div class="text-center">
-                                                    <Button color="primary" onClick={this.handleCloseModal}>Add</Button>{' '}
+                                                    <Button color="primary" onClick={(e) => this.handleCloseModal(e)}>Add</Button>{' '}
                                                     <Button color="secondary" onClick={this.closeModal}>close</Button>
                                                     </div>
                                                 </FormGroup>
