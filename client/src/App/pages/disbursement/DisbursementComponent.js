@@ -144,16 +144,6 @@ class disbursementComponent extends Component {
     };
 
     handleSubmit(event) {
-        // console.log(sessionStorage.getItem("disburse_interest"));
-        //set Array for interest schedule
-        // const { rq_body } = { ...this.state };
-        // const currentState = rq_body;
-        // const properties = currentState.other_properties;
-        // properties["interest_schedule"] = JSON.parse(sessionStorage.getItem("disburse_interest"));
-
-
-        // this.setState({ rq_body[""]["interest_schedule"] : JSON.parse(sessionStorage.getItem("disburse_interest"))});
-
         event.preventDefault();
         this.setState({ loading: true });
         //clone state for use in omit function.
@@ -205,7 +195,6 @@ class disbursementComponent extends Component {
     }
 
     closeModal() {
-
         this.setState({ openMyModal: false });
     }
 
@@ -217,28 +206,14 @@ class disbursementComponent extends Component {
             interest_index: this.state.interest_index,
             interest_spread: this.state.interest_spread
         };
-        // console.log("DATA:" + JSON.stringify(data));
 
-        // if (sessionStorage.getItem("disburse_interest") != null) {
-        //     dataArray = JSON.parse(sessionStorage.getItem("disburse_interest"));
-        //     dataArray.push(data);
-
-        //     for (var i = 0; i < dataArray.length; i++)
-        //         console.log((i + 1) + ": " + JSON.stringify(dataArray[i]));
-
-        //     sessionStorage.setItem("disburse_interest", JSON.stringify(dataArray));
-        // } else {
-        //     dataArray.push(data);
-        //     sessionStorage.setItem("disburse_interest", JSON.stringify(dataArray));
-        // }
         dataArray.push(data);
-        // console.log("data = "+ JSON.stringify(dataArray));
         const { rq_body } = { ...this.state };
         const currentState = rq_body;
         const properties = currentState.other_properties;
         properties["interest_schedule"] = dataArray;
+        // console.log("dataArray : "+ JSON.stringify(dataArray))
         // console.log(this.state.rq_body);
-        // properties["interest_schedule"] = JSON.parse(sessionStorage.getItem("disburse_interest"));
     }
 
     FormInputData = () => {
@@ -286,21 +261,22 @@ class disbursementComponent extends Component {
         })
     };
 
-    clickDelete(param) {
-        return function (e) {
-            console.log("get index"+param);
-            // var dataArray = JSON.parse(sessionStorage.getItem("disburse_interest"));
-            // dataArray.splice(param,1);
+    clickDelete = (param) => {
             // console.log(JSON.stringify(dataArray));
+            // const { rq_body } = { ...this.state };
+            // const currentState = rq_body;
+            // const properties = currentState.other_properties;
+            // this.state.rq_body.other_properties.interest_schedule.splice(param,1);
+            // properties["interest_schedule"] = dataArray;
+
+            // console.log("currentState = "+ JSON.stringify(this.state.rq_body));
             // this.setState({ isFound: true });
-        };
     };
 
     render() {
         const { loading } = this.state;
         // let tempData = this.state.rq_body.other_properties.interest_schedule;
         let tempData = this.state.rq_body.other_properties.interest_schedule;
-        console.log("tempData : " + tempData);
         return (
             <div>
                 <DynamicHeader />
@@ -338,8 +314,6 @@ class disbursementComponent extends Component {
                                                     <div class="text-center">
                                                     <Button color="primary" onClick={this.handleCloseModal}>Add</Button>{' '}
                                                     <Button color="secondary" onClick={this.closeModal}>close</Button>
-                                                    {/* <button type="button" onClick={this.handleCloseModal}>Add</button>
-                                                    <button type="button" onClick={this.closeModal}>close</button> */}
                                                     </div>
                                                 </FormGroup>
                                             </ModalBody>
