@@ -220,55 +220,118 @@ class disbursementComponent extends Component {
         this.setState({interest_schedule_obj : dataArray});
     }
 
+    // FormInputData = () => {
+    //     return inputModel.model.map(item => {
+    //         if (item.root === null) {
+    //             return (
+    //                 <FormGroup>
+    //                     <Label>{item.label}</Label>
+    //                     <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+    //                         value={this.state.rq_body[item.value]} onChange={this.handleChange} />
+    //                 </FormGroup>
+    //             );
+    //         } else {
+    //             if (item.type === "select") {
+    //                 return (
+    //                     <FormGroup>
+    //                         <Label>{item.label}</Label>
+    //                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+    //                             value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange}>
+    //                             {item.items.map(element => <option>{element}</option>)}
+    //                         </Input>
+    //                     </FormGroup>
+    //                 )
+    //             } else {
+    //                 if (item.name === "installment_amount" || item.name === "number_of_payment") {
+    //                     return (
+    //                         <FormGroup>
+    //                             <Label>{item.label}</Label>
+    //                             <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+    //                                 value={this.state.rq_body[item.root][item.value]}
+    //                                 onChange={this.handleChange} disabled={this.state.disabled} />
+    //                         </FormGroup>
+    //                     )
+    //                 } else {
+    //                     return (
+    //                         <FormGroup>
+    //                             <Label>{item.label}</Label>
+    //                             <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+    //                                 value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
+    //                         </FormGroup>
+    //                     )
+    //                 }
+    //             }
+    //         }
+    //     })
+    // };
+
     FormInputData = () => {
-        return inputModel.model.map(item => {
+        let count = 0;
+        let columnLeft = [];
+        let columnRight = [];
+        inputModel.model.map(item => {
+            count++;
             if (item.root === null) {
-                return (
-                    <FormGroup>
+                if (count % 2 !== 0) {
+                    columnLeft.push(<FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
                             value={this.state.rq_body[item.value]} onChange={this.handleChange} />
                     </FormGroup>
-                );
-            } else {
-                if (item.type === "select") {
-                    return (
-                        <FormGroup>
-                            <Label>{item.label}</Label>
-                            <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                                value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange}>
-                                {item.items.map(element => <option>{element}</option>)}
-                            </Input>
-                        </FormGroup>
                     )
                 } else {
-                    if (item.name === "installment_amount" || item.name === "number_of_payment") {
-                        return (
+                    columnRight.push(<FormGroup>
+                        <Label>{item.label}</Label>
+                        <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+                            value={this.state.rq_body[item.value]} onChange={this.handleChange} />
+                    </FormGroup>
+                    )
+                }
+            }else{
+
+            }
+        })
+        return (<Row><Col md={{ size: 3, offset: 3 }}>{columnLeft}</Col><Col md={{ size: 3 }}>{columnRight}</Col></Row>);
+    }
+
+    FormInputRow2 = () => {
+        let count = 0;
+        let columnLeft = [];
+        let columnRight = [];
+        inputModel.model.map(item => {
+            count++;
+            if (item.root !== null && item.root === "other_properties") {
+                if (count % 2 !== 0) {
+                    if (item.type === "select") {
+                        columnLeft.push(
                             <FormGroup>
                                 <Label>{item.label}</Label>
                                 <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                                    value={this.state.rq_body[item.root][item.value]}
-                                    onChange={this.handleChange} disabled={this.state.disabled} />
+                                    value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} >
+                                    {item.items.map(element => <option>{element}</option>)}
+                                </Input>
                             </FormGroup>
-                        )
+                        );
                     } else {
-                        return (
-                            <FormGroup>
-                                <Label>{item.label}</Label>
-                                <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                                    value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
-                            </FormGroup>
+                        columnLeft.push(<FormGroup>
+                            <Label>{item.label}</Label>
+                            <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+                                value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
+                        </FormGroup>
                         )
                     }
+                } else {
+                    columnRight.push(<FormGroup>
+                        <Label>{item.label}</Label>
+                        <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+                            value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
+                    </FormGroup>
+                    );
                 }
             }
         })
-    };
-
-    // FormInputData = () => {
-
-
-    // }
+        return (<Row><Col md={{ size: 3, offset: 3 }}>{columnLeft}</Col><Col md={{ size: 3 }}>{columnRight}</Col></Row>);
+    }
 
     render() {
         const { loading } = this.state;
@@ -279,9 +342,12 @@ class disbursementComponent extends Component {
                 <h2>Form Input Disbursement</h2>
                 <Container>
                     <Form onSubmit={this.handleSubmit}>
+                    {this.FormInputData()}
+                    <h4>Other properties</h4>
+                    <hr />
+                    {this.FormInputRow2()}
                         <Row>
-                            <Col md={{ size: 4, offset: 4 }}>
-                                {this.FormInputData()}
+                            <Col md={{ size: 6, offset: 3 }}>
                                 <FormGroup>
                                     <Label>Interest Schedule</Label>
                                     <div>
@@ -352,11 +418,11 @@ class disbursementComponent extends Component {
                             </Button>
                         </div>
                     </Form>
-                    <Row>
+                    {/* <Row>
                         <Col md={{ size: 4, offset: 4 }}>
 
                         </Col>
-                    </Row>
+                    </Row> */}
                 </Container>
             </div>
         )
