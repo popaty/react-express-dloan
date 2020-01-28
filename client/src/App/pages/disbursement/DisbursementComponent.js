@@ -145,6 +145,12 @@ class disbursementComponent extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        //convert [] to "" in interest_schedule if interest_schedule === []
+        const { rq_body } = { ...this.state };
+        const currentState = rq_body;
+        const properties = currentState.other_properties;
+        properties["interest_schedule"] = "";
+
         this.setState({ loading: true });
         //clone state for use in omit function.
         let body = cloneDeep(this.state);
