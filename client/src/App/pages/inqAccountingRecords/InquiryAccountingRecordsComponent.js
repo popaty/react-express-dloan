@@ -7,7 +7,7 @@ import fieldHeader from './fieldRes.js'
 // import dataResMock from './mockDataRes.js'
 import Modal from '../modal'
 const cloneDeep = require('lodash.clonedeep');
-
+ 
 class InquiryAccountingRecordsComponent extends Component {
     constructor(props) {
         super(props);

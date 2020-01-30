@@ -153,7 +153,17 @@ class disbursementComponent extends Component {
         if (this.state.interest_schedule_obj.length !== 0) {
             body.rq_body.other_properties.interest_schedule = JSON.stringify(this.state.interest_schedule_obj);
         }
+
+        if(body.rq_body.other_properties.interest_index !== "" && body.rq_body.other_properties.interest_spread === 0){
+            body.rq_body.other_properties.interest_spread === -1;
+        }
+
         const request = utility.omit(body);
+
+        if(body.rq_body.other_properties.interest_spread === -1){
+            body.rq_body.other_properties.interest_spread === 0;
+        }
+
         setTimeout(() => {
             this.setState({ loading: false });
             this.postList(request);
