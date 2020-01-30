@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Col, Container, Form, FormGroup, Input, Label, Row, Table, Modal ,ModalBody,ModalHeader} from 'reactstrap';
+import { Button, Col, Container, Form, FormGroup, Input, Label, Row, Table, Modal, ModalBody, ModalHeader } from 'reactstrap';
 import DynamicHeader from '../Header.js';
 import inputModel from './model.json';
 import utility from '../Utility.js';
@@ -42,7 +42,7 @@ class disbursementComponent extends Component {
             interest_spread: "",
             isFound: false,
             //declare for map in table
-            interest_schedule_obj : []
+            interest_schedule_obj: []
 
         };
         this.handleChange = this.handleChange.bind(this);
@@ -150,7 +150,7 @@ class disbursementComponent extends Component {
         this.setState({ loading: true });
         //clone state for use in omit function.
         let body = cloneDeep(this.state);
-        if(this.state.interest_schedule_obj.length !== 0){
+        if (this.state.interest_schedule_obj.length !== 0) {
             body.rq_body.other_properties.interest_schedule = JSON.stringify(this.state.interest_schedule_obj);
         }
         const request = utility.omit(body);
@@ -217,7 +217,7 @@ class disbursementComponent extends Component {
         // const currentState = rq_body;
         // const properties = currentState.other_properties;
         // properties["interest_schedule"] = dataArray;
-        this.setState({interest_schedule_obj : dataArray});
+        this.setState({ interest_schedule_obj: dataArray });
     }
 
     // FormInputRow1 = () => {
@@ -287,7 +287,7 @@ class disbursementComponent extends Component {
                     </FormGroup>
                     )
                 }
-            }else{
+            } else {
 
             }
         })
@@ -313,20 +313,44 @@ class disbursementComponent extends Component {
                             </FormGroup>
                         );
                     } else {
-                        columnLeft.push(<FormGroup>
-                            <Label>{item.label}</Label>
-                            <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                                value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
-                        </FormGroup>
-                        )
+                        if (item.name === "installment_amount") {
+                            columnLeft.push (
+                                <FormGroup>
+                                    <Label>{item.label}</Label>
+                                    <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+                                        value={this.state.rq_body[item.root][item.value]}
+                                        onChange={this.handleChange} disabled={this.state.disabled} />
+                                </FormGroup>
+                            )
+                        } else {
+                            columnLeft.push (
+                                <FormGroup>
+                                    <Label>{item.label}</Label>
+                                    <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+                                        value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
+                                </FormGroup>
+                            )
+                        }
                     }
                 } else {
-                    columnRight.push(<FormGroup>
-                        <Label>{item.label}</Label>
-                        <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                            value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
-                    </FormGroup>
-                    );
+                    if (item.name === "number_of_payment") {
+                        columnRight.push (
+                            <FormGroup>
+                                <Label>{item.label}</Label>
+                                <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+                                    value={this.state.rq_body[item.root][item.value]}
+                                    onChange={this.handleChange} disabled={this.state.disabled} />
+                            </FormGroup>
+                        )
+                    } else {
+                        columnRight.push (
+                            <FormGroup>
+                                <Label>{item.label}</Label>
+                                <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+                                    value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
+                            </FormGroup>
+                        )
+                    }
                 }
             }
         })
@@ -342,10 +366,10 @@ class disbursementComponent extends Component {
                 <h2>Form Input Disbursement</h2>
                 <Container>
                     <Form onSubmit={this.handleSubmit}>
-                    {this.FormInputRow1()}
-                    <h4>Other properties</h4>
-                    <hr />
-                    {this.FormInputRow2()}
+                        {this.FormInputRow1()}
+                        <h4>Other properties</h4>
+                        <hr />
+                        {this.FormInputRow2()}
                         <Row>
                             <Col md={{ size: 6, offset: 3 }}>
                                 <FormGroup>
@@ -374,8 +398,8 @@ class disbursementComponent extends Component {
                                                         onChange={this.handleChangeModal}>
                                                     </Input>
                                                     <div class="text-center">
-                                                    <Button color="primary" onClick={(e) => this.handleCloseModal(e)}>Add</Button>{' '}
-                                                    <Button color="secondary" onClick={this.closeModal}>close</Button>
+                                                        <Button color="primary" onClick={(e) => this.handleCloseModal(e)}>Add</Button>{' '}
+                                                        <Button color="secondary" onClick={this.closeModal}>close</Button>
                                                     </div>
                                                 </FormGroup>
                                             </ModalBody>
@@ -388,24 +412,24 @@ class disbursementComponent extends Component {
                             <div>
                                 <Table striped>
                                     <tbody>
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>Date</th>
-                                        <th>Interest Index</th>
-                                        <th>Interest Spread</th>
-                                        <th></th>
-                                    </tr>
-                                {tempData.map((item, index) => {
-                                    return (
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>Date</th>
+                                            <th>Interest Index</th>
+                                            <th>Interest Spread</th>
+                                            <th></th>
+                                        </tr>
+                                        {tempData.map((item, index) => {
+                                            return (
                                                 <tr>
-                                                    <td>{index+1}</td>
+                                                    <td>{index + 1}</td>
                                                     <td>{item.date}</td>
                                                     <td>{item.interest_index}</td>
                                                     <td>{item.interest_spread}</td>
                                                 </tr>
-                                    )
-                                }
-                                )}
+                                            )
+                                        }
+                                        )}
                                     </tbody>
                                 </Table>
                             </div>
