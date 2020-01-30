@@ -212,6 +212,9 @@ class InquiryAccountingRecordsComponent extends Component {
             .then(data => {
                 if (data.rs_body.gl_entry_list.length > 0) {
                     this.setState({
+                        dataResponse: []
+                   });
+                    this.setState({
                          dataResponse: data.rs_body.gl_entry_list
                     });
                 } else {

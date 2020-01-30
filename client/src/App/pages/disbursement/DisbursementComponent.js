@@ -120,6 +120,7 @@ class disbursementComponent extends Component {
         const { rq_body } = { ...this.state };
         const currentState = rq_body;
         const properties = currentState.other_properties;
+        //field in other properties expect type string
         if (event.target.name === "interest_index" || event.target.name === "interest_spread"
             || event.target.name === "first_payment_date" || event.target.name === "number_of_payment"
             || event.target.name === "installment_amount" || event.target.name === "interest_override_reason"
