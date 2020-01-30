@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Button, Col, Form, FormGroup, Input, Label, Container, Row, Table} from 'reactstrap';
 import DynamicHeader from '../../Header';
 import inputModel from './model.json';
-import utility from '../../Utility';
 import SpinnerLoader from '../../loading';
 import fieldHeader from './fieldRes.js'
 

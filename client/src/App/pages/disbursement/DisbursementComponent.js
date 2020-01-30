@@ -220,7 +220,7 @@ class disbursementComponent extends Component {
         this.setState({interest_schedule_obj : dataArray});
     }
 
-    // FormInputData = () => {
+    // FormInputRow1 = () => {
     //     return inputModel.model.map(item => {
     //         if (item.root === null) {
     //             return (
@@ -265,7 +265,7 @@ class disbursementComponent extends Component {
     //     })
     // };
 
-    FormInputData = () => {
+    FormInputRow1 = () => {
         let count = 0;
         let columnLeft = [];
         let columnRight = [];
@@ -342,7 +342,7 @@ class disbursementComponent extends Component {
                 <h2>Form Input Disbursement</h2>
                 <Container>
                     <Form onSubmit={this.handleSubmit}>
-                    {this.FormInputData()}
+                    {this.FormInputRow1()}
                     <h4>Other properties</h4>
                     <hr />
                     {this.FormInputRow2()}
