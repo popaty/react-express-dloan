@@ -26,12 +26,24 @@ class InquiryPositionDetailSummery extends Component {
                                     <td>{catchup}</td>
                                 </tr>)
                             } else {
-                                if (subdata === "balance" || subdata === "available_balance" ||
+                                if (subdata === "available_balance" ||
                                 subdata === "unpaid_accrued_interest_amount" || subdata === "interest_rate") {
                                     obj.push(<tr class="text-primary">
                                         <td>{subdata}</td>
                                         <td>{data[key][subdata]}</td>
                                     </tr>);
+                                } else if (subdata === "balance" || subdata === "unpaid_principal_amount"){
+                                    if(key === "bills"){
+                                        obj.push(<tr>
+                                            <td>{subdata}</td>
+                                            <td>{data[key][subdata]}</td>
+                                        </tr>);
+                                    }else{
+                                        obj.push(<tr class="text-success">
+                                        <td>{subdata}</td>
+                                        <td>{data[key][subdata]}</td>
+                                        </tr>);
+                                    }
                                 } else {
                                     obj.push(<tr>
                                         <td>{subdata}</td>
