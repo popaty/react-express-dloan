@@ -44,25 +44,25 @@ class InquiryAccountingRecordsComponent extends Component {
     Clicked(event) {
         event.preventDefault();
          console.log(this.state);
-        // this.setState({ loading: true,glEntryList : []});
-        // setTimeout(() => {
-        //     fetch('/api/inquiryAccountingRecord/' + this.state.account_number + "/" + this.state.account_sequence + "/"
-        //         + this.state.transaction_date + "/" + this.state.channel_post_date + "/" + this.state.job_id + "/"
-        //         + this.state.service + "/" + this.state.transaction_id, {})
-        //         .then(response => response.json())
-        //         .then(data => {
-        //             // if (data.rs_body.gl_entry_list.length) {
-        //             if (data.rs_body.gl_entry_list.length > 0) {
-        //                 this.setState({
-        //                     loading: false,
-        //                     isFound: true,
-        //                     glEntryList: data.rs_body.gl_entry_list})
-        //             } else {
-        //                 alert("Not Found.");
-        //             }
-        //         }).catch(error => console.log(error));
-        //         this.setState({loading: false});
-        // }, 1000);
+        this.setState({ loading: true,glEntryList : []});
+        setTimeout(() => {
+            fetch('/api/inquiryAccountingRecord/' + this.state.account_number + "/" + this.state.account_sequence + "/"
+                + this.state.transaction_date + "/" + this.state.channel_post_date + "/" + this.state.job_id + "/"
+                + this.state.service + "/" + this.state.transaction_id, {})
+                .then(response => response.json())
+                .then(data => {
+                    // if (data.rs_body.gl_entry_list.length) {
+                    if (data.rs_body.gl_entry_list.length > 0) {
+                        this.setState({
+                            loading: false,
+                            isFound: true,
+                            glEntryList: data.rs_body.gl_entry_list})
+                    } else {
+                        alert("Not Found.");
+                    }
+                }).catch(error => console.log(error));
+                this.setState({loading: false});
+        }, 1000);
     };
 
     FormInputData = () => {
