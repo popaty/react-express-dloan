@@ -161,7 +161,7 @@ class disbursementComponent extends Component {
         const request = utility.omit(body);
 
         if(body.rq_body.other_properties.interest_spread === 1){
-            body.rq_body.other_properties.interest_spread = 0;
+            body.rq_body.other_properties.interest_spread = "0";
         }
 
         setTimeout(() => {
