@@ -155,13 +155,13 @@ class disbursementComponent extends Component {
         }
 
         if(body.rq_body.other_properties.interest_index !== "" && body.rq_body.other_properties.interest_spread === 0){
-            body.rq_body.other_properties.interest_spread === -1;
+            body.rq_body.other_properties.interest_spread = 1;
         }
 
         const request = utility.omit(body);
 
-        if(body.rq_body.other_properties.interest_spread === -1){
-            body.rq_body.other_properties.interest_spread === 0;
+        if(body.rq_body.other_properties.interest_spread === 1){
+            body.rq_body.other_properties.interest_spread = 0;
         }
 
         setTimeout(() => {
