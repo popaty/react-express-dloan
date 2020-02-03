@@ -44,7 +44,7 @@ class InquiryAccountingRecordsComponent extends Component {
     Clicked(event) {
         event.preventDefault();
          console.log(this.state);
-        this.setState({ loading: true,glEntryList : []});
+        this.setState({ loading: true});
         setTimeout(() => {
             fetch('/api/inquiryAccountingRecord/' + this.state.account_number + "/" + this.state.account_sequence + "/"
                 + this.state.transaction_date + "/" + this.state.channel_post_date + "/" + this.state.job_id + "/"
@@ -211,9 +211,6 @@ class InquiryAccountingRecordsComponent extends Component {
             .then(response => response.json())
             .then(data => {
                 if (data.rs_body.gl_entry_list.length > 0) {
-                    this.setState({
-                        dataResponse: []
-                   });
                     this.setState({
                          dataResponse: data.rs_body.gl_entry_list
                     });

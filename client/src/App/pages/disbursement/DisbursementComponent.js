@@ -41,7 +41,7 @@ class disbursementComponent extends Component {
             interest_index: "FIXED",
             interest_spread: "",
             isFound: false,
-            //declare for map in table
+            //declare for used map in table
             interest_schedule_obj: []
 
         };
@@ -92,7 +92,7 @@ class disbursementComponent extends Component {
             clearing_and_settlement_key: "CBS",
             other_properties: {
                 interest_index: "",
-                interest_spread: 0,
+                interest_spread: "",
                 first_payment_date: "",
                 number_of_payment: String(numberOfPayment),
                 installment_amount: String(installmentAmount),
@@ -154,8 +154,8 @@ class disbursementComponent extends Component {
         if (this.state.interest_schedule_obj.length !== 0) {
             body.rq_body.other_properties.interest_schedule = JSON.stringify(this.state.interest_schedule_obj);
         }
-
-        if(body.rq_body.other_properties.interest_index !== "" && body.rq_body.other_properties.interest_spread === 0){
+        console.log("interest_schedule : "+body.rq_body.other_properties.interest_schedule);
+        if(body.rq_body.other_properties.interest_index !== "" && body.rq_body.other_properties.interest_spread === ""){
             body.rq_body.other_properties.interest_spread = 1;
         }
 
@@ -222,59 +222,9 @@ class disbursementComponent extends Component {
             interest_index: this.state.interest_index,
             interest_spread: this.state.interest_spread
         };
-
         dataArray.push(data);
-        // const { rq_body } = { ...this.state };
-        // const currentState = rq_body;
-        // const properties = currentState.other_properties;
-        // properties["interest_schedule"] = dataArray;
         this.setState({ interest_schedule_obj: dataArray });
     }
-
-    // FormInputRow1 = () => {
-    //     return inputModel.model.map(item => {
-    //         if (item.root === null) {
-    //             return (
-    //                 <FormGroup>
-    //                     <Label>{item.label}</Label>
-    //                     <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-    //                         value={this.state.rq_body[item.value]} onChange={this.handleChange} />
-    //                 </FormGroup>
-    //             );
-    //         } else {
-    //             if (item.type === "select") {
-    //                 return (
-    //                     <FormGroup>
-    //                         <Label>{item.label}</Label>
-    //                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-    //                             value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange}>
-    //                             {item.items.map(element => <option>{element}</option>)}
-    //                         </Input>
-    //                     </FormGroup>
-    //                 )
-    //             } else {
-    //                 if (item.name === "installment_amount" || item.name === "number_of_payment") {
-    //                     return (
-    //                         <FormGroup>
-    //                             <Label>{item.label}</Label>
-    //                             <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-    //                                 value={this.state.rq_body[item.root][item.value]}
-    //                                 onChange={this.handleChange} disabled={this.state.disabled} />
-    //                         </FormGroup>
-    //                     )
-    //                 } else {
-    //                     return (
-    //                         <FormGroup>
-    //                             <Label>{item.label}</Label>
-    //                             <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-    //                                 value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
-    //                         </FormGroup>
-    //                     )
-    //                 }
-    //             }
-    //         }
-    //     })
-    // };
 
     FormInputRow1 = () => {
         let count = 0;
@@ -453,11 +403,6 @@ class disbursementComponent extends Component {
                             </Button>
                         </div>
                     </Form>
-                    {/* <Row>
-                        <Col md={{ size: 4, offset: 4 }}>
-
-                        </Col>
-                    </Row> */}
                 </Container>
             </div>
         )

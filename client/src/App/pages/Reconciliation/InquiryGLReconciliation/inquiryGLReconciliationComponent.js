@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Button, Col, Form, FormGroup, Input, Label, Container, Row, Table } from 'reactstrap';
 import DynamicHeader from '../../Header';
 import inputModel from './model.json';
-import utility from '../../Utility';
 import SpinnerLoader from '../../loading';
 import fieldHeader from './fieldRes.js'
 
@@ -25,7 +24,8 @@ class inquiryGLReconciliationComponent extends Component {
 
     Clicked(event) {
         event.preventDefault();
-        this.setState({ loading: true,dataRes:[] });
+        console.log(this.state.date_GL);
+        this.setState({ loading: true});
         setTimeout(() => {
             fetch('/api/inquiryGL/' + this.state.date_GL)
                 .then(response => response.json())
@@ -109,7 +109,7 @@ class inquiryGLReconciliationComponent extends Component {
                 <FormGroup>
                     <Label>{item.label}</Label>
                     <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                        value={this.state[item.value]} onChange={this.handleChange} />
+                    value={this.state[item.value]} onChange={this.handleChange} />
                 </FormGroup>
             );
         });
