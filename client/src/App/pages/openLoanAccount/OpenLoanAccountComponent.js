@@ -98,23 +98,13 @@ class OpenLoanAccountComponent extends Component {
     };
 
     loadJson(event) {
-        if (event.target.name === "000") {
-            this.setState(v000);
-        }
-        if (event.target.name === "001") {
-            this.setState(v001);
-        }
-        if (event.target.name === "002") {
-            this.setState(v002);
-        }
-        if (event.target.name === "003") {
-            this.setState(v003);
-        }
-        if (event.target.name === "004") {
-            this.setState(v004);
-        }
-        if (event.target.name === "005") {
-            this.setState(v005);
+        switch(event.target.name){
+            case "000" : this.setState(v000); break;
+            case "001" : this.setState(v001); break;
+            case "002" : this.setState(v002); break;
+            case "003" : this.setState(v003); break;
+            case "004" : this.setState(v004); break;
+            case "005" : this.setState(v005); break;
         }
     };
 
