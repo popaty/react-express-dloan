@@ -1,0 +1,22 @@
+{
+    "rq_body": {
+      "account_number": 6000000000001,
+      "disbursement_amount": 50000,
+      "effective_date": "2020-01-22",
+      "channel_post_date": "2019-12-31",
+      "currency_code": "THB",
+      "service_branch": 33,
+      "clearing_and_settlement_key": "CBS",
+      "other_properties": {
+        "interest_index": "FIXED",
+        "interest_spread": "0",
+        "first_payment_date": "2020-03-09",
+        "number_of_payment": "12",
+        "installment_amount": "1833.59",
+        "payment_calculation_method": "minimum",
+        "interest_override_reason": "had promotion",
+        "campaign_name": "dynamic interest",
+        "interest_schedule": ""
+      }
+    }
+}

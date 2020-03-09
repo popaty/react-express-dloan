@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
-import { Button, Col, Container, Form, FormGroup, Input, Label, Row, Table, Modal, ModalBody, ModalHeader } from 'reactstrap';
+import { Button, Col, Container, Form, FormGroup, Input, Label, Row, Table, Modal, ModalBody, ModalHeader,
+    DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown} from 'reactstrap';
+
 import DynamicHeader from '../Header.js';
 import inputModel from './model.json';
 import utility from '../Utility.js';
 import SpinnerLoader from '../loading.js';
+
+import data0 from './data0.json';
+import data1 from './data1.json';
 
 const cloneDeep = require('lodash.clonedeep');
 let installmentAmount = "";
@@ -318,6 +323,14 @@ class disbursementComponent extends Component {
         return (<Row><Col md={{ size: 3, offset: 3 }}>{columnLeft}</Col><Col md={{ size: 3 }}>{columnRight}</Col></Row>);
     }
 
+    loadJson = (event) => {
+        event.preventDefault();
+        switch(event.target.name){
+            case "000" : this.setState({rq_body : data0.rq_body}); break;
+            case "001" : this.setState({rq_body : data1.rq_body}); break;
+        }
+    };
+
     render() {
         const { loading } = this.state;
         let tempData = this.state.interest_schedule_obj;
@@ -326,6 +339,14 @@ class disbursementComponent extends Component {
                 <DynamicHeader />
                 <h2>Form Input Disbursement</h2>
                 <Container>
+                <UncontrolledDropdown align="center">
+                        <DropdownToggle caret color="secondary">Select data here &nbsp;</DropdownToggle>
+                        <DropdownMenu>
+                            <DropdownItem name="000" onClick={(e) => this.loadJson(e)}>Select data here</DropdownItem>
+                            <DropdownItem name="001" onClick={(e) => this.loadJson(e)}>Input body data first</DropdownItem>
+                            {/* <DropdownItem name="002" onClick={this.loadJson}>Input body data second </DropdownItem> */}
+                        </DropdownMenu>
+                    </UncontrolledDropdown>
                     <Form onSubmit={this.handleSubmit}>
                         {this.FormInputRow1()}
                         <h4>Other properties</h4>
