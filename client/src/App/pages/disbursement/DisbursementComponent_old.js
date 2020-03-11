@@ -9,7 +9,6 @@ import SpinnerLoader from '../loading.js';
 
 import data0 from './data0.json';
 import data1 from './data1.json';
-import data2 from './data2.json';
 
 const cloneDeep = require('lodash.clonedeep');
 let installmentAmount = "";
@@ -26,21 +25,19 @@ class disbursementComponent extends Component {
                 effective_date: "",
                 channel_post_date: "",
                 currency_code: "THB",
-                user_id: "",
                 service_branch: 0,
                 clearing_and_settlement_key: "",
-                number_of_payment: 0,
-                installment_amount: 0,
-                interest_index: "",
-                interest_spread: 0,
-                first_payment_date: "",
-                payment_calculation_method: ""
-
-                // other_properties: {
-                //     interest_override_reason: "",
-                //     campaign_name: "",
-                //     interest_schedule: ""
-                // }
+                other_properties: {
+                    interest_index: "",
+                    interest_spread: 0,
+                    first_payment_date: "",
+                    number_of_payment: 0,
+                    installment_amount: 0,
+                    payment_calculation_method: "",
+                    interest_override_reason: "",
+                    campaign_name: "",
+                    interest_schedule: ""
+                }
             },
             loading: false,
             disabled: "",
@@ -50,14 +47,14 @@ class disbursementComponent extends Component {
             interest_spread: "",
             isFound: false,
             //declare for used map in table
-            // interest_schedule_obj: []
+            interest_schedule_obj: []
 
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleChangeModal = this.handleChangeModal.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleOpenModal = this.handleOpenModal.bind(this);
-        // this.handleCloseModal = this.handleCloseModal.bind(this);
+        this.handleCloseModal = this.handleCloseModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
     };
 
@@ -96,20 +93,19 @@ class disbursementComponent extends Component {
             effective_date: "",
             channel_post_date: "",
             currency_code: "THB",
-            user_id:"",
             service_branch: 0,
             clearing_and_settlement_key: "CBS",
-            interest_index: "",
-            interest_spread: "",
-            first_payment_date: "",
-            number_of_payment: String(numberOfPayment),
-            installment_amount: String(installmentAmount),
-            payment_calculation_method: "installment",
-            // other_properties: {
-            //     interest_override_reason: "",
-            //     campaign_name: "",
-            //     interest_schedule: ""
-            // }
+            other_properties: {
+                interest_index: "",
+                interest_spread: "",
+                first_payment_date: "",
+                number_of_payment: String(numberOfPayment),
+                installment_amount: String(installmentAmount),
+                payment_calculation_method: "installment",
+                interest_override_reason: "",
+                campaign_name: "",
+                interest_schedule: ""
+            }
         };
         this.setState({ rq_body: body });
     };
@@ -128,8 +124,7 @@ class disbursementComponent extends Component {
         //this.setState({[event.target.name]:event.target.value});
         const { rq_body } = { ...this.state };
         const currentState = rq_body;
-        // const properties = currentState.other_properties;
-        const properties = currentState;
+        const properties = currentState.other_properties;
         //field in other properties expect type string
         if (event.target.name === "interest_index" || event.target.name === "interest_spread"
             || event.target.name === "first_payment_date" || event.target.name === "number_of_payment"
@@ -161,27 +156,18 @@ class disbursementComponent extends Component {
         this.setState({ loading: true });
         //clone state for use in omit function.
         let body = cloneDeep(this.state);
-        // if (this.state.interest_schedule_obj.length !== 0) {
-        //     body.rq_body.other_properties.interest_schedule = JSON.stringify(this.state.interest_schedule_obj);
-        // }
-        // console.log("interest_schedule : "+body.rq_body.other_properties.interest_schedule);
-
-        // if(body.rq_body.other_properties.interest_index !== "" && body.rq_body.other_properties.interest_spread === ""){
-        //     body.rq_body.other_properties.interest_spread = 1;
-        // }
-
-        if(body.rq_body.interest_index !== "" && body.rq_body.interest_spread === ""){
-            body.rq_body.interest_spread = 1;
+        if (this.state.interest_schedule_obj.length !== 0) {
+            body.rq_body.other_properties.interest_schedule = JSON.stringify(this.state.interest_schedule_obj);
+        }
+        console.log("interest_schedule : "+body.rq_body.other_properties.interest_schedule);
+        if(body.rq_body.other_properties.interest_index !== "" && body.rq_body.other_properties.interest_spread === ""){
+            body.rq_body.other_properties.interest_spread = 1;
         }
 
         const request = utility.omit(body);
 
-        // if(body.rq_body.other_properties.interest_spread === 1){
-        //     body.rq_body.other_properties.interest_spread = "0";
-        // }
-
-        if(body.rq_body.interest_spread === 1){
-            body.rq_body.interest_spread = "0";
+        if(body.rq_body.other_properties.interest_spread === 1){
+            body.rq_body.other_properties.interest_spread = "0";
         }
 
         setTimeout(() => {
@@ -232,18 +218,18 @@ class disbursementComponent extends Component {
         this.setState({ openMyModal: false });
     }
 
-    // handleCloseModal = (e) => {
-    //     e.preventDefault();
-        // this.setState({ openMyModal: false });
-        // this.setState({ isFound: true });
-        // let data = {
-        //     date: this.state.date,
-        //     interest_index: this.state.interest_index,
-        //     interest_spread: this.state.interest_spread
-        // };
-        // dataArray.push(data);
-        // this.setState({ interest_schedule_obj: dataArray });
-    // };
+    handleCloseModal = (e) => {
+        e.preventDefault();
+        this.setState({ openMyModal: false });
+        this.setState({ isFound: true });
+        let data = {
+            date: this.state.date,
+            interest_index: this.state.interest_index,
+            interest_spread: this.state.interest_spread
+        };
+        dataArray.push(data);
+        this.setState({ interest_schedule_obj: dataArray });
+    }
 
     FormInputRow1 = () => {
         let count = 0;
@@ -253,43 +239,19 @@ class disbursementComponent extends Component {
             count++;
             if (item.root === null) {
                 if (count % 2 !== 0) {
-                    if (item.type === "select") {
-                        columnLeft.push(
-                            <FormGroup>
-                                <Label>{item.label}</Label>
-                                <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                                       value={this.state.rq_body[item.value]} onChange={this.handleChange} >
-                                    {item.items.map(element => <option>{element}</option>)}
-                                </Input>
-                            </FormGroup>
-                        );
-                    }else{
-                        columnLeft.push(<FormGroup>
-                                <Label>{item.label}</Label>
-                                <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                                       value={this.state.rq_body[item.value]} onChange={this.handleChange} />
-                            </FormGroup>
-                        )
-                    }
+                    columnLeft.push(<FormGroup>
+                        <Label>{item.label}</Label>
+                        <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+                            value={this.state.rq_body[item.value]} onChange={this.handleChange} />
+                    </FormGroup>
+                    )
                 } else {
-                    if (item.type === "select") {
-                        columnRight.push(
-                            <FormGroup>
-                                <Label>{item.label}</Label>
-                                <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                                       value={this.state.rq_body[item.value]} onChange={this.handleChange} >
-                                    {item.items.map(element => <option>{element}</option>)}
-                                </Input>
-                            </FormGroup>
-                        );
-                    }else{
-                        columnRight.push(<FormGroup>
-                                <Label>{item.label}</Label>
-                                <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                                       value={this.state.rq_body[item.value]} onChange={this.handleChange} />
-                            </FormGroup>
-                        )
-                    }
+                    columnRight.push(<FormGroup>
+                        <Label>{item.label}</Label>
+                        <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+                            value={this.state.rq_body[item.value]} onChange={this.handleChange} />
+                    </FormGroup>
+                    )
                 }
             } else {
 
@@ -366,13 +328,12 @@ class disbursementComponent extends Component {
         switch(event.target.name){
             case "000" : this.setState({rq_body : data0.rq_body}); break;
             case "001" : this.setState({rq_body : data1.rq_body}); break;
-            case "002" : this.setState({rq_body : data2.rq_body}); break;
         }
     };
 
     render() {
         const { loading } = this.state;
-        // let tempData = this.state.interest_schedule_obj;
+        let tempData = this.state.interest_schedule_obj;
         return (
             <div>
                 <DynamicHeader />
@@ -382,80 +343,79 @@ class disbursementComponent extends Component {
                         <DropdownToggle caret color="secondary">Select data here &nbsp;</DropdownToggle>
                         <DropdownMenu>
                             <DropdownItem name="000" onClick={(e) => this.loadJson(e)}>Select data here</DropdownItem>
-                            <DropdownItem name="001" onClick={(e) => this.loadJson(e)}>First Model</DropdownItem>
-                            <DropdownItem name="002" onClick={(e) => this.loadJson(e)}>Second Model</DropdownItem>
+                            <DropdownItem name="001" onClick={(e) => this.loadJson(e)}>Input body data first</DropdownItem>
                             {/* <DropdownItem name="002" onClick={this.loadJson}>Input body data second </DropdownItem> */}
                         </DropdownMenu>
                     </UncontrolledDropdown>
                     <Form onSubmit={this.handleSubmit}>
                         {this.FormInputRow1()}
-                        {/*<h4>Other properties</h4>*/}
-                        {/*<hr />*/}
-                        {/*{this.FormInputRow2()}*/}
-                        {/*<Row>*/}
-                        {/*    <Col md={{ size: 6, offset: 3 }}>*/}
-                        {/*        <FormGroup>*/}
-                        {/*            <Label>Interest Schedule</Label>*/}
-                        {/*            <div>*/}
-                        {/*                <Button color="secondary" type="button" onClick={this.handleOpenModal}>Add*/}
-                        {/*                    Interest Schedule</Button>*/}
-                        {/*                <Modal isOpen={this.state.openMyModal}>*/}
-                        {/*                    <ModalHeader toggle={this.closeModal} >Interest Schedule</ModalHeader>*/}
-                        {/*                    <ModalBody>*/}
-                        {/*                        <FormGroup>*/}
-                        {/*                            <Label>Date</Label>*/}
-                        {/*                            <Input type="date" name="date" placeholder="date" step="any"*/}
-                        {/*                                value={this.state.date} onChange={this.handleChangeModal}>*/}
-                        {/*                            </Input>*/}
-                        {/*                            <Label>Interest Index</Label>*/}
-                        {/*                            <Input type="String" name="interest_index" placeholder="interest_index"*/}
-                        {/*                                step="any"*/}
-                        {/*                                value={this.state.interest_index}*/}
-                        {/*                                onChange={this.handleChangeModal}>*/}
-                        {/*                            </Input>*/}
-                        {/*                            <Label>Interest Spread</Label>*/}
-                        {/*                            <Input type="number" name="interest_spread"*/}
-                        {/*                                placeholder="interest_spread" step="any"*/}
-                        {/*                                value={this.state.interest_spread}*/}
-                        {/*                                onChange={this.handleChangeModal}>*/}
-                        {/*                            </Input>*/}
-                        {/*                            <div class="text-center">*/}
-                        {/*                                <Button color="primary" onClick={(e) => this.handleCloseModal(e)}>Add</Button>{' '}*/}
-                        {/*                                <Button color="secondary" onClick={this.closeModal}>close</Button>*/}
-                        {/*                            </div>*/}
-                        {/*                        </FormGroup>*/}
-                        {/*                    </ModalBody>*/}
-                        {/*                </Modal>*/}
-                        {/*            </div>*/}
-                        {/*        </FormGroup>*/}
-                        {/*    </Col>*/}
-                        {/*</Row>*/}
-                        {/*{this.state.isFound &&*/}
-                        {/*    <div>*/}
-                        {/*        <Table striped>*/}
-                        {/*            <tbody>*/}
-                        {/*                <tr>*/}
-                        {/*                    <th>No.</th>*/}
-                        {/*                    <th>Date</th>*/}
-                        {/*                    <th>Interest Index</th>*/}
-                        {/*                    <th>Interest Spread</th>*/}
-                        {/*                    <th></th>*/}
-                        {/*                </tr>*/}
-                        {/*                {tempData.map((item, index) => {*/}
-                        {/*                    return (*/}
-                        {/*                        <tr>*/}
-                        {/*                            <td>{index + 1}</td>*/}
-                        {/*                            <td>{item.date}</td>*/}
-                        {/*                            <td>{item.interest_index}</td>*/}
-                        {/*                            <td>{item.interest_spread}</td>*/}
-                        {/*                        </tr>*/}
-                        {/*                    )*/}
-                        {/*                }*/}
-                        {/*                )}*/}
-                        {/*            </tbody>*/}
-                        {/*        </Table>*/}
-                        {/*    </div>*/}
-                        {/*}*/}
+                        <h4>Other properties</h4>
+                        <hr />
+                        {this.FormInputRow2()}
+                        <Row>
+                            <Col md={{ size: 6, offset: 3 }}>
+                                <FormGroup>
+                                    <Label>Interest Schedule</Label>
+                                    <div>
+                                        <Button color="secondary" type="button" onClick={this.handleOpenModal}>Add
+                                            Interest Schedule</Button>
+                                        <Modal isOpen={this.state.openMyModal}>
+                                            <ModalHeader toggle={this.closeModal} >Interest Schedule</ModalHeader>
+                                            <ModalBody>
+                                                <FormGroup>
+                                                    <Label>Date</Label>
+                                                    <Input type="date" name="date" placeholder="date" step="any"
+                                                        value={this.state.date} onChange={this.handleChangeModal}>
+                                                    </Input>
+                                                    <Label>Interest Index</Label>
+                                                    <Input type="String" name="interest_index" placeholder="interest_index"
+                                                        step="any"
+                                                        value={this.state.interest_index}
+                                                        onChange={this.handleChangeModal}>
+                                                    </Input>
+                                                    <Label>Interest Spread</Label>
+                                                    <Input type="number" name="interest_spread"
+                                                        placeholder="interest_spread" step="any"
+                                                        value={this.state.interest_spread}
+                                                        onChange={this.handleChangeModal}>
+                                                    </Input>
+                                                    <div class="text-center">
+                                                        <Button color="primary" onClick={(e) => this.handleCloseModal(e)}>Add</Button>{' '}
+                                                        <Button color="secondary" onClick={this.closeModal}>close</Button>
+                                                    </div>
+                                                </FormGroup>
+                                            </ModalBody>
+                                        </Modal>
+                                    </div>
+                                </FormGroup>
+                            </Col>
+                        </Row>
+                        {this.state.isFound &&
+                            <div>
+                                <Table striped>
+                                    <tbody>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>Date</th>
+                                            <th>Interest Index</th>
+                                            <th>Interest Spread</th>
+                                            <th></th>
+                                        </tr>
+                                        {tempData.map((item, index) => {
+                                            return (
+                                                <tr>
+                                                    <td>{index + 1}</td>
+                                                    <td>{item.date}</td>
+                                                    <td>{item.interest_index}</td>
+                                                    <td>{item.interest_spread}</td>
+                                                </tr>
+                                            )
+                                        }
+                                        )}
+                                    </tbody>
+                                </Table>
+                            </div>
+                        }
                         <div class="text-center">
                             <Button color="primary" type="submit" disabled={loading}>
                                 {loading && (<SpinnerLoader />)}

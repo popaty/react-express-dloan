@@ -5,20 +5,15 @@
         "effective_date": "",
         "channel_post_date": "",
         "currency_code": "THB",
+        "user_id": "",
         "service_branch": 0,
         "clearing_and_settlement_key": "CBS",
-        "other_properties": {
-            "interest_index": "",
-            "interest_spread": "",
-            "first_payment_date": "",
-            "number_of_payment": "",
-            "installment_amount": "",
-            "payment_calculation_method": "installment",
-            "interest_override_reason": "",
-            "campaign_name": "",
-            "interest_schedule": ""
-        }
+        "interest_index": "",
+        "interest_spread": "",
+        "first_payment_date": "",
+        "number_of_payment": "",
+        "installment_amount": "",
+        "payment_calculation_method": "installment"
     }
 }
 
-  

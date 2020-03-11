@@ -41,14 +41,6 @@
       "root": null
     },
     {
-      "label": "User ID",
-      "type": "text",
-      "name": "user_id",
-      "placeholder": "Enter user id",
-      "value": "user_id",
-      "root": null
-    },
-    {
       "label": "Service branch",
       "type": "number",
       "name": "service_branch",
@@ -65,28 +57,12 @@
       "root": null
     },
     {
-      "label": "Number of Payment",
-      "type": "number",
-      "name": "number_of_payment",
-      "placeholder": "Enter number of payment",
-      "value": "number_of_payment",
-      "root": null
-    },
-    {
-      "label": "Installment Amount",
-      "type": "number",
-      "name": "installment_amount",
-      "placeholder": "Enter installment amount",
-      "value": "installment_amount",
-      "root": null
-    },
-    {
       "label": "Interest index",
       "type": "text",
       "name": "interest_index",
       "placeholder": "Enter interest index",
       "value": "interest_index",
-      "root": null
+      "root": "other_properties"
     },
     {
       "label": "Interest spread",
@@ -94,7 +70,7 @@
       "name": "interest_spread",
       "placeholder": "Enter interest spread",
       "value": "interest_spread",
-      "root": null
+      "root": "other_properties"
     },
     {
       "label": "First payment date",
@@ -102,7 +78,7 @@
       "name": "first_payment_date",
       "placeholder": "Enter first payment date",
       "value": "first_payment_date",
-      "root": null
+      "root": "other_properties"
     },
     {
       "label": "Payment Calculation Method",
@@ -111,7 +87,39 @@
       "name": "payment_calculation_method",
       "placeholder": "Enter Payment Calculation Method",
       "value": "payment_calculation_method",
-      "root": null
+      "root": "other_properties"
+    },
+    {
+      "label": "Number of Payment",
+      "type": "number",
+      "name": "number_of_payment",
+      "placeholder": "Enter number of payment",
+      "value": "number_of_payment",
+      "root": "other_properties"
+    },
+    {
+      "label": "Installment Amount",
+      "type": "number",
+      "name": "installment_amount",
+      "placeholder": "Enter installment amount",
+      "value": "installment_amount",
+      "root": "other_properties"
+    },
+    {
+      "label": "Interest Override Reason",
+      "type": "text",
+      "name": "interest_override_reason",
+      "placeholder": "Enter interest override reason",
+      "value": "interest_override_reason",
+      "root": "other_properties"
+    },
+    {
+      "label": "Campaign Name",
+      "type": "String",
+      "name": "campaign_name",
+      "placeholder": "Enter campaign name",
+      "value": "campaign_name",
+      "root": "other_properties"
     }
   ]
 }
