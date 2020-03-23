@@ -97,6 +97,22 @@
       "root": null
     },
     {
+      "label": "User ID",
+      "type": "text",
+      "name": "user_id",
+      "placeholder": "Enter user id",
+      "value": "user_id",
+      "root": null
+    },
+    {
+      "label": "Service Branch",
+      "type": "number",
+      "name": "service_branch",
+      "placeholder": "Enter service branch",
+      "value": "service_branch",
+      "root": null
+    },
+    {
       "label": "Interest index",
       "type": "text",
       "name": "interest_index",

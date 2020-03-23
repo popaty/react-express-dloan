@@ -46,6 +46,8 @@ class OpenLoanAccountComponent extends Component {
                 account_branch: 0,
                 response_unit: 0,
                 application_id: "",
+                user_id:"",
+                service_branch:0,
                 interest: {
                     interest_index: "",
                     interest_spread: 0

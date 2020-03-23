@@ -12,6 +12,8 @@
     "account_branch": 20,
     "response_unit": 20,
     "application_id": "APP0003",
+    "user_id":"",
+    "service_branch":0,
     "interest": {
       "interest_index": "MRR",
       "interest_spread": -3

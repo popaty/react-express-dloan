@@ -12,6 +12,8 @@
       "account_branch": 1,
       "response_unit": 1,
       "application_id": "APP0002",
+      "user_id":"",
+      "service_branch":0,
       "interest": {
         "interest_index": "FIXED",
         "interest_spread": 18
