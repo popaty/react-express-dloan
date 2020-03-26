@@ -191,6 +191,15 @@ class disbursementComponent extends Component {
     };
 
     postList = (request) => {
+
+        let installmentAmtFloat = parseFloat(request.rq_body.installment_amount)
+        let numberOfPmtInt = parseInt(request.rq_body.number_of_payment)
+        let accountNumberInt = parseInt(request.rq_body.account_number)
+        
+        request.rq_body.installment_amount = installmentAmtFloat
+        request.rq_body.number_of_payment = numberOfPmtInt
+        request.rq_body.account_number = accountNumberInt
+
         console.log("myRequest : " + JSON.stringify(request));
         fetch('/api/disbursement', {
             method: 'POST',
