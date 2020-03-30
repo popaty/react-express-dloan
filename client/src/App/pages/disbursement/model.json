@@ -2,7 +2,7 @@
   "model": [
     {
       "label": "Account number",
-      "type": "text",
+      "type": "number",
       "name": "account_number",
       "placeholder": "Enter account number",
       "value": "account_number",
@@ -65,22 +65,6 @@
       "root": null
     },
     {
-      "label": "Number of Payment",
-      "type": "number",
-      "name": "number_of_payment",
-      "placeholder": "Enter number of payment",
-      "value": "number_of_payment",
-      "root": null
-    },
-    {
-      "label": "Installment Amount",
-      "type": "number",
-      "name": "installment_amount",
-      "placeholder": "Enter installment amount",
-      "value": "installment_amount",
-      "root": null
-    },
-    {
       "label": "Interest index",
       "type": "text",
       "name": "interest_index",
@@ -111,6 +95,22 @@
       "name": "payment_calculation_method",
       "placeholder": "Enter Payment Calculation Method",
       "value": "payment_calculation_method",
+      "root": null
+    },
+    {
+      "label": "Number of Payment",
+      "type": "number",
+      "name": "number_of_payment",
+      "placeholder": "Enter number of payment",
+      "value": "number_of_payment",
+      "root": null
+    },
+    {
+      "label": "Installment Amount",
+      "type": "number",
+      "name": "installment_amount",
+      "placeholder": "Enter installment amount",
+      "value": "installment_amount",
       "root": null
     }
   ]

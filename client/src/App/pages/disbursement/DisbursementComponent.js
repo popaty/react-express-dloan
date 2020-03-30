@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Button, Col, Container, Form, FormGroup, Input, Label, Row, Table, Modal, ModalBody, ModalHeader,
-    DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown} from 'reactstrap';
+import {
+    Button, Col, Container, Form, FormGroup, Input, Label, Row, Table, Modal, ModalBody, ModalHeader,
+    DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown
+} from 'reactstrap';
 
 import DynamicHeader from '../Header.js';
 import inputModel from './model.json';
@@ -96,14 +98,14 @@ class disbursementComponent extends Component {
             effective_date: "",
             channel_post_date: "",
             currency_code: "THB",
-            user_id:"",
+            user_id: "",
             service_branch: 0,
             clearing_and_settlement_key: "CBS",
             interest_index: "",
             interest_spread: "",
             first_payment_date: "",
-            number_of_payment: String(numberOfPayment),
-            installment_amount: String(installmentAmount),
+            number_of_payment: numberOfPayment,
+            installment_amount: installmentAmount,
             payment_calculation_method: "installment",
             // other_properties: {
             //     interest_override_reason: "",
@@ -129,25 +131,26 @@ class disbursementComponent extends Component {
         const { rq_body } = { ...this.state };
         const currentState = rq_body;
         // const properties = currentState.other_properties;
-        const properties = currentState;
+        // const properties = currentState;
         //field in other properties expect type string
-        if (event.target.name === "interest_index" || event.target.name === "interest_spread"
-            || event.target.name === "first_payment_date" || event.target.name === "number_of_payment"
-            || event.target.name === "installment_amount" || event.target.name === "interest_override_reason"
-            || event.target.name === "campaign_name") {
+        // if (event.target.name === "interest_index" || event.target.name === "interest_spread"
+        //     || event.target.name === "first_payment_date" || event.target.name === "number_of_payment"
+        //     || event.target.name === "installment_amount" || event.target.name === "interest_override_reason"
+        //     || event.target.name === "campaign_name") {
 
-            properties[event.target.name] = event.target.value;
+        //     properties[event.target.name] = event.target.value;
 
-        } else if (event.target.name === "payment_calculation_method") {
+        // } else 
+        if (event.target.name === "payment_calculation_method") {
             //check drop down payment_calculation_method field
-            properties[event.target.name] = event.target.value;
+            currentState[event.target.name] = event.target.value;
             if (event.target.value === "minimum") {
-                properties["installment_amount"] = "";
-                properties["number_of_payment"] = "";
+                currentState["installment_amount"] = "";
+                currentState["number_of_payment"] = "";
                 this.setState({ disabled: "disabled" });
             } else {
-                properties["installment_amount"] = String(installmentAmount);
-                properties["number_of_payment"] = String(numberOfPayment);
+                currentState["installment_amount"] = installmentAmount;
+                currentState["number_of_payment"] = numberOfPayment;
                 this.setState({ disabled: "" });
             }
         } else {
@@ -170,7 +173,7 @@ class disbursementComponent extends Component {
         //     body.rq_body.other_properties.interest_spread = 1;
         // }
 
-        if(body.rq_body.interest_index !== "" && body.rq_body.interest_spread === ""){
+        if (body.rq_body.interest_index !== "" && body.rq_body.interest_spread === "") {
             body.rq_body.interest_spread = 1;
         }
 
@@ -180,7 +183,7 @@ class disbursementComponent extends Component {
         //     body.rq_body.other_properties.interest_spread = "0";
         // }
 
-        if(body.rq_body.interest_spread === 1){
+        if (body.rq_body.interest_spread === 1) {
             body.rq_body.interest_spread = "0";
         }
 
@@ -192,13 +195,13 @@ class disbursementComponent extends Component {
 
     postList = (request) => {
 
-        let installmentAmtFloat = parseFloat(request.rq_body.installment_amount)
-        let numberOfPmtInt = parseInt(request.rq_body.number_of_payment)
-        let accountNumberInt = parseInt(request.rq_body.account_number)
-        
-        request.rq_body.installment_amount = installmentAmtFloat
-        request.rq_body.number_of_payment = numberOfPmtInt
-        request.rq_body.account_number = accountNumberInt
+        // let installmentAmtFloat = parseFloat(request.rq_body.installment_amount)
+        // let numberOfPmtInt = parseInt(request.rq_body.number_of_payment)
+        // let accountNumberInt = parseInt(request.rq_body.account_number)
+
+        // request.rq_body.installment_amount = installmentAmtFloat
+        // request.rq_body.number_of_payment = numberOfPmtInt
+        // request.rq_body.account_number = accountNumberInt
 
         console.log("myRequest : " + JSON.stringify(request));
         fetch('/api/disbursement', {
@@ -243,15 +246,15 @@ class disbursementComponent extends Component {
 
     // handleCloseModal = (e) => {
     //     e.preventDefault();
-        // this.setState({ openMyModal: false });
-        // this.setState({ isFound: true });
-        // let data = {
-        //     date: this.state.date,
-        //     interest_index: this.state.interest_index,
-        //     interest_spread: this.state.interest_spread
-        // };
-        // dataArray.push(data);
-        // this.setState({ interest_schedule_obj: dataArray });
+    // this.setState({ openMyModal: false });
+    // this.setState({ isFound: true });
+    // let data = {
+    //     date: this.state.date,
+    //     interest_index: this.state.interest_index,
+    //     interest_spread: this.state.interest_spread
+    // };
+    // dataArray.push(data);
+    // this.setState({ interest_schedule_obj: dataArray });
     // };
 
     FormInputRow1 = () => {
@@ -260,25 +263,35 @@ class disbursementComponent extends Component {
         let columnRight = [];
         inputModel.model.map(item => {
             count++;
-            if (item.root === null) {
                 if (count % 2 !== 0) {
                     if (item.type === "select") {
                         columnLeft.push(
                             <FormGroup>
                                 <Label>{item.label}</Label>
                                 <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                                       value={this.state.rq_body[item.value]} onChange={this.handleChange} >
+                                    value={this.state.rq_body[item.value]} onChange={this.handleChange}  >
                                     {item.items.map(element => <option>{element}</option>)}
                                 </Input>
                             </FormGroup>
                         );
-                    }else{
-                        columnLeft.push(<FormGroup>
+                    } else {
+                        if (item.name === "number_of_payment") {
+                            columnLeft.push(
+                                <FormGroup>
+                                    <Label>{item.label}</Label>
+                                    <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+                                        value={this.state.rq_body[item.value]}
+                                        onChange={this.handleChange} disabled={this.state.disabled} />
+                                </FormGroup>
+                            )
+                        } else {
+                            columnLeft.push(<FormGroup>
                                 <Label>{item.label}</Label>
                                 <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                                       value={this.state.rq_body[item.value]} onChange={this.handleChange} />
+                                    value={this.state.rq_body[item.value]} onChange={this.handleChange} />
                             </FormGroup>
-                        )
+                            )
+                        }
                     }
                 } else {
                     if (item.type === "select") {
@@ -286,96 +299,104 @@ class disbursementComponent extends Component {
                             <FormGroup>
                                 <Label>{item.label}</Label>
                                 <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                                       value={this.state.rq_body[item.value]} onChange={this.handleChange} >
-                                    {item.items.map(element => <option>{element}</option>)}
-                                </Input>
-                            </FormGroup>
-                        );
-                    }else{
-                        columnRight.push(<FormGroup>
-                                <Label>{item.label}</Label>
-                                <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                                       value={this.state.rq_body[item.value]} onChange={this.handleChange} />
-                            </FormGroup>
-                        )
-                    }
-                }
-            } else {
-
-            }
-        })
-        return (<Row><Col md={{ size: 3, offset: 3 }}>{columnLeft}</Col><Col md={{ size: 3 }}>{columnRight}</Col></Row>);
-    }
-
-    FormInputRow2 = () => {
-        let count = 0;
-        let columnLeft = [];
-        let columnRight = [];
-        inputModel.model.map(item => {
-            count++;
-            if (item.root !== null && item.root === "other_properties") {
-                if (count % 2 !== 0) {
-                    if (item.type === "select") {
-                        columnLeft.push(
-                            <FormGroup>
-                                <Label>{item.label}</Label>
-                                <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                                    value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} >
+                                    value={this.state.rq_body[item.value]} onChange={this.handleChange} onInvalid > 
                                     {item.items.map(element => <option>{element}</option>)}
                                 </Input>
                             </FormGroup>
                         );
                     } else {
                         if (item.name === "installment_amount") {
-                            columnLeft.push (
+                            columnRight.push(
                                 <FormGroup>
                                     <Label>{item.label}</Label>
                                     <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                                        value={this.state.rq_body[item.root][item.value]}
+                                        value={this.state.rq_body[item.value]}
                                         onChange={this.handleChange} disabled={this.state.disabled} />
                                 </FormGroup>
                             )
                         } else {
-                            columnLeft.push (
-                                <FormGroup>
-                                    <Label>{item.label}</Label>
-                                    <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                                        value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
-                                </FormGroup>
-                            )
-                        }
-                    }
-                } else {
-                    if (item.name === "number_of_payment") {
-                        columnRight.push (
-                            <FormGroup>
-                                <Label>{item.label}</Label>
-                                <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                                    value={this.state.rq_body[item.root][item.value]}
-                                    onChange={this.handleChange} disabled={this.state.disabled} />
-                            </FormGroup>
-                        )
-                    } else {
-                        columnRight.push (
-                            <FormGroup>
-                                <Label>{item.label}</Label>
-                                <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                                    value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
-                            </FormGroup>
+                        columnRight.push(<FormGroup>
+                            <Label>{item.label}</Label>
+                            <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+                                value={this.state.rq_body[item.value]} onChange={this.handleChange} />
+                        </FormGroup>
                         )
                     }
                 }
-            }
+                }
         })
         return (<Row><Col md={{ size: 3, offset: 3 }}>{columnLeft}</Col><Col md={{ size: 3 }}>{columnRight}</Col></Row>);
     }
 
+    // FormInputRow2 = () => {
+    //     let count = 0;
+    //     let columnLeft = [];
+    //     let columnRight = [];
+    //     inputModel.model.map(item => {
+    //         count++;
+    //         if (item.root !== null && item.root === "other_properties") {
+    //             if (count % 2 !== 0) {
+    //                 if (item.type === "select") {
+    //                     columnLeft.push(
+    //                         <FormGroup>
+    //                             <Label>{item.label}</Label>
+    //                             <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+    //                                 value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} >
+    //                                 {item.items.map(element => <option>{element}</option>)}
+    //                             </Input>
+    //                         </FormGroup>
+    //                     );
+    //                 } else {
+    //                     if (item.name === "installment_amount") {
+    //                         columnLeft.push (
+    //                             <FormGroup>
+    //                                 <Label>{item.label}</Label>
+    //                                 <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+    //                                     value={this.state.rq_body[item.root][item.value]}
+    //                                     onChange={this.handleChange} disabled={this.state.disabled} />
+    //                             </FormGroup>
+    //                         )
+    //                     } else {
+    //                         columnLeft.push (
+    //                             <FormGroup>
+    //                                 <Label>{item.label}</Label>
+    //                                 <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+    //                                     value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
+    //                             </FormGroup>
+    //                         )
+    //                     }
+    //                 }
+    //             } else {
+    //                 if (item.name === "number_of_payment") {
+    //                     columnRight.push (
+    //                         <FormGroup>
+    //                             <Label>{item.label}</Label>
+    //                             <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+    //                                 value={this.state.rq_body[item.root][item.value]}
+    //                                 onChange={this.handleChange} disabled={this.state.disabled} />
+    //                         </FormGroup>
+    //                     )
+    //                 } else {
+    //                     columnRight.push (
+    //                         <FormGroup>
+    //                             <Label>{item.label}</Label>
+    //                             <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+    //                                 value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
+    //                         </FormGroup>
+    //                     )
+    //                 }
+    //             }
+    //         }
+    //     })
+    //     return (<Row><Col md={{ size: 3, offset: 3 }}>{columnLeft}</Col><Col md={{ size: 3 }}>{columnRight}</Col></Row>);
+    // }
+
     loadJson = (event) => {
         event.preventDefault();
-        switch(event.target.name){
-            case "000" : this.setState({rq_body : data0.rq_body}); break;
-            case "001" : this.setState({rq_body : data1.rq_body}); break;
-            case "002" : this.setState({rq_body : data2.rq_body}); break;
+        switch (event.target.name) {
+            case "000": this.setState({ rq_body: data0.rq_body }); break;
+            case "001": this.setState({ rq_body: data1.rq_body }); break;
+            case "002": this.setState({ rq_body: data2.rq_body }); break;
         }
     };
 
@@ -387,7 +408,7 @@ class disbursementComponent extends Component {
                 <DynamicHeader />
                 <h2>Form Input Disbursement</h2>
                 <Container>
-                <UncontrolledDropdown align="center">
+                    <UncontrolledDropdown align="center">
                         <DropdownToggle caret color="secondary">Select data here &nbsp;</DropdownToggle>
                         <DropdownMenu>
                             <DropdownItem name="000" onClick={(e) => this.loadJson(e)}>Select data here</DropdownItem>
