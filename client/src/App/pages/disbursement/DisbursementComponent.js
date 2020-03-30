@@ -394,9 +394,23 @@ class disbursementComponent extends Component {
     loadJson = (event) => {
         event.preventDefault();
         switch (event.target.name) {
-            case "000": this.setState({ rq_body: data0.rq_body }); break;
-            case "001": this.setState({ rq_body: data1.rq_body }); break;
-            case "002": this.setState({ rq_body: data2.rq_body }); break;
+            case "000": this.setState({ disabled: "",rq_body: data0.rq_body });break;
+            case "001": {
+                if(data1.rq_body.payment_calculation_method === "minimum"){
+                    data1.rq_body.installment_amount = "";
+                    data1.rq_body.number_of_payment = "";
+                    this.setState({ disabled: "disabled", rq_body: data1.rq_body });
+                }
+                break;
+            }
+            case "002": {
+                if(data2.rq_body.payment_calculation_method === "minimum"){
+                    data2.rq_body.installment_amount = "";
+                    data2.rq_body.number_of_payment = "";
+                    this.setState({ disabled: "disabled", rq_body: data2.rq_body });
+                }
+                break;
+            }
         }
     };
 
