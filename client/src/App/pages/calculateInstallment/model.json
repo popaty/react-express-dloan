@@ -39,6 +39,22 @@
       "placeholder": "Enter payment unit",
       "value": "payment_unit",
       "root": null
+    },
+    {
+      "label": "Buffer Rate",
+      "type": "number",
+      "name": "buffer_rate",
+      "placeholder": "Enter buffer rate",
+      "value": "buffer_rate",
+      "root": null
+    },
+    {
+      "label": "Installment Rounding Digit",
+      "type": "number",
+      "name": "installment_rounding_digit",
+      "placeholder": "Enter installment rounding digit",
+      "value": "installment_rounding_digit",
+      "root": null
     }
   ]
 }

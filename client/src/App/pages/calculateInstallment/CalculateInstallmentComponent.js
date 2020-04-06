@@ -17,6 +17,8 @@ class installmentComponent extends Component {
                 interest_rate: 0,
                 payment_frequency: 0,
                 payment_unit: "",
+                buffer_rate:0,
+                installment_rounding_digit:0
             },
             loading: false
         };
@@ -32,8 +34,9 @@ class installmentComponent extends Component {
                 number_of_payment: 0,
                 interest_rate: data.interest_rate,
                 payment_frequency: data.payment_frequency,
-                payment_unit: data.payment_unit
-
+                payment_unit: data.payment_unit,
+                buffer_rate:0,
+                installment_rounding_digit:0
             };
             this.setState({ rq_body: body });
         } else {
@@ -55,7 +58,6 @@ class installmentComponent extends Component {
         //clone state for use in omit function.
         let body = cloneDeep(this.state);
         const request = utility.omit(body);
-        //console.log(request)
         setTimeout(() => {
             this.setState({ loading: false });
             this.postList(request);
