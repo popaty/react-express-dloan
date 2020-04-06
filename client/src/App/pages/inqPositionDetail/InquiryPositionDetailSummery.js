@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Col, Table} from 'reactstrap';
+import React, { Component } from 'react';
+import { Col, Table } from 'reactstrap';
 import DynamicHeader from '../Header.js';
 
 class InquiryPositionDetailSummery extends Component {
@@ -11,6 +11,7 @@ class InquiryPositionDetailSummery extends Component {
     dynamicResponse = (data) => {
         let table = [];
         let children = [];
+        let purple = "#cf92ff";
         // eslint-disable-next-line
         for (let key in data) {
             if (data.hasOwnProperty(key)) {
@@ -27,28 +28,38 @@ class InquiryPositionDetailSummery extends Component {
                                 </tr>)
                             } else {
                                 if (subdata === "available_balance" ||
-                                subdata === "unpaid_accrued_interest_amount" || subdata === "interest_rate") {
+                                    subdata === "unpaid_accrued_interest_amount" || subdata === "interest_rate") {
                                     obj.push(<tr class="text-primary">
                                         <td>{subdata}</td>
                                         <td>{data[key][subdata]}</td>
                                     </tr>);
-                                } else if (subdata === "balance" || subdata === "unpaid_principal_amount"){
-                                    if(key === "bills"){
-                                        obj.push(<tr>
+                                } else {
+                                    if (subdata === "balance" || subdata === "unpaid_principal_amount") {
+                                        // if (key === "bills") {
+                                        //     obj.push(<tr>
+                                        //         <td>{subdata}</td>
+                                        //         <td>{data[key][subdata]}</td>
+                                        //     </tr>);
+                                        // } else {
+                                        obj.push(<tr class="text-success">
                                             <td>{subdata}</td>
                                             <td>{data[key][subdata]}</td>
                                         </tr>);
-                                    }else{
-                                        obj.push(<tr class="text-success">
-                                        <td>{subdata}</td>
-                                        <td>{data[key][subdata]}</td>
-                                        </tr>);
+                                        // }
+                                    } else {
+                                        if (subdata === "total_unpaid_penalty_amount" || subdata === "total_unpaid_interest_amount" || 
+                                        subdata === "total_unpaid_principal_amount" || subdata === "total_bill_unpaid_amount") {
+                                            obj.push(<tr style={{ color: purple }}>
+                                                <td>{subdata}</td>
+                                                <td>{data[key][subdata]}</td>
+                                            </tr>);
+                                        } else {
+                                            obj.push(<tr>
+                                                <td>{subdata}</td>
+                                                <td>{data[key][subdata]}</td>
+                                            </tr>);
+                                        }
                                     }
-                                } else {
-                                    obj.push(<tr>
-                                        <td>{subdata}</td>
-                                        <td>{data[key][subdata]}</td>
-                                    </tr>);
                                 }
                             }
                         }
@@ -58,10 +69,32 @@ class InquiryPositionDetailSummery extends Component {
                         <td><Table borderless>{obj}</Table></td>
                     </tr>);
                 } else {
-                    children.push(<tr>
-                        <td>{key}</td>
-                        <td>{data[key]}</td>
-                    </tr>);
+                    if (typeof data[key] === "boolean") {
+                        let catchup = String(data[key]);
+                        if (key === "is_closed") {
+                            children.push(<tr style={{ color: purple }}>
+                                <td>{key}</td>
+                                <td>{catchup}</td>
+                            </tr>)
+                        } else {
+                            children.push(<tr>
+                                <td>{key}</td>
+                                <td>{catchup}</td>
+                            </tr>)
+                        }
+                    } else {
+                        if (key === "closed_date") {
+                            children.push(<tr style={{ color: purple }}>
+                                <td>{key}</td>
+                                <td>{data[key]}</td>
+                            </tr>);
+                        } else {
+                            children.push(<tr>
+                                <td>{key}</td>
+                                <td>{data[key]}</td>
+                            </tr>);
+                        }
+                    }
                 }
             }
         }
@@ -74,9 +107,9 @@ class InquiryPositionDetailSummery extends Component {
         //console.log(data);
         return (
             <div className="App">
-                <DynamicHeader/>
+                <DynamicHeader />
                 <h2>Form Data Inquiry Position Detail</h2>
-                <Col md={{size: 6, offset: 3}}>
+                <Col md={{ size: 6, offset: 3 }}>
                     {this.dynamicResponse(data)}
                 </Col>
                 <br />
