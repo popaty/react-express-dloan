@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Button, Col, Table} from 'reactstrap';
+import React, { Component } from 'react';
+import { Button, Col, Table } from 'reactstrap';
 import DynamicHeader from '../Header.js';
 
 class InquiryLoanAccountSummery extends Component {
@@ -27,6 +27,7 @@ class InquiryLoanAccountSummery extends Component {
     dynamicResponse = (data) => {
         let table = [];
         let children = [];
+        let purple = "#cf92ff";
         // eslint-disable-next-line
         for (let key in data) {
             if (data.hasOwnProperty(key)) {
@@ -37,10 +38,17 @@ class InquiryLoanAccountSummery extends Component {
                         if (data[key].hasOwnProperty(subdata)) {
                             if (typeof data[key][subdata] === "boolean") {
                                 let catchup = String(data[key][subdata]);
-                                obj.push(<tr>
-                                    <td>{subdata}</td>
-                                    <td>{catchup}</td>
-                                </tr>)
+                                if (subdata === "is_freeze") {
+                                    obj.push(<tr style={{ color: purple }}>
+                                        <td>{subdata}</td>
+                                        <td>{catchup}</td>
+                                    </tr>)
+                                } else {
+                                    obj.push(<tr>
+                                        <td>{subdata}</td>
+                                        <td>{catchup}</td>
+                                    </tr>)
+                                }
                             } else {
                                 if (subdata === "balance" || subdata === "available_balance") {
                                     obj.push(<tr class="text-primary">
@@ -48,10 +56,26 @@ class InquiryLoanAccountSummery extends Component {
                                         <td>{data[key][subdata]}</td>
                                     </tr>);
                                 } else {
-                                    obj.push(<tr>
-                                        <td>{subdata}</td>
-                                        <td>{data[key][subdata]}</td>
-                                    </tr>);
+                                    if ((subdata === "oldest_stmt_due_date" )|| (subdata === "total_unpaid_penalty_amount" )||
+                                    (subdata === "total_unpaid_interest_amount") || (subdata === "total_unpaid_principal_amount")
+                                    ||(subdata === "total_bill_unpaid_amount")) {
+                                        if(key === "bills"){
+                                            obj.push(<tr style={{ color: purple }}>
+                                                <td>{subdata}</td>
+                                                <td>{data[key][subdata]}</td>
+                                            </tr>);
+                                        }else{
+                                            obj.push(<tr>
+                                                <td>{subdata}</td>
+                                                <td>{data[key][subdata]}</td>
+                                            </tr>);
+                                        }
+                                    } else {
+                                        obj.push(<tr>
+                                            <td>{subdata}</td>
+                                            <td>{data[key][subdata]}</td>
+                                        </tr>);
+                                    }
                                 }
                             }
                         }
@@ -78,9 +102,9 @@ class InquiryLoanAccountSummery extends Component {
         //console.log(data);
         return (
             <div className="App">
-                <DynamicHeader/>
+                <DynamicHeader />
                 <h2>Form Data Inquiry Account</h2>
-                <Col md={{size: 6, offset: 3}}>
+                <Col md={{ size: 6, offset: 3 }}>
                     {this.dynamicResponse(data)}
                 </Col>
                 <Button color="success" onClick={InquiryLoanAccountSummery.openInstallment}>Calculate Installment

@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Button, Container, Col, Form, FormGroup, Input, Label, Row} from 'reactstrap';
+import React, { Component } from 'react';
+import { Button, Container, Col, Form, FormGroup, Input, Label, Row } from 'reactstrap';
 import DynamicHeader from '../Header.js';
 import inputModel from './model.json';
 import utility from '../Utility.js';
@@ -15,8 +15,8 @@ class InquiryLoanAccountComponent extends Component {
     }
 
     Clicked(event) {
-       event.preventDefault();
-        //console.log(this.state);
+        event.preventDefault();
+        console.log(this.state);
         fetch('/api/inqLoanAccount/' + this.state.account_number, {}).then(response => response.json())
         .then(data => {
             if (data.rs_body) {
@@ -32,29 +32,29 @@ class InquiryLoanAccountComponent extends Component {
     };
 
     handleChange(event) {
-        this.setState({[event.target.name]: event.target.type === "number" ? Number(event.target.value) : event.target.value});
+        this.setState({ [event.target.name]: event.target.type === "number" ? Number(event.target.value) : event.target.value });
     };
 
     FormInputData = () => {
         return inputModel.model.map(item => {
-                return (
-                    <FormGroup>
-                        <Label>{item.label}</Label>
-                        <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                               value={this.state[item.value]} onChange={this.handleChange}/>
-                    </FormGroup>
-                );
+            return (
+                <FormGroup>
+                    <Label>{item.label}</Label>
+                    <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+                        value={this.state[item.value]} onChange={this.handleChange} />
+                </FormGroup>
+            );
         });
     };
 
     render() {
         return (
             <div>
-                <DynamicHeader/>
+                <DynamicHeader />
                 <h2>Form Input Inquiry Account</h2>
                 <Container>
                     <Row>
-                        <Col md={{size: 4, offset: 4}}>
+                        <Col md={{ size: 4, offset: 4 }}>
                             <Form onSubmit={this.Clicked}>
                                 {this.FormInputData()}
                                 <div class="text-center">
