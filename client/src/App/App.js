@@ -45,6 +45,9 @@ import inquiryPenaltyReconciliationComponent from './pages/Reconciliation/Inquir
 
 import inquiryGLReconciliationComponent from './pages/Reconciliation/InquiryGLReconciliation/viewInquiryGLReconciliationComponent';
 
+import calculateInstallmentAmountOfSpecificComponent from './pages/calculateInstallmentOfSpecific/viewCalculateInstallmentAmountOfSpecificComponent';
+import calculateInstallmentAmountOfSpecificSummery from './pages/calculateInstallmentOfSpecific/viewCalculateInstallmentAmountOfSpecificSummary';
+
 class App extends Component {
     render() {
         const App = () => (
@@ -92,6 +95,9 @@ class App extends Component {
                     <Route path='/iprComponent' component={inquiryPenaltyReconciliationComponent}/>
 
                     <Route path='/iglComponent' component={inquiryGLReconciliationComponent}/>
+
+                    <Route path='/ciaospComponent' component={calculateInstallmentAmountOfSpecificComponent}/>
+                    <Route path='/ciaospSummery' component={calculateInstallmentAmountOfSpecificSummery}/>
 
                 </Switch>
             </div>

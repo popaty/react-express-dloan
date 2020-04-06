@@ -279,6 +279,21 @@ app.get("/api/inquiryGL/:acDate", (req, res) => {
         });
 });
 
+//[POST] Calculate Installment Amount of Specific Product
+app.post("/api/calculateInstallmentOfSpecific", (req, res) => {
+    console.log("Calculate Installment Amount of Specific Product");
+    let header = headers.get_headers();
+    let url = properties.get("calculateInstallmentOfSpecific.url");
+    api_helper_post.API_call_post(url, header, req.body)
+        .then(response => {
+            res.json(response);
+            console.log("Finished Calculate Installment Amount of Specific Product");
+        })
+        .catch(error => {
+            res.send(error)
+        });
+});
+
 // Handles any requests that don"t match the ones above
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname + "/index.html"));

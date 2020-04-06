@@ -39,6 +39,9 @@ const header = (props) => {
                         <DropdownItem href="/rpmComponent">
                             Repayment
                         </DropdownItem>
+                        <DropdownItem href="/ciaospComponent">
+                            Calculate Installment Amount of Specific Product
+                        </DropdownItem>
                     </DropdownMenu>
                 </UncontrolledDropdown>
                 &emsp;
