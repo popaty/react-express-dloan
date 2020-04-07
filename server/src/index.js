@@ -294,6 +294,23 @@ app.post("/api/calculateInstallmentOfSpecific", (req, res) => {
         });
 });
 
+
+//[POST] Pre-Disbursement
+app.post("/api/preDisbursement", (req, res) => {
+    console.log("Pre-Disbursement");
+    let header = headers.get_headers();
+    let url = properties.get("preDisbursement.url");
+    api_helper_post.API_call_post(url, header, req.body)
+        .then(response => {
+            res.json(response);
+            console.log("Finished Pre-Disbursement");
+        })
+        .catch(error => {
+            res.send(error)
+        });
+});
+
+
 // Handles any requests that don"t match the ones above
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname + "/index.html"));

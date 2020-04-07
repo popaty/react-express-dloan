@@ -1,0 +1,19 @@
+{
+    "rq_body": {
+        "account_number": 0,
+        "disbursement_amount": 0,
+        "effective_date": "",
+        "channel_post_date": "",
+        "currency_code": "THB",
+        "user_id": "",
+        "service_branch": 0,
+        "clearing_and_settlement_key": "CBS",
+        "interest_index": "",
+        "interest_spread": 0,
+        "first_payment_date": "",
+        "number_of_payment": 0,
+        "installment_amount": 0,
+        "payment_calculation_method": "installment"
+    }
+}
+

@@ -48,6 +48,10 @@ import inquiryGLReconciliationComponent from './pages/Reconciliation/InquiryGLRe
 import calculateInstallmentAmountOfSpecificComponent from './pages/calculateInstallmentOfSpecific/viewCalculateInstallmentAmountOfSpecificComponent';
 import calculateInstallmentAmountOfSpecificSummery from './pages/calculateInstallmentOfSpecific/viewCalculateInstallmentAmountOfSpecificSummary';
 
+import preDisbursementComponent from './pages/pre-disbursement/viewPreDisbursementComponent'
+import preDisbursementSummary from './pages/pre-disbursement/viewPreDisbursementSummary'
+
+
 class App extends Component {
     render() {
         const App = () => (
@@ -98,6 +102,9 @@ class App extends Component {
 
                     <Route path='/ciaospComponent' component={calculateInstallmentAmountOfSpecificComponent}/>
                     <Route path='/ciaospSummery' component={calculateInstallmentAmountOfSpecificSummery}/>
+
+                    <Route path='/pdComponent' component={preDisbursementComponent}/>
+                    <Route path='/pdSummary' component={preDisbursementSummary}/>
 
                 </Switch>
             </div>
