@@ -9,7 +9,7 @@
     "service_branch": 33,
     "clearing_and_settlement_key": "CBS",
     "interest_index": "FIXED",
-    "interest_spread": "0",
+    "interest_spread": 0,
     "first_payment_date": "2020-03-09",
     "number_of_payment": 12,
     "installment_amount": 1833.59,

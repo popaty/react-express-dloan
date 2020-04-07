@@ -23,20 +23,20 @@ class disbursementComponent extends Component {
         super(props);
         this.state = {
             rq_body: {
-                account_number: "",
+                account_number: 0,
                 disbursement_amount: 0,
                 effective_date: "",
                 channel_post_date: "",
                 currency_code: "THB",
                 user_id: "",
                 service_branch: 0,
-                clearing_and_settlement_key: "",
+                clearing_and_settlement_key: "CBS",
                 number_of_payment: 0,
                 installment_amount: 0,
                 interest_index: "",
                 interest_spread: 0,
                 first_payment_date: "",
-                payment_calculation_method: ""
+                payment_calculation_method: "installment"
 
                 // other_properties: {
                 //     interest_override_reason: "",
@@ -223,17 +223,6 @@ class disbursementComponent extends Component {
                         + "error type : " + data.errors.map(error => error.error_type));
                 }
             }).catch(error => console.log(error))
-
-        //mock data
-        // let data =  {"rs_body":{"account_number":600000000067,"account_sequence":1,"balance":1000.00}}
-        // if (data.rs_body) {
-        //         sessionStorage.setItem("response_disbursement",JSON.stringify(data));
-        //         window.open('/dbmSummary', '_self');
-        // } else {
-        //     alert("error code : " + data.errors.map(error => error.error_code) + "\n"
-        //     + "error desc : " + data.errors.map(error => error.error_desc) + "\n"
-        //     + "error type : " + data.errors.map(error => error.error_type));
-        // }
     };
 
     handleOpenModal() {
