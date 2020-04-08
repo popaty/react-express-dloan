@@ -34,7 +34,7 @@ class InquiryPositionDetailSummery extends Component {
                                         <td>{data[key][subdata]}</td>
                                     </tr>);
                                 } else {
-                                    if (subdata === "balance" || subdata === "unpaid_principal_amount") {
+                                    if (subdata === "balance" ){//|| subdata === "unpaid_principal_amount") {
                                         // if (key === "bills") {
                                         //     obj.push(<tr>
                                         //         <td>{subdata}</td>
@@ -47,8 +47,8 @@ class InquiryPositionDetailSummery extends Component {
                                         </tr>);
                                         // }
                                     } else {
-                                        if (subdata === "total_unpaid_penalty_amount" || subdata === "total_unpaid_interest_amount" || 
-                                        subdata === "total_unpaid_principal_amount" || subdata === "total_bill_unpaid_amount") {
+                                        if (subdata === "unpaid_penalty_amount" || subdata === "unpaid_interest_amount" || 
+                                        subdata === "unpaid_principal_amount" || subdata === "total_bill_unpaid_amount") {
                                             obj.push(<tr style={{ color: purple }}>
                                                 <td>{subdata}</td>
                                                 <td>{data[key][subdata]}</td>
