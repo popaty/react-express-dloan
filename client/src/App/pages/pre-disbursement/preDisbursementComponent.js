@@ -100,8 +100,8 @@ class PreDisbursementComponent extends Component {
         }).then(response => response.json())
             .then(data => {
                 if (data.rs_body) {
-                    utility.clearSessionStorage("response_preDisbursement");
-                    sessionStorage.setItem("response_preDisbursement", JSON.stringify(data));
+                    // utility.clearSessionStorage("response_preDisbursement");
+                    // sessionStorage.setItem("response_preDisbursement", JSON.stringify(data));
                     window.open('/pdSummary', '_self');
                 } else {
                     alert("error code : " + data.errors.map(error => error.error_code) + "\n"
