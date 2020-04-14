@@ -1,28 +1,24 @@
 {
     "rq_body": {
-      "customer_number": "12345",
-      "customer_type": "0702",
-      "account_name": "นางแก้ว ตา",
-      "credit_limit": 200000,
-      "credit_term_number": 12,
-      "credit_term_unit": "M",
-      "product_name": "7200120090002",
-      "disbursement_account": "1111111111",
-      "deduction_account": "9999999999",
-      "account_branch": 1,
-      "response_unit": 1,
-      "application_id": "APP0001",
-      "user_id":"",
-      "service_branch":0,
-      "interest": {
-        "interest_index": "FIXED",
-        "interest_spread": 18
-      },
-      "payment": {
-        "payment_frequency": 1,
-        "payment_unit": "M",
-        "payment_date": 28,
-        "payment_calculation_method": "installment"
-      }
+      "customer_number": "100000000001",
+      "customer_type": "1010",
+      "product_name": "GSBMyCredits",
+      "account_branch": 150,
+      "account_name": "นางสาวกชพร สุ่มทรัพย์",
+      "account_name_en": "Kotchaporn Soomsab",
+      "credit_limit": 90000,
+      "term": 999,
+      "payment_type": "1",
+      "payment_day": "31",
+      "payment_calculation_method": "minimum",
+      "interest_rate": 3.75,
+      "is_auto_payment": true,
+      "disbursement_target_account": "20000021475",
+      "repayment_source_account": "20000021475",
+      "loan_application_id": "190402134512015001000000003828",
+      "fee_amount": 0,
+      "response_unit": 150,
+      "user_id": "",
+      "service_branch": 0
     }
   }

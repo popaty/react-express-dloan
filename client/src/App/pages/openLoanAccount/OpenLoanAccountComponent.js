@@ -21,10 +21,6 @@ import {
 
 import v000 from './v000.json';
 import v001 from './v001.json';
-import v002 from './v002.json';
-import v003 from './v003.json';
-import v004 from './v004.json';
-import v005 from './v005.json';
 import inputModel from './model.json';
 
 const cloneDeep = require('lodash.clonedeep');
@@ -36,28 +32,24 @@ class OpenLoanAccountComponent extends Component {
             rq_body: {
                 customer_number: "",
                 customer_type: "",
-                account_name: "",
-                credit_limit: 0,
-                credit_term_number: 0,
-                credit_term_unit: "",
                 product_name: "",
-                disbursement_account: "",
-                deduction_account: "",
                 account_branch: 0,
+                account_name: "",
+                account_name_en: "",
+                credit_limit: 0,
+                term: 0,
+                payment_type: "",
+                payment_day: 0,
+                payment_calculation_method: "minimum",
+                interest_rate: 0,
+                is_auto_payment: false,
+                disbursement_target_account: "",
+                repayment_source_account: "",
+                loan_application_id: "",
+                fee_amount:0,
                 response_unit: 0,
-                application_id: "",
-                user_id:"",
-                service_branch:0,
-                interest: {
-                    interest_index: "",
-                    interest_spread: 0
-                },
-                payment: {
-                    payment_frequency: 0,
-                    payment_unit: "",
-                    payment_date: 0,
-                    payment_calculation_method: ""
-                }
+                user_id: "",
+                service_branch: 0  
             },
             loading: false
         };
@@ -67,20 +59,12 @@ class OpenLoanAccountComponent extends Component {
     };
 
     handleChange(event) {
-        //this.setState({[event.target.name]:event.target.value});
         const { rq_body } = { ...this.state };
         const currentState = rq_body;
-        const interest = currentState.interest;
-        const payment = currentState.payment;
 
-        if (event.target.name === "interest_index" || event.target.name === "interest_spread") {
-            interest[event.target.name] = event.target.type === "number" ? Number(event.target.value) : event.target.value;
-        } else if (event.target.name === "payment_frequency" || event.target.name === "payment_unit" ||
-            event.target.name === "payment_date" || event.target.name === "billing_offset_day"
-            || event.target.name === "payment_calculation_method") {
-
-            payment[event.target.name] = event.target.type === "number" ? Number(event.target.value) : event.target.value;
-        } else {
+        if(event.target.name === "is_auto_payment"){
+            currentState[event.target.name] = Boolean(event.target.value);
+        }else{
             currentState[event.target.name] = event.target.type === "number" ? Number(event.target.value) : event.target.value;
         }
         this.setState({ rq_body: currentState });
@@ -100,13 +84,10 @@ class OpenLoanAccountComponent extends Component {
     };
 
     loadJson(event) {
+        event.preventDefault();
         switch(event.target.name){
             case "000" : this.setState(v000); break;
             case "001" : this.setState(v001); break;
-            case "002" : this.setState(v002); break;
-            case "003" : this.setState(v003); break;
-            case "004" : this.setState(v004); break;
-            case "005" : this.setState(v005); break;
         }
     };
 
@@ -155,66 +136,12 @@ class OpenLoanAccountComponent extends Component {
             count++;
             if (item.root === null) {
                 if (count % 2 !== 0) {
-                    columnLeft.push(<FormGroup>
-                        <Label>{item.label}</Label>
-                        <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                            value={this.state.rq_body[item.value]} onChange={this.handleChange} />
-                    </FormGroup>
-                    )
-                } else {
-                    columnRight.push(<FormGroup>
-                        <Label>{item.label}</Label>
-                        <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                            value={this.state.rq_body[item.value]} onChange={this.handleChange} />
-                    </FormGroup>
-                    )
-                }
-            }
-        })
-        return (<Row><Col md={{ size: 3, offset: 3 }}>{columnLeft}</Col><Col md={{ size: 3 }}>{columnRight}</Col></Row>);
-    };
-
-    FormInputRow2 = () => {
-        let count = 0;
-        let columnLeft = [];
-        let columnRight = [];
-        inputModel.model.map(item => {
-            count++;
-            if (item.root !== null && item.root === "interest") {
-                if (count % 2 !== 0) {
-                    columnLeft.push(<FormGroup>
-                        <Label>{item.label}</Label>
-                        <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                            value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
-                    </FormGroup>
-                    )
-                } else {
-                    columnRight.push(<FormGroup>
-                        <Label>{item.label}</Label>
-                        <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                            value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
-                    </FormGroup>
-                    )
-                }
-            }
-        })
-        return (<Row><Col md={{ size: 3, offset: 3 }}>{columnLeft}</Col><Col md={{ size: 3 }}>{columnRight}</Col></Row>);
-    };
-
-    FormInputRow3 = () => {
-        let count = 0;
-        let columnLeft = [];
-        let columnRight = [];
-        inputModel.model.map(item => {
-            count++;
-            if (item.root !== null && item.root === "payment") {
-                if (count % 2 !== 0) {
                     if (item.type === "select") {
                         columnLeft.push(
                             <FormGroup>
                                 <Label>{item.label}</Label>
                                 <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                                    value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} >
+                                    value={this.state.rq_body[item.value]} onChange={this.handleChange} >
                                     {item.items.map(element => <option>{element}</option>)}
                                 </Input>
                             </FormGroup>
@@ -223,7 +150,7 @@ class OpenLoanAccountComponent extends Component {
                         columnLeft.push(<FormGroup>
                             <Label>{item.label}</Label>
                             <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                                value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
+                                value={this.state.rq_body[item.value]} onChange={this.handleChange} />
                         </FormGroup>
                         )
                     }
@@ -231,9 +158,9 @@ class OpenLoanAccountComponent extends Component {
                     columnRight.push(<FormGroup>
                         <Label>{item.label}</Label>
                         <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                            value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
+                            value={this.state.rq_body[item.value]} onChange={this.handleChange} />
                     </FormGroup>
-                    );
+                    )
                 }
             }
         })
@@ -246,32 +173,18 @@ class OpenLoanAccountComponent extends Component {
             <div>
                 <DynamicHeader />
                 <Container>
-                    <h2>Form Input Open Account</h2>
+                    <h2>Form Input Open My Credits Loan Account</h2>
                     <UncontrolledDropdown align="center">
                         <DropdownToggle caret color="secondary">Select validation here &nbsp;</DropdownToggle>
                         <DropdownMenu>
                             <DropdownItem name="000" onClick={this.loadJson}>Select validation here</DropdownItem>
                             <DropdownItem name="001" onClick={this.loadJson}>Input body Open Account Validation
                                 001</DropdownItem>
-                            <DropdownItem name="002" onClick={this.loadJson}>Input body Open Account Validation
-                                002</DropdownItem>
-                            <DropdownItem name="003" onClick={this.loadJson}>Input body Open Account Validation
-                                003</DropdownItem>
-                            <DropdownItem name="004" onClick={this.loadJson}>[DEMO1]Input body Open Account Validation
-                                004</DropdownItem>
-                            <DropdownItem name="005" onClick={this.loadJson}>[DEMO2]Input body Open Account Validation
-                                005</DropdownItem>
                         </DropdownMenu>
                     </UncontrolledDropdown>
                     <Form onSubmit={this.handleSubmit}>
 
                         {this.FormInputRow1()}
-                        <h4>Interest</h4>
-                        <hr />
-                        {this.FormInputRow2()}
-                        <h4>Payment</h4>
-                        <hr />
-                        {this.FormInputRow3()}
 
                         <div class="text-center">
                             <Button color="primary" type="submit" disabled={loading}>

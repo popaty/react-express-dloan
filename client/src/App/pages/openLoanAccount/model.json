@@ -17,59 +17,11 @@
       "root": null
     },
     {
-      "label": "Account name",
-      "type": "text",
-      "name": "account_name",
-      "placeholder": "Enter account name",
-      "value": "account_name",
-      "root": null
-    },
-    {
-      "label": "Credit limit",
-      "type": "number",
-      "name": "credit_limit",
-      "placeholder": "Enter credit limit",
-      "value": "credit_limit",
-      "root": null
-    },
-    {
-      "label": "Credit term number",
-      "type": "number",
-      "name": "credit_term_number",
-      "placeholder": "Enter credit term number",
-      "value": "credit_term_number",
-      "root": null
-    },
-    {
-      "label": "Credit term unit",
-      "type": "text",
-      "name": "credit_term_unit",
-      "placeholder": "Enter credit term unit",
-      "value": "credit_term_unit",
-      "root": null
-    },
-    {
       "label": "Product name",
       "type": "text",
       "name": "product_name",
       "placeholder": "Enter product name",
       "value": "product_name",
-      "root": null
-    },
-    {
-      "label": "Disbursement account",
-      "type": "text",
-      "name": "disbursement_account",
-      "placeholder": "Enter disbursement account",
-      "value": "disbursement_account",
-      "root": null
-    },
-    {
-      "label": "Deduction account",
-      "type": "text",
-      "name": "deduction_account",
-      "placeholder": "Enter deduction account",
-      "value": "deduction_account",
       "root": null
     },
     {
@@ -81,52 +33,52 @@
       "root": null
     },
     {
-      "label": "Response unit",
-      "type": "number",
-      "name": "response_unit",
-      "placeholder": "Enter response unit",
-      "value": "response_unit",
-      "root": null
-    },
-    {
-      "label": "Application id",
+      "label": "Account name",
       "type": "text",
-      "name": "application_id",
-      "placeholder": "Enter application id",
-      "value": "application_id",
+      "name": "account_name",
+      "placeholder": "Enter account name",
+      "value": "account_name",
       "root": null
     },
     {
-      "label": "User ID",
+      "label": "Account name en",
       "type": "text",
-      "name": "user_id",
-      "placeholder": "Enter user id",
-      "value": "user_id",
+      "name": "account_name_en",
+      "placeholder": "Enter Account name en",
+      "value": "account_name_en",
       "root": null
     },
     {
-      "label": "Service Branch",
+      "label": "Credit limit",
       "type": "number",
-      "name": "service_branch",
-      "placeholder": "Enter service branch",
-      "value": "service_branch",
+      "name": "credit_limit",
+      "placeholder": "Enter credit limit",
+      "value": "credit_limit",
       "root": null
     },
     {
-      "label": "Interest index",
+      "label": "Term",
+      "type": "number",
+      "name": "term",
+      "placeholder": "Enter term",
+      "value": "term",
+      "root": null
+    },
+    {
+      "label": "Payment type",
       "type": "text",
-      "name": "interest_index",
-      "placeholder": "Enter interest index",
-      "value": "interest_index",
-      "root": "interest"
+      "name": "payment_type",
+      "placeholder": "Enter payment type",
+      "value": "payment_type",
+      "root": null
     },
     {
-      "label": "Interest spread",
+      "label": "Payment day",
       "type": "number",
-      "name": "interest_spread",
-      "placeholder": "Enter interest_spread",
-      "value": "interest_spread",
-      "root": "interest"
+      "name": "payment_day",
+      "placeholder": "Enter Payment day",
+      "value": "payment_day",
+      "root": null
     },
     {
       "label": "Payment Calculation Method",
@@ -135,31 +87,80 @@
       "name": "payment_calculation_method",
       "placeholder": "Enter Payment Calculation Method",
       "value": "payment_calculation_method",
-      "root": "payment"
+      "root": null
     },
     {
-      "label": "Payment frequency",
+      "label": "Interest rate",
       "type": "number",
-      "name": "payment_frequency",
-      "placeholder": "Enter payment frequency",
-      "value": "payment_frequency",
-      "root": "payment"
+      "name": "interest_rate",
+      "placeholder": "Enter interest rate",
+      "value": "interest_rate",
+      "root": null
     },
     {
-      "label": "Payment unit",
+      "label": "Is auto payment",
+      "type": "select",
+      "items": ["false","true"],
+      "name": "is_auto_payment",
+      "placeholder": "Enter is auto payment",
+      "value": "is_auto_payment",
+      "root": null
+    },
+    {
+      "label": "Disbursement target account",
       "type": "text",
-      "name": "payment_unit",
-      "placeholder": "Enter payment unit",
-      "value": "payment_unit",
-      "root": "payment"
+      "name": "disbursement_target_account",
+      "placeholder": "Enter disbursement target account",
+      "value": "disbursement_target_account",
+      "root": null
     },
     {
-      "label": "Payment date",
+      "label": "Repayment source account",
+      "type": "text",
+      "name": "repayment_source_account",
+      "placeholder": "Enter repayment source account",
+      "value": "repayment_source_account",
+      "root": null
+    },
+    {
+      "label": "Loan application id",
+      "type": "text",
+      "name": "loan_application_id",
+      "placeholder": "Enter loan application id",
+      "value": "loan_application_id",
+      "root": null
+    },
+    {
+      "label": "Fee amount",
       "type": "number",
-      "name": "payment_date",
-      "placeholder": "Enter payment date",
-      "value": "payment_date",
-      "root": "payment"
+      "name": "fee_amount",
+      "placeholder": "Enter fee amount",
+      "value": "fee_amount",
+      "root": null
+    },
+    {
+      "label": "Response unit",
+      "type": "number",
+      "name": "response_unit",
+      "placeholder": "Enter response unit",
+      "value": "response_unit",
+      "root": null
+    },
+    {
+      "label": "User id",
+      "type": "text",
+      "name": "user_id",
+      "placeholder": "Enter user id",
+      "value": "user_id",
+      "root": null
+    },
+    {
+      "label": "Service branch",
+      "type": "number",
+      "name": "service_branch",
+      "placeholder": "Enter service branch",
+      "value": "service_branch",
+      "root": null
     }
   ]
 }

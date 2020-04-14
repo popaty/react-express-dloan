@@ -2,7 +2,7 @@
   "model": [
     {
       "label": "Account Number",
-      "type": "text",
+      "type": "number",
       "name": "account_number",
       "placeholder": "Enter account number",
       "value": "account_number",
@@ -46,6 +46,14 @@
       "name": "service_branch",
       "placeholder": "Enter service branch",
       "value": "service_branch",
+      "root": null
+    },
+    {
+      "label": "User id",
+      "type": "text",
+      "name": "user_id",
+      "placeholder": "Enter user id",
+      "value": "user_id",
       "root": null
     },
     {

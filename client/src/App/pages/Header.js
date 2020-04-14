@@ -17,10 +17,10 @@ const header = (props) => {
                     </DropdownToggle>
                     <DropdownMenu right>
                         <DropdownItem href="/olaComponent">
-                            Open Loan Account
+                        Open My Credits Loan Account
                         </DropdownItem>
                         <DropdownItem href="/ilaComponent">
-                            Inquiry Loan Account
+                        Inquiry My Credits Loan Account
                         </DropdownItem>
                     </DropdownMenu>
                 </UncontrolledDropdown>

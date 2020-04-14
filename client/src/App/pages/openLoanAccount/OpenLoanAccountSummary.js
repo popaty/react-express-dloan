@@ -124,11 +124,11 @@ class OpenLoanAccountSummary extends Component {
             <div className="App">
                 <DynamicHeader/>
                 <Form>
-                    <h2>Form Data Open Account</h2>
+                    <h2>Form Data Open My Credits Loan Account</h2>
                     <Col md={{size: 6, offset: 3}}>
                         {this.dynamicResponse(data.rs_body)}
                     </Col>
-                    <Button color="success" onClick={this.CallInquiryLoanAccount}>Inquiry Account Details : 
+                    <Button color="success" onClick={this.CallInquiryLoanAccount}> Inquiry My Credits Loan Account Details : 
                     {account}</Button>
                  </Form>
              </div>

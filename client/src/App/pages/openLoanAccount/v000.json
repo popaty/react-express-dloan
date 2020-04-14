@@ -2,28 +2,23 @@
   "rq_body": {
     "customer_number": "",
     "customer_type": "",
-    "account_name": "",
-    "credit_limit": 0,
-    "credit_term_number": 0,
-    "credit_term_unit": "",
     "product_name": "",
-    "disbursement_account": "",
-    "deduction_account": "",
     "account_branch": 0,
+    "account_name": "",
+    "account_name_en": "",
+    "credit_limit": 0,
+    "term": 0,
+    "payment_type": "",
+    "payment_day": "",
+    "payment_calculation_method": "minimum",
+    "interest_rate": 0,
+    "is_auto_payment": false,
+    "disbursement_target_account": "",
+    "repayment_source_account": "",
+    "loan_application_id": "",
+    "fee_amount": 0,
     "response_unit": 0,
-    "application_id": "",
-    "user_id":"",
-    "service_branch":0,
-    "interest": {
-      "interest_index": "",
-      "interest_spread": 0
-    },
-    "payment": {
-      "payment_frequency": 0,
-      "payment_unit": "",
-      "payment_date": 0,
-      "billing_offset_day": 0,
-      "payment_calculation_method": "installment"
-    }
+    "user_id": "",
+    "service_branch": 0
   }
 }

@@ -12,13 +12,14 @@ class RepaymentComponent extends Component {
         super(props);
         this.state = {
             rq_body: {
-                account_number: "",
+                account_number: 0,
                 transaction_amount: 0,
                 effective_date: "",
                 channel_post_date: "",
                 currency_code: "THB",
+                user_id:"",
                 service_branch: 0,
-                clearing_and_settlement_key: "",
+                clearing_and_settlement_key: "CBS",
             },
             loading: false
         };
@@ -35,6 +36,7 @@ class RepaymentComponent extends Component {
                 channel_post_date: "",
                 currency_code: "THB",
                 service_branch: 0,
+                user_id:"",
                 clearing_and_settlement_key: "CBS",
             }
             this.setState({rq_body: body});
@@ -42,7 +44,6 @@ class RepaymentComponent extends Component {
     }
 
     handleChange(event) {
-        //this.setState({[event.target.name]:event.target.value});
         const {rq_body} = {...this.state};
         const currentState = rq_body;
         currentState[event.target.name] = event.target.type === "number" ? Number(event.target.value) : event.target.value;

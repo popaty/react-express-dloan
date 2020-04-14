@@ -16,7 +16,6 @@ import data2 from './data2.json';
 const cloneDeep = require('lodash.clonedeep');
 let installmentAmount = "";
 let numberOfPayment = "";
-let dataArray = [];
 
 class disbursementComponent extends Component {
     constructor(props) {
@@ -38,34 +37,23 @@ class disbursementComponent extends Component {
                 first_payment_date: "",
                 payment_calculation_method: "installment"
 
-                // other_properties: {
-                //     interest_override_reason: "",
-                //     campaign_name: "",
-                //     interest_schedule: ""
-                // }
             },
             loading: false,
             disabled: "",
-            openMyModal: false,
+            // openMyModal: false,
             date: "",
             interest_index: "FIXED",
             interest_spread: "",
             isFound: false,
-            //declare for used map in table
-            // interest_schedule_obj: []
 
         };
         this.handleChange = this.handleChange.bind(this);
-        this.handleChangeModal = this.handleChangeModal.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleOpenModal = this.handleOpenModal.bind(this);
-        // this.handleCloseModal = this.handleCloseModal.bind(this);
-        this.closeModal = this.closeModal.bind(this);
     };
 
     componentDidMount() {
         let disbursementAmount = 0;
-        let accountNumber = "";
+        let accountNumber = 0;
 
         if ((JSON.parse(sessionStorage.getItem("disburse_interest")))) {
             sessionStorage.removeItem("disburse_interest")
@@ -107,40 +95,13 @@ class disbursementComponent extends Component {
             number_of_payment: numberOfPayment,
             installment_amount: installmentAmount,
             payment_calculation_method: "installment",
-            // other_properties: {
-            //     interest_override_reason: "",
-            //     campaign_name: "",
-            //     interest_schedule: ""
-            // }
         };
         this.setState({ rq_body: body });
     };
 
-    handleChangeModal(event) {
-        if (event.target.name === "date") {
-            this.setState({ date: event.target.value });
-        } else if (event.target.name === "interest_index") {
-            this.setState({ interest_index: event.target.value })
-        } else if (event.target.name === "interest_spread") {
-            this.setState({ interest_spread: event.target.value });
-        }
-    }
-
     handleChange(event) {
-        //this.setState({[event.target.name]:event.target.value});
         const { rq_body } = { ...this.state };
         const currentState = rq_body;
-        // const properties = currentState.other_properties;
-        // const properties = currentState;
-        //field in other properties expect type string
-        // if (event.target.name === "interest_index" || event.target.name === "interest_spread"
-        //     || event.target.name === "first_payment_date" || event.target.name === "number_of_payment"
-        //     || event.target.name === "installment_amount" || event.target.name === "interest_override_reason"
-        //     || event.target.name === "campaign_name") {
-
-        //     properties[event.target.name] = event.target.value;
-
-        // } else 
         if (event.target.name === "payment_calculation_method") {
             //check drop down payment_calculation_method field
             currentState[event.target.name] = event.target.value;
@@ -164,24 +125,11 @@ class disbursementComponent extends Component {
         this.setState({ loading: true });
         //clone state for use in omit function.
         let body = cloneDeep(this.state);
-        // if (this.state.interest_schedule_obj.length !== 0) {
-        //     body.rq_body.other_properties.interest_schedule = JSON.stringify(this.state.interest_schedule_obj);
-        // }
-        // console.log("interest_schedule : "+body.rq_body.other_properties.interest_schedule);
-
-        // if(body.rq_body.other_properties.interest_index !== "" && body.rq_body.other_properties.interest_spread === ""){
-        //     body.rq_body.other_properties.interest_spread = 1;
-        // }
 
         if (body.rq_body.interest_index !== "" && body.rq_body.interest_spread === "") {
             body.rq_body.interest_spread = 1;
         }
-
         const request = utility.omit(body);
-
-        // if(body.rq_body.other_properties.interest_spread === 1){
-        //     body.rq_body.other_properties.interest_spread = "0";
-        // }
 
         if (body.rq_body.interest_spread === 1) {
             body.rq_body.interest_spread = "0";
@@ -194,15 +142,6 @@ class disbursementComponent extends Component {
     };
 
     postList = (request) => {
-
-        // let installmentAmtFloat = parseFloat(request.rq_body.installment_amount)
-        // let numberOfPmtInt = parseInt(request.rq_body.number_of_payment)
-        // let accountNumberInt = parseInt(request.rq_body.account_number)
-
-        // request.rq_body.installment_amount = installmentAmtFloat
-        // request.rq_body.number_of_payment = numberOfPmtInt
-        // request.rq_body.account_number = accountNumberInt
-
         console.log("myRequest : " + JSON.stringify(request));
         fetch('/api/disbursement', {
             method: 'POST',
@@ -224,27 +163,6 @@ class disbursementComponent extends Component {
                 }
             }).catch(error => console.log(error))
     };
-
-    handleOpenModal() {
-        this.setState({ openMyModal: true });
-    }
-
-    closeModal() {
-        this.setState({ openMyModal: false });
-    }
-
-    // handleCloseModal = (e) => {
-    //     e.preventDefault();
-    // this.setState({ openMyModal: false });
-    // this.setState({ isFound: true });
-    // let data = {
-    //     date: this.state.date,
-    //     interest_index: this.state.interest_index,
-    //     interest_spread: this.state.interest_spread
-    // };
-    // dataArray.push(data);
-    // this.setState({ interest_schedule_obj: dataArray });
-    // };
 
     FormInputRow1 = () => {
         let count = 0;
@@ -317,69 +235,6 @@ class disbursementComponent extends Component {
         return (<Row><Col md={{ size: 3, offset: 3 }}>{columnLeft}</Col><Col md={{ size: 3 }}>{columnRight}</Col></Row>);
     }
 
-    // FormInputRow2 = () => {
-    //     let count = 0;
-    //     let columnLeft = [];
-    //     let columnRight = [];
-    //     inputModel.model.map(item => {
-    //         count++;
-    //         if (item.root !== null && item.root === "other_properties") {
-    //             if (count % 2 !== 0) {
-    //                 if (item.type === "select") {
-    //                     columnLeft.push(
-    //                         <FormGroup>
-    //                             <Label>{item.label}</Label>
-    //                             <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-    //                                 value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} >
-    //                                 {item.items.map(element => <option>{element}</option>)}
-    //                             </Input>
-    //                         </FormGroup>
-    //                     );
-    //                 } else {
-    //                     if (item.name === "installment_amount") {
-    //                         columnLeft.push (
-    //                             <FormGroup>
-    //                                 <Label>{item.label}</Label>
-    //                                 <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-    //                                     value={this.state.rq_body[item.root][item.value]}
-    //                                     onChange={this.handleChange} disabled={this.state.disabled} />
-    //                             </FormGroup>
-    //                         )
-    //                     } else {
-    //                         columnLeft.push (
-    //                             <FormGroup>
-    //                                 <Label>{item.label}</Label>
-    //                                 <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-    //                                     value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
-    //                             </FormGroup>
-    //                         )
-    //                     }
-    //                 }
-    //             } else {
-    //                 if (item.name === "number_of_payment") {
-    //                     columnRight.push (
-    //                         <FormGroup>
-    //                             <Label>{item.label}</Label>
-    //                             <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-    //                                 value={this.state.rq_body[item.root][item.value]}
-    //                                 onChange={this.handleChange} disabled={this.state.disabled} />
-    //                         </FormGroup>
-    //                     )
-    //                 } else {
-    //                     columnRight.push (
-    //                         <FormGroup>
-    //                             <Label>{item.label}</Label>
-    //                             <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-    //                                 value={this.state.rq_body[item.root][item.value]} onChange={this.handleChange} />
-    //                         </FormGroup>
-    //                     )
-    //                 }
-    //             }
-    //         }
-    //     })
-    //     return (<Row><Col md={{ size: 3, offset: 3 }}>{columnLeft}</Col><Col md={{ size: 3 }}>{columnRight}</Col></Row>);
-    // }
-
     loadJson = (event) => {
         event.preventDefault();
         switch (event.target.name) {
@@ -405,7 +260,6 @@ class disbursementComponent extends Component {
 
     render() {
         const { loading } = this.state;
-        // let tempData = this.state.interest_schedule_obj;
         return (
             <div>
                 <DynamicHeader />
@@ -416,79 +270,11 @@ class disbursementComponent extends Component {
                         <DropdownMenu>
                             <DropdownItem name="000" onClick={(e) => this.loadJson(e)}>Select data here</DropdownItem>
                             <DropdownItem name="001" onClick={(e) => this.loadJson(e)}>First Model</DropdownItem>
-                            <DropdownItem name="002" onClick={(e) => this.loadJson(e)}>Second Model</DropdownItem>
-                            {/* <DropdownItem name="002" onClick={this.loadJson}>Input body data second </DropdownItem> */}
+                            <DropdownItem name="002" onClick={(e) => this.loadJson(e)}>Second Model</DropdownItem>                          
                         </DropdownMenu>
                     </UncontrolledDropdown>
                     <Form onSubmit={this.handleSubmit}>
                         {this.FormInputRow1()}
-                        {/*<h4>Other properties</h4>*/}
-                        {/*<hr />*/}
-                        {/*{this.FormInputRow2()}*/}
-                        {/*<Row>*/}
-                        {/*    <Col md={{ size: 6, offset: 3 }}>*/}
-                        {/*        <FormGroup>*/}
-                        {/*            <Label>Interest Schedule</Label>*/}
-                        {/*            <div>*/}
-                        {/*                <Button color="secondary" type="button" onClick={this.handleOpenModal}>Add*/}
-                        {/*                    Interest Schedule</Button>*/}
-                        {/*                <Modal isOpen={this.state.openMyModal}>*/}
-                        {/*                    <ModalHeader toggle={this.closeModal} >Interest Schedule</ModalHeader>*/}
-                        {/*                    <ModalBody>*/}
-                        {/*                        <FormGroup>*/}
-                        {/*                            <Label>Date</Label>*/}
-                        {/*                            <Input type="date" name="date" placeholder="date" step="any"*/}
-                        {/*                                value={this.state.date} onChange={this.handleChangeModal}>*/}
-                        {/*                            </Input>*/}
-                        {/*                            <Label>Interest Index</Label>*/}
-                        {/*                            <Input type="String" name="interest_index" placeholder="interest_index"*/}
-                        {/*                                step="any"*/}
-                        {/*                                value={this.state.interest_index}*/}
-                        {/*                                onChange={this.handleChangeModal}>*/}
-                        {/*                            </Input>*/}
-                        {/*                            <Label>Interest Spread</Label>*/}
-                        {/*                            <Input type="number" name="interest_spread"*/}
-                        {/*                                placeholder="interest_spread" step="any"*/}
-                        {/*                                value={this.state.interest_spread}*/}
-                        {/*                                onChange={this.handleChangeModal}>*/}
-                        {/*                            </Input>*/}
-                        {/*                            <div class="text-center">*/}
-                        {/*                                <Button color="primary" onClick={(e) => this.handleCloseModal(e)}>Add</Button>{' '}*/}
-                        {/*                                <Button color="secondary" onClick={this.closeModal}>close</Button>*/}
-                        {/*                            </div>*/}
-                        {/*                        </FormGroup>*/}
-                        {/*                    </ModalBody>*/}
-                        {/*                </Modal>*/}
-                        {/*            </div>*/}
-                        {/*        </FormGroup>*/}
-                        {/*    </Col>*/}
-                        {/*</Row>*/}
-                        {/*{this.state.isFound &&*/}
-                        {/*    <div>*/}
-                        {/*        <Table striped>*/}
-                        {/*            <tbody>*/}
-                        {/*                <tr>*/}
-                        {/*                    <th>No.</th>*/}
-                        {/*                    <th>Date</th>*/}
-                        {/*                    <th>Interest Index</th>*/}
-                        {/*                    <th>Interest Spread</th>*/}
-                        {/*                    <th></th>*/}
-                        {/*                </tr>*/}
-                        {/*                {tempData.map((item, index) => {*/}
-                        {/*                    return (*/}
-                        {/*                        <tr>*/}
-                        {/*                            <td>{index + 1}</td>*/}
-                        {/*                            <td>{item.date}</td>*/}
-                        {/*                            <td>{item.interest_index}</td>*/}
-                        {/*                            <td>{item.interest_spread}</td>*/}
-                        {/*                        </tr>*/}
-                        {/*                    )*/}
-                        {/*                }*/}
-                        {/*                )}*/}
-                        {/*            </tbody>*/}
-                        {/*        </Table>*/}
-                        {/*    </div>*/}
-                        {/*}*/}
                         <div class="text-center">
                             <Button color="primary" type="submit" disabled={loading}>
                                 {loading && (<SpinnerLoader />)}

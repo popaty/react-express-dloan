@@ -8,7 +8,7 @@ class Home extends Component {
     return (
       <div className="App">
         <DynamicHeader />
-        <h1>Project Home</h1>
+        <h1>Project MyCredits</h1>
         {/* Link to List.js */}   
         <Link to={'./list'}>
           <button variant="raised">
