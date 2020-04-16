@@ -37,6 +37,7 @@ class OpenLoanAccountComponent extends Component {
                 customer_number: "",
                 customer_type: "",
                 account_name: "",
+                account_name_en: "",
                 credit_limit: 0,
                 credit_term_number: 0,
                 credit_term_unit: "",

@@ -25,6 +25,14 @@
       "root": null
     },
     {
+      "label": "Account name en",
+      "type": "text",
+      "name": "account_name_en",
+      "placeholder": "Enter account name en",
+      "value": "account_name_en",
+      "root": null
+    },
+    {
       "label": "Credit limit",
       "type": "number",
       "name": "credit_limit",
@@ -129,20 +137,20 @@
       "root": "interest"
     },
     {
+      "label": "Payment frequency",
+      "type": "number",
+      "name": "payment_frequency",
+      "placeholder": "Enter payment frequency",
+      "value": "payment_frequency",
+      "root": "payment"
+    },
+    {
       "label": "Payment Calculation Method",
       "type": "select",
       "items": ["installment","minimum"],
       "name": "payment_calculation_method",
       "placeholder": "Enter Payment Calculation Method",
       "value": "payment_calculation_method",
-      "root": "payment"
-    },
-    {
-      "label": "Payment frequency",
-      "type": "number",
-      "name": "payment_frequency",
-      "placeholder": "Enter payment frequency",
-      "value": "payment_frequency",
       "root": "payment"
     },
     {
