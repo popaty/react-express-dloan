@@ -27,7 +27,7 @@ class InquiryLoanAccountSummery extends Component {
     dynamicResponse = (data) => {
         let table = [];
         let children = [];
-        let purple = "#cf92ff";
+        let orange = "#E4640B";
         // eslint-disable-next-line
         for (let key in data) {
             if (data.hasOwnProperty(key)) {
@@ -38,17 +38,17 @@ class InquiryLoanAccountSummery extends Component {
                         if (data[key].hasOwnProperty(subdata)) {
                             if (typeof data[key][subdata] === "boolean") {
                                 let catchup = String(data[key][subdata]);
-                                if (subdata === "is_freeze") {
-                                    obj.push(<tr style={{ color: purple }}>
-                                        <td>{subdata}</td>
-                                        <td>{catchup}</td>
-                                    </tr>)
-                                } else {
+                                // if (subdata === "is_freeze") {
+                                //     obj.push(<tr style={{ color: purple }}>
+                                //         <td>{subdata}</td>
+                                //         <td>{catchup}</td>
+                                //     </tr>)
+                                // } else {
                                     obj.push(<tr>
                                         <td>{subdata}</td>
                                         <td>{catchup}</td>
                                     </tr>)
-                                }
+                                // }
                             } else {
                                 if (subdata === "balance" || subdata === "available_balance") {
                                     obj.push(<tr class="text-primary">
@@ -56,26 +56,26 @@ class InquiryLoanAccountSummery extends Component {
                                         <td>{data[key][subdata]}</td>
                                     </tr>);
                                 } else {
-                                    if ((subdata === "oldest_stmt_due_date" )|| (subdata === "total_unpaid_penalty_amount" )||
-                                    (subdata === "total_unpaid_interest_amount") || (subdata === "total_unpaid_principal_amount")
-                                    ||(subdata === "total_bill_unpaid_amount")) {
-                                        if(key === "bills"){
-                                            obj.push(<tr style={{ color: purple }}>
-                                                <td>{subdata}</td>
-                                                <td>{data[key][subdata]}</td>
-                                            </tr>);
-                                        }else{
-                                            obj.push(<tr>
-                                                <td>{subdata}</td>
-                                                <td>{data[key][subdata]}</td>
-                                            </tr>);
-                                        }
-                                    } else {
+                                    // if ((subdata === "oldest_stmt_due_date" )|| (subdata === "total_unpaid_penalty_amount" )||
+                                    // (subdata === "total_unpaid_interest_amount") || (subdata === "total_unpaid_principal_amount")
+                                    // ||(subdata === "total_bill_unpaid_amount")) {
+                                    //     if(key === "bills"){
+                                    //         obj.push(<tr style={{ color: purple }}>
+                                    //             <td>{subdata}</td>
+                                    //             <td>{data[key][subdata]}</td>
+                                    //         </tr>);
+                                    //     }else{
+                                    //         obj.push(<tr>
+                                    //             <td>{subdata}</td>
+                                    //             <td>{data[key][subdata]}</td>
+                                    //         </tr>);
+                                    //     }
+                                    // } else {
                                         obj.push(<tr>
                                             <td>{subdata}</td>
                                             <td>{data[key][subdata]}</td>
                                         </tr>);
-                                    }
+                                    // }
                                 }
                             }
                         }
@@ -85,10 +85,18 @@ class InquiryLoanAccountSummery extends Component {
                         <td><Table borderless>{obj}</Table></td>
                     </tr>);
                 } else {
-                    children.push(<tr>
-                        <td>{key}</td>
-                        <td>{data[key]}</td>
-                    </tr>);
+                    if(key === "account_name_2"){
+                        children.push(<tr style={{ color: orange }}>
+                            <td>{key}</td>
+                            <td>{data[key]}</td>
+                        </tr>);
+                    }else{
+                        children.push(<tr>
+                            <td>{key}</td>
+                            <td>{data[key]}</td>
+                        </tr>);
+                    }
+                    
                 }
             }
         }

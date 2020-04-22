@@ -11,7 +11,7 @@ class InquiryPositionDetailSummery extends Component {
     dynamicResponse = (data) => {
         let table = [];
         let children = [];
-        let purple = "#cf92ff";
+        let orange = "#E4640B";
         // eslint-disable-next-line
         for (let key in data) {
             if (data.hasOwnProperty(key)) {
@@ -47,9 +47,8 @@ class InquiryPositionDetailSummery extends Component {
                                         </tr>);
                                         // }
                                     } else {
-                                        if (subdata === "unpaid_penalty_amount" || subdata === "unpaid_interest_amount" || 
-                                        subdata === "unpaid_principal_amount" || subdata === "total_bill_unpaid_amount") {
-                                            obj.push(<tr style={{ color: purple }}>
+                                        if (subdata === "installment_amount") {
+                                            obj.push(<tr style={{ color: orange }}>
                                                 <td>{subdata}</td>
                                                 <td>{data[key][subdata]}</td>
                                             </tr>);
@@ -71,20 +70,20 @@ class InquiryPositionDetailSummery extends Component {
                 } else {
                     if (typeof data[key] === "boolean") {
                         let catchup = String(data[key]);
-                        if (key === "is_closed") {
-                            children.push(<tr style={{ color: purple }}>
-                                <td>{key}</td>
-                                <td>{catchup}</td>
-                            </tr>)
-                        } else {
+                        // if (key === "is_closed") {
+                        //     children.push(<tr style={{ color: purple }}>
+                        //         <td>{key}</td>
+                        //         <td>{catchup}</td>
+                        //     </tr>)
+                        // } else {
                             children.push(<tr>
                                 <td>{key}</td>
                                 <td>{catchup}</td>
                             </tr>)
-                        }
+                        // }
                     } else {
-                        if (key === "closed_date") {
-                            children.push(<tr style={{ color: purple }}>
+                        if (key === "product_name") {
+                            children.push(<tr style={{ color: orange }}>
                                 <td>{key}</td>
                                 <td>{data[key]}</td>
                             </tr>);
