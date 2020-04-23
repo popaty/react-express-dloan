@@ -6,6 +6,7 @@ class calculateInstallmentOfSpecificSummary extends Component {
     constructor(props) {
         super(props);
         this.state = {};
+        calculateInstallmentOfSpecificSummary.openDisbursement = calculateInstallmentOfSpecificSummary.openDisbursement.bind(this);
     };
 
     dynamicResponse = (data) => {
@@ -60,6 +61,7 @@ class calculateInstallmentOfSpecificSummary extends Component {
                     <Col md={{size: 6, offset: 3}}>
                         {this.dynamicResponse(data.rs_body)}
                     </Col>
+                    <Button color="success" onClick={calculateInstallmentOfSpecificSummary.openDisbursement}>Disbursement</Button><br/>
                 </Form>
             </div>
         );
