@@ -19,12 +19,13 @@ import {
     UncontrolledDropdown
 } from 'reactstrap';
 
-import v000 from './v000.json';
-import v001 from './v001.json';
-import v002 from './v002.json';
-import v003 from './v003.json';
-import v004 from './v004.json';
-import v005 from './v005.json';
+// import v000 from './v000.json';
+// import v001 from './v001.json';
+// import v002 from './v002.json';
+// import v003 from './v003.json';
+// import v004 from './v004.json';
+// import v005 from './v005.json';
+import demoS16C1 from './demoS16C1.json';
 import inputModel from './model.json';
 
 const cloneDeep = require('lodash.clonedeep');
@@ -102,12 +103,13 @@ class OpenLoanAccountComponent extends Component {
 
     loadJson(event) {
         switch(event.target.name){
-            case "000" : this.setState(v000); break;
-            case "001" : this.setState(v001); break;
-            case "002" : this.setState(v002); break;
-            case "003" : this.setState(v003); break;
-            case "004" : this.setState(v004); break;
-            case "005" : this.setState(v005); break;
+            // case "000" : this.setState(v000); break;
+            // case "001" : this.setState(v001); break;
+            // case "002" : this.setState(v002); break;
+            // case "003" : this.setState(v003); break;
+            // case "004" : this.setState(v004); break;
+            // case "005" : this.setState(v005); break;
+            case "S16C1" : this.setState(demoS16C1); break;
         }
     };
 
@@ -251,8 +253,8 @@ class OpenLoanAccountComponent extends Component {
                     <UncontrolledDropdown align="center">
                         <DropdownToggle caret color="secondary">Select validation here &nbsp;</DropdownToggle>
                         <DropdownMenu>
-                            <DropdownItem name="000" onClick={this.loadJson}>Select validation here</DropdownItem>
-                            <DropdownItem name="001" onClick={this.loadJson}>Input body Open Account Validation
+                            {/* <DropdownItem name="000" onClick={this.loadJson}>Select input body open account</DropdownItem> */}
+                            {/* <DropdownItem name="001" onClick={this.loadJson}>Input body Open Account Validation
                                 001</DropdownItem>
                             <DropdownItem name="002" onClick={this.loadJson}>Input body Open Account Validation
                                 002</DropdownItem>
@@ -261,7 +263,8 @@ class OpenLoanAccountComponent extends Component {
                             <DropdownItem name="004" onClick={this.loadJson}>[DEMO1]Input body Open Account Validation
                                 004</DropdownItem>
                             <DropdownItem name="005" onClick={this.loadJson}>[DEMO2]Input body Open Account Validation
-                                005</DropdownItem>
+                                005</DropdownItem> */}
+                            <DropdownItem name="S16C1" onClick={this.loadJson}>Input body Open Account Sprint#16 Case 1</DropdownItem>
                         </DropdownMenu>
                     </UncontrolledDropdown>
                     <Form onSubmit={this.handleSubmit}>

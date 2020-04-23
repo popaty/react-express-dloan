@@ -9,9 +9,13 @@ import inputModel from './model.json';
 import utility from '../Utility.js';
 import SpinnerLoader from '../loading.js';
 
-import data0 from './data0.json';
-import data1 from './data1.json';
-import data2 from './data2.json';
+// import data0 from './data0.json';
+// import data1 from './data1.json';
+// import data2 from './data2.json';
+import disbS16C1S3 from './disbS16C1S3.json';
+import disbS16C1S4 from './disbS16C1S4.json';
+import disbS16C1S5 from './disbS16C1S5.json';
+import disbS16C1S6 from './disbS16C1S6.json';
 
 const cloneDeep = require('lodash.clonedeep');
 let installmentAmount = "";
@@ -383,23 +387,27 @@ class disbursementComponent extends Component {
     loadJson = (event) => {
         event.preventDefault();
         switch (event.target.name) {
-            case "000": this.setState({ disabled: "",rq_body: data0.rq_body });break;
-            case "001": {
-                if(data1.rq_body.payment_calculation_method === "minimum"){
-                    data1.rq_body.installment_amount = "";
-                    data1.rq_body.number_of_payment = "";
-                    this.setState({ disabled: "disabled", rq_body: data1.rq_body });
-                }
-                break;
-            }
-            case "002": {
-                if(data2.rq_body.payment_calculation_method === "minimum"){
-                    data2.rq_body.installment_amount = "";
-                    data2.rq_body.number_of_payment = "";
-                    this.setState({ disabled: "disabled", rq_body: data2.rq_body });
-                }
-                break;
-            }
+            // case "000": this.setState({ disabled: "",rq_body: data0.rq_body });break;
+            // case "001": {
+            //     if(data1.rq_body.payment_calculation_method === "minimum"){
+            //         data1.rq_body.installment_amount = "";
+            //         data1.rq_body.number_of_payment = "";
+            //         this.setState({ disabled: "disabled", rq_body: data1.rq_body });
+            //     }
+            //     break;
+            // }
+            // case "002": {
+            //     if(data2.rq_body.payment_calculation_method === "minimum"){
+            //         data2.rq_body.installment_amount = "";
+            //         data2.rq_body.number_of_payment = "";
+            //         this.setState({ disabled: "disabled", rq_body: data2.rq_body });
+            //     }
+            //     break;
+            // }
+            case "S16C1S3": this.setState({ disabled: "",rq_body: disbS16C1S3.rq_body });break;
+            case "S16C1S4": this.setState({ disabled: "",rq_body: disbS16C1S4.rq_body });break;
+            case "S16C1S5": this.setState({ disabled: "",rq_body: disbS16C1S5.rq_body });break;
+            case "S16C1S6": this.setState({ disabled: "",rq_body: disbS16C1S6.rq_body });break;
         }
     };
 
@@ -414,10 +422,14 @@ class disbursementComponent extends Component {
                     <UncontrolledDropdown align="center">
                         <DropdownToggle caret color="secondary">Select data here &nbsp;</DropdownToggle>
                         <DropdownMenu>
-                            <DropdownItem name="000" onClick={(e) => this.loadJson(e)}>Select data here</DropdownItem>
-                            <DropdownItem name="001" onClick={(e) => this.loadJson(e)}>First Model</DropdownItem>
-                            <DropdownItem name="002" onClick={(e) => this.loadJson(e)}>Second Model</DropdownItem>
+                            {/* <DropdownItem name="000" onClick={(e) => this.loadJson(e)}>Select data here</DropdownItem> */}
+                            {/* <DropdownItem name="001" onClick={(e) => this.loadJson(e)}>First Model</DropdownItem> */}
+                            {/* <DropdownItem name="002" onClick={(e) => this.loadJson(e)}>Second Model</DropdownItem> */}
                             {/* <DropdownItem name="002" onClick={this.loadJson}>Input body data second </DropdownItem> */}
+                            <DropdownItem name="S16C1S3" onClick={(e) => this.loadJson(e)}>Input Disbursement Step 3</DropdownItem>
+                            <DropdownItem name="S16C1S4" onClick={(e) => this.loadJson(e)}>Input Disbursement Step 4</DropdownItem>
+                            <DropdownItem name="S16C1S5" onClick={(e) => this.loadJson(e)}>Input Disbursement Step 5</DropdownItem>
+                            <DropdownItem name="S16C1S6" onClick={(e) => this.loadJson(e)}>Input Disbursement Step 6</DropdownItem>
                         </DropdownMenu>
                     </UncontrolledDropdown>
                     <Form onSubmit={this.handleSubmit}>

@@ -85,8 +85,8 @@ class InquiryLoanAccountSummery extends Component {
                         <td><Table borderless>{obj}</Table></td>
                     </tr>);
                 } else {
-                    if(key === "account_name_2"){
-                        children.push(<tr style={{ color: orange }}>
+                    if(key === "account_name_en"){
+                        children.push(<tr style={{ color: '#E4640B' }}>
                             <td>{key}</td>
                             <td>{data[key]}</td>
                         </tr>);

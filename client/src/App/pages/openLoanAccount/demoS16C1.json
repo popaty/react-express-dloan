@@ -1,0 +1,29 @@
+{
+  "rq_body": {
+    "customer_number": "12345",
+    "customer_type": "0702",
+    "account_name": "นางหนึ่ง ใจ",
+    "account_name_en": "Nueng Jai",
+    "credit_limit": 200000,
+    "credit_term_number": 12,
+    "credit_term_unit": "M",
+    "product_name": "7200120090005",
+    "disbursement_account": "1111111111",
+    "deduction_account": "9999999999",
+    "account_branch": 1,
+    "response_unit": 1,
+    "application_id": "APP0001",
+    "user_id": "Test",
+    "service_branch": 1,
+    "interest": {
+      "interest_index": "FIXED",
+      "interest_spread": 18
+    },
+    "payment": {
+      "payment_frequency": 1,
+      "payment_unit": "M",
+      "payment_date": 31,
+      "payment_calculation_method": "installment"
+    }
+  }
+}

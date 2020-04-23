@@ -1,0 +1,10 @@
+{
+  "rq_body": {
+    "disbursement_amount": 10000,
+    "number_of_payment": 4,
+    "interest_rate": 18,
+    "payment_frequency": 1,
+    "payment_unit": "M",
+    "product_name": "7200120090005"
+  }
+}

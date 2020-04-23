@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-import { Button, Col, Container, Form, FormGroup, Input, Label, Row } from 'reactstrap';
+import { Button, Col, Container, Form, FormGroup, Input, Label, Row,
+    DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown
+} from 'reactstrap';
 import DynamicHeader from '../Header.js';
 import inputModel from './model.json';
 import SpinnerLoader from '../loading.js';
 import utility from '../Utility.js';
+
+import calcS16C1S5 from './calcS16C1S5.json';
 
 const cloneDeep = require('lodash.clonedeep');
 
@@ -42,6 +46,13 @@ class calculateInstallmentAmountOfSpecific extends Component {
             this.setState({ loading: false });
             this.postList(request);
         }, 1000);
+    };
+
+    loadJson = (event) => {
+        event.preventDefault();
+        switch (event.target.name) {
+            case "S16C1S5": this.setState({ disabled: "",rq_body: calcS16C1S5.rq_body });break;
+        }
     };
 
     postList = (request) => {
@@ -113,6 +124,12 @@ class calculateInstallmentAmountOfSpecific extends Component {
                 <DynamicHeader />
                 <Container>
                     <h2>Form Input Calculate Installment Amount of Specific Product</h2>
+                    <UncontrolledDropdown align="center">
+                        <DropdownToggle caret color="secondary">Select data here &nbsp;</DropdownToggle>
+                        <DropdownMenu>
+                            <DropdownItem name="S16C1S5" onClick={(e) => this.loadJson(e)}>Input CalculateInstallmentSpecific Step 5</DropdownItem>
+                        </DropdownMenu>
+                    </UncontrolledDropdown>
                     <Row>
                         <Col md={{ size: 4, offset: 4 }}>
                             <Form onSubmit={this.handleSubmit}>

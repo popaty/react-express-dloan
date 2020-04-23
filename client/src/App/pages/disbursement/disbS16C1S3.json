@@ -1,0 +1,18 @@
+{
+  "rq_body": {
+    "account_number": 0,
+    "disbursement_amount": 10000,
+    "effective_date": "2020-04-24",
+    "channel_post_date": "2020-04-24",
+    "currency_code": "THB",
+    "user_id": "Test",
+    "service_branch": 1,
+    "clearing_and_settlement_key": "CBS",
+    "interest_index": "FIXED",
+    "interest_spread": 30,
+    "first_payment_date": "2020-04-30",
+    "number_of_payment": 4,
+    "installment_amount": 2594.45,
+    "payment_calculation_method": "installment"
+  }
+}
