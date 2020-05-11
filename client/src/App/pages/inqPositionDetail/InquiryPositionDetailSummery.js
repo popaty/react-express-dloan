@@ -12,6 +12,7 @@ class InquiryPositionDetailSummery extends Component {
         let table = [];
         let children = [];
         let orange = "#E4640B";
+        let blue = "#0000FF";
         // eslint-disable-next-line
         for (let key in data) {
             if (data.hasOwnProperty(key)) {
@@ -27,25 +28,19 @@ class InquiryPositionDetailSummery extends Component {
                                     <td>{catchup}</td>
                                 </tr>)
                             } else {
-                                if (subdata === "available_balance" ||
-                                    subdata === "unpaid_accrued_interest_amount" || subdata === "interest_rate") {
-                                    obj.push(<tr class="text-primary">
+                                if (subdata === "unpaid_principal_amount" || subdata === "total_bill_unpaid_amount" ||
+                                    subdata === "unpaid_accrued_interest_amount" || subdata === "interest_rate" ||
+                                    subdata === "number_of_payment") {
+                                    obj.push(<tr style={{ color: blue }}>
                                         <td>{subdata}</td>
                                         <td>{data[key][subdata]}</td>
                                     </tr>);
                                 } else {
-                                    if (subdata === "balance" ){//|| subdata === "unpaid_principal_amount") {
-                                        // if (key === "bills") {
-                                        //     obj.push(<tr>
-                                        //         <td>{subdata}</td>
-                                        //         <td>{data[key][subdata]}</td>
-                                        //     </tr>);
-                                        // } else {
+                                    if (subdata === "balance" ){
                                         obj.push(<tr class="text-success">
                                             <td>{subdata}</td>
                                             <td>{data[key][subdata]}</td>
                                         </tr>);
-                                        // }
                                     } else {
                                         if (subdata === "installment_amount") {
                                             obj.push(<tr style={{ color: orange }}>

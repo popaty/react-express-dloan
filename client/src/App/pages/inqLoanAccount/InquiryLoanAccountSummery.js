@@ -28,6 +28,7 @@ class InquiryLoanAccountSummery extends Component {
         let table = [];
         let children = [];
         let orange = "#E4640B";
+        let blue = "#0000FF";
         // eslint-disable-next-line
         for (let key in data) {
             if (data.hasOwnProperty(key)) {
@@ -50,8 +51,8 @@ class InquiryLoanAccountSummery extends Component {
                                     </tr>)
                                 // }
                             } else {
-                                if (subdata === "balance" || subdata === "available_balance") {
-                                    obj.push(<tr class="text-primary">
+                                if (subdata === "balance" || subdata === "available_balance" || subdata === "credit_limit") {
+                                    obj.push(<tr style={{ color: blue }}>
                                         <td>{subdata}</td>
                                         <td>{data[key][subdata]}</td>
                                     </tr>);
@@ -86,7 +87,7 @@ class InquiryLoanAccountSummery extends Component {
                     </tr>);
                 } else {
                     if(key === "account_name_en"){
-                        children.push(<tr style={{ color: '#E4640B' }}>
+                        children.push(<tr style={{ color: orange }}>
                             <td>{key}</td>
                             <td>{data[key]}</td>
                         </tr>);
