@@ -112,6 +112,14 @@
         "placeholder": "Enter installment amount",
         "value": "installment_amount",
         "root": null
+      },
+      {
+        "label": "Destination Account",
+        "type": "text",
+        "name": "destination_account",
+        "placeholder": "Enter destination account",
+        "value": "destination_account",
+        "root": null
       }
     ]
   }

@@ -33,7 +33,8 @@ class PreDisbursementComponent extends Component {
                 interest_index: "",
                 interest_spread: 0,
                 first_payment_date: "",
-                payment_calculation_method: "installment"
+                payment_calculation_method: "installment",
+                destination_account:""
             },
             loading: false,
             disabled: "",
