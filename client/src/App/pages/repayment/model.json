@@ -2,7 +2,7 @@
   "model": [
     {
       "label": "Account Number",
-      "type": "text",
+      "type": "number",
       "name": "account_number",
       "placeholder": "Enter account number",
       "value": "account_number",
@@ -41,6 +41,14 @@
       "root": null
     },
     {
+      "label": "User ID",
+      "type": "text",
+      "name": "user_id",
+      "placeholder": "Enter user id",
+      "value": "user_id",
+      "root": null
+    },
+    {
       "label": "Service branch",
       "type": "number",
       "name": "service_branch",
@@ -54,6 +62,14 @@
       "name": "clearing_and_settlement_key",
       "placeholder": "Enter clearing and settlement key",
       "value": "clearing_and_settlement_key",
+      "root": null
+    },
+    {
+      "label": "Source Account",
+      "type": "text",
+      "name": "source_account",
+      "placeholder": "Enter source account",
+      "value": "source_account",
       "root": null
     }
   ]

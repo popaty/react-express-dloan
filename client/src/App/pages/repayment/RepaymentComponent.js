@@ -12,13 +12,15 @@ class RepaymentComponent extends Component {
         super(props);
         this.state = {
             rq_body: {
-                account_number: "",
+                account_number: 0,
                 transaction_amount: 0,
                 effective_date: "",
                 channel_post_date: "",
                 currency_code: "THB",
+                user_id:"",
                 service_branch: 0,
-                clearing_and_settlement_key: "",
+                clearing_and_settlement_key: "CBS",
+                source_account:""
             },
             loading: false
         };
@@ -34,8 +36,10 @@ class RepaymentComponent extends Component {
                 effective_date: "",
                 channel_post_date: "",
                 currency_code: "THB",
+                user_id:"",
                 service_branch: 0,
                 clearing_and_settlement_key: "CBS",
+                source_account:""
             }
             this.setState({rq_body: body});
         }
