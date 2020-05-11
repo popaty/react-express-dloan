@@ -45,6 +45,12 @@ const header = (props) => {
                         <DropdownItem href="/pdComponent">
                             Pre-Disbursement
                         </DropdownItem>
+                        <DropdownItem href="/prpmComponent">
+                            Pre-Repayment
+                        </DropdownItem>
+                        <DropdownItem href="/rvComponent">
+                            Reverse
+                        </DropdownItem>
                     </DropdownMenu>
                 </UncontrolledDropdown>
                 &emsp;

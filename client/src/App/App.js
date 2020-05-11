@@ -51,6 +51,11 @@ import calculateInstallmentAmountOfSpecificSummery from './pages/calculateInstal
 import preDisbursementComponent from './pages/pre-disbursement/viewPreDisbursementComponent'
 import preDisbursementSummary from './pages/pre-disbursement/viewPreDisbursementSummary'
 
+import PreRepaymentComponent from './pages/pre-repayment/viewPre-RepaymentComponent';
+import PreRepaymentSummery from './pages/pre-repayment/viewPre-RepaymentSummery';
+
+import ReverseComponent from './pages/reverse/viewReverseComponent';
+import ReverseSummery from './pages/reverse/viewReverseSummery';
 
 class App extends Component {
     render() {
@@ -105,6 +110,12 @@ class App extends Component {
 
                     <Route path='/pdComponent' component={preDisbursementComponent}/>
                     <Route path='/pdSummary' component={preDisbursementSummary}/>
+
+                    <Route path='/prpmComponent' component={PreRepaymentComponent}/>
+                    <Route path='/prpmSummary' component={PreRepaymentSummery}/>
+
+                    <Route path='/rvComponent' component={ReverseComponent}/>
+                    <Route path='/rvSummery' component={ReverseSummery}/>
 
                 </Switch>
             </div>

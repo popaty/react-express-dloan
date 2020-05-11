@@ -310,6 +310,35 @@ app.post("/api/preDisbursement", (req, res) => {
         });
 });
 
+//[POST] Pre-Repayment
+app.post("/api/pre-repayment", (req, res) => {
+    console.log("Pre-Repayment");
+    let header = headers.get_headers();
+    let url = properties.get("pre-repayment.url");
+    api_helper_post.API_call_post(url, header, req.body)
+        .then(response => {
+            res.json(response);
+            console.log("Finished Pre-Repayment");
+        })
+        .catch(error => {
+            res.send(error)
+        });
+});
+
+//[POST] Pre-Repayment
+app.post("/api/reverse", (req, res) => {
+    console.log("Reverse Transaction");
+    let header = headers.get_headers();
+    let url = properties.get("reverse.url");
+    api_helper_post.API_call_post(url, header, req.body)
+        .then(response => {
+            res.json(response);
+            console.log("Finished Reverse Transaction");
+        })
+        .catch(error => {
+            res.send(error)
+        });
+});
 
 // Handles any requests that don"t match the ones above
 app.get("*", (req, res) => {

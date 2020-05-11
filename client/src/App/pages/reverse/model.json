@@ -1,0 +1,37 @@
+{
+    "model": [
+      {
+        "label": "Original Job ID",
+        "type": "text",
+        "name": "original_job_id",
+        "placeholder": "Enter original job id",
+        "value": "original_job_id",
+        "root": null
+      },
+      {
+        "label": "Account Number",
+        "type": "number",
+        "name": "account_number",
+        "placeholder": "Enter account number",
+        "value": "account_number",
+        "root": null
+      },
+      {
+        "label": "Transaction Amount",
+        "type": "number",
+        "name": "transaction_amount",
+        "placeholder": "Enter transaction amount",
+        "value": "transaction_amount",
+        "root": null
+      },
+      {
+        "label": "Channel Post Date",
+        "type": "date",
+        "name": "channel_post_date",
+        "placeholder": "Enter channel post date",
+        "value": "channel_post_date",
+        "root": null
+      }
+    ]
+  }
+  
