@@ -40,8 +40,8 @@ class disbursementComponent extends Component {
                 interest_index: "",
                 interest_spread: 0,
                 first_payment_date: "",
-                payment_calculation_method: "installment"
-
+                payment_calculation_method: "installment",
+                destination_account:""
                 // other_properties: {
                 //     interest_override_reason: "",
                 //     campaign_name: "",
@@ -111,6 +111,7 @@ class disbursementComponent extends Component {
             number_of_payment: numberOfPayment,
             installment_amount: installmentAmount,
             payment_calculation_method: "installment",
+            destination_account:""
             // other_properties: {
             //     interest_override_reason: "",
             //     campaign_name: "",
