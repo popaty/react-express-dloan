@@ -74,7 +74,7 @@ class RepaymentComponent extends Component {
         })
             .then(response => response.json())
             .then(data => {
-                if (data) {
+                if (!data.errors) {
                     // sessionStorage.setItem("response_repayment", JSON.stringify(data));
                     window.open('/rpmSummary', '_self');
 

@@ -58,8 +58,8 @@ class PreDisbursementComponent extends Component {
                 currentState["number_of_payment"] = "";
                 this.setState({ disabled: "disabled" });
             } else {
-                currentState["installment_amount"] = (Number(event.target.value)===null)? 0:Number(event.target.value);
-                currentState["number_of_payment"] = (Number(event.target.value)===null)? 0:Number(event.target.value);
+                currentState["installment_amount"] = (Number(event.target.value) === null) ? 0 : Number(event.target.value);
+                currentState["number_of_payment"] = (Number(event.target.value) === null) ? 0 : Number(event.target.value);
                 this.setState({ disabled: "" });
             }
         } else {
@@ -99,7 +99,7 @@ class PreDisbursementComponent extends Component {
             body: JSON.stringify(request),
         }).then(response => response.json())
             .then(data => {
-                if (data) {
+                if (!data.errors) {
                     utility.clearSessionStorage("request_preDisbursement");
                     sessionStorage.setItem("request_preDisbursement", JSON.stringify(request.rq_body));
                     window.open('/pdSummary', '_self');
@@ -117,58 +117,58 @@ class PreDisbursementComponent extends Component {
         let columnRight = [];
         inputModel.model.map(item => {
             count++;
-                if (count % 2 !== 0) {
-                    if (item.type === "select") {
+            if (count % 2 !== 0) {
+                if (item.type === "select") {
+                    columnLeft.push(
+                        <FormGroup>
+                            <Label>{item.label}</Label>
+                            <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+                                value={this.state.rq_body[item.value]} onChange={this.handleChange}  >
+                                {item.items.map(element => <option>{element}</option>)}
+                            </Input>
+                        </FormGroup>
+                    );
+                } else {
+                    if (item.name === "number_of_payment") {
                         columnLeft.push(
                             <FormGroup>
                                 <Label>{item.label}</Label>
                                 <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                                    value={this.state.rq_body[item.value]} onChange={this.handleChange}  >
-                                    {item.items.map(element => <option>{element}</option>)}
-                                </Input>
+                                    value={this.state.rq_body[item.value]}
+                                    onChange={this.handleChange} disabled={this.state.disabled} />
                             </FormGroup>
-                        );
+                        )
                     } else {
-                        if (item.name === "number_of_payment") {
-                            columnLeft.push(
-                                <FormGroup>
-                                    <Label>{item.label}</Label>
-                                    <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                                        value={this.state.rq_body[item.value]}
-                                        onChange={this.handleChange} disabled={this.state.disabled} />
-                                </FormGroup>
-                            )
-                        } else {
-                            columnLeft.push(<FormGroup>
-                                <Label>{item.label}</Label>
-                                <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                                    value={this.state.rq_body[item.value]} onChange={this.handleChange} />
-                            </FormGroup>
-                            )
-                        }
+                        columnLeft.push(<FormGroup>
+                            <Label>{item.label}</Label>
+                            <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+                                value={this.state.rq_body[item.value]} onChange={this.handleChange} />
+                        </FormGroup>
+                        )
                     }
+                }
+            } else {
+                if (item.type === "select") {
+                    columnRight.push(
+                        <FormGroup>
+                            <Label>{item.label}</Label>
+                            <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
+                                value={this.state.rq_body[item.value]} onChange={this.handleChange} onInvalid >
+                                {item.items.map(element => <option>{element}</option>)}
+                            </Input>
+                        </FormGroup>
+                    );
                 } else {
-                    if (item.type === "select") {
+                    if (item.name === "installment_amount") {
                         columnRight.push(
                             <FormGroup>
                                 <Label>{item.label}</Label>
                                 <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                                    value={this.state.rq_body[item.value]} onChange={this.handleChange} onInvalid > 
-                                    {item.items.map(element => <option>{element}</option>)}
-                                </Input>
+                                    value={this.state.rq_body[item.value]}
+                                    onChange={this.handleChange} disabled={this.state.disabled} />
                             </FormGroup>
-                        );
+                        )
                     } else {
-                        if (item.name === "installment_amount") {
-                            columnRight.push(
-                                <FormGroup>
-                                    <Label>{item.label}</Label>
-                                    <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
-                                        value={this.state.rq_body[item.value]}
-                                        onChange={this.handleChange} disabled={this.state.disabled} />
-                                </FormGroup>
-                            )
-                        } else {
                         columnRight.push(<FormGroup>
                             <Label>{item.label}</Label>
                             <Input type={item.type} name={item.name} placeholder={item.placeholder} step="any"
@@ -177,7 +177,7 @@ class PreDisbursementComponent extends Component {
                         )
                     }
                 }
-                }
+            }
         })
         return (<Row><Col md={{ size: 3, offset: 3 }}>{columnLeft}</Col><Col md={{ size: 3 }}>{columnRight}</Col></Row>);
     }
@@ -185,9 +185,9 @@ class PreDisbursementComponent extends Component {
     loadJson = (event) => {
         event.preventDefault();
         switch (event.target.name) {
-            case "000": this.setState({ disabled: "",rq_body: data0.rq_body });break;
+            case "000": this.setState({ disabled: "", rq_body: data0.rq_body }); break;
             case "001": {
-                if(data1.rq_body.payment_calculation_method === "minimum"){
+                if (data1.rq_body.payment_calculation_method === "minimum") {
                     data1.rq_body.installment_amount = "";
                     data1.rq_body.number_of_payment = "";
                     this.setState({ disabled: "disabled", rq_body: data1.rq_body });
@@ -195,7 +195,7 @@ class PreDisbursementComponent extends Component {
                 break;
             }
             case "002": {
-                if(data2.rq_body.payment_calculation_method === "minimum"){
+                if (data2.rq_body.payment_calculation_method === "minimum") {
                     data2.rq_body.installment_amount = "";
                     data2.rq_body.number_of_payment = "";
                     this.setState({ disabled: "disabled", rq_body: data2.rq_body });
