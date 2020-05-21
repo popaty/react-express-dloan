@@ -1,18 +1,18 @@
 {
   "rq_body": {
-    "account_number": 6000000000001,
-    "disbursement_amount": 50000,
-    "effective_date": "2020-01-22",
-    "channel_post_date": "2019-12-31",
+    "account_number": 600000000015,
+    "disbursement_amount": 90000.00,
+    "effective_date": "2020-02-01",
+    "channel_post_date": "2020-02-01",
     "currency_code": "THB",
     "user_id": "",
-    "service_branch": 33,
+    "service_branch": 1,
     "clearing_and_settlement_key": "CBS",
     "interest_index": "FIXED",
-    "interest_spread": 0,
-    "first_payment_date": "2020-03-09",
-    "number_of_payment": 12,
-    "installment_amount": 1833.59,
+    "interest_spread": 3.75,
+    "first_payment_date": "2020-02-29",
+    "number_of_payment": 0,
+    "installment_amount": 0,
     "payment_calculation_method": "minimum"
   }
 }
