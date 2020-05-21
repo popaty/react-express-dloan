@@ -58,6 +58,7 @@ class OpenLoanAccountComponent extends Component {
                     payment_frequency: 0,
                     payment_unit: "",
                     payment_date: 0,
+                    max_installment_amount : 0,
                     payment_calculation_method: ""
                 }
             },
@@ -209,8 +210,8 @@ class OpenLoanAccountComponent extends Component {
         let columnLeft = [];
         let columnRight = [];
         inputModel.model.map(item => {
-            count++;
             if (item.root !== null && item.root === "payment") {
+                count++;
                 if (count % 2 !== 0) {
                     if (item.type === "select") {
                         columnLeft.push(
