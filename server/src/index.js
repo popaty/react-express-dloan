@@ -310,6 +310,20 @@ app.post("/api/preDisbursement", (req, res) => {
         });
 });
 
+//[POST] Calculate Credit Limit and Review Date by Product
+app.post("/api/calculateCreditLimitByProduct", (req, res) => {
+    console.log("Calculate Credit Limit and Review Date by Product");
+    let header = headers.get_headers();
+    let url = properties.get("calculateCreditLimitByProduct.url");
+    api_helper_post.API_call_post(url, header, req.body)
+        .then(response => {
+            res.json(response);
+            console.log("Finished Calculate Credit Limit and Review Date by Product");
+        })
+        .catch(error => {
+            res.send(error)
+        });
+});
 
 // Handles any requests that don"t match the ones above
 app.get("*", (req, res) => {
