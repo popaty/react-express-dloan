@@ -45,6 +45,9 @@ const header = (props) => {
                         <DropdownItem href="/pdComponent">
                             Pre-Disbursement
                         </DropdownItem>
+                        <DropdownItem href="/cclpComponent">
+                            Calculate Credit Limit and Review Date by Product
+                        </DropdownItem>
                     </DropdownMenu>
                 </UncontrolledDropdown>
                 &emsp;

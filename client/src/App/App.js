@@ -51,6 +51,9 @@ import calculateInstallmentAmountOfSpecificSummery from './pages/calculateInstal
 import preDisbursementComponent from './pages/pre-disbursement/viewPreDisbursementComponent'
 import preDisbursementSummary from './pages/pre-disbursement/viewPreDisbursementSummary'
 
+import CalculateCreditLimitComponent from './pages/calculateCreditLimitByProduct/viewCalculateCreditLimitComponent'
+import CalculateCreditLimitSummary from './pages/calculateCreditLimitByProduct/viewCalculateCreditLimitSummary'
+
 
 class App extends Component {
     render() {
@@ -105,6 +108,9 @@ class App extends Component {
 
                     <Route path='/pdComponent' component={preDisbursementComponent}/>
                     <Route path='/pdSummary' component={preDisbursementSummary}/>
+
+                    <Route path='/cclpComponent' component={CalculateCreditLimitComponent}/>
+                    <Route path='/cclpummary' component={CalculateCreditLimitSummary}/>
 
                 </Switch>
             </div>

@@ -1,0 +1,21 @@
+{
+    "model": [
+      {
+        "label": "Product Name",
+        "type": "text",
+        "name": "product_name",
+        "placeholder": "Enter product name",
+        "value": "product_name",
+        "root": null
+      },
+      {
+        "label": "Salak account number",
+        "type": "number",
+        "name": "salak_account_number",
+        "placeholder": "Enter salak account numbert",
+        "value": "salak_account_number",
+        "root": null
+      }
+    ]
+  }
+  
