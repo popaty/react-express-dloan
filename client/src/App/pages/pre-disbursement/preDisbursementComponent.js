@@ -99,7 +99,7 @@ class PreDisbursementComponent extends Component {
             body: JSON.stringify(request),
         }).then(response => response.json())
             .then(data => {
-                if (data.rs_body) {
+                if (data) {
                     utility.clearSessionStorage("request_preDisbursement");
                     sessionStorage.setItem("request_preDisbursement", JSON.stringify(request.rq_body));
                     window.open('/pdSummary', '_self');
