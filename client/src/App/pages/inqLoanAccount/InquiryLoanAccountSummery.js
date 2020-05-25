@@ -28,6 +28,7 @@ class InquiryLoanAccountSummery extends Component {
         let table = [];
         let children = [];
         let orange = "#E4640B";
+        let orangeF77016 = "#F77016";
         let blue = "#0000FF";
         // eslint-disable-next-line
         for (let key in data) {
@@ -57,26 +58,19 @@ class InquiryLoanAccountSummery extends Component {
                                         <td>{data[key][subdata]}</td>
                                     </tr>);
                                 } else {
-                                    // if ((subdata === "oldest_stmt_due_date" )|| (subdata === "total_unpaid_penalty_amount" )||
-                                    // (subdata === "total_unpaid_interest_amount") || (subdata === "total_unpaid_principal_amount")
-                                    // ||(subdata === "total_bill_unpaid_amount")) {
-                                    //     if(key === "bills"){
-                                    //         obj.push(<tr style={{ color: purple }}>
-                                    //             <td>{subdata}</td>
-                                    //             <td>{data[key][subdata]}</td>
-                                    //         </tr>);
-                                    //     }else{
-                                    //         obj.push(<tr>
-                                    //             <td>{subdata}</td>
-                                    //             <td>{data[key][subdata]}</td>
-                                    //         </tr>);
-                                    //     }
-                                    // } else {
+                                    if ((subdata === "available_bal_increase_option" )|| (subdata === "minimum_credit_limit" )||
+                                    (subdata === "maximum_credit_limit") || (subdata === "repayment_principal_amount_percentage")
+                                    || (subdata === "last_installment_bill_option") || (subdata === "max_installment_amount")) {
+                                        obj.push(<tr style={{ color: orangeF77016 }}>
+                                            <td>{subdata}</td>
+                                            <td>{data[key][subdata]}</td>
+                                        </tr>);
+                                    } else {
                                         obj.push(<tr>
                                             <td>{subdata}</td>
                                             <td>{data[key][subdata]}</td>
                                         </tr>);
-                                    // }
+                                    }
                                 }
                             }
                         }

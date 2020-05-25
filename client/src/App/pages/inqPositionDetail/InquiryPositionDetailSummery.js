@@ -11,7 +11,7 @@ class InquiryPositionDetailSummery extends Component {
     dynamicResponse = (data) => {
         let table = [];
         let children = [];
-        let orange = "#E4640B";
+        let orange = "#F77016";
         let blue = "#0000FF";
         // eslint-disable-next-line
         for (let key in data) {
@@ -28,21 +28,21 @@ class InquiryPositionDetailSummery extends Component {
                                     <td>{catchup}</td>
                                 </tr>)
                             } else {
-                                if (subdata === "unpaid_principal_amount" || subdata === "total_bill_unpaid_amount" ||
-                                    subdata === "unpaid_accrued_interest_amount" || subdata === "interest_rate" ||
-                                    subdata === "number_of_payment") {
+                                if ((subdata === "unpaid_principal_amount") || (subdata === "total_bill_unpaid_amount") ||
+                                     (subdata === "interest_rate") ||(subdata === "number_of_payment")) {
                                     obj.push(<tr style={{ color: blue }}>
                                         <td>{subdata}</td>
                                         <td>{data[key][subdata]}</td>
                                     </tr>);
                                 } else {
-                                    if (subdata === "balance" ){
-                                        obj.push(<tr class="text-success">
-                                            <td>{subdata}</td>
-                                            <td>{data[key][subdata]}</td>
-                                        </tr>);
-                                    } else {
-                                        if (subdata === "installment_amount") {
+                                    // if (subdata === "balance" ){
+                                    //     obj.push(<tr class="text-success">
+                                    //         <td>{subdata}</td>
+                                    //         <td>{data[key][subdata]}</td>
+                                    //     </tr>);
+                                    // } else {
+                                        if ((subdata === "balance" )||(subdata === "installment_amount")||(subdata === "installment_amount")
+                                        ||(subdata === "unpaid_accrued_interest_amount")|| (subdata === "unpaid_accrued_penalty_amount")) {
                                             obj.push(<tr style={{ color: orange }}>
                                                 <td>{subdata}</td>
                                                 <td>{data[key][subdata]}</td>
@@ -53,7 +53,7 @@ class InquiryPositionDetailSummery extends Component {
                                                 <td>{data[key][subdata]}</td>
                                             </tr>);
                                         }
-                                    }
+                                    // }
                                 }
                             }
                         }

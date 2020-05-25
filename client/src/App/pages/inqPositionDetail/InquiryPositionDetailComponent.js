@@ -28,7 +28,7 @@ class InquiryPositionDetailComponent extends Component {
 
     Clicked(event) {
         event.preventDefault();
-        //console.log(this.state);
+        console.log(this.state);
         this.setState({ loading: true });
         setTimeout(() => {
             this.setState({ loading: false });
