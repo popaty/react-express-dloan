@@ -58,8 +58,8 @@ class OpenLoanAccountComponent extends Component {
                     payment_frequency: 0,
                     payment_unit: "",
                     payment_date: 0,
-                    max_installment_amount : 0,
-                    payment_calculation_method: ""
+                    payment_calculation_method: "",
+                    max_installment_amount : 0
                 }
             },
             loading: false
@@ -80,7 +80,7 @@ class OpenLoanAccountComponent extends Component {
             interest[event.target.name] = event.target.type === "number" ? Number(event.target.value) : event.target.value;
         } else if (event.target.name === "payment_frequency" || event.target.name === "payment_unit" ||
             event.target.name === "payment_date" || event.target.name === "billing_offset_day"
-            || event.target.name === "payment_calculation_method") {
+            || event.target.name === "payment_calculation_method" || event.target.name === "max_installment_amount") {
 
             payment[event.target.name] = event.target.type === "number" ? Number(event.target.value) : event.target.value;
         } else {
