@@ -1,0 +1,12 @@
+{
+  "model": [
+    {
+      "label": "Account Number",
+      "type": "number",
+      "name": "account_number",
+      "placeholder": "Enter account number",
+      "value": "account_number",
+      "root": null
+    }
+  ]
+}

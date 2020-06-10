@@ -22,6 +22,9 @@ const header = (props) => {
                         <DropdownItem href="/ilaComponent">
                             Inquiry Loan Account
                         </DropdownItem>
+                        <DropdownItem href="/caComponent">
+                            Close Account
+                        </DropdownItem>
                     </DropdownMenu>
                 </UncontrolledDropdown>
                 &emsp;
@@ -104,6 +107,9 @@ const header = (props) => {
                         </DropdownItem>
                         <DropdownItem href="/iglComponent">
                             Inquiry GL Reconciliation
+                        </DropdownItem>
+                        <DropdownItem href="/iagloComponent">
+                            Inquiry Aggregate GL Outstanding
                         </DropdownItem>
                     </DropdownMenu>
                 </UncontrolledDropdown>

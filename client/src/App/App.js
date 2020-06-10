@@ -57,6 +57,12 @@ import PreRepaymentSummery from './pages/pre-repayment/viewPre-RepaymentSummery'
 import ReverseComponent from './pages/reverse/viewReverseComponent';
 import ReverseSummery from './pages/reverse/viewReverseSummery';
 
+import CloseAccountComponent from './pages/closeAccount/viewCloseAccountComponent';
+import CloseAccountSummary from './pages/closeAccount/viewCloseAccountSummary';
+
+import InqAggregateGLOutstandingComponent from './pages/inqAggregateGLOutstanding/viewInqAggregateGLOutstandingComponent';
+import InqAggregateGLOutstandingSummery from './pages/inqAggregateGLOutstanding/viewInqAggregateGLOutstandingSummery';
+
 class App extends Component {
     render() {
         const App = () => (
@@ -116,6 +122,12 @@ class App extends Component {
 
                     <Route path='/rvComponent' component={ReverseComponent}/>
                     <Route path='/rvSummery' component={ReverseSummery}/>
+
+                    <Route path='/caComponent' component={CloseAccountComponent}/>
+                    <Route path='/caSummary' component={CloseAccountSummary}/>
+
+                    <Route path='/iagloComponent' component={InqAggregateGLOutstandingComponent}/>
+                    <Route path='/iagloSummary' component={InqAggregateGLOutstandingSummery}/>
 
                 </Switch>
             </div>

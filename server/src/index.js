@@ -340,6 +340,56 @@ app.post("/api/reverse", (req, res) => {
         });
 });
 
+//[POST] Close Account
+app.post("/api/close-account", (req, res) => {
+    console.log("Close Account Transaction");
+    let header = headers.get_headers();
+    let url = properties.get("close-account.url");
+    api_helper_post.API_call_post(url, header, req.body)
+        .then(response => {
+            res.json(response);
+            console.log("Finished Close Account Transaction");
+        })
+        .catch(error => {
+            res.send(error)
+        });
+});
+
+//[GET] Inquiry Aggregate GL Outstanding
+app.get("/api/inqAggregateGLOutstanding/:date/:currency/:cost_center/:business_area/:gl_account_number/:business_product", (req, res) => {
+    let parameter = [];
+    console.log("Inquiry Aggregate GL Outstandin");
+    if(req.params.date != "null"){
+         parameter.push(req.params.date);
+    }
+    if(req.params.currency != "null"){
+        parameter.push(req.params.currency);
+    }
+    if(req.params.cost_center != "null"){
+        parameter.push(req.params.cost_center);
+    }
+    if(req.params.business_area != "null"){
+        parameter.push(req.params.business_area);
+    }
+    if(req.params.gl_account_number != "null"){
+        parameter.push(req.params.gl_account_number);
+    }
+    if(req.params.business_product != "null"){
+        parameter.push(req.params.business_product);
+    }
+    let header = headers.get_headers();
+    let url = properties.get("inqAggregateGLOutstanding.url") + parameter.join("/").toString();
+    console.log("url = "+url);
+    api_helper.API_call_get(url, header)
+        .then(response => {
+            res.json(response);
+            console.log("Finished Inquiry Aggregate GL Outstandin");
+        })
+        .catch(error => {
+            res.send(error)
+        });
+});
+
 // Handles any requests that don"t match the ones above
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname + "/index.html"));
