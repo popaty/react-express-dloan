@@ -1,0 +1,46 @@
+{
+    "model": [
+      {
+        "label": "Date",
+        "type": "date",
+        "name": "date",
+        "placeholder": "Enter date",
+        "value": "date"
+      },
+      {
+        "label": "Currency",
+        "type": "text",
+        "name": "currency",
+        "placeholder": "Enter currency",
+        "value": "currency"
+      },
+      {
+        "label": "Cost center",
+        "type": "text",
+        "name": "cost_center",
+        "placeholder": "Enter costcenter",
+        "value": "cost_center"
+      },
+      {
+        "label": "Business Area",
+        "type": "text",
+        "name": "business_area",
+        "placeholder": "Enter business area",
+        "value": "business_area"
+      },
+      {
+        "label": "GL Account Number",
+        "type": "text",
+        "name": "gl_account_number",
+        "placeholder": "Enter gl account number",
+        "value": "gl_account_number"
+      },
+      {
+        "label": "Business product",
+        "type": "text",
+        "name": "business_product",
+        "placeholder": "Enter Business product",
+        "value": "business_product"
+      }
+    ]
+  }
