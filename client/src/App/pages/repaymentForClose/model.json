@@ -1,0 +1,76 @@
+{
+  "model": [
+    {
+      "label": "Account Number",
+      "type": "number",
+      "name": "account_number",
+      "placeholder": "Enter account number",
+      "value": "account_number",
+      "root": null
+    },
+    {
+      "label": "Transaction amount",
+      "type": "number",
+      "name": "transaction_amount",
+      "placeholder": "Enter transaction amount",
+      "value": "transaction_amount",
+      "root": null
+    },
+    {
+      "label": "Effective date",
+      "type": "date",
+      "name": "effective_date",
+      "placeholder": "Enter effective date",
+      "value": "effective_date",
+      "root": null
+    },
+    {
+      "label": "Channel post date",
+      "type": "date",
+      "name": "channel_post_date",
+      "placeholder": "Enter channel post date",
+      "value": "channel_post_date",
+      "root": null
+    },
+    {
+      "label": "Currency code",
+      "type": "text",
+      "name": "currency_code",
+      "placeholder": "Enter currency code",
+      "value": "currency_code",
+      "root": null
+    },
+    {
+      "label": "User ID",
+      "type": "text",
+      "name": "user_id",
+      "placeholder": "Enter user id",
+      "value": "user_id",
+      "root": null
+    },
+    {
+      "label": "Service branch",
+      "type": "number",
+      "name": "service_branch",
+      "placeholder": "Enter service branch",
+      "value": "service_branch",
+      "root": null
+    },
+    {
+      "label": "Clearing and settlement key",
+      "type": "text",
+      "name": "clearing_and_settlement_key",
+      "placeholder": "Enter clearing and settlement key",
+      "value": "clearing_and_settlement_key",
+      "root": null
+    },
+    {
+      "label": "Source Account",
+      "type": "text",
+      "name": "source_account",
+      "placeholder": "Enter source account",
+      "value": "source_account",
+      "root": null
+    }
+  ]
+}
