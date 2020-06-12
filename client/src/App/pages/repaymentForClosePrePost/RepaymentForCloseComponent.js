@@ -21,7 +21,7 @@ class RepaymentForCloseComponent extends Component {
                 service_branch: 0,
                 clearing_and_settlement_key: "CBS",
                 // source_account:""
-                comment: ""
+                // comment: ""
             },
             loading: false
         };
@@ -41,7 +41,7 @@ class RepaymentForCloseComponent extends Component {
                 service_branch: 0,
                 clearing_and_settlement_key: "CBS",
                 // source_account:"",
-                comment: ""
+                // comment: ""
             }
             this.setState({rq_body: body});
         }
@@ -69,7 +69,7 @@ class RepaymentForCloseComponent extends Component {
 
     postList = (request) => {
         console.log("myRequest : " + JSON.stringify(request));
-        fetch('/api/repaymentForClosePost', {
+        fetch('/api/repaymentForClosePrePost', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -80,7 +80,7 @@ class RepaymentForCloseComponent extends Component {
             .then(data => {
 
                 if (data.rs_body) {
-                    window.open('/rpmfcSummary', '_self');
+                    window.open('/rpmfcpreSummary', '_self');
 
                 } else {
                     alert("error code : " + data.errors.map(error => error.error_code) + "\n"
@@ -116,7 +116,7 @@ class RepaymentForCloseComponent extends Component {
         return (
             <div>
                 <DynamicHeader/>
-                <h2>Form Input Repayment For Close Post</h2>
+                <h2>Form Input Repayment For Close PrePost</h2>
                 <Container>
                     <Row>
                         <Col md={{size: 4, offset: 4}}>

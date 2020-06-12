@@ -390,15 +390,30 @@ app.get("/api/inqAggregateGLOutstanding/:date/:currency/:cost_center/:business_a
         });
 });
 
-//[POST] Repayment For Close
-app.post("/api/repaymentForClose", (req, res) => {
-    console.log("Repayment For Close");
+//[POST] Repayment For Close PrePost
+app.post("/api/repaymentForClosePrePost", (req, res) => {
+    console.log("Repayment For Close PrePost");
     let header = headers.get_headers();
-    let url = properties.get("repaymentForClose.url");
+    let url = properties.get("repaymentForClosePrePost.url");
     api_helper_post.API_call_post(url, header, req.body)
         .then(response => {
             res.json(response);
-            console.log("Finished Repayment For Close");
+            console.log("Finished Repayment For Close PrePost");
+        })
+        .catch(error => {
+            res.send(error)
+        });
+});
+
+//[POST] Repayment For Close Post
+app.post("/api/repaymentForClosePost", (req, res) => {
+    console.log("Repayment For Close Post");
+    let header = headers.get_headers();
+    let url = properties.get("repaymentForClosePost.url");
+    api_helper_post.API_call_post(url, header, req.body)
+        .then(response => {
+            res.json(response);
+            console.log("Finished Repayment For Close Post");
         })
         .catch(error => {
             res.send(error)
