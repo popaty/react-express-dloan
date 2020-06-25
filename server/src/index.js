@@ -14,7 +14,7 @@ app.use(express.static(path.join(__dirname, "client/build")));
 // Declare variable body for used body in method app.post, support json encoded bodies, support encoded bodies
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //get URL from property file
 // var property1 = properties.get("openLoanAccount.url");
@@ -150,7 +150,7 @@ app.get("/api/inquiryPositionList/:accountNo", (req, res) => {
 app.get("/api/inquiryPositionDetail/:accountNo/:accountSequence", (req, res) => {
     console.log("Inquiry Position Detail");
     let header = headers.get_headers();
-    let url = properties.get("inquiryPositionDetail.url") + req.params.accountNo +"/"+ req.params.accountSequence;
+    let url = properties.get("inquiryPositionDetail.url") + req.params.accountNo + "/" + req.params.accountSequence;
     api_helper.API_call_get(url, header)
         .then(response => {
             res.json(response);
@@ -180,31 +180,31 @@ app.post("/api/repayment", (req, res) => {
 app.get("/api/inquiryAccountingRecord/:accountNo/:accountSequence/:transactionDate/:channelPostDate/:jobID/:service/:transactionID", (req, res) => {
     console.log("Inquiry Accounting Record");
     let parameter = [];
-    
-    if(req.params.accountNo != "null"){
-        parameter.push("account_number="+req.params.accountNo);
+
+    if (req.params.accountNo != "null") {
+        parameter.push("account_number=" + req.params.accountNo);
     }
-    if(req.params.accountSequence != "null"){
-         parameter.push("account_sequence="+ req.params.accountSequence);
+    if (req.params.accountSequence != "null") {
+        parameter.push("account_sequence=" + req.params.accountSequence);
     }
-    if(req.params.transactionDate != "null"){
-        parameter.push("transaction_date="+req.params.transactionDate);
+    if (req.params.transactionDate != "null") {
+        parameter.push("transaction_date=" + req.params.transactionDate);
     }
-    if(req.params.channelPostDate != "null"){
-        parameter.push("channel_post_date="+req.params.channelPostDate);
+    if (req.params.channelPostDate != "null") {
+        parameter.push("channel_post_date=" + req.params.channelPostDate);
     }
-    if(req.params.jobID != "null"){
-        parameter.push("job_id="+req.params.jobID);
+    if (req.params.jobID != "null") {
+        parameter.push("job_id=" + req.params.jobID);
     }
-    if(req.params.service != "null"){
-        parameter.push("service="+req.params.service);
+    if (req.params.service != "null") {
+        parameter.push("service=" + req.params.service);
     }
-    if(req.params.transactionID != "null"){
-        parameter.push("transaction_id="+req.params.transactionID);
+    if (req.params.transactionID != "null") {
+        parameter.push("transaction_id=" + req.params.transactionID);
     }
     let header = headers.get_headers();
     let url = properties.get("inquiryAccountingRecord.url") + parameter.join("&").toString();
-    console.log("url ="+url);
+    console.log("url =" + url);
     api_helper.API_call_get(url, header)
         .then(response => {
             res.json(response);
@@ -219,8 +219,8 @@ app.get("/api/inquiryAccountingRecord/:accountNo/:accountSequence/:transactionDa
 app.get("/api/inquiryPrincipal/:acDate", (req, res) => {
     console.log("Inquiry Principal Reconciliation Result");
     let header = headers.get_headers();
-    let url = properties.get("inquiryPrincipal.url")+ req.params.acDate;
-    console.log("url = "+ url);
+    let url = properties.get("inquiryPrincipal.url") + req.params.acDate;
+    console.log("url = " + url);
     api_helper.API_call_get(url, header)
         .then(response => {
             res.json(response);
@@ -236,7 +236,7 @@ app.get("/api/inquiryInterest/:acDate", (req, res) => {
     console.log("Inquiry Interest Reconciliation Result");
     let header = headers.get_headers();
     let url = properties.get("inquiryInterest.url") + req.params.acDate;
-    console.log("url = "+ url);
+    console.log("url = " + url);
     api_helper.API_call_get(url, header)
         .then(response => {
             res.json(response);
@@ -252,7 +252,7 @@ app.get("/api/inquiryPenalty/:acDate", (req, res) => {
     console.log("Inquiry Penalty Reconciliation Result");
     let header = headers.get_headers();
     let url = properties.get("inquiryPenalty.url") + req.params.acDate;
-    console.log("url = "+ url);
+    console.log("url = " + url);
     api_helper.API_call_get(url, header)
         .then(response => {
             res.json(response);
@@ -268,7 +268,7 @@ app.get("/api/inquiryGL/:acDate", (req, res) => {
     console.log("Inquiry GL Reconciliation");
     let header = headers.get_headers();
     let url = properties.get("inquiryGL.url") + req.params.acDate;
-    console.log("url = "+url);
+    console.log("url = " + url);
     api_helper.API_call_get(url, header)
         .then(response => {
             res.json(response);
@@ -359,27 +359,27 @@ app.post("/api/close-account", (req, res) => {
 app.get("/api/inqAggregateGLOutstanding/:date/:currency/:cost_center/:business_area/:gl_account_number/:business_product", (req, res) => {
     let parameter = [];
     console.log("Inquiry Aggregate GL Outstandin");
-    if(req.params.date != "null"){
-         parameter.push(req.params.date);
+    if (req.params.date != "null") {
+        parameter.push(req.params.date);
     }
-    if(req.params.currency != "null"){
+    if (req.params.currency != "null") {
         parameter.push(req.params.currency);
     }
-    if(req.params.cost_center != "null"){
+    if (req.params.cost_center != "null") {
         parameter.push(req.params.cost_center);
     }
-    if(req.params.business_area != "null"){
+    if (req.params.business_area != "null") {
         parameter.push(req.params.business_area);
     }
-    if(req.params.gl_account_number != "null"){
+    if (req.params.gl_account_number != "null") {
         parameter.push(req.params.gl_account_number);
     }
-    if(req.params.business_product != "null"){
+    if (req.params.business_product != "null") {
         parameter.push(req.params.business_product);
     }
     let header = headers.get_headers();
     let url = properties.get("inqAggregateGLOutstanding.url") + parameter.join("/").toString();
-    console.log("url = "+url);
+    console.log("url = " + url);
     api_helper.API_call_get(url, header)
         .then(response => {
             res.json(response);
@@ -399,6 +399,21 @@ app.post("/api/repaymentForClose", (req, res) => {
         .then(response => {
             res.json(response);
             console.log("Finished Repayment For Close");
+        })
+        .catch(error => {
+            res.send(error)
+        });
+});
+
+//[POST] Calculate Installment Amount Options of Specific Account
+app.post("/api/calculateInstallmentOfSpecificAccount", (req, res) => {
+    console.log("Calculate Installment Amount Options of Specific Account");
+    let header = headers.get_headers();
+    let url = properties.get("calculateInstallmentOfSpecificAccount.url");
+    api_helper_post.API_call_post(url, header, req.body)
+        .then(response => {
+            res.json(response);
+            console.log("Finished Calculate Installment Amount Options of Specific Account");
         })
         .catch(error => {
             res.send(error)

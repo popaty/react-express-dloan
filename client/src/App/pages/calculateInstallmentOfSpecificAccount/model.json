@@ -1,0 +1,28 @@
+{
+  "model": [
+    {
+      "label": "Account Number",
+      "type": "number",
+      "name": "account_number",
+      "placeholder": "Enter account number",
+      "value": "account_number",
+      "root": null
+    },
+    {
+      "label": "Disbursement Amount",
+      "type": "number",
+      "name": "disbursement_amount",
+      "placeholder": "Enter disbursement amount",
+      "value": "disbursement_amount",
+      "root": null
+    },
+    {
+      "label": "Number of Payment",
+      "type": "number",
+      "name": "number_of_payment",
+      "placeholder": "Enter number of payment",
+      "value": "number_of_payment",
+      "root": "number_of_payment_lists"
+    }
+  ]
+}

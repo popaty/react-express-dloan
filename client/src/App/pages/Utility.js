@@ -32,6 +32,8 @@ const utility = {
         delete body.interest_spread;
         delete body.date;
         delete body.interest_schedule_obj;
+        delete body.statusList;
+        delete body.number_of_payment;
 
         return body;
     },

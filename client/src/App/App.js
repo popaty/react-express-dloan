@@ -66,6 +66,9 @@ import InqAggregateGLOutstandingSummery from './pages/inqAggregateGLOutstanding/
 import RepaymentForCloseComponent from './pages/repaymentForClose/viewRepaymentForCloseComponent';
 import RepaymentForCloseSummery from './pages/repaymentForClose/viewRepaymentForCloseSummery';
 
+import ClAOfSpecificAccountComponent from './pages/calculateInstallmentOfSpecificAccount/viewClAOfSpecificAccountComponent';
+import ClAOfSpecificAccountSummery from './pages/calculateInstallmentOfSpecificAccount/viewClAOfSpecificAccountSummery';
+
 class App extends Component {
     render() {
         const App = () => (
@@ -134,6 +137,9 @@ class App extends Component {
 
                     <Route path='/rpmfcComponent' component={RepaymentForCloseComponent}/>
                     <Route path='/rpmfcSummary' component={RepaymentForCloseSummery}/>
+
+                    <Route path='/ciaosaComponent' component={ClAOfSpecificAccountComponent}/>
+                    <Route path='/ciaosaSummary' component={ClAOfSpecificAccountSummery}/>
 
                 </Switch>
             </div>

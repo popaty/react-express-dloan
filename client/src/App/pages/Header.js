@@ -36,6 +36,12 @@ const header = (props) => {
                         <DropdownItem href="/ciaComponent">
                             Calculate Installment Amount
                         </DropdownItem>
+                        <DropdownItem href="/ciaospComponent">
+                            Calculate Installment Amount of Specific Product
+                        </DropdownItem>
+                        <DropdownItem href="/ciaosaComponent">
+                            Calculate Installment Amount Options of Specific Account
+                        </DropdownItem>
                         <DropdownItem href="/dbmComponent">
                             Disbursement
                         </DropdownItem>
@@ -44,9 +50,6 @@ const header = (props) => {
                         </DropdownItem>
                         <DropdownItem href="/rpmfcComponent">
                             Repayment For Close
-                        </DropdownItem>
-                        <DropdownItem href="/ciaospComponent">
-                            Calculate Installment Amount of Specific Product
                         </DropdownItem>
                         <DropdownItem href="/pdComponent">
                             Pre-Disbursement
