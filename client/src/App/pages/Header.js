@@ -48,8 +48,11 @@ const header = (props) => {
                         <DropdownItem href="/rpmComponent">
                             Repayment
                         </DropdownItem>
+                        <DropdownItem href="/rpmfcpreComponent">
+                            Repayment For Close PrePost
+                        </DropdownItem>
                         <DropdownItem href="/rpmfcComponent">
-                            Repayment For Close
+                            Repayment For Close Post
                         </DropdownItem>
                         <DropdownItem href="/pdComponent">
                             Pre-Disbursement

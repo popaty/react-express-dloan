@@ -63,6 +63,9 @@ import CloseAccountSummary from './pages/closeAccount/viewCloseAccountSummary';
 import InqAggregateGLOutstandingComponent from './pages/inqAggregateGLOutstanding/viewInqAggregateGLOutstandingComponent';
 import InqAggregateGLOutstandingSummery from './pages/inqAggregateGLOutstanding/viewInqAggregateGLOutstandingSummery';
 
+import RepaymentForClosePrePostComponent from './pages/repaymentForClosePrePost/viewRepaymentForCloseComponent';
+import RepaymentForClosePrePostSummery from './pages/repaymentForClosePrePost/viewRepaymentForCloseSummery';
+
 import RepaymentForCloseComponent from './pages/repaymentForClose/viewRepaymentForCloseComponent';
 import RepaymentForCloseSummery from './pages/repaymentForClose/viewRepaymentForCloseSummery';
 
@@ -134,6 +137,9 @@ class App extends Component {
 
                     <Route path='/iagloComponent' component={InqAggregateGLOutstandingComponent}/>
                     <Route path='/iagloSummary' component={InqAggregateGLOutstandingSummery}/>
+
+                    <Route path='/rpmfcpreComponent' component={RepaymentForClosePrePostComponent}/>
+                    <Route path='/rpmfcpreSummary' component={RepaymentForClosePrePostSummery}/>
 
                     <Route path='/rpmfcComponent' component={RepaymentForCloseComponent}/>
                     <Route path='/rpmfcSummary' component={RepaymentForCloseSummery}/>

@@ -55,14 +55,6 @@
       "placeholder": "Enter clearing and settlement key",
       "value": "clearing_and_settlement_key",
       "root": null
-    },
-    {
-      "label": "Comment",
-      "type": "text",
-      "name": "comment",
-      "placeholder": "Comment",
-      "value": "comment",
-      "root": null
     }
   ]
 }
