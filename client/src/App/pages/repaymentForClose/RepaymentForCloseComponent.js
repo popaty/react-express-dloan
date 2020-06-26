@@ -17,11 +17,13 @@ class RepaymentForCloseComponent extends Component {
                 effective_date: "",
                 channel_post_date: "",
                 currency_code: "THB",
-                // user_id:"",
                 service_branch: 0,
                 clearing_and_settlement_key: "CBS",
-                // source_account:""
-                comment: ""
+                comment: "",
+                other_properties: {
+                    related_account: "",
+                    terminal_id: ""
+                }
             },
             loading: false
         };
@@ -37,11 +39,13 @@ class RepaymentForCloseComponent extends Component {
                 effective_date: "",
                 channel_post_date: "",
                 currency_code: "THB",
-                // user_id:"",
                 service_branch: 0,
                 clearing_and_settlement_key: "CBS",
-                // source_account:"",
-                comment: ""
+                comment: "",
+                other_properties: {
+                    related_account: "",
+                    terminal_id: ""
+                }
             }
             this.setState({rq_body: body});
         }
@@ -50,7 +54,14 @@ class RepaymentForCloseComponent extends Component {
     handleChange(event) {
         const {rq_body} = {...this.state};
         const currentState = rq_body;
-        currentState[event.target.name] = event.target.type === "number" ? Number(event.target.value) : event.target.value;
+        // currentState[event.target.name] = event.target.type === "number" ? Number(event.target.value) : event.target.value;
+        const properties = currentState.other_properties;
+        //field in other properties expect type string
+        if (event.target.name === "related_account" || event.target.name === "terminal_id") {
+            properties[event.target.name] = event.target.value;
+        } else {
+            currentState[event.target.name] = event.target.type === "number" ? Number(event.target.value) : event.target.value;
+        }
         this.setState({rq_body: currentState});
     };
 

@@ -17,11 +17,11 @@ class RepaymentForCloseComponent extends Component {
                 effective_date: "",
                 channel_post_date: "",
                 currency_code: "THB",
-                // user_id:"",
                 service_branch: 0,
                 clearing_and_settlement_key: "CBS",
-                // source_account:""
-                // comment: ""
+                other_properties: {
+                    related_account: ""
+                }
             },
             loading: false
         };
@@ -37,11 +37,11 @@ class RepaymentForCloseComponent extends Component {
                 effective_date: "",
                 channel_post_date: "",
                 currency_code: "THB",
-                // user_id:"",
                 service_branch: 0,
                 clearing_and_settlement_key: "CBS",
-                // source_account:"",
-                // comment: ""
+                other_properties: {
+                    related_account: ""
+                }
             }
             this.setState({rq_body: body});
         }
@@ -50,7 +50,14 @@ class RepaymentForCloseComponent extends Component {
     handleChange(event) {
         const {rq_body} = {...this.state};
         const currentState = rq_body;
-        currentState[event.target.name] = event.target.type === "number" ? Number(event.target.value) : event.target.value;
+        // currentState[event.target.name] = event.target.type === "number" ? Number(event.target.value) : event.target.value;
+        const properties = currentState.other_properties;
+        //field in other properties expect type string
+        if (event.target.name === "related_account") {
+            properties[event.target.name] = event.target.value;
+        } else {
+            currentState[event.target.name] = event.target.type === "number" ? Number(event.target.value) : event.target.value;
+        }
         this.setState({rq_body: currentState});
     };
 
@@ -111,6 +118,7 @@ class RepaymentForCloseComponent extends Component {
             }
         });
     };
+
     render() {
         const { loading } = this.state;
         return (
@@ -129,6 +137,7 @@ class RepaymentForCloseComponent extends Component {
                                             {!loading && <span>Submit</span>}
                                         </Button>
                                     </div>
+
                             </Form>
                         </Col>
                     </Row>

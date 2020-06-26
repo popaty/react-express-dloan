@@ -63,6 +63,22 @@
       "placeholder": "Comment",
       "value": "comment",
       "root": null
+    },
+    {
+      "label": "Related account (OtherProperties)",
+      "type": "text",
+      "name": "related_account",
+      "placeholder": "Enter related account",
+      "value": "related_account",
+      "root": "other_properties"
+    },
+    {
+      "label": "Terminal ID (OtherProperties)",
+      "type": "text",
+      "name": "terminal_id",
+      "placeholder": "Enter terminal id",
+      "value": "terminal_id",
+      "root": "other_properties"
     }
   ]
 }

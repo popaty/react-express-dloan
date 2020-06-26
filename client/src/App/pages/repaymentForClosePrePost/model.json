@@ -55,6 +55,14 @@
       "placeholder": "Enter clearing and settlement key",
       "value": "clearing_and_settlement_key",
       "root": null
+    },
+    {
+      "label": "Related account (OtherProperties)",
+      "type": "text",
+      "name": "related_account",
+      "placeholder": "Enter related account",
+      "value": "related_account",
+      "root": "other_properties"
     }
   ]
 }
