@@ -130,7 +130,7 @@ class App extends Component {
                     <Route path='/prpmSummary' component={PreRepaymentSummery}/>
 
                     <Route path='/rvComponent' component={ReverseComponent}/>
-                    <Route path='/rvSummery' component={ReverseSummery}/>
+                    <Route path='/rvSummary' component={ReverseSummery}/>
 
                     <Route path='/caComponent' component={CloseAccountComponent}/>
                     <Route path='/caSummary' component={CloseAccountSummary}/>
